@@ -25,13 +25,22 @@ namespace ConsoleApplication1 {
 
             foreach (var control in gridData.GetAllControls()) {
 
-                Console.WriteLine(control.Editor.Alias.PadRight(16) + " => " + (control.Value == null ? "NULL" : control.Value.GetType().FullName));
+                Console.WriteLine(control.Editor.Alias.PadRight(20) + " => " + (control.Value == null ? "NULL" : control.Value.GetType().FullName));
 
                 if (control.Editor.Alias == "rte") {
 
                     Console.WriteLine();
-                    Console.WriteLine("Value of RTE: " + control.GetValue<GridControlRichTextValue>().Value);
-                    Console.WriteLine("Value of RTE: " + control.GetValue<GridControlRichTextValue>().HtmlValue);
+                    Console.WriteLine("RTE as String:".PadRight(20) + " => " + control.GetValue<GridControlRichTextValue>().Value);
+                    Console.WriteLine("RTE as HtmlString:".PadRight(20) + " => " + control.GetValue<GridControlRichTextValue>().HtmlValue);
+                    Console.WriteLine();
+
+                } else if (control.Editor.Alias == "media") {
+
+                    var media = control.GetValue<GridControlMediaValue>();
+
+                    Console.WriteLine();
+                    Console.WriteLine("Media:".PadRight(20) + " => " + media.Image + " (" + media.Id + ")");
+                    Console.WriteLine();
 
                 }
 
