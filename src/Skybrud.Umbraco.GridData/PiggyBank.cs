@@ -27,6 +27,8 @@ namespace Skybrud.Umbraco.GridData {
             _oink["embed"] = ConvertEmbedValue;
             _oink["rte"] = ConvertRichTextValue;
             _oink["macro"] = ConvertMacroValue;
+            _oink["quote"] = ConvertTextValue;
+            _oink["headline"] = ConvertTextValue;
             
         }
 
@@ -58,6 +60,14 @@ namespace Skybrud.Umbraco.GridData {
 
         public static IGridControlValue ConvertMacroValue(JToken token) {
             return new GridControlMacroValue();
+        }
+
+        public static IGridControlValue ConvertTextValue(JToken token)
+        {
+            return new GridControlTextValue
+            {
+                Value = token.Value<string>()
+            };
         }
     
     }
