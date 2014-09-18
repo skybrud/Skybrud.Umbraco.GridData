@@ -1,0 +1,259 @@
+{
+    "gridWidth": "",
+    "columns": [
+        {
+            "grid": 9,
+            "percentage": 70,
+            "cellModels": [
+                {
+                    "models": [
+                        {
+                            "grid": 12,
+                            "percentage": 100
+                        }
+                    ]
+                },
+                {
+                    "models": [
+                        {
+                            "grid": 6,
+                            "percentage": 50
+                        },
+                        {
+                            "grid": 6,
+                            "percentage": 50
+                        }
+                    ]
+                },
+                {
+                    "models": [
+                        {
+                            "grid": 4,
+                            "percentage": 33.3
+                        },
+                        {
+                            "grid": 4,
+                            "percentage": 33.3
+                        },
+                        {
+                            "grid": 4,
+                            "percentage": 33.3
+                        }
+                    ]
+                },
+                {
+                    "models": [
+                        {
+                            "grid": 3,
+                            "percentage": 25
+                        },
+                        {
+                            "grid": 3,
+                            "percentage": 25
+                        },
+                        {
+                            "grid": 3,
+                            "percentage": 25
+                        },
+                        {
+                            "grid": 3,
+                            "percentage": 25
+                        }
+                    ]
+                },
+                {
+                    "models": [
+                        {
+                            "grid": 2,
+                            "percentage": 16.6
+                        },
+                        {
+                            "grid": 2,
+                            "percentage": 16.6
+                        },
+                        {
+                            "grid": 2,
+                            "percentage": 16.6
+                        },
+                        {
+                            "grid": 2,
+                            "percentage": 16.6
+                        },
+                        {
+                            "grid": 2,
+                            "percentage": 16.6
+                        },
+                        {
+                            "grid": 2,
+                            "percentage": 16.6
+                        }
+                    ]
+                },
+                {
+                    "models": [
+                        {
+                            "grid": 8,
+                            "percentage": 60
+                        },
+                        {
+                            "grid": 4,
+                            "percentage": 40
+                        }
+                    ]
+                },
+                {
+                    "models": [
+                        {
+                            "grid": 4,
+                            "percentage": 40
+                        },
+                        {
+                            "grid": 8,
+                            "percentage": 60
+                        }
+                    ]
+                }
+            ],
+            "rows": [
+                {
+                    "uniqueId": "11481711420347",
+                    "cells": [
+                        {
+                            "model": {
+                                "grid": 12,
+                                "percentage": 100
+                            },
+                            "controls": [
+                                {
+                                    "uniqueId": "114817114217174",
+                                    "value": "",
+                                    "editor": {
+                                        "name": "Embed",
+                                        "alias": "embed",
+                                        "view": "embed",
+                                        "icon": "icon-movie-alt"
+                                    },
+                                    "editorPath": "views/propertyeditors/grid/editors/embed.html"
+                                }
+                            ]
+                        }
+                    ],
+                    "cssClass": ""
+                },
+                {
+                    "uniqueId": "114817114310356",
+                    "cells": [
+                        {
+                            "model": {
+                                "grid": 6,
+                                "percentage": 50
+                            },
+                            "controls": [
+                                {
+                                    "uniqueId": "114817114312579",
+                                    "value": {
+                                        "id": 1082,
+                                        "image": "/media/1003/10572236_10152483770623075_8083411564026549230_o.jpg",
+                                        "thumbnail": "/media/1003/10572236_10152483770623075_8083411564026549230_o.jpg?width=500&mode=max",
+                                        "caption": "aøæsdøa"
+                                    },
+                                    "editor": {
+                                        "name": "Media",
+                                        "alias": "media",
+                                        "view": "media",
+                                        "icon": "icon-picture"
+                                    },
+                                    "editorPath": "views/propertyeditors/grid/editors/media.html"
+                                }
+                            ]
+                        },
+                        {
+                            "model": {
+                                "grid": 6,
+                                "percentage": 50
+                            },
+                            "controls": [
+                                {
+                                    "uniqueId": "114817114321378",
+                                    "value": {
+                                        "id": 1084,
+                                        "image": "/media/1001/1597643_10152483772903075_7817393792414379270_o.jpg",
+                                        "thumbnail": "/media/1001/1597643_10152483772903075_7817393792414379270_o.jpg?width=500&mode=max",
+                                        "caption": "asdasd asdfasdf"
+                                    },
+                                    "editor": {
+                                        "name": "Media",
+                                        "alias": "media",
+                                        "view": "media",
+                                        "icon": "icon-picture"
+                                    },
+                                    "editorPath": "views/propertyeditors/grid/editors/media.html"
+                                }
+                            ]
+                        }
+                    ],
+                    "cssClass": ""
+                },
+                {
+                    "uniqueId": "114817114338350",
+                    "cells": [
+                        {
+                            "model": {
+                                "grid": 6,
+                                "percentage": 50
+                            },
+                            "controls": [
+                                {
+                                    "uniqueId": "114817114341559",
+                                    "value": null,
+                                    "editor": {
+                                        "name": "Macro",
+                                        "alias": "macro",
+                                        "view": "macro",
+                                        "icon": "icon-settings-alt"
+                                    },
+                                    "editorPath": "views/propertyeditors/grid/editors/macro.html"
+                                }
+                            ]
+                        },
+                        {
+                            "model": {
+                                "grid": 6,
+                                "percentage": 50
+                            },
+                            "controls": [
+                                {
+                                    "uniqueId": "114817124752878",
+                                    "value": "<p>Orlando er en flot fyr</p>",
+                                    "editor": {
+                                        "name": "Rich text editor",
+                                        "alias": "rte",
+                                        "view": "rte",
+                                        "icon": "icon-article"
+                                    },
+                                    "editorPath": "views/propertyeditors/grid/editors/rte.html"
+                                }
+                            ]
+                        }
+                    ],
+                    "cssClass": ""
+                }
+            ]
+        },
+        {
+            "grid": 3,
+            "percentage": 30,
+            "cellModels": [
+                {
+                    "models": [
+                        {
+                            "grid": 12,
+                            "percentage": 100
+                        }
+                    ]
+                }
+            ],
+            "rows": []
+        }
+    ]
+}
