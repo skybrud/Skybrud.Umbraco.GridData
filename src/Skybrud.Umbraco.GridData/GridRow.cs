@@ -15,7 +15,7 @@ namespace Skybrud.Umbraco.GridData {
         public static GridRow Parse(JObject obj) {
             return new GridRow {
                 UniqueId = obj.GetString("uniqueId"),
-                Cells = obj.GetArray("cells", GridCell.Parse)
+                Cells = obj.GetArray("areas", GridCell.Parse) ?? obj.GetArray("cells", GridCell.Parse) ?? new GridCell[0]
             };
         }
 

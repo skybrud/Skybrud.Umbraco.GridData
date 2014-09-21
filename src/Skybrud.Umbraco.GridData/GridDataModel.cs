@@ -4,8 +4,11 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
-    
+
     public class GridDataModel {
+        
+        [JsonIgnore]
+        public string Raw { get; private set; }
 
         ///// <summary>
         ///// Not exactly sure what this property contains.
@@ -33,29 +36,22 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Parses the specified <code>JObject</code>.
-        /// </summary>
-        /// <param name="obj">The <code>JObject</code> to be parsed.</param>
-        public static GridDataModel Parse(JObject obj) {
-            return new GridDataModel {
-                Columns = obj.GetArray("columns", GridColumn.Parse) ?? new GridColumn[0]
-            };
-        }
-
-        /// <summary>
         /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
         public static GridDataModel Deserialize(string json) {
 
-            if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) {
-                return new GridDataModel {
-                    Columns = new GridColumn[0]
-                };
-            }
+            // Validate the JSON
+            if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
 
+            // Deserialize the JSON
             JObject obj = JObject.Parse(json);
-            return Parse(obj);
+
+            // Parse the JObject
+            return new GridDataModel {
+                Raw = json,
+                Columns = obj.GetArray("sections", GridColumn.Parse) ?? obj.GetArray("columns", GridColumn.Parse) ?? new GridColumn[0]
+            };
         
         }
 
