@@ -21,7 +21,7 @@ namespace ConsoleApplication1 {
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "", "Example.json");
 
             // Deserialize the grid data
-            GridData gridData = GridData.Deserialize(File.ReadAllText(path));
+            GridDataModel gridData = GridDataModel.Deserialize(File.ReadAllText(path));
 
             foreach (var control in gridData.GetAllControls()) {
 

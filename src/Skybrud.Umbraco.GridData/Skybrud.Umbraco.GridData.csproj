@@ -192,7 +192,7 @@
     <Compile Include="GridCell.cs" />
     <Compile Include="GridColumn.cs" />
     <Compile Include="GridControl.cs" />
-    <Compile Include="GridData.cs" />
+    <Compile Include="GridDataModel.cs" />
     <Compile Include="GridEditor.cs" />
     <Compile Include="GridRow.cs" />
     <Compile Include="Interfaces\IGridControlValue.cs" />

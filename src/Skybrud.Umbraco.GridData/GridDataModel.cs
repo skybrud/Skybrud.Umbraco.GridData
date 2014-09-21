@@ -5,7 +5,7 @@ using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
     
-    public class GridData {
+    public class GridDataModel {
 
         ///// <summary>
         ///// Not exactly sure what this property contains.
@@ -36,20 +36,20 @@ namespace Skybrud.Umbraco.GridData {
         /// Parses the specified <code>JObject</code>.
         /// </summary>
         /// <param name="obj">The <code>JObject</code> to be parsed.</param>
-        public static GridData Parse(JObject obj) {
-            return new GridData {
+        public static GridDataModel Parse(JObject obj) {
+            return new GridDataModel {
                 Columns = obj.GetArray("columns", GridColumn.Parse) ?? new GridColumn[0]
             };
         }
 
         /// <summary>
-        /// Deserializes the specified JSON string into an instance of <code>GridData</code>.
+        /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
-        public static GridData Deserialize(string json) {
+        public static GridDataModel Deserialize(string json) {
 
             if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) {
-                return new GridData {
+                return new GridDataModel {
                     Columns = new GridColumn[0]
                 };
             }
