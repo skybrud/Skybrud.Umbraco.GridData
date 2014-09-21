@@ -194,6 +194,7 @@
     <Compile Include="GridControl.cs" />
     <Compile Include="GridDataModel.cs" />
     <Compile Include="GridEditor.cs" />
+    <Compile Include="GridPropertyValueConverter.cs" />
     <Compile Include="GridRow.cs" />
     <Compile Include="Interfaces\IGridControlValue.cs" />
     <Compile Include="PiggyBank.cs" />
