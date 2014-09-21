@@ -59,13 +59,17 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         public static IGridControlValue ConvertMacroValue(JToken token) {
-            return new GridControlMacroValue();
+
+            // At this point the token should be a JObject, but we cast it safely to be sure
+            JObject obj = token as JObject;
+
+            // Return the converted macro value (or NULL if the object is already NULL)
+            return obj == null ? null : obj.ToObject<GridControlMacroValue>();
+
         }
 
-        public static IGridControlValue ConvertTextValue(JToken token)
-        {
-            return new GridControlTextValue
-            {
+        public static IGridControlValue ConvertTextValue(JToken token) {
+            return new GridControlTextValue {
                 Value = token.Value<string>()
             };
         }

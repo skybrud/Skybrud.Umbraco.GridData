@@ -1,12 +1,19 @@
-﻿using Skybrud.Umbraco.GridData.Interfaces;
+﻿using System.Collections.Generic;
+using Newtonsoft.Json;
+using Skybrud.Umbraco.GridData.Interfaces;
 
 namespace Skybrud.Umbraco.GridData.Values {
 
     public class GridControlMacroValue : IGridControlValue {
 
-        // Not doing much here
+        [JsonProperty("syntax")]
+        public string Syntax { get; set; }
 
-        // TODO: Can we have parameters plx?
+        [JsonProperty("macroAlias")]
+        public string MacroAlias { get; set; }
+
+        [JsonProperty("macroParamsDictionary")]
+        public Dictionary<string, object> MacroParamsDictionary { get; set; }
         
     }
 
