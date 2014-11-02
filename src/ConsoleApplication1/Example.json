@@ -1,259 +1,127 @@
 {
-    "gridWidth": "",
-    "columns": [
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": [
         {
-            "grid": 9,
-            "percentage": 70,
-            "cellModels": [
+          "name": "Headline",
+          "areas": [
+            {
+              "grid": 12,
+              "editors": [
+                "headline"
+              ],
+              "controls": [
                 {
-                    "models": [
-                        {
-                            "grid": 12,
-                            "percentage": 100
-                        }
-                    ]
+                  "value": "Hello World",
+                  "editor": {
+                    "name": "Headline",
+                    "alias": "headline",
+                    "view": "textstring",
+                    "icon": "icon-coin",
+                    "config": {
+                      "style": "font-size: 36px; line-height: 45px; font-weight: bold",
+                      "markup": "<h1>#value#</h1>"
+                    }
+                  }
                 },
                 {
-                    "models": [
-                        {
-                            "grid": 6,
-                            "percentage": 50
-                        },
-                        {
-                            "grid": 6,
-                            "percentage": 50
-                        }
-                    ]
-                },
-                {
-                    "models": [
-                        {
-                            "grid": 4,
-                            "percentage": 33.3
-                        },
-                        {
-                            "grid": 4,
-                            "percentage": 33.3
-                        },
-                        {
-                            "grid": 4,
-                            "percentage": 33.3
-                        }
-                    ]
-                },
-                {
-                    "models": [
-                        {
-                            "grid": 3,
-                            "percentage": 25
-                        },
-                        {
-                            "grid": 3,
-                            "percentage": 25
-                        },
-                        {
-                            "grid": 3,
-                            "percentage": 25
-                        },
-                        {
-                            "grid": 3,
-                            "percentage": 25
-                        }
-                    ]
-                },
-                {
-                    "models": [
-                        {
-                            "grid": 2,
-                            "percentage": 16.6
-                        },
-                        {
-                            "grid": 2,
-                            "percentage": 16.6
-                        },
-                        {
-                            "grid": 2,
-                            "percentage": 16.6
-                        },
-                        {
-                            "grid": 2,
-                            "percentage": 16.6
-                        },
-                        {
-                            "grid": 2,
-                            "percentage": 16.6
-                        },
-                        {
-                            "grid": 2,
-                            "percentage": 16.6
-                        }
-                    ]
-                },
-                {
-                    "models": [
-                        {
-                            "grid": 8,
-                            "percentage": 60
-                        },
-                        {
-                            "grid": 4,
-                            "percentage": 40
-                        }
-                    ]
-                },
-                {
-                    "models": [
-                        {
-                            "grid": 4,
-                            "percentage": 40
-                        },
-                        {
-                            "grid": 8,
-                            "percentage": 60
-                        }
-                    ]
+                  "value": {
+                    "id": 1059,
+                    "image": "/media/1001/e8bd0e138ccf4ea6.jpg",
+                    "thumbnail": "/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1001%2Fe8bd0e138ccf4ea6.jpg"
+                  },
+                  "editor": {
+                    "name": "Image",
+                    "alias": "media",
+                    "view": "media",
+                    "icon": "icon-picture"
+                  }
                 }
-            ],
-            "rows": [
-                {
-                    "uniqueId": "11481711420347",
-                    "cells": [
-                        {
-                            "model": {
-                                "grid": 12,
-                                "percentage": 100
-                            },
-                            "controls": [
-                                {
-                                    "uniqueId": "114817114217174",
-                                    "value": "",
-                                    "editor": {
-                                        "name": "Embed",
-                                        "alias": "embed",
-                                        "view": "embed",
-                                        "icon": "icon-movie-alt"
-                                    },
-                                    "editorPath": "views/propertyeditors/grid/editors/embed.html"
-                                }
-                            ]
-                        }
-                    ],
-                    "cssClass": ""
-                },
-                {
-                    "uniqueId": "114817114310356",
-                    "cells": [
-                        {
-                            "model": {
-                                "grid": 6,
-                                "percentage": 50
-                            },
-                            "controls": [
-                                {
-                                    "uniqueId": "114817114312579",
-                                    "value": {
-                                        "id": 1082,
-                                        "image": "/media/1003/10572236_10152483770623075_8083411564026549230_o.jpg",
-                                        "thumbnail": "/media/1003/10572236_10152483770623075_8083411564026549230_o.jpg?width=500&mode=max",
-                                        "caption": "aøæsdøa"
-                                    },
-                                    "editor": {
-                                        "name": "Media",
-                                        "alias": "media",
-                                        "view": "media",
-                                        "icon": "icon-picture"
-                                    },
-                                    "editorPath": "views/propertyeditors/grid/editors/media.html"
-                                }
-                            ]
-                        },
-                        {
-                            "model": {
-                                "grid": 6,
-                                "percentage": 50
-                            },
-                            "controls": [
-                                {
-                                    "uniqueId": "114817114321378",
-                                    "value": {
-                                        "id": 1084,
-                                        "image": "/media/1001/1597643_10152483772903075_7817393792414379270_o.jpg",
-                                        "thumbnail": "/media/1001/1597643_10152483772903075_7817393792414379270_o.jpg?width=500&mode=max",
-                                        "caption": "asdasd asdfasdf"
-                                    },
-                                    "editor": {
-                                        "name": "Media",
-                                        "alias": "media",
-                                        "view": "media",
-                                        "icon": "icon-picture"
-                                    },
-                                    "editorPath": "views/propertyeditors/grid/editors/media.html"
-                                }
-                            ]
-                        }
-                    ],
-                    "cssClass": ""
-                },
-                {
-                    "uniqueId": "114817114338350",
-                    "cells": [
-                        {
-                            "model": {
-                                "grid": 6,
-                                "percentage": 50
-                            },
-                            "controls": [
-                                {
-                                    "uniqueId": "114817114341559",
-                                    "value": null,
-                                    "editor": {
-                                        "name": "Macro",
-                                        "alias": "macro",
-                                        "view": "macro",
-                                        "icon": "icon-settings-alt"
-                                    },
-                                    "editorPath": "views/propertyeditors/grid/editors/macro.html"
-                                }
-                            ]
-                        },
-                        {
-                            "model": {
-                                "grid": 6,
-                                "percentage": 50
-                            },
-                            "controls": [
-                                {
-                                    "uniqueId": "114817124752878",
-                                    "value": "<p>Orlando er en flot fyr</p>",
-                                    "editor": {
-                                        "name": "Rich text editor",
-                                        "alias": "rte",
-                                        "view": "rte",
-                                        "icon": "icon-article"
-                                    },
-                                    "editorPath": "views/propertyeditors/grid/editors/rte.html"
-                                }
-                            ]
-                        }
-                    ],
-                    "cssClass": ""
-                }
-            ]
+              ]
+            }
+          ],
+          "id": "9afa35bb-6411-b06c-e8d2-a6c23e6cc96b"
         },
         {
-            "grid": 3,
-            "percentage": 30,
-            "cellModels": [
+          "name": "Article",
+          "areas": [
+            {
+              "grid": 4,
+              "controls": [
                 {
-                    "models": [
-                        {
-                            "grid": 12,
-                            "percentage": 100
-                        }
-                    ]
+                  "value": {
+                    "id": 1060,
+                    "image": "/media/1002/664b83ffe1a46097.jpg",
+                    "thumbnail": "/umbraco/backoffice/UmbracoApi/Images/GetBigThumbnail?originalImagePath=%2Fmedia%2F1002%2F664b83ffe1a46097.jpg",
+                    "caption": "This is a caption"
+                  },
+                  "editor": {
+                    "name": "Image",
+                    "alias": "media",
+                    "view": "media",
+                    "icon": "icon-picture"
+                  }
                 }
-            ],
-            "rows": []
+              ]
+            },
+            {
+              "grid": 8,
+              "controls": [
+                {
+                  "value": "<p>Bacon ipsum dolor amet hamburger corned beef sausage t-bone ham venison shoulder rump beef ribs andouille biltong pork chop. Hamburger shoulder salami spare ribs chicken kevin andouille flank short ribs boudin. Flank biltong kevin shankle. Meatloaf jerky shankle bresaola.</p>\n<p>Pork loin ribeye ham kielbasa corned beef, fatback meatball filet mignon chicken pork belly pork chop salami frankfurter drumstick. Swine rump beef doner, turducken andouille pancetta pork loin chicken. Ribeye boudin t-bone, corned beef pork belly jerky shank tongue leberkas sausage meatball tail shankle pancetta flank. Sausage jerky chicken rump frankfurter turkey flank swine pancetta ground round ham leberkas doner. Turkey rump ground round, pork loin venison corned beef swine strip steak chuck pork biltong fatback. Short ribs tenderloin ham ribeye pancetta shankle porchetta pastrami chicken beef ribs venison andouille capicola ball tip. Bresaola pork drumstick, salami sausage leberkas landjaeger.</p>\n<p>Swine kielbasa ham hock sausage landjaeger kevin beef ribs sirloin. Chicken sirloin strip steak, fatback pork ribeye pork belly sausage cow pig tri-tip bresaola kevin beef ribs. Sirloin pork chop frankfurter, capicola fatback short loin pork loin turducken landjaeger hamburger pig tri-tip pork belly drumstick. Jerky tail brisket prosciutto, flank leberkas landjaeger ball tip ham hock pastrami drumstick beef ribs turkey. Boudin porchetta ham swine chuck chicken. Bacon beef porchetta, shank capicola ham jowl shoulder bresaola pork loin. Kevin turkey filet mignon, prosciutto frankfurter bacon biltong tri-tip.</p>\n<p>Pastrami ham hock pork, turducken kielbasa leberkas venison kevin pig biltong swine andouille tenderloin strip steak. Biltong frankfurter turkey salami. Pork chop boudin landjaeger tongue short loin leberkas capicola, meatball swine hamburger pork belly. Frankfurter t-bone tongue biltong corned beef. Turkey t-bone shank, sausage hamburger turducken ham hock beef doner jerky. Turducken strip steak kielbasa salami ham tail.</p>\n<p>Biltong beef ribs doner leberkas hamburger filet mignon. Bresaola t-bone jowl shankle fatback corned beef. Jowl ball tip turducken landjaeger capicola pork loin flank venison corned beef tongue jerky boudin andouille ground round bresaola. Shoulder sirloin shank pastrami, tri-tip pig bacon brisket fatback short loin short ribs.</p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "icon": "icon-article"
+                  }
+                },
+                {
+                  "value": {
+                    "syntax": "<?UMBRACO_MACRO macroAlias=\"TestMacro\" Content=\"1052\" Url=\"http:&#x2F;&#x2F;google.com\" />",
+                    "macroAlias": "TestMacro",
+                    "macroParamsDictionary": {
+                      "Content": "1052",
+                      "Url": "http:&#x2F;&#x2F;google.com"
+                    }
+                  },
+                  "editor": {
+                    "name": "Macro",
+                    "alias": "macro",
+                    "view": "macro",
+                    "icon": "icon-settings-alt"
+                  }
+                },
+                {
+                  "value": "Here is something clever",
+                  "editor": {
+                    "name": "Quote",
+                    "alias": "quote",
+                    "view": "textstring",
+                    "icon": "icon-quote",
+                    "config": {
+                      "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-variant: italic; font-size: 18px",
+                      "markup": "<blockquote>#value#</blockquote>"
+                    }
+                  }
+                },
+                {
+                  "value": "<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/Kw-Mfu2zsUM?feature=oembed\" frameborder=\"0\" allowfullscreen></iframe>",
+                  "editor": {
+                    "name": "Embed",
+                    "alias": "embed",
+                    "view": "embed",
+                    "icon": "icon-movie-alt"
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "dd67954b-9c26-de06-f5cf-ca56c91f0629"
         }
-    ]
+      ]
+    }
+  ]
 }

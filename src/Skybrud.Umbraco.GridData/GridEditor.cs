@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Umbraco.GridData {
     
@@ -15,6 +16,9 @@ namespace Skybrud.Umbraco.GridData {
 
         [JsonProperty("icon")]
         public string Icon { get; set; }
+
+        [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
+        public JObject Config { get; set; }
 
     }
 

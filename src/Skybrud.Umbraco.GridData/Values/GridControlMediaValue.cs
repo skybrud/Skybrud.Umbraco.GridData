@@ -14,7 +14,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         [JsonProperty("thumbnail")]
         public string Thumbnail { get; set; }
 
-        [JsonProperty("caption")]
+        [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
         public string Caption { get; set; }
         
     }

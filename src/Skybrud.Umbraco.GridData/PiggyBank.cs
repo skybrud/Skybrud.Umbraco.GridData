@@ -7,7 +7,7 @@ using Skybrud.Umbraco.GridData.Values;
 namespace Skybrud.Umbraco.GridData {
     
     public class PiggyBank {
-        
+
         readonly Dictionary<string, Func<JToken, IGridControlValue>> _oink = new Dictionary<string, Func<JToken, IGridControlValue>>();
  
         private static readonly PiggyBank NomNom = new PiggyBank();

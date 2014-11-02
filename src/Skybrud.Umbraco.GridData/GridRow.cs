@@ -6,16 +6,20 @@ namespace Skybrud.Umbraco.GridData {
 
     public class GridRow {
 
-        [JsonProperty("uniqueId")]
-        public string UniqueId { get; set; }
+        [JsonProperty("id", Order = 3)]
+        public string Id { get; set; }
 
-        [JsonProperty("cells")]
-        public GridCell[] Cells { get; set; }
+        [JsonProperty("name", Order = 1)]
+        public string Name { get; set; }
+
+        [JsonProperty("areas", Order = 2)]
+        public GridArea[] Areas { get; set; }
 
         public static GridRow Parse(JObject obj) {
             return new GridRow {
-                UniqueId = obj.GetString("uniqueId"),
-                Cells = obj.GetArray("areas", GridCell.Parse) ?? obj.GetArray("cells", GridCell.Parse) ?? new GridCell[0]
+                Id = obj.GetString("id"),
+                Name = obj.GetString("name"),
+                Areas = obj.GetArray("areas", GridArea.Parse) ?? new GridArea[0]
             };
         }
 

@@ -39,6 +39,10 @@ namespace Skybrud.Umbraco.GridData.ExtensionMethods {
             return property == null ? 0 : property.Value<double>();
         }
 
+        public static JArray GetArray(this JObject obj, string propertyName) {
+            return obj == null ? null : obj.GetValue(propertyName) as JArray;
+        }
+
         public static T[] GetArray<T>(this JObject obj, string propertyName, Func<JObject, T> func) {
 
             if (obj == null) return null;

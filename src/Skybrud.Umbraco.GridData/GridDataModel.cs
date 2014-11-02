@@ -10,27 +10,27 @@ namespace Skybrud.Umbraco.GridData {
         [JsonIgnore]
         public string Raw { get; private set; }
 
-        ///// <summary>
-        ///// Not exactly sure what this property contains.
-        ///// </summary>
-        //[JsonProperty("gridWidth")]
-        //public object GridWidth { get; private set; }
+        /// <summary>
+        /// Gets the name of the selected layout.
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; private set; }
 
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        [JsonProperty("columns")]
-        public GridColumn[] Columns { get; private set; }
+        [JsonProperty("sections")]
+        public GridSection[] Sections { get; private set; }
 
         /// <summary>
         /// Gets an array of all nested controls. 
         /// </summary>
         public GridControl[] GetAllControls() {
             return (
-                from column in Columns
-                from row in column.Rows
-                from cell in row.Cells
-                from control in cell.Controls
+                from section in Sections
+                from row in section.Rows
+                from area in row.Areas
+                from control in area.Controls
                 select control
             ).ToArray();
         }
@@ -50,7 +50,8 @@ namespace Skybrud.Umbraco.GridData {
             // Parse the JObject
             return new GridDataModel {
                 Raw = json,
-                Columns = obj.GetArray("sections", GridColumn.Parse) ?? obj.GetArray("columns", GridColumn.Parse) ?? new GridColumn[0]
+                Name = obj.GetString("name"),
+                Sections = obj.GetArray("sections", GridSection.Parse) ?? new GridSection[0]
             };
         
         }

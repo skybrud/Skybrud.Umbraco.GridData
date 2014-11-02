@@ -1,8 +1,10 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Newtonsoft.Json;
 using Skybrud.Umbraco.GridData;
+using Skybrud.Umbraco.GridData.ExtensionMethods;
 using Skybrud.Umbraco.GridData.Values;
 using Newtonsoft.Json.Linq;
 
@@ -12,16 +14,23 @@ namespace ConsoleApplication1 {
 
         static void Main(string[] args) {
 
-            // Registering "custom" control types
-            PiggyBank.OneLittlePiggy["macro"] = token => new GridControlMacroValue();
-            PiggyBank.OneLittlePiggy["rte"] = token => new GridControlRichTextValue {
-                Value = token.Value<string>()
-            };
-
             string path = Path.Combine(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "", "Example.json");
 
             // Deserialize the grid data
             GridDataModel gridData = GridDataModel.Deserialize(File.ReadAllText(path));
+
+            Console.WriteLine(path);
+            Console.WriteLine();
+
+
+            if (gridData == null)
+            {
+                Console.WriteLine("WTF?");
+                return;
+            }
+
+
+
 
             foreach (var control in gridData.GetAllControls()) {
 

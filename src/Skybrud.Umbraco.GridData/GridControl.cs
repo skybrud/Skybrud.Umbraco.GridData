@@ -8,17 +8,14 @@ namespace Skybrud.Umbraco.GridData {
 
     public class GridControl {
 
-        [JsonProperty("uniqueId")]
-        public string UniqueId { get; set; }
+        [JsonIgnore]
+        public JObject JObject { get; private set; }
 
         [JsonProperty("value")]
-        public IGridControlValue Value { get; set; }
+        public IGridControlValue Value { get; private set; }
 
         [JsonProperty("editor")]
-        public GridEditor Editor { get; set; }
-
-        [JsonProperty("editorPath")]
-        public string EditorPath { get; set; }
+        public GridEditor Editor { get; private set; }
 
         public T GetValue<T>() where T : IGridControlValue {
             return (T) Value;
@@ -27,9 +24,8 @@ namespace Skybrud.Umbraco.GridData {
         public static GridControl Parse(JObject obj) {
             
             GridControl control = new GridControl {
-                UniqueId = obj.GetString("uniqueId"),
-                Editor = obj.GetObject("editor").ToObject<GridEditor>(),
-                EditorPath = obj.GetString("editorPath")
+                JObject = obj,
+                Editor = obj.GetObject("editor").ToObject<GridEditor>()
             };
 
             Func<JToken, IGridControlValue> func;
