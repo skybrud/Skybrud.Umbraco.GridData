@@ -24,3 +24,15 @@ If you have the raw JSON string, you can parse it like:
 ```C#
 GridDataModel grid = GridDataModel.Deserialize(json);
 ```
+
+#### Property Value Converter
+
+By default in Umbraco, calling `Model.Content.GetPropertyValue("body")` (assuming that `body` is our grid property), an instance of `JObject` will be returned.
+
+After installing the package, the property value converter will make sure that an instance of `GridDataModel` is returned instead.
+
+Unfortunately this will also break the existing logic in Umbraco's `GetGridHtml` extension methods. If you still wish to use `GetGridHtml` in your project, you can disable the property value converter by calling the following line during startup:
+
+```C#
+GridPropertyValueConverter.IsEnabled = false;
+```
