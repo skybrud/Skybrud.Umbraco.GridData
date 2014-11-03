@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Skybrud.Umbraco.GridData")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Skybrud.Umbraco.GridData is a small package with a strongly typed model for the grid in Umbraco 7.2.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Skybrud.dk")]
 [assembly: AssemblyProduct("Skybrud.Umbraco.GridData")]
 [assembly: AssemblyCopyright("Copyright ©  2014")]
 [assembly: AssemblyTrademark("")]
