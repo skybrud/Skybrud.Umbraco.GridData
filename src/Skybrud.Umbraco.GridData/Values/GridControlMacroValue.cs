@@ -13,7 +13,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         public string MacroAlias { get; set; }
 
         [JsonProperty("macroParamsDictionary")]
-        public Dictionary<string, object> MacroParamsDictionary { get; set; }
+        public Dictionary<string, object> Parameters { get; set; }
         
     }
 
