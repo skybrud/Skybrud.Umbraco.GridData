@@ -6,9 +6,12 @@ using Skybrud.Umbraco.GridData.ExtensionMethods;
 namespace Skybrud.Umbraco.GridData {
 
     public class GridDataModel {
-        
+
         [JsonIgnore]
         public string Raw { get; private set; }
+
+        [JsonIgnore]
+        public JObject JObject { get; private set; }
 
         /// <summary>
         /// Gets the name of the selected layout.
@@ -50,10 +53,20 @@ namespace Skybrud.Umbraco.GridData {
             // Parse the JObject
             return new GridDataModel {
                 Raw = json,
+                JObject = obj,
                 Name = obj.GetString("name"),
                 Sections = obj.GetArray("sections", GridSection.Parse) ?? new GridSection[0]
             };
-        
+
+        }
+
+        public static GridDataModel Parse(JObject obj) {
+            if (obj == null) return null;
+            return new GridDataModel {
+                Raw = obj.ToString(),
+                Name = obj.GetString("name"),
+                Sections = obj.GetArray("sections", GridSection.Parse) ?? new GridSection[0]
+            };
         }
 
     }
