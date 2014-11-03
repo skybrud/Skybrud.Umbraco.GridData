@@ -5,8 +5,10 @@ namespace Skybrud.Umbraco.GridData {
     
     public class GridPropertyValueConverter : IPropertyValueConverter {
 
+        public static bool IsEnabled = true;
+
         public bool IsConverter(PublishedPropertyType propertyType) {
-            return propertyType.PropertyEditorAlias == "Umbraco.Grid";
+            return IsEnabled && propertyType.PropertyEditorAlias == "Umbraco.Grid";
         }
 
         public object ConvertDataToSource(PublishedPropertyType propertyType, object source, bool preview) {
