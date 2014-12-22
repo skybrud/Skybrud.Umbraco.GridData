@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.ExtensionMethods;
@@ -24,6 +25,28 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonProperty("sections")]
         public GridSection[] Sections { get; private set; }
+
+        #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
+
+        /// <summary>
+        /// Same as <code>Name</code>.
+        /// </summary>
+        [JsonIgnore]
+        [Obsolete]
+        public string name {
+            get { return Name; }
+        }
+
+        /// <summary>
+        /// Gets the underlying JSON array for the <code>sections</code> property. 
+        /// </summary>
+        [JsonIgnore]
+        [Obsolete]
+        public dynamic sections {
+            get { return ((dynamic)JObject).sections; }
+        }
+
+        #endregion
 
         /// <summary>
         /// Gets an array of all nested controls. 
