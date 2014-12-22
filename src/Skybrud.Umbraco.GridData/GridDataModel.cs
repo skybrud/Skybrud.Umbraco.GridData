@@ -1,12 +1,11 @@
-﻿using System.Dynamic;
-using System.Linq;
+﻿using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
 
-    public class GridDataModel : DynamicObject {
+    public class GridDataModel {
 
         [JsonIgnore]
         public string Raw { get; private set; }
@@ -68,15 +67,6 @@ namespace Skybrud.Umbraco.GridData {
                 Name = obj.GetString("name"),
                 Sections = obj.GetArray("sections", GridSection.Parse) ?? new GridSection[0]
             };
-        }
-
-        public override bool TryGetMember(GetMemberBinder binder, out object result) {
-            if (binder.Name == "sections") {
-                result = ((dynamic) JObject).sections;
-                return true;
-            }
-            result = binder.Name;
-            return false;
         }
 
     }
