@@ -39,6 +39,12 @@ namespace Skybrud.Umbraco.GridData.ExtensionMethods {
             return property == null ? 0 : property.Value<double>();
         }
 
+        public static bool GetBoolean(this JObject obj, string propertyName) {
+            if (obj == null) return false;
+            JToken property = obj.GetValue(propertyName);
+            return property != null && property.Value<bool>();
+        }
+
         public static JArray GetArray(this JObject obj, string propertyName) {
             return obj == null ? null : obj.GetValue(propertyName) as JArray;
         }
