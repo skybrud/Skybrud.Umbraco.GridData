@@ -29,7 +29,7 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             Func<JToken, IGridControlValue> func;
-            if (PiggyBank.OneLittlePiggy.TryGetValue(control.Editor.Alias, out func)) {
+            if (GridContext.Current.TryGetValue(control.Editor.Alias, out func)) {
                 control.Value = func(obj.GetValue("value"));
             }
 

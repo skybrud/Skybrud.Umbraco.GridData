@@ -211,6 +211,7 @@
     <Compile Include="ExtensionMethods\JArrayExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\JObjectExtensionMethods.cs" />
     <Compile Include="GridArea.cs" />
+    <Compile Include="GridContext.cs" />
     <Compile Include="GridSection.cs" />
     <Compile Include="GridControl.cs" />
     <Compile Include="GridDataModel.cs" />
@@ -220,6 +221,7 @@
     <Compile Include="Interfaces\IGridControlValue.cs" />
     <Compile Include="PiggyBank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\AssemblyInfoGenerated.cs" />
     <Compile Include="Values\GridControlHtmlValue.cs" />
     <Compile Include="Values\GridControlRichTextValue.cs" />
     <Compile Include="Values\GridControlTextValue.cs" />
@@ -231,6 +233,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PreBuildEvent>"$(SolutionDir)Skybrud.Social.PreBuildTool.exe" 2014-09-18 "$(ProjectPath)"</PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

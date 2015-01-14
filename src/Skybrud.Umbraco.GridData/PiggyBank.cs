@@ -1,14 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
-using Skybrud.Umbraco.GridData.Values;
 
 namespace Skybrud.Umbraco.GridData {
     
+    /// <summary>
+    /// This project started out as a proof of concept for and my colleague René Pjengaard. While I couldn't think of
+    /// a proper name at the time, the name of this class was mostly to annoy René.
+    /// 
+    /// The class has now been replaced by GridContext, but this class is left behind for good memories. It is however
+    /// not recommended to use this class.
+    /// </summary>
     public class PiggyBank {
-
-        readonly Dictionary<string, Func<JToken, IGridControlValue>> _oink = new Dictionary<string, Func<JToken, IGridControlValue>>();
  
         private static readonly PiggyBank NomNom = new PiggyBank();
 
@@ -17,61 +20,34 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         public Func<JToken, IGridControlValue> this[string comeHereLittlePiggy] {
-            get { return _oink[comeHereLittlePiggy]; }
-            set { _oink[comeHereLittlePiggy] = value; }
+            get { return GridContext.Current[comeHereLittlePiggy]; }
+            set { GridContext.Current[comeHereLittlePiggy] = value; }
         }
 
-        private PiggyBank() {
-
-            _oink["media"] = ConvertMediaValue;
-            _oink["embed"] = ConvertEmbedValue;
-            _oink["rte"] = ConvertRichTextValue;
-            _oink["macro"] = ConvertMacroValue;
-            _oink["quote"] = ConvertTextValue;
-            _oink["headline"] = ConvertTextValue;
-            
-        }
+        private PiggyBank() { }
 
         public bool TryGetValue(string alias, out Func<JToken, IGridControlValue> func) {
-            return _oink.TryGetValue(alias, out func);
+            return GridContext.Current.TryGetValue(alias, out func);
         }
 
         public static IGridControlValue ConvertMediaValue(JToken token) {
-
-            // At this point the token should be a JObject, but we cast it safely to be sure
-            JObject obj = token as JObject;
-
-            // Return the converted media value (or NULL if the object is already NULL)
-            return obj == null ? null : obj.ToObject<GridControlMediaValue>();
-
+            return GridContext.ConvertMediaValue(token);
         }
 
         public static IGridControlValue ConvertEmbedValue(JToken token) {
-            return new GridControlEmbedValue {
-                Value = token.Value<string>()
-            };
+            return GridContext.ConvertEmbedValue(token);
         }
 
         public static IGridControlValue ConvertRichTextValue(JToken token) {
-            return new GridControlRichTextValue {
-                Value = token.Value<string>()
-            };
+            return GridContext.ConvertRichTextValue(token);
         }
 
         public static IGridControlValue ConvertMacroValue(JToken token) {
-
-            // At this point the token should be a JObject, but we cast it safely to be sure
-            JObject obj = token as JObject;
-
-            // Return the converted macro value (or NULL if the object is already NULL)
-            return obj == null ? null : obj.ToObject<GridControlMacroValue>();
-
+            return GridContext.ConvertMacroValue(token);
         }
 
         public static IGridControlValue ConvertTextValue(JToken token) {
-            return new GridControlTextValue {
-                Value = token.Value<string>()
-            };
+            return GridContext.ConvertTextValue(token);
         }
     
     }
