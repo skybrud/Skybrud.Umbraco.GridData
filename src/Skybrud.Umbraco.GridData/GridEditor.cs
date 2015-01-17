@@ -22,6 +22,9 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("view")]
         public string View { get; set; }
 
+        [JsonProperty("render", NullValueHandling = NullValueHandling.Ignore)]
+        public string Render { get; set; }
+
         /// <summary>
         /// Gets the icon of the editor.
         /// </summary>
