@@ -2,8 +2,11 @@
 using Skybrud.Umbraco.GridData.Interfaces;
 
 namespace Skybrud.Umbraco.GridData.Values {
-    
+
     public class GridControlMediaValue : IGridControlValue {
+
+        [JsonProperty("focalPoint")]
+        public GridControlMediaFocalPoint FocalPoint { get; set; }
 
         [JsonProperty("id")]
         public int Id { get; set; }
