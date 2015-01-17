@@ -28,8 +28,13 @@ namespace Skybrud.Umbraco.GridData {
                 Editor = obj.GetObject("editor").ToObject<GridEditor>()
             };
 
+            string alias = control.Editor.Alias;
+            string view = control.Editor.View;
+
             Func<JToken, IGridControlValue> func;
-            if (GridContext.Current.TryGetValue(control.Editor.Alias, out func)) {
+            if (GridContext.Current.TryGetValue(alias + ":" + view, out func)) {
+                control.Value = func(obj.GetValue("value"));
+            } else if (GridContext.Current.TryGetValue(view, out func)) {
                 control.Value = func(obj.GetValue("value"));
             }
 
