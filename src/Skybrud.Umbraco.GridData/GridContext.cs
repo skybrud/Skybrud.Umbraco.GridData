@@ -38,6 +38,7 @@ namespace Skybrud.Umbraco.GridData {
             _converters["macro"] = ConvertMacroValue;
             _converters["quote"] = ConvertTextValue;
             _converters["headline"] = ConvertTextValue;
+            _converters["textstring"] = ConvertTextValue;
         }
 
         #endregion
