@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
+    using System.Collections.Generic;
 
     public class GridRow {
 
@@ -15,11 +16,17 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("areas", Order = 2)]
         public GridArea[] Areas { get; set; }
 
+        public Dictionary<string, string> Settings { get; set; }
+
+        public JObject JObject { get; set; }
+
         public static GridRow Parse(JObject obj) {
             return new GridRow {
                 Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
-                Areas = obj.GetArray("areas", GridArea.Parse) ?? new GridArea[0]
+                Areas = obj.GetArray("areas", GridArea.Parse) ?? new GridArea[0],
+                JObject = obj,
+                Settings = GridCustomSetting.Parse(obj)
             };
         }
 

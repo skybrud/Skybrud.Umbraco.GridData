@@ -210,6 +210,7 @@
     <Compile Include="Converters\GridControlValueStringConverter.cs" />
     <Compile Include="ExtensionMethods\JArrayExtensionMethods.cs" />
     <Compile Include="ExtensionMethods\JObjectExtensionMethods.cs" />
+    <Compile Include="GridCustomSetting.cs" />
     <Compile Include="GridArea.cs" />
     <Compile Include="GridContext.cs" />
     <Compile Include="GridEditorConfig.cs" />
