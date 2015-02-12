@@ -9,10 +9,6 @@ namespace Skybrud.Umbraco.GridData
 
     public class GridCustomSetting
     {
-        //public string Key { get; set; }
-
-        //public string Value { get; set; }
-
         public static Dictionary<string, string> Parse(JObject obj)
         {
             JObject cfg = obj.GetObject("config");
@@ -25,14 +21,9 @@ namespace Skybrud.Umbraco.GridData
                 {
                     settings.Add(property.Name, property.Value.ToString());
                 }
-
-                //return settings.ToArray();
             }
-            //else
-            //{
+
             return settings;
-            //return new GridCustomSetting[0];
-            //}
         }
     }
 }
