@@ -5,6 +5,7 @@ using Skybrud.Umbraco.GridData.ExtensionMethods;
 using Skybrud.Umbraco.GridData.Interfaces;
 
 namespace Skybrud.Umbraco.GridData {
+    using System.Collections.Generic;
 
     public class GridControl {
 
@@ -21,11 +22,14 @@ namespace Skybrud.Umbraco.GridData {
             return (T) Value;
         }
 
+        public Dictionary<string, string> Settings { get; set; }
+
         public static GridControl Parse(JObject obj) {
             
             GridControl control = new GridControl {
                 JObject = obj,
-                Editor = obj.GetObject("editor").ToObject<GridEditor>()
+                Editor = obj.GetObject("editor").ToObject<GridEditor>(),
+                Settings = GridCustomSetting.Parse(obj)
             };
 
             string alias = control.Editor.Alias;
