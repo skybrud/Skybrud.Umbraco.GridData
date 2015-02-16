@@ -25,6 +25,12 @@ If you have the raw JSON string, you can parse it like:
 GridDataModel grid = GridDataModel.Deserialize(json);
 ```
 
+### Indexing with Examine
+
+The Gist below gives a quick example on how the Grid can be indexed in Examine:
+
+* [Gist: Indexing the Umbraco Grid.md](https://gist.github.com/abjerner/bdd89e0788d274ec5a33)
+
 #### Property Value Converter
 
 By default in Umbraco, calling `Model.Content.GetPropertyValue("body")` (assuming that `body` is our grid property), an instance of `JObject` will be returned.
