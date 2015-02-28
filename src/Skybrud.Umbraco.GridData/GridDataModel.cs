@@ -83,6 +83,7 @@ namespace Skybrud.Umbraco.GridData {
 
         }
 
+        [Obsolete("Use Deserialize method instead")]
         public static GridDataModel Parse(JObject obj) {
             if (obj == null) return null;
             return new GridDataModel {
