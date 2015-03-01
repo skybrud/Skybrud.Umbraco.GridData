@@ -11,6 +11,9 @@ namespace Skybrud.Umbraco.GridData {
         [JsonIgnore]
         public string Raw { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the instance of <code>JObject</code> this section was parsed from.
+        /// </summary>
         [JsonIgnore]
         public JObject JObject { get; private set; }
 
@@ -73,13 +76,18 @@ namespace Skybrud.Umbraco.GridData {
             // Deserialize the JSON
             JObject obj = JObject.Parse(json);
 
-            // Parse the JObject
-            return new GridDataModel {
+            // Parse basic properties
+            GridDataModel model = new GridDataModel {
                 Raw = json,
                 JObject = obj,
-                Name = obj.GetString("name"),
-                Sections = obj.GetArray("sections", GridSection.Parse) ?? new GridSection[0]
+                Name = obj.GetString("name")
             };
+
+            // Parse the sections
+            model.Sections = obj.GetArray("sections", x => GridSection.Parse(model, x)) ?? new GridSection[0];
+
+            // Return the model
+            return model;
 
         }
 
@@ -89,7 +97,7 @@ namespace Skybrud.Umbraco.GridData {
             return new GridDataModel {
                 Raw = obj.ToString(),
                 Name = obj.GetString("name"),
-                Sections = obj.GetArray("sections", GridSection.Parse) ?? new GridSection[0]
+                Sections = obj.GetArray("sections", x => GridSection.Parse(null, obj)) ?? new GridSection[0]
             };
         }
 
