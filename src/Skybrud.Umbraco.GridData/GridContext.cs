@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Rendering;
 using Skybrud.Umbraco.GridData.Values;
 
 namespace Skybrud.Umbraco.GridData {
@@ -44,6 +45,10 @@ namespace Skybrud.Umbraco.GridData {
         #endregion
 
         #region Member methods
+
+        public static GridControlWrapper<T> GetWrapper<T>(GridControl control, T value) {
+            return new GridControlWrapper<T>(control, value);
+        }
 
         public bool TryGetValue(string alias, out Func<JToken, IGridControlValue> func) {
             return _converters.TryGetValue(alias, out func);
