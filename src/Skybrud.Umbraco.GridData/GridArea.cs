@@ -60,7 +60,7 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             // Parse the controls
-            area.Controls = obj.GetArray("controls", x => GridControl.Parse(area, obj)) ?? new GridControl[0];
+            area.Controls = obj.GetArray("controls", x => GridControl.Parse(area, x)) ?? new GridControl[0];
             
             // Return the row
             return area;
