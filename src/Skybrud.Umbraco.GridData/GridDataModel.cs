@@ -8,6 +8,8 @@ namespace Skybrud.Umbraco.GridData {
 
     public class GridDataModel {
 
+        #region Properties
+
         [JsonIgnore]
         public string Raw { get; private set; }
 
@@ -50,6 +52,10 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         #endregion
+        
+        #endregion
+
+        #region Member methods
 
         /// <summary>
         /// Gets an array of all nested controls. 
@@ -63,6 +69,12 @@ namespace Skybrud.Umbraco.GridData {
                 select control
             ).ToArray();
         }
+
+        /// <summary>
+
+        #endregion
+
+        #region Static methods
 
         /// <summary>
         /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
@@ -100,6 +112,8 @@ namespace Skybrud.Umbraco.GridData {
                 Sections = obj.GetArray("sections", x => GridSection.Parse(null, obj)) ?? new GridSection[0]
             };
         }
+
+        #endregion
 
     }
 
