@@ -71,6 +71,27 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
+        /// Gets an array of all nested controls with the specified editor <code>alias</code>. 
+        /// </summary>
+        /// <param name="alias">The editor alias of controls to be returned.</param>
+        public GridControl[] GetAllControls(string alias) {
+            return GetAllControls(x => x.Editor.Alias == alias);
+        }
+
+        /// <summary>
+        /// Gets an array of all nested controls matching the specified <code>predicate</code>. 
+        /// </summary>
+        /// <param name="predicate">The predicate (callback function) used for comparison.</param>
+        public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
+            return (
+                from section in Sections
+                from row in section.Rows
+                from area in row.Areas
+                from control in area.Controls
+                where predicate(control)
+                select control
+            ).ToArray();
+        }
 
         #endregion
 
