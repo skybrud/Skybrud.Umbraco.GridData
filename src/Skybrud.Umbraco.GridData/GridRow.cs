@@ -60,7 +60,7 @@ namespace Skybrud.Umbraco.GridData {
                 JObject = obj,
                 Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
-                Settings = GridCustomSetting.Parse(obj)
+                Settings = obj.GetObject("config", GridHelpers.ParseDictionary)
             };
 
             row.Areas = obj.GetArray("areas", x => GridArea.Parse(row, x)) ?? new GridArea[0];

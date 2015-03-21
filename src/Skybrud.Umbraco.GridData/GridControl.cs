@@ -52,7 +52,7 @@ namespace Skybrud.Umbraco.GridData {
                 Area = area,
                 JObject = obj,
                 Editor = obj.GetObject("editor").ToObject<GridEditor>(),
-                Settings = GridCustomSetting.Parse(obj)
+                Settings = obj.GetObject("config", GridHelpers.ParseDictionary)
             };
 
             string alias = control.Editor.Alias;

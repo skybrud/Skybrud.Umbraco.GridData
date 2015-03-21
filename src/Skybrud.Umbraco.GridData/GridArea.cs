@@ -77,7 +77,7 @@ namespace Skybrud.Umbraco.GridData {
                 Grid = obj.GetInt32("grid"),
                 AllowAll = obj.GetBoolean("allowAll"),
                 Allowed = allowed == null ? new string[0] : allowed.Select(x => (string) x).ToArray(),
-                Settings = GridCustomSetting.Parse(obj)
+                Settings = obj.GetObject("config", GridHelpers.ParseDictionary)
             };
 
             // Parse the controls
