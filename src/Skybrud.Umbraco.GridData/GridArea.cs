@@ -7,6 +7,9 @@ using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
 
+    /// <summary>
+    /// Class representing an area in an Umbraco Grid.
+    /// </summary>
     public class GridArea {
 
         #region Properties
@@ -23,24 +26,42 @@ namespace Skybrud.Umbraco.GridData {
         [JsonIgnore]
         public JObject JObject { get; private set; }
 
+        /// <summary>
+        /// Gets the column width of the area.
+        /// </summary>
         [JsonProperty("grid")]
-        public int Grid { get; set; }
+        public int Grid { get; private set; }
 
+        /// <summary>
+        /// Gets wether all editors are allowed for this area.
+        /// </summary>
         [JsonProperty("allowAll")]
-        public bool AllowAll { get; set; }
+        public bool AllowAll { get; private set; }
 
+        /// <summary>
+        /// Gets an array of all editors allowed for this area. If <code>AllowAll</code> is <code>TRUE</code>, this
+        /// array may be empty.
+        /// </summary>
         [JsonProperty("allowed")]
-        public string[] Allowed { get; set; }
+        public string[] Allowed { get; private set; }
 
+        /// <summary>
+        /// Gets an array of all controls added to this area.
+        /// </summary>
         [JsonProperty("controls")]
-        public GridControl[] Controls { get; set; }
+        public GridControl[] Controls { get; private set; }
 
-        public Dictionary<string, string> Settings { get; set; }
+        public Dictionary<string, string> Settings { get; private set; }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Parses an area from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="row">The parent row of the area.</param>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridArea Parse(GridRow row, JObject obj) {
 
             // Some input validation
