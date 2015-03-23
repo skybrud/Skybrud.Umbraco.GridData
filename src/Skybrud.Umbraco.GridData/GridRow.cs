@@ -6,6 +6,9 @@ using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
 
+    /// <summary>
+    /// Class representing a row in an Umbraco Grid.
+    /// </summary>
     public class GridRow {
 
         #region Properties

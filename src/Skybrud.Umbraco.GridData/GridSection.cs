@@ -4,7 +4,10 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
-    
+
+    /// <summary>
+    /// Class representing a section in an Umbraco Grid.
+    /// </summary>
     public class GridSection {
 
         #region Properties
@@ -36,7 +39,12 @@ namespace Skybrud.Umbraco.GridData {
         #endregion
 
         #region Static methods
-        
+
+        /// <summary>
+        /// Parses a section from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="model">The parent model of the section.</param>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridSection Parse(GridDataModel model, JObject obj) {
 
             // Some input validation

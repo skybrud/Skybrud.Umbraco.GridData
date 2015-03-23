@@ -6,10 +6,16 @@ using Skybrud.Umbraco.GridData.ExtensionMethods;
 
 namespace Skybrud.Umbraco.GridData {
 
+    /// <summary>
+    /// Class representing the value/model saved by an Umbraco Grid property.
+    /// </summary>
     public class GridDataModel {
 
         #region Properties
 
+        /// <summary>
+        /// Gets the raw JSON value this model was parsed from.
+        /// </summary>
         [JsonIgnore]
         public string Raw { get; private set; }
 

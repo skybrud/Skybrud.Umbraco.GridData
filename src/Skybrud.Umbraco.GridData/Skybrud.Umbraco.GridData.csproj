@@ -221,6 +221,7 @@
     <Compile Include="GridEditor.cs" />
     <Compile Include="GridPropertyValueConverter.cs" />
     <Compile Include="GridRow.cs" />
+    <Compile Include="Interfaces\IGridControlConfig.cs" />
     <Compile Include="Interfaces\IGridControlValue.cs" />
     <Compile Include="PiggyBank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
