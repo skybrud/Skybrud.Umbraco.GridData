@@ -52,6 +52,11 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses a row from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="section">The parent section of the row.</param>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridRow Parse(GridSection section, JObject obj) {
 
             // Some input validation

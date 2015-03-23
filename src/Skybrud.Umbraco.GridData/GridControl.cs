@@ -7,6 +7,9 @@ using Skybrud.Umbraco.GridData.Interfaces;
 
 namespace Skybrud.Umbraco.GridData {
 
+    /// <summary>
+    /// Class representing a control in an Umbraco Grid.
+    /// </summary>
     public class GridControl {
 
         #region Properties
@@ -29,39 +32,54 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("value")]
         public IGridControlValue Value { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the editor of the control.
+        /// </summary>
         [JsonProperty("editor")]
         public GridEditor Editor { get; private set; }
 
-        public Dictionary<string, string> Settings { get; set; }
+        /// <summary>
+        /// Gets the configuration of the control.
+        /// </summary>
+        public Dictionary<string, string> Config { get; set; }
 
         #endregion
 
         #region Member methods
 
+        /// <summary>
+        /// Gets the value of the control casted to the type of <code>T</code>.
+        /// </summary>
+        /// <typeparam name="T">The type of the value to be returned.</typeparam>
         public T GetValue<T>() where T : IGridControlValue {
-            return (T)Value;
+            return (T) Value;
         }
 
         #endregion
 
         #region Static methods
 
+        /// <summary>
+        /// Parses a control from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="area">The parent area of the control.</param>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridControl Parse(GridArea area, JObject obj) {
             
             GridControl control = new GridControl {
                 Area = area,
                 JObject = obj,
                 Editor = obj.GetObject("editor").ToObject<GridEditor>(),
-                Settings = obj.GetObject("config", GridHelpers.ParseDictionary)
+                Config = obj.GetObject("config", GridHelpers.ParseDictionary)
             };
 
             string alias = control.Editor.Alias;
             string view = control.Editor.View;
 
             Func<JToken, IGridControlValue> func;
-            if (GridContext.Current.TryGetValue(alias + ":" + view, out func)) {
+            if (GridContext.Current.TryGetValueConverter(alias + ":" + view, out func)) {
                 control.Value = func(obj.GetValue("value"));
-            } else if (GridContext.Current.TryGetValue(view, out func)) {
+            } else if (GridContext.Current.TryGetValueConverter(view, out func)) {
                 control.Value = func(obj.GetValue("value"));
             }
 

@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
 
 namespace Skybrud.Umbraco.GridData {
-    
+
+    /// <summary>
+    /// Class representing an editor of a control in an Umbraco Grid.
+    /// </summary>
     public class GridEditor {
 
         /// <summary>
@@ -22,6 +25,10 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("view")]
         public string View { get; set; }
 
+        /// <summary>
+        /// Gets renderer for the control/editor. If specified, the renderer refers to a partial
+        /// view that should be used for rendering the control.
+        /// </summary>
         [JsonProperty("render", NullValueHandling = NullValueHandling.Ignore)]
         public string Render { get; set; }
 
