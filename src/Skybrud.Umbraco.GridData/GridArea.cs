@@ -54,12 +54,12 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a dictionary representing the styles of the area.
         /// </summary>
-        public Dictionary<string, string> Styles { get; private set; }
+        public GridDictionary Styles { get; private set; }
 
         /// <summary>
         /// Gets a dictionary representing the configuration (called Settings in the backoffice) of the area.
         /// </summary>
-        public Dictionary<string, string> Config { get; private set; }
+        public GridDictionary Config { get; private set; }
 
         #endregion
 
@@ -85,8 +85,8 @@ namespace Skybrud.Umbraco.GridData {
                 Grid = obj.GetInt32("grid"),
                 AllowAll = obj.GetBoolean("allowAll"),
                 Allowed = allowed == null ? new string[0] : allowed.Select(x => (string)x).ToArray(),
-                Styles = obj.GetObject("styles", GridHelpers.ParseDictionary),
-                Config = obj.GetObject("config", GridHelpers.ParseDictionary)
+                Styles = obj.GetObject("styles", GridDictionary.Parse),
+                Config = obj.GetObject("config", GridDictionary.Parse)
             };
 
             // Parse the controls

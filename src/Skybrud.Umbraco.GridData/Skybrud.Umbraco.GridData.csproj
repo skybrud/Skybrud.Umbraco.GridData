@@ -213,6 +213,7 @@
     <Compile Include="ExtensionMethods\JObjectExtensionMethods.cs" />
     <Compile Include="GridArea.cs" />
     <Compile Include="GridContext.cs" />
+    <Compile Include="GridDictionary.cs" />
     <Compile Include="GridEditorConfig.cs" />
     <Compile Include="GridHelpers.cs" />
     <Compile Include="GridSection.cs" />

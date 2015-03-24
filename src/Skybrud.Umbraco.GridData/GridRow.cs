@@ -44,9 +44,14 @@ namespace Skybrud.Umbraco.GridData {
         public GridArea[] Areas { get; private set; }
 
         /// <summary>
-        /// Gets a dictionary containg the config/settings associated with the row.
+        /// Gets a dictionary representing the styles of the row.
         /// </summary>
-        public Dictionary<string, string> Settings { get; private set; }
+        public GridDictionary Styles { get; private set; }
+
+        /// <summary>
+        /// Gets a dictionary representing the configuration (called Settings in the backoffice) of the row.
+        /// </summary>
+        public GridDictionary Config { get; private set; }
 
         #endregion
 
@@ -68,7 +73,8 @@ namespace Skybrud.Umbraco.GridData {
                 JObject = obj,
                 Id = obj.GetString("id"),
                 Name = obj.GetString("name"),
-                Settings = obj.GetObject("config", GridHelpers.ParseDictionary)
+                Styles = obj.GetObject("styles", GridDictionary.Parse),
+                Config = obj.GetObject("config", GridDictionary.Parse)
             };
 
             row.Areas = obj.GetArray("areas", x => GridArea.Parse(row, x)) ?? new GridArea[0];
