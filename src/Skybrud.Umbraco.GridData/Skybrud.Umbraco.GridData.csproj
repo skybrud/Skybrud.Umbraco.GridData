@@ -214,7 +214,6 @@
     <Compile Include="GridArea.cs" />
     <Compile Include="GridContext.cs" />
     <Compile Include="GridDictionary.cs" />
-    <Compile Include="GridEditorConfig.cs" />
     <Compile Include="GridHelpers.cs" />
     <Compile Include="GridSection.cs" />
     <Compile Include="GridControl.cs" />
@@ -222,7 +221,7 @@
     <Compile Include="GridEditor.cs" />
     <Compile Include="GridPropertyValueConverter.cs" />
     <Compile Include="GridRow.cs" />
-    <Compile Include="Interfaces\IGridControlConfig.cs" />
+    <Compile Include="Interfaces\IGridEditorConfig.cs" />
     <Compile Include="Interfaces\IGridControlValue.cs" />
     <Compile Include="PiggyBank.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

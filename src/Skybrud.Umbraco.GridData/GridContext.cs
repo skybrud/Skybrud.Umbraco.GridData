@@ -16,7 +16,7 @@ namespace Skybrud.Umbraco.GridData {
 
         readonly Dictionary<string, Func<JToken, IGridControlValue>> _valueConverters = new Dictionary<string, Func<JToken, IGridControlValue>>();
 
-        readonly Dictionary<string, Func<JToken, IGridControlConfig>> _configConverters = new Dictionary<string, Func<JToken, IGridControlConfig>>();
+        readonly Dictionary<string, Func<JToken, IGridEditorConfig>> _configConverters = new Dictionary<string, Func<JToken, IGridEditorConfig>>();
 
         #endregion
 
@@ -37,7 +37,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a dictionary of all registered config converters.
         /// </summary>
-        public Dictionary<string, Func<JToken, IGridControlConfig>> ConfigConverters {
+        public Dictionary<string, Func<JToken, IGridEditorConfig>> ConfigConverters {
             get { return _configConverters; }
         }
 
@@ -72,11 +72,23 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an instance of <code>GridControlWrapper</code> based on the specified <code>control</code> and <code>value</code>.
         /// </summary>
-        /// <typeparam name="T">The type of the value.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
         /// <param name="control">The control to wrap.</param>
         /// <param name="value">The value to wrap.</param>
-        public static GridControlWrapper<T> GetControlWrapper<T>(GridControl control, T value) {
-            return new GridControlWrapper<T>(control, value);
+        public static GridControlWrapper<TValue, IGridEditorConfig> GetControlWrapper<TValue>(GridControl control, TValue value) {
+            return new GridControlWrapper<TValue, IGridEditorConfig>(control, value, null);
+        }
+
+        /// <summary>
+        /// Gets an instance of <code>GridControlWrapper</code> based on the specified <code>control</code> and <code>value</code>.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        /// <typeparam name="TConfig">The type of the config.</typeparam>
+        /// <param name="control">The control to wrap.</param>
+        /// <param name="value">The value to wrap.</param>
+        /// <param name="config">The editor config to wrap.</param>
+        public static GridControlWrapper<TValue, TConfig> GetControlWrapper<TValue, TConfig>(GridControl control, TValue value, TConfig config) {
+            return new GridControlWrapper<TValue, TConfig>(control, value, config);
         }
 
         /// <summary>
@@ -103,7 +115,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="alias">The alias of the converter.</param>
         /// <param name="func"></param>
-        public bool TryGetConfigConverter(string alias, out Func<JToken, IGridControlConfig> func) {
+        public bool TryGetConfigConverter(string alias, out Func<JToken, IGridEditorConfig> func) {
             return _configConverters.TryGetValue(alias, out func);
         }
 

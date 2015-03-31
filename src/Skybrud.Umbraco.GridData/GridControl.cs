@@ -38,11 +38,6 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("editor")]
         public GridEditor Editor { get; private set; }
 
-        /// <summary>
-        /// Gets the configuration of the control.
-        /// </summary>
-        public Dictionary<string, string> Config { get; set; }
-
         #endregion
 
         #region Member methods
@@ -66,20 +61,22 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridControl Parse(GridArea area, JObject obj) {
             
+            // Set basic properties
             GridControl control = new GridControl {
                 Area = area,
-                JObject = obj,
-                Editor = obj.GetObject("editor").ToObject<GridEditor>(),
-                Config = obj.GetObject("config", GridHelpers.ParseDictionary)
+                JObject = obj
             };
 
+            // Parse the editor
+            control.Editor = obj.GetObject("editor", x => GridEditor.Parse(control, x));
+
+            // Parse the value
             string alias = control.Editor.Alias;
             string view = control.Editor.View;
-
             Func<JToken, IGridControlValue> func;
             if (GridContext.Current.TryGetValueConverter(alias + ":" + view, out func)) {
                 control.Value = func(obj.GetValue("value"));
-            } else if (GridContext.Current.TryGetValueConverter(view, out func)) {
+            } else if (GridContext.Current.TryGetValueConverter(alias, out func)) {
                 control.Value = func(obj.GetValue("value"));
             }
 

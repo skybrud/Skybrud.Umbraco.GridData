@@ -4,8 +4,8 @@
     /// Helper class for wrapping a grid control and its strongly typed value. The wrapper class
     /// can be used as the model for a partial view.
     /// </summary>
-    /// <typeparam name="T">The type of the value.</typeparam>
-    public class GridControlWrapper<T> {
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    public class GridControlWrapper<TValue> {
 
         #region Properties
 
@@ -24,15 +24,42 @@
         /// <summary>
         /// Gets a referece to the control value.
         /// </summary>
-        public T Value { get; private set; }
+        public TValue Value { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        internal GridControlWrapper(GridControl control, T value) {
+        internal GridControlWrapper(GridControl control, TValue value) {
             Control = control;
             Value = value;
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// Helper class for wrapping a grid control, its strongly typed value and the config of the
+    /// editor. The wrapper class can be used as the model for a partial view.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <typeparam name="TConfig">The type of the config.</typeparam>
+    public class GridControlWrapper<TValue, TConfig> : GridControlWrapper<TValue> {
+
+        #region Properties
+
+        /// <summary>
+        /// Gets a referece to the editor config.
+        /// </summary>
+        public TConfig Config { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        internal GridControlWrapper(GridControl control, TValue value, TConfig config) : base(control, value) {
+            Config = config;
         }
 
         #endregion
