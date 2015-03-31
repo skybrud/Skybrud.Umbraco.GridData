@@ -209,8 +209,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\GridControlValueStringConverter.cs" />
-    <Compile Include="ExtensionMethods\JArrayExtensionMethods.cs" />
-    <Compile Include="ExtensionMethods\JObjectExtensionMethods.cs" />
+    <Compile Include="Extensions\Json\JArrayExtensionMethods.cs" />
+    <Compile Include="Extensions\Json\JObjectExtensionMethods.cs" />
     <Compile Include="GridArea.cs" />
     <Compile Include="GridContext.cs" />
     <Compile Include="GridDictionary.cs" />

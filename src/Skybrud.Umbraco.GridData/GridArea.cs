@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Umbraco.GridData.ExtensionMethods;
+using Skybrud.Umbraco.GridData.Extensions.Json;
 
 namespace Skybrud.Umbraco.GridData {
 
