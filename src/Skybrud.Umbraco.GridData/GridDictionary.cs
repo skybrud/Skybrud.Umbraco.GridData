@@ -7,6 +7,9 @@ using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Umbraco.GridData {
     
+    /// <summary>
+    /// Dictionary representing a configuration for an element in the Umbraco Grid.
+    /// </summary>
     public class GridDictionary {
 
         #region Private fields
@@ -51,6 +54,10 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Static methods
 
+        /// <summary>
+        /// Parses a dictionary from the specified <code>obj</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridDictionary Parse(JObject obj) {
 
             // Initialize an empty dictionary
