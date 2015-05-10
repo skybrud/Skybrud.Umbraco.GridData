@@ -1,11 +1,9 @@
 ﻿namespace Skybrud.Umbraco.GridData.Rendering {
 
     /// <summary>
-    /// Helper class for wrapping a grid control and its strongly typed value. The wrapper class
-    /// can be used as the model for a partial view.
+    /// Helper class for wrapping a grid control.
     /// </summary>
-    /// <typeparam name="TValue">The type of the value.</typeparam>
-    public class GridControlWrapper<TValue> {
+    public class GridControlWrapper {
 
         #region Properties
 
@@ -21,6 +19,27 @@
             get { return Control == null ? null : Control.Editor; }
         }
 
+        #endregion
+
+        #region Constructors
+
+        public GridControlWrapper(GridControl control) {
+            Control = control;
+        }
+
+        #endregion
+
+    }
+
+    /// <summary>
+    /// Helper class for wrapping a grid control and its strongly typed value. The wrapper class
+    /// can be used as the model for a partial view.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    public class GridControlWrapper<TValue> : GridControlWrapper {
+
+        #region Properties
+
         /// <summary>
         /// Gets a referece to the control value.
         /// </summary>
@@ -30,8 +49,7 @@
 
         #region Constructors
 
-        internal GridControlWrapper(GridControl control, TValue value) {
-            Control = control;
+        public GridControlWrapper(GridControl control, TValue value) : base(control) {
             Value = value;
         }
 
@@ -58,7 +76,7 @@
 
         #region Constructors
 
-        internal GridControlWrapper(GridControl control, TValue value, TConfig config) : base(control, value) {
+        public GridControlWrapper(GridControl control, TValue value, TConfig config) : base(control, value) {
             Config = config;
         }
 

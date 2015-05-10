@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 
 namespace Skybrud.Umbraco.GridData {
@@ -12,6 +15,12 @@ namespace Skybrud.Umbraco.GridData {
     public class GridDataModel {
 
         #region Properties
+        
+        /// <summary>
+        /// Gets whether the model is valid.
+        /// </summary>
+        [JsonIgnore]
+        public bool IsValid { get; private set; }
 
         /// <summary>
         /// Gets the raw JSON value this model was parsed from.
@@ -54,11 +63,23 @@ namespace Skybrud.Umbraco.GridData {
         [JsonIgnore]
         [Obsolete]
         public dynamic sections {
-            get { return ((dynamic)JObject).sections; }
+            get { return ((dynamic) JObject).sections; }
         }
 
         #endregion
         
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public GridDataModel() {
+            Sections = new GridSection[0];
+            IsValid = false;
+        }
+
         #endregion
 
         #region Member methods
@@ -99,6 +120,23 @@ namespace Skybrud.Umbraco.GridData {
             ).ToArray();
         }
 
+        /// <summary>
+        /// Generates the HTML for the Grid model.
+        /// </summary>
+        /// <param name="helper">The HTML helper used for rendering the Grid.</param>
+        public HtmlString GetHtml(HtmlHelper helper) {
+            return helper.GetTypedGridHtml(this);
+        }
+
+        /// <summary>
+        /// Generates the HTML for the Grid model.
+        /// </summary>
+        /// <param name="helper">The HTML helper used for rendering the Grid.</param>
+        /// <param name="framework">The framework used to render the Grid.</param>
+        public HtmlString GetHtml(HtmlHelper helper, string framework) {
+            return helper.GetTypedGridHtml(this, framework);
+        }
+
         #endregion
 
         #region Static methods
@@ -119,7 +157,8 @@ namespace Skybrud.Umbraco.GridData {
             GridDataModel model = new GridDataModel {
                 Raw = json,
                 JObject = obj,
-                Name = obj.GetString("name")
+                Name = obj.GetString("name"),
+                IsValid = true
             };
 
             // Parse the sections
