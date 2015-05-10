@@ -3,6 +3,13 @@
     /// <summary>
     /// Interface describing a grid control value.
     /// </summary>
-    public interface IGridControlValue { }
+    public interface IGridControlValue {
+
+        /// <summary>
+        /// Gets a reference to the parent control.
+        /// </summary>
+        GridControl Control { get; }
+
+    }
 
 }

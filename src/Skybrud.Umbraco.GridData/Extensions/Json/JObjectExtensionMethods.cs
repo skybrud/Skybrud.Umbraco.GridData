@@ -76,6 +76,17 @@ namespace Skybrud.Umbraco.GridData.Extensions.Json {
         }
 
         /// <summary>
+        /// Gets a float from a property with the specified <code>propertyName</code>.
+        /// </summary>
+        /// <param name="obj">The parent object of the property.</param>
+        /// <param name="propertyName">The name of the property.</param>
+        public static float GetFloat(this JObject obj, string propertyName) {
+            if (obj == null) return default(float);
+            JToken property = obj.GetValue(propertyName);
+            return property == null ? default(float) : property.Value<float>();
+        }
+
+        /// <summary>
         /// Gets a double from a property with the specified <code>propertyName</code>.
         /// </summary>
         /// <param name="obj">The parent object of the property.</param>

@@ -1,8 +1,8 @@
-﻿using System;
+using System;
 using Newtonsoft.Json;
 using Skybrud.Umbraco.GridData.Values;
 
-namespace Skybrud.Umbraco.GridData.Converters {
+namespace Skybrud.Umbraco.GridData.Json.Converters {
 
     public class GridControlValueStringConverter : JsonConverter {
 
@@ -24,8 +24,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         }
 
         public override bool CanConvert(Type type) {
-            // Not sure that this is used
-            return false;// type == typeof(GridControlTextValue);
+            return false;
         }
     
     }

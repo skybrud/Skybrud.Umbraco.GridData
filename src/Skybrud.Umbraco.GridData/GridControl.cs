@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Umbraco.Core.Logging;
 
 namespace Skybrud.Umbraco.GridData {
 
@@ -69,16 +70,19 @@ namespace Skybrud.Umbraco.GridData {
             // Parse the editor
             control.Editor = obj.GetObject("editor", x => GridEditor.Parse(control, x));
 
-            // Parse the value
-            string alias = control.Editor.Alias;
-            string view = control.Editor.View;
-            Func<JToken, IGridControlValue> func;
-            if (GridContext.Current.TryGetValueConverter(alias + ":" + view, out func)) {
-                control.Value = func(obj.GetValue("value"));
-            } else if (GridContext.Current.TryGetValueConverter(alias, out func)) {
-                control.Value = func(obj.GetValue("value"));
+            // Parse the control value
+            JToken value = obj.GetValue("value");
+            foreach (IGridConverter converter in GridContext.Current.Converters) {
+                try {
+                    IGridControlValue converted;
+                    if (!converter.ConvertControlValue(control, value, out converted)) continue;
+                    control.Value = converted;
+                    break;
+                } catch (Exception ex) {
+                    LogHelper.Error<GridControl>("Converter of type " + converter + " failed for ConvertControlValue()", ex);
+                }
             }
-
+            
             return control;
 
         }

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Umbraco.Core.Logging;
 
 namespace Skybrud.Umbraco.GridData {
 
@@ -86,6 +87,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         public static GridEditor Parse(GridControl control, JObject obj) {
 
+            // Parse basic properties
             GridEditor editor = new GridEditor {
                 Control = control,
                 JObject = obj,
@@ -96,14 +98,17 @@ namespace Skybrud.Umbraco.GridData {
                 Icon = obj.GetString("icon")
             };
 
-            string alias = editor.Alias;
-            string view = editor.View;
-
-            Func<JToken, IGridEditorConfig> func;
-            if (GridContext.Current.TryGetConfigConverter(alias + ":" + view, out func)) {
-                editor.Config = func(obj.GetValue("config"));
-            } else if (GridContext.Current.TryGetConfigConverter(alias, out func)) {
-                editor.Config = func(obj.GetValue("config"));
+            // Parse the editor configuration
+            JToken config = obj.GetValue("config");
+            foreach (IGridConverter converter in GridContext.Current.Converters) {
+                try {
+                    IGridEditorConfig converted;
+                    if (!converter.ConvertEditorConfig(editor, config, out converted)) continue;
+                    editor.Config = converted;
+                    break;
+                } catch (Exception ex) {
+                    LogHelper.Error<GridEditor>("Converter of type " + converter + " failed for ConvertEditorConfig()", ex);
+                }
             }
 
             return editor;
