@@ -31,15 +31,22 @@ namespace Skybrud.Umbraco.GridData {
         public string Id { get; private set; }
 
         /// <summary>
+        /// Gets the alias of the row. This property is not part of the official Umbraco Grid in 7.2.x,
+        /// but will be available in 7.3 according to http://issues.umbraco.org/issue/U4-6533.
+        /// </summary>
+        [JsonProperty("alias", Order = 1)]
+        public string Alias { get; private set; }
+
+        /// <summary>
         /// Gets the name of the row.
         /// </summary>
-        [JsonProperty("name", Order = 1)]
+        [JsonProperty("name", Order = 2)]
         public string Name { get; private set; }
 
         /// <summary>
         /// Gets an array of all areas in the row.
         /// </summary>
-        [JsonProperty("areas", Order = 2)]
+        [JsonProperty("areas", Order = 3)]
         public GridArea[] Areas { get; private set; }
 
         /// <summary>
@@ -71,6 +78,7 @@ namespace Skybrud.Umbraco.GridData {
                 Section = section,
                 JObject = obj,
                 Id = obj.GetString("id"),
+                Alias = obj.GetString("alias"),
                 Name = obj.GetString("name"),
                 Styles = obj.GetObject("styles", GridDictionary.Parse),
                 Config = obj.GetObject("config", GridDictionary.Parse)
