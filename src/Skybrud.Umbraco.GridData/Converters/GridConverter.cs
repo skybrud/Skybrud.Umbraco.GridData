@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System;
+using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Config;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
@@ -27,7 +28,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
                     break;
 
                 case "rte":
-                    value = GridControlRichTextValue.Parse(control, token as JObject);
+                    value = GridControlRichTextValue.Parse(control, token);
                     break;
 
                 case "macro":
@@ -36,7 +37,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
 
                 case "headline":
                 case "quote":
-                    value = GridControlTextValue.Parse(control, token as JObject);
+                    value = GridControlTextValue.Parse(control, token);
                     break;
 
             }
