@@ -89,9 +89,10 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="property">The property holding the Grid model.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
         public static HtmlString GetTypedGridHtml(this HtmlHelper html, IPublishedProperty property, string framework = DefaultFramework) {
-            
-            // Check whether the property value is empty
-            if (String.IsNullOrWhiteSpace(property.Value as string)) return new HtmlString(String.Empty);
+
+            // Get the property value
+            GridDataModel value = property.Value as GridDataModel;
+            if (value == null) return new HtmlString(String.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, property.Value);
@@ -130,8 +131,9 @@ namespace Skybrud.Umbraco.GridData.Extensions {
             IPublishedProperty property = content.GetProperty(propertyAlias);
             if (property == null) throw new NullReferenceException("No property type found with alias " + propertyAlias);
 
-            // Check whether the property value is empty
-            if (String.IsNullOrEmpty(property.Value as string)) return new HtmlString(String.Empty);
+            // Get the property value
+            GridDataModel value = property.Value as GridDataModel;
+            if (value == null) return new HtmlString(String.Empty);
             
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, property.Value);
@@ -145,9 +147,10 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
         public static HtmlString GetTypedGridHtml(this IPublishedProperty property, HtmlHelper html, string framework = DefaultFramework) {
-            
-            // Check whether the property value is empty
-            if (String.IsNullOrEmpty(property.Value as string)) return new HtmlString(String.Empty);
+
+            // Get the property value
+            GridDataModel value = property.Value as GridDataModel;
+            if (value == null) return new HtmlString(String.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, property.Value);
@@ -186,8 +189,9 @@ namespace Skybrud.Umbraco.GridData.Extensions {
             IPublishedProperty property = content.GetProperty(propertyAlias);
             if (property == null) throw new NullReferenceException("No property type found with alias " + propertyAlias);
 
-            // Check whether the property value is empty
-            if (String.IsNullOrEmpty(property.Value as string)) return new HtmlString(String.Empty);
+            // Get the property value
+            GridDataModel value = property.Value as GridDataModel;
+            if (value == null) return new HtmlString(String.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, property.Value);
