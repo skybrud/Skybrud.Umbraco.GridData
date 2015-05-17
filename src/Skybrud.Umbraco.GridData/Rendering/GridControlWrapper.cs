@@ -1,4 +1,6 @@
-﻿namespace Skybrud.Umbraco.GridData.Rendering {
+﻿using Skybrud.Umbraco.GridData.Interfaces;
+
+namespace Skybrud.Umbraco.GridData.Rendering {
 
     /// <summary>
     /// Helper class for wrapping a grid control.
@@ -23,6 +25,10 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Wraps an instance of <code>GridControl</code>.
+        /// </summary>
+        /// <param name="control">The control to be wrap.</param>
         public GridControlWrapper(GridControl control) {
             Control = control;
         }
@@ -36,7 +42,7 @@
     /// can be used as the model for a partial view.
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
-    public class GridControlWrapper<TValue> : GridControlWrapper {
+    public class GridControlWrapper<TValue> : GridControlWrapper where TValue : IGridControlValue {
 
         #region Properties
 
@@ -49,6 +55,11 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Wraps an instance of <code>GridControl</code>.
+        /// </summary>
+        /// <param name="control">The control to be wrap.</param>
+        /// <param name="value">The type of the value.</param>
         public GridControlWrapper(GridControl control, TValue value) : base(control) {
             Value = value;
         }
@@ -63,7 +74,7 @@
     /// </summary>
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <typeparam name="TConfig">The type of the config.</typeparam>
-    public class GridControlWrapper<TValue, TConfig> : GridControlWrapper<TValue> {
+    public class GridControlWrapper<TValue, TConfig> : GridControlWrapper<TValue> where TValue : IGridControlValue  where TConfig : IGridEditorConfig {
 
         #region Properties
 
@@ -76,6 +87,12 @@
 
         #region Constructors
 
+        /// <summary>
+        /// Wraps an instance of <code>GridControl</code>.
+        /// </summary>
+        /// <param name="control">The control to be wrap.</param>
+        /// <param name="value">The type of the value.</param>
+        /// <param name="config">The type of the editor config.</param>
         public GridControlWrapper(GridControl control, TValue value, TConfig config) : base(control, value) {
             Config = config;
         }

@@ -28,7 +28,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets a string representing the value.
         /// </summary>
         [JsonProperty("value")]
-        public virtual string Value { get; protected set; }
+        public string Value { get; protected set; }
 
         #endregion
 
@@ -37,6 +37,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         protected GridControlTextValue(GridControl control, JToken token) {
             Control = control;
             JToken = token;
+            Value = token.Value<string>();
         }
 
         #endregion
@@ -50,9 +51,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// <param name="token">The instance of <code>JToken</code> to be parsed.</param>
         public static GridControlTextValue Parse(GridControl control, JToken token) {
             if (token == null) return null;
-            return new GridControlTextValue(control, token) {
-                Value = token.Value<string>()
-            };
+            return new GridControlTextValue(control, token);
         }
 
         #endregion

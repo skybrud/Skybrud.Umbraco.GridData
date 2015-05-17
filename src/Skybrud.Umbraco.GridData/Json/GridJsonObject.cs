@@ -1,11 +1,13 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Umbraco.GridData.Json.Converters;
 
 namespace Skybrud.Umbraco.GridData.Json {
     
     /// <summary>
     /// Class representing an object derived from an instance of <code>JObject</code>.
     /// </summary>
+    [JsonConverter(typeof(GridJsonConverter))]
     public class GridJsonObject {
 
         #region Properties

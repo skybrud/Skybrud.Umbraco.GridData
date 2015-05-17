@@ -4,12 +4,14 @@ using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Umbraco.GridData.Json.Converters;
 
 namespace Skybrud.Umbraco.GridData {
     
     /// <summary>
     /// Dictionary representing a configuration for an element in the Umbraco Grid.
     /// </summary>
+    //[JsonConverter(typeof(GridDictionaryConverter))]
     public class GridDictionary {
 
         #region Private fields

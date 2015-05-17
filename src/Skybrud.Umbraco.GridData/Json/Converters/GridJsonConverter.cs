@@ -1,21 +1,36 @@
 using System;
 using Newtonsoft.Json;
-using Skybrud.Umbraco.GridData.Values;
+using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Umbraco.GridData.Json.Converters {
 
     /// <summary>
-    /// Converter for text based grid control values.
+    /// Converter for dictionary based values in the grid.
     /// </summary>
-    public class GridControlValueStringConverter : JsonConverter {
+    public class GridJsonConverter : JsonConverter {
 
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            GridControlTextValue text = value as GridControlTextValue;
-            if (text != null) {
-                writer.WriteValue(text.Value);
+
+            GridJsonObject obj = value as GridJsonObject;
+            if (obj != null) {
+                serializer.Serialize(writer, obj.JObject);
                 return;
             }
+
+            GridRow row = value as GridRow;
+            if (row != null) {
+                serializer.Serialize(writer, row.JObject);
+                return;
+            }
+
+            GridDictionary dictionary = value as GridDictionary;
+            if (dictionary != null) {
+                serializer.Serialize(writer, dictionary.JObject);
+                return;
+            }
+            
             serializer.Serialize(writer, value);
+        
         }
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {

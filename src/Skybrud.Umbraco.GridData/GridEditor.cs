@@ -48,7 +48,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets renderer for the control/editor. If specified, the renderer refers to a partial
         /// view that should be used for rendering the control.
         /// </summary>
-        [JsonProperty("render", NullValueHandling = NullValueHandling.Ignore)]
+        [JsonProperty("render")]
         public string Render { get; private set; }
 
         /// <summary>

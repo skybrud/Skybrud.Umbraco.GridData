@@ -11,32 +11,21 @@ namespace Skybrud.Umbraco.GridData.Values {
     [JsonConverter(typeof(GridControlValueStringConverter))]
     public class GridControlHtmlValue : GridControlTextValue {
 
-        #region Private fields
-
-        private HtmlString _html;
-
-        #endregion
-
         #region Properties
-
-        public override string Value {
-            get { return base.Value; }
-            protected set { base.Value = value; _html = new HtmlString(value); }
-        }
 
         /// <summary>
         /// Gets an instance of <code>HtmlString</code> representing the text value.
         /// </summary>
         [JsonIgnore]
-        public virtual HtmlString HtmlValue {
-            get { return _html; }
-        }
+        public HtmlString HtmlValue { get; private set; }
 
         #endregion
 
         #region Constructors
 
-        protected GridControlHtmlValue(GridControl control, JToken token) : base(control, token) { }
+        protected GridControlHtmlValue(GridControl control, JToken token) : base(control, token) {
+            HtmlValue = new HtmlString(Value);
+        }
 
         #endregion
 

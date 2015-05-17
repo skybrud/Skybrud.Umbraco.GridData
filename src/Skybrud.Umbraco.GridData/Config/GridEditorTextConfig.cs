@@ -16,13 +16,13 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <summary>
         /// Gets the style properties for the text.
         /// </summary>
-        [JsonProperty("style")]
+        [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
         public string Style { get; private set; }
 
         /// <summary>
         /// Gets the markup for the text.
         /// </summary>
-        [JsonProperty("markup")]
+        [JsonProperty("markup", NullValueHandling = NullValueHandling.Ignore)]
         public string Markup { get; private set; }
 
         /// <summary>

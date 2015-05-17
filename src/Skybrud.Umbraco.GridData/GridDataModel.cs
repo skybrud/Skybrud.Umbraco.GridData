@@ -2,56 +2,47 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Extensions.Json;
+using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData {
 
     /// <summary>
     /// Class representing the value/model saved by an Umbraco Grid property.
     /// </summary>
-    public class GridDataModel {
+    public class GridDataModel : GridJsonObject {
 
         #region Properties
         
         /// <summary>
         /// Gets whether the model is valid.
         /// </summary>
-        [JsonIgnore]
         public bool IsValid { get; private set; }
 
         /// <summary>
         /// Gets the raw JSON value this model was parsed from.
         /// </summary>
-        [JsonIgnore]
         public string Raw { get; private set; }
-
-        /// <summary>
-        /// Gets a reference to the instance of <code>JObject</code> this section was parsed from.
-        /// </summary>
-        [JsonIgnore]
-        public JObject JObject { get; private set; }
 
         /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
-        [JsonProperty("name")]
         public string Name { get; private set; }
 
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        [JsonProperty("sections")]
         public GridSection[] Sections { get; private set; }
 
         #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
 
+        // ReSharper disable InconsistentNaming
+
         /// <summary>
         /// Same as <code>Name</code>.
         /// </summary>
-        [JsonIgnore]
         [Obsolete]
         public string name {
             get { return Name; }
@@ -60,11 +51,12 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets the underlying JSON array for the <code>sections</code> property. 
         /// </summary>
-        [JsonIgnore]
         [Obsolete]
         public dynamic sections {
             get { return ((dynamic) JObject).sections; }
         }
+        
+        // ReSharper restore InconsistentNaming
 
         #endregion
         
@@ -72,10 +64,7 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Constructors
 
-        /// <summary>
-        /// Default constructor.
-        /// </summary>
-        public GridDataModel() {
+        private GridDataModel(JObject obj) : base(obj) {
             Sections = new GridSection[0];
             IsValid = false;
         }
@@ -142,6 +131,14 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
+        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
+        /// when an actual Grid model isn't available.
+        /// </summary>
+        public static GridDataModel GetEmptyModel() {
+            return new GridDataModel(null);
+        }
+
+        /// <summary>
         /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
@@ -154,9 +151,8 @@ namespace Skybrud.Umbraco.GridData {
             JObject obj = JObject.Parse(json);
 
             // Parse basic properties
-            GridDataModel model = new GridDataModel {
+            GridDataModel model = new GridDataModel(obj) {
                 Raw = json,
-                JObject = obj,
                 Name = obj.GetString("name"),
                 IsValid = true
             };
@@ -169,10 +165,14 @@ namespace Skybrud.Umbraco.GridData {
 
         }
 
+        /// <summary>
+        /// Parses the specified <code>JObject</code> into an instance of <code>GridDataModel</code>.
+        /// </summary>
+        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
         [Obsolete("Use Deserialize method instead")]
         public static GridDataModel Parse(JObject obj) {
             if (obj == null) return null;
-            return new GridDataModel {
+            return new GridDataModel(obj) {
                 Raw = obj.ToString(),
                 Name = obj.GetString("name"),
                 Sections = obj.GetArray("sections", x => GridSection.Parse(null, obj)) ?? new GridSection[0]
