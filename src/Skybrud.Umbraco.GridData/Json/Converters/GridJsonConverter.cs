@@ -1,6 +1,5 @@
 using System;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Umbraco.GridData.Json.Converters {
 
@@ -14,12 +13,6 @@ namespace Skybrud.Umbraco.GridData.Json.Converters {
             GridJsonObject obj = value as GridJsonObject;
             if (obj != null) {
                 serializer.Serialize(writer, obj.JObject);
-                return;
-            }
-
-            GridRow row = value as GridRow;
-            if (row != null) {
-                serializer.Serialize(writer, row.JObject);
                 return;
             }
 

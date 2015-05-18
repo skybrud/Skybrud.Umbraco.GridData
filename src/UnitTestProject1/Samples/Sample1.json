@@ -381,6 +381,51 @@
             "class": "dark"
           },
           "id": "0093bd05-735a-9623-8509-28085818745c"
+        },
+        {
+          "name": "Hest",
+          "areas": [
+            {
+              "grid": 4,
+              "allowAll": true,
+              "config": {
+                "class": "yellow"
+              },
+              "styles": {
+                "margin-bottom": "150px"
+              },
+              "controls": [
+                {
+                  "value": {
+                    "focalPoint": {
+                      "left": 0.5,
+                      "top": 0.5
+                    },
+                    "id": 1090,
+                    "image": "/media/1050/b72830727ba3ca99.jpg"
+                  },
+                  "editor": {
+                    "name": "Image",
+                    "alias": "media",
+                    "view": "media",
+                    "render": null,
+                    "icon": "icon-picture",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 8,
+              "allowAll": true,
+              "controls": []
+            }
+          ],
+          "styles": {},
+          "config": {
+            "class": "dark"
+          },
+          "id": "2b641ce4-cde8-f1a2-5841-f4688cf75f5f"
         }
       ]
     }

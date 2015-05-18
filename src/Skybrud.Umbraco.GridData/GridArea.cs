@@ -3,13 +3,14 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
+using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData {
 
     /// <summary>
     /// Class representing an area in an Umbraco Grid.
     /// </summary>
-    public class GridArea {
+    public class GridArea : GridJsonObject {
 
         #region Properties
 
@@ -20,34 +21,24 @@ namespace Skybrud.Umbraco.GridData {
         public GridRow Row { get; private set; }
 
         /// <summary>
-        /// Gets a reference to the instance of <code>JObject</code> this area was parsed from.
-        /// </summary>
-        [JsonIgnore]
-        public JObject JObject { get; private set; }
-
-        /// <summary>
         /// Gets the column width of the area.
         /// </summary>
-        [JsonProperty("grid")]
         public int Grid { get; private set; }
 
         /// <summary>
         /// Gets wether all editors are allowed for this area.
         /// </summary>
-        [JsonProperty("allowAll")]
         public bool AllowAll { get; private set; }
 
         /// <summary>
         /// Gets an array of all editors allowed for this area. If <code>AllowAll</code> is <code>TRUE</code>, this
         /// array may be empty.
         /// </summary>
-        [JsonProperty("allowed")]
         public string[] Allowed { get; private set; }
 
         /// <summary>
         /// Gets an array of all controls added to this area.
         /// </summary>
-        [JsonProperty("controls")]
         public GridControl[] Controls { get; private set; }
         
         /// <summary>
@@ -59,6 +50,12 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets a dictionary representing the configuration (called Settings in the backoffice) of the area.
         /// </summary>
         public GridDictionary Config { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        protected GridArea(JObject obj) : base(obj) { }
 
         #endregion
 
@@ -78,9 +75,8 @@ namespace Skybrud.Umbraco.GridData {
             JArray allowed = obj.GetArray("allowed");
             
             // Parse basic properties
-            GridArea area = new GridArea {
+            GridArea area = new GridArea(obj) {
                 Row = row,
-                JObject = obj,
                 Grid = obj.GetInt32("grid"),
                 AllowAll = obj.GetBoolean("allowAll"),
                 Allowed = allowed == null ? new string[0] : allowed.Select(x => (string)x).ToArray(),

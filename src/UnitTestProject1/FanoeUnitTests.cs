@@ -30,11 +30,11 @@ namespace UnitTestProject1 {
             Assert.IsNotNull(model);
 
             Assert.AreEqual(1, model.Sections.Length);
-            Assert.AreEqual(6, model.Sections[0].Rows.Length);
+            Assert.AreEqual(7, model.Sections[0].Rows.Length);
 
             GridControl[] controls = model.GetAllControls();
 
-            Assert.AreEqual(13, controls.Length);
+            Assert.AreEqual(14, controls.Length);
 
             Hest(controls[0], "headline", typeof(GridControlTextValue), typeof(GridEditorTextConfig));
             Hest(controls[1], "quote", typeof(GridControlTextValue), typeof(GridEditorTextConfig));
@@ -49,6 +49,7 @@ namespace UnitTestProject1 {
             Hest(controls[10], "rte", typeof(GridControlRichTextValue));
             Hest(controls[11], "rte", typeof(GridControlRichTextValue));
             Hest(controls[12], "rte", typeof(GridControlRichTextValue));
+            Hest(controls[13], "media", typeof(GridControlMediaValue));
 
         }
 

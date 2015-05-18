@@ -4,36 +4,36 @@ using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Umbraco.GridData.Json.Converters;
+using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData {
     
     /// <summary>
     /// Dictionary representing a configuration for an element in the Umbraco Grid.
     /// </summary>
-    //[JsonConverter(typeof(GridDictionaryConverter))]
-    public class GridDictionary {
+    public class GridDictionary : GridJsonObject {
 
         #region Private fields
 
-        private readonly Dictionary<string, string> _config;
+        private readonly Dictionary<string, string> _dictionary;
 
         #endregion
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the instance of <code>JObject</code> this object was parsed from.
-        /// </summary>
-        [JsonIgnore]
-        public JObject JObject { get; private set; }
-
-        /// <summary>
         /// Gets the keys of the underlying dictionary.
         /// </summary>
         [JsonIgnore]
         public string[] Keys {
-            get { return _config.Keys.ToArray(); }
+            get { return _dictionary.Keys.ToArray(); }
+        }
+
+        /// <summary>
+        /// Gets the amount of items in the dictionary.
+        /// </summary>
+        public int Count {
+            get { return _dictionary.Count; }
         }
 
         /// <summary>
@@ -41,15 +41,27 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="key">The key of the dictionary item.</param>
         public string this[string key] {
-            get { return _config[key]; }
+            get { return _dictionary[key]; }
         }
 
         #endregion
 
         #region Constructors
 
-        private GridDictionary(Dictionary<string, string> config) {
-            _config = config;
+        private GridDictionary(Dictionary<string, string> config, JObject obj) : base(obj) {
+            _dictionary = config;
+        }
+
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets whether the specified <code>key</code> is contained in the dictionary.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public bool ContainsKey(string key) {
+            return _dictionary.ContainsKey(key);
         }
 
         #endregion
@@ -73,9 +85,7 @@ namespace Skybrud.Umbraco.GridData {
             }
 
             // Return the instance
-            return new GridDictionary(config) {
-                JObject = obj
-            };
+            return new GridDictionary(config, obj);
 
         }
 

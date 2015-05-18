@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json;
 using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Config;
 using Skybrud.Umbraco.GridData.Fanoe;
@@ -28,11 +29,11 @@ namespace UnitTestProject1 {
             Assert.IsNotNull(model);
 
             Assert.AreEqual(1, model.Sections.Length);
-            Assert.AreEqual(6, model.Sections[0].Rows.Length);
+            Assert.AreEqual(7, model.Sections[0].Rows.Length);
 
             GridControl[] controls = model.GetAllControls();
 
-            Assert.AreEqual(13, controls.Length);
+            Assert.AreEqual(14, controls.Length);
 
             Hest(controls[0], "headline", typeof(GridControlTextValue), typeof(GridEditorTextConfig));
             Hest(controls[1], "quote", typeof(GridControlTextValue), typeof(GridEditorTextConfig));
@@ -47,6 +48,37 @@ namespace UnitTestProject1 {
             Hest(controls[10], "rte", typeof(GridControlRichTextValue));
             Hest(controls[11], "rte", typeof(GridControlRichTextValue));
             Hest(controls[12], "rte", typeof(GridControlRichTextValue));
+            Hest(controls[13], "media", typeof(GridControlMediaValue));
+
+            {
+                Assert.AreEqual(JsonConvert.SerializeObject(model, Formatting.None), model.JObject.ToString(Formatting.None));
+                Assert.AreEqual(JsonConvert.SerializeObject(model.Sections[0], Formatting.None), model.Sections[0].JObject.ToString(Formatting.None));
+
+                GridRow row = model.Sections[0].Rows[6];
+                Assert.AreEqual("Hest", row.Name);
+                Assert.AreEqual(2, row.Areas.Length);
+                Assert.AreEqual(true, row.HasAreas);
+                Assert.AreEqual(0, row.Styles.Count);
+                Assert.AreEqual(1, row.Config.Count);
+                Assert.AreEqual("dark", row.Config["class"]);
+                Assert.AreEqual(JsonConvert.SerializeObject(row, Formatting.None), row.JObject.ToString(Formatting.None));
+
+                GridArea area1 = model.Sections[0].Rows[6].Areas[0];
+                Assert.AreEqual(4, area1.Grid);
+                Assert.AreEqual(1, area1.Controls.Length);
+                Assert.AreEqual("Hest", area1.Row.Name);
+                Assert.AreEqual(4, area1.Grid);
+                Assert.AreEqual(1, area1.Config.Count);
+                Assert.AreEqual(1, area1.Styles.Count);
+                Assert.AreEqual("yellow", area1.Config["class"]);
+                Assert.AreEqual("150px", area1.Styles["margin-bottom"]);
+                Assert.AreEqual(JsonConvert.SerializeObject(area1, Formatting.None), area1.JObject.ToString(Formatting.None));
+
+                GridArea area2 = model.Sections[0].Rows[6].Areas[1];
+                Assert.AreEqual(8, area2.Grid);
+                Assert.AreEqual(0, area2.Controls.Length);
+                Assert.AreEqual(JsonConvert.SerializeObject(area2, Formatting.None), area2.JObject.ToString(Formatting.None));
+            }
 
         }
 
