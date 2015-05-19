@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Json;
 using Umbraco.Core.Logging;
 
 namespace Skybrud.Umbraco.GridData {
@@ -10,7 +11,7 @@ namespace Skybrud.Umbraco.GridData {
     /// <summary>
     /// Class representing an editor of a control in an Umbraco Grid.
     /// </summary>
-    public class GridEditor {
+    public class GridEditor : GridJsonObject {
 
         #region Properties
 
@@ -19,12 +20,6 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonIgnore]
         public GridControl Control { get; private set; }
-
-        /// <summary>
-        /// Gets a reference to the instance of <code>JObject</code> this editor was parsed from.
-        /// </summary>
-        [JsonIgnore]
-        public JObject JObject { get; private set; }
 
         /// <summary>
         /// Gets the name of the editor.
@@ -66,6 +61,12 @@ namespace Skybrud.Umbraco.GridData {
 
         #endregion
 
+        #region Constructors
+
+        private GridEditor(JObject obj) : base(obj) { }
+
+        #endregion
+
         #region Member methods
 
         /// <summary>
@@ -88,9 +89,8 @@ namespace Skybrud.Umbraco.GridData {
         public static GridEditor Parse(GridControl control, JObject obj) {
 
             // Parse basic properties
-            GridEditor editor = new GridEditor {
+            GridEditor editor = new GridEditor(obj) {
                 Control = control,
-                JObject = obj,
                 Name = obj.GetString("name"),
                 Alias = obj.GetString("alias"),
                 View = obj.GetString("view"),

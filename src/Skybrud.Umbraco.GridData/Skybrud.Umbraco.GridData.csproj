@@ -196,7 +196,6 @@
     <Compile Include="Extensions\Json\GridControlExtensions.cs" />
     <Compile Include="Interfaces\IGridConverter.cs" />
     <Compile Include="Json\Converters\GridJsonConverter.cs" />
-    <Compile Include="Json\Converters\GridDictionaryConverter.cs" />
     <Compile Include="Json\Converters\GridControlValueStringConverter.cs" />
     <Compile Include="Extensions\Json\JArrayExtensionMethods.cs" />
     <Compile Include="Extensions\Json\JObjectExtensionMethods.cs" />

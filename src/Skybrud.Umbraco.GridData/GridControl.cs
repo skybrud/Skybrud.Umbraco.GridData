@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Json;
 using Umbraco.Core.Logging;
 
 namespace Skybrud.Umbraco.GridData {
@@ -10,7 +11,7 @@ namespace Skybrud.Umbraco.GridData {
     /// <summary>
     /// Class representing a control in an Umbraco Grid.
     /// </summary>
-    public class GridControl {
+    public class GridControl : GridJsonObject {
 
         #region Properties
 
@@ -19,12 +20,6 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonIgnore]
         public GridArea Area { get; private set; }
-
-        /// <summary>
-        /// Gets a reference to the instance of <code>JObject</code> this control was parsed from.
-        /// </summary>
-        [JsonIgnore]
-        public JObject JObject { get; private set; }
 
         /// <summary>
         /// Gets the value of the control. Alternately use the <code>GetValue&lt;T&gt;</code> method to get the type safe value.
@@ -37,6 +32,12 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonProperty("editor")]
         public GridEditor Editor { get; private set; }
+
+        #endregion
+
+        #region Constructors
+
+        private GridControl(JObject obj) : base(obj) { }
 
         #endregion
 
@@ -62,9 +63,8 @@ namespace Skybrud.Umbraco.GridData {
         public static GridControl Parse(GridArea area, JObject obj) {
             
             // Set basic properties
-            GridControl control = new GridControl {
-                Area = area,
-                JObject = obj
+            GridControl control = new GridControl(obj) {
+                Area = area
             };
 
             // Parse the editor

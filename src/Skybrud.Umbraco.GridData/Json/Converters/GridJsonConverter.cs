@@ -15,12 +15,6 @@ namespace Skybrud.Umbraco.GridData.Json.Converters {
                 serializer.Serialize(writer, obj.JObject);
                 return;
             }
-
-            GridDictionary dictionary = value as GridDictionary;
-            if (dictionary != null) {
-                serializer.Serialize(writer, dictionary.JObject);
-                return;
-            }
             
             serializer.Serialize(writer, value);
         
