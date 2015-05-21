@@ -4,7 +4,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using Skybrud.Umbraco.GridData;
 using Skybrud.Umbraco.GridData.Config;
-using Skybrud.Umbraco.GridData.Fanoe;
+using Skybrud.Umbraco.GridData.Converters;
+using Skybrud.Umbraco.GridData.Converters.Fanoe;
 using Skybrud.Umbraco.GridData.Values;
 
 namespace UnitTestProject1 {
@@ -48,7 +49,7 @@ namespace UnitTestProject1 {
             Hest(controls[10], "rte", typeof(GridControlRichTextValue));
             Hest(controls[11], "rte", typeof(GridControlRichTextValue));
             Hest(controls[12], "rte", typeof(GridControlRichTextValue));
-            Hest(controls[13], "media", typeof(GridControlMediaValue));
+            Hest(controls[13], "media", typeof(GridControlMediaValue), typeof(GridEditorMediaConfig));
 
             {
                 Assert.AreEqual(JsonConvert.SerializeObject(model, Formatting.None), model.JObject.ToString(Formatting.None));

@@ -74,10 +74,6 @@
     <None Include="Samples\Sample1.json" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Skybrud.Umbraco.GridData.Fanoe\Skybrud.Umbraco.GridData.Fanoe.csproj">
-      <Project>{f9e91627-7d8d-4b9d-b071-f8f29d04f548}</Project>
-      <Name>Skybrud.Umbraco.GridData.Fanoe</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Skybrud.Umbraco.GridData\Skybrud.Umbraco.GridData.csproj">
       <Project>{99dc24ea-4933-4bb9-b6a1-bf565e9e93c0}</Project>
       <Name>Skybrud.Umbraco.GridData</Name>
