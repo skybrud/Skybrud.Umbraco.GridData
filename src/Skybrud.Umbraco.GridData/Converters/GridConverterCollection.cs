@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Skybrud.Umbraco.GridData.Converters.Fanoe;
+using Skybrud.Umbraco.GridData.Converters.Umbraco;
 using Skybrud.Umbraco.GridData.Interfaces;
 
 namespace Skybrud.Umbraco.GridData.Converters {
@@ -13,7 +15,8 @@ namespace Skybrud.Umbraco.GridData.Converters {
         #region Private fields
 
         private readonly List<IGridConverter> _converters = new List<IGridConverter> {
-            new GridConverter()
+            new UmbracoGridConverter(),
+            new FanoeGridConverter()
         };
         
         #endregion

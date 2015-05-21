@@ -5,12 +5,12 @@ using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
 using Skybrud.Umbraco.GridData.Values;
 
-namespace Skybrud.Umbraco.GridData.Converters {
+namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
     /// <summary>
     /// Converter for handling the default editors (and their values and configs) of Umbraco.
     /// </summary>
-    public class GridConverter : IGridConverter {
+    public class UmbracoGridConverter : IGridConverter {
 
         public virtual bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
             
@@ -45,20 +45,24 @@ namespace Skybrud.Umbraco.GridData.Converters {
         
         }
 
-        public virtual bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig value) {
+        public virtual bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
        
-            value = null;
+            config = null;
 
             switch (editor.Alias) {
 
+                case "media":
+                    config = GridEditorMediaConfig.Parse(editor, token as JObject);
+                    break;
+
                 case "headline":
                 case "quote":
-                    value = GridEditorTextConfig.Parse(editor, token as JObject);
+                    config = GridEditorTextConfig.Parse(editor, token as JObject);
                     break;
 
             }
 
-            return value != null;
+            return config != null;
         
         }
 
@@ -69,7 +73,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
             switch (control.Editor.Alias) {
 
                 case "media":
-                    wrapper = control.GetControlWrapper<GridControlMediaValue>();
+                    wrapper = control.GetControlWrapper<GridControlMediaValue, GridEditorMediaConfig>();
                     break;
 
                 case "embed":

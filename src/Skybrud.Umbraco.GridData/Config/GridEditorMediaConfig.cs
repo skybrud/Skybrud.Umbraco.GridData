@@ -4,10 +4,10 @@ using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 
-namespace Skybrud.Umbraco.GridData.Fanoe {
+namespace Skybrud.Umbraco.GridData.Config {
     
     /// <summary>
-    /// Class representing the configuration of a text editor.
+    /// Class representing the configuration of a media editor.
     /// </summary>
     public class GridEditorMediaConfig : GridJsonObject, IGridEditorConfig {
 
@@ -15,6 +15,9 @@ namespace Skybrud.Umbraco.GridData.Fanoe {
 
         public GridEditor Editor { get; private set; }
 
+        /// <summary>
+        /// Gets an object describing the desired size of the media.
+        /// </summary>
         [JsonProperty("size", NullValueHandling = NullValueHandling.Ignore)]
         public GridEditorMediaConfigSize Size { get; private set; }
 

@@ -5,8 +5,11 @@ using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
 using Skybrud.Umbraco.GridData.Values;
 
-namespace Skybrud.Umbraco.GridData.Fanoe {
+namespace Skybrud.Umbraco.GridData.Converters.Fanoe {
     
+    /// <summary>
+    /// Converter for Grid editors from the Fanoe starter kit.
+    /// </summary>
     public class FanoeGridConverter : IGridConverter {
         
         public bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {

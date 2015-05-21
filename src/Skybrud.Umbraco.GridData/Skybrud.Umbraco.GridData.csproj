@@ -190,8 +190,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\GridEditorMediaConfig.cs" />
+    <Compile Include="Config\GridEditorMediaConfigSize.cs" />
     <Compile Include="Config\GridEditorTextConfig.cs" />
-    <Compile Include="Converters\GridConverter.cs" />
+    <Compile Include="Converters\Fanoe\FanoeGridConverter.cs" />
+    <Compile Include="Converters\Umbraco\UmbracoGridConverter.cs" />
     <Compile Include="Converters\GridConverterCollection.cs" />
     <Compile Include="Extensions\Json\GridControlExtensions.cs" />
     <Compile Include="Interfaces\IGridConverter.cs" />
