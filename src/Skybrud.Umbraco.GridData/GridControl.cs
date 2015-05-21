@@ -33,6 +33,16 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("editor")]
         public GridEditor Editor { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the previous control.
+        /// </summary>
+        public GridControl PreviousControl { get; internal set; }
+
+        /// <summary>
+        /// Gets a reference to the next control.
+        /// </summary>
+        public GridControl NextControl { get; internal set; }
+
         #endregion
 
         #region Constructors

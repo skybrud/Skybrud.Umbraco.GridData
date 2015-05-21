@@ -51,6 +51,39 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         public GridDictionary Config { get; private set; }
 
+        /// <summary>
+        /// Gets a reference to the previous area.
+        /// </summary>
+        public GridArea PreviousArea { get; internal set; }
+
+        /// <summary>
+        /// Gets a reference to the next area.
+        /// </summary>
+        public GridArea NextArea { get; internal set; }
+
+        /// <summary>
+        /// Gets whether the area has any controls.
+        /// </summary>
+        public bool HasControls {
+            get { return Controls.Length > 0; }
+        }
+
+        /// <summary>
+        /// Gets the first control of the area. If the area doesn't contain
+        /// any controls, this property will return <code>NULL</code>.
+        /// </summary>
+        public GridControl FirstControl {
+            get { return Controls.FirstOrDefault(); }
+        }
+
+        /// <summary>
+        /// Gets the last control of the area. If the area doesn't contain
+        /// any controls, this property will return <code>NULL</code>.
+        /// </summary>
+        public GridControl LastControl {
+            get { return Controls.LastOrDefault(); }
+        }
+
         #endregion
 
         #region Constructors
@@ -86,6 +119,12 @@ namespace Skybrud.Umbraco.GridData {
 
             // Parse the controls
             area.Controls = obj.GetArray("controls", x => GridControl.Parse(area, x)) ?? new GridControl[0];
+            
+            // Update "PreviousArea" and "NextArea" properties
+            for (int i = 1; i < area.Controls.Length; i++) {
+                area.Controls[i - 1].NextControl = area.Controls[i];
+                area.Controls[i].PreviousControl = area.Controls[i - 1];
+            }
             
             // Return the row
             return area;

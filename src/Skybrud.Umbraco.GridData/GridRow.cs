@@ -66,6 +66,22 @@ namespace Skybrud.Umbraco.GridData {
             get { return Areas.Length > 0; }
         }
 
+        /// <summary>
+        /// Gets the first area of the row. If the row doesn't contain
+        /// any areas, this property will return <code>NULL</code>.
+        /// </summary>
+        public GridArea FirstRow {
+            get { return Areas.FirstOrDefault(); }
+        }
+
+        /// <summary>
+        /// Gets the last area of the row. If the row doesn't contain
+        /// any areas, this property will return <code>NULL</code>.
+        /// </summary>
+        public GridArea LastRow {
+            get { return Areas.LastOrDefault(); }
+        }
+
         #endregion
 
         #region Constructors
@@ -132,7 +148,14 @@ namespace Skybrud.Umbraco.GridData {
                 Config = obj.GetObject("config", GridDictionary.Parse)
             };
 
+            // Parse the areas
             row.Areas = obj.GetArray("areas", x => GridArea.Parse(row, x)) ?? new GridArea[0];
+
+            // Update "PreviousArea" and "NextArea" properties
+            for (int i = 1; i < row.Areas.Length; i++) {
+                row.Areas[i - 1].NextArea = row.Areas[i];
+                row.Areas[i].PreviousArea = row.Areas[i - 1];
+            }
 
             // Return the row
             return row;
