@@ -23,7 +23,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
                     break;
 
                 case "embed":
-                    value = GridControlEmbedValue.Parse(control, token as JObject);
+                    value = GridControlEmbedValue.Parse(control, token);
                     break;
 
                 case "rte":
