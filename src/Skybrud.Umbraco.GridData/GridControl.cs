@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using Umbraco.Core.Logging;
+using IGridEditorConfig = Umbraco.Core.Configuration.Grid.IGridEditorConfig;
 
 namespace Skybrud.Umbraco.GridData {
 
@@ -76,6 +78,34 @@ namespace Skybrud.Umbraco.GridData {
             GridControl control = new GridControl(obj) {
                 Area = area
             };
+
+            // Get the "editor" object
+            JObject editor = obj.GetObject("editor");
+
+            // Get the alias of the editor
+            string editorAlias = editor == null ? null : editor.GetString("alias");
+
+            // Replace the "editor" object if we can find it in the configuration
+            if (!String.IsNullOrWhiteSpace(editorAlias)) {
+                
+                // Find the alias in config
+                IGridEditorConfig found = GridContext.Current.Config.EditorsConfig.Editors.FirstOrDefault(x => x.Alias == editorAlias);
+
+                if (found != null) {
+
+                    JObject serialized = new JObject();
+                    serialized["name"] = found.Name;
+                    serialized["alias"] = found.Alias;
+                    serialized["view"] = found.View;
+                    serialized["render"] = found.Render;
+                    serialized["icon"] = found.Icon;
+                    serialized["config"] = JObject.FromObject(found.Config);
+
+                    obj["editor"] = serialized;
+                
+                }
+
+            }
 
             // Parse the editor
             control.Editor = obj.GetObject("editor", x => GridEditor.Parse(control, x));
