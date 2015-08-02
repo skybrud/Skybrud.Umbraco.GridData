@@ -4,10 +4,6 @@ using System.Web;
 using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
-using Umbraco.Core;
-using Umbraco.Core.Configuration;
-using Umbraco.Core.Configuration.Grid;
-using Umbraco.Core.IO;
 using Umbraco.Core.Logging;
 
 namespace Skybrud.Umbraco.GridData {
@@ -37,30 +33,11 @@ namespace Skybrud.Umbraco.GridData {
             get { return _converters; }
         }
 
-        /// <summary>
-        /// Gets or sets a reference to the grid configuration to be used. In a web project where
-        /// <code>HttpContext.Current</code> is present, this property will automatically be initialized with the
-        /// default configuration.
-        /// </summary>
-        public IGridConfig Config { get; set; } 
-
         #endregion
 
         #region Constructors
 
-        private GridContext() {
-            
-            if (HttpContext.Current != null) {
-                Config = UmbracoConfig.For.GridConfig(
-                    ApplicationContext.Current.ProfilingLogger.Logger,
-                    ApplicationContext.Current.ApplicationCache.RuntimeCache,
-                    new DirectoryInfo(HttpContext.Current.Server.MapPath(SystemDirectories.AppPlugins)),
-                    new DirectoryInfo(HttpContext.Current.Server.MapPath(SystemDirectories.Config)),
-                    HttpContext.Current.IsDebuggingEnabled
-                );
-            }
-
-        }
+        private GridContext() { }
 
         #endregion
 
