@@ -278,6 +278,7 @@
     <Compile Include="Converters\Umbraco\UmbracoGridConverter.cs" />
     <Compile Include="Converters\GridConverterCollection.cs" />
     <Compile Include="Extensions\Json\GridControlExtensions.cs" />
+    <Compile Include="GridUtils.cs" />
     <Compile Include="Howdy.cs" />
     <Compile Include="Interfaces\IGridConverter.cs" />
     <Compile Include="Json\Converters\GridJsonConverter.cs" />
