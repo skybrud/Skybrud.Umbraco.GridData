@@ -12,6 +12,12 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
     /// </summary>
     public class UmbracoGridConverter : IGridConverter {
 
+        /// <summary>
+        /// Converts the specified <code>token</code> into an instance of <code>IGridControlValue</code>.
+        /// </summary>
+        /// <param name="control">The parent control.</param>
+        /// <param name="token">The instance of <code>JToken</code> representing the control value.</param>
+        /// <param name="value">The converted value.</param>
         public virtual bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
             
             value = null;
@@ -45,6 +51,12 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         
         }
 
+        /// <summary>
+        /// Converts the specified <code>token</code> into an instance of <code>IGridEditorConfig</code>.
+        /// </summary>
+        /// <param name="editor"></param>
+        /// <param name="token">The instance of <code>JToken</code> representing the editor config.</param>
+        /// <param name="config">The converted config.</param>
         public virtual bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
        
             config = null;
@@ -66,6 +78,11 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         
         }
 
+        /// <summary>
+        /// Gets an instance <code>GridControlWrapper</code> for the specified <code>control</code>.
+        /// </summary>
+        /// <param name="control">The control to be wrapped.</param>
+        /// <param name="wrapper">The wrapper.</param>
         public virtual bool GetControlWrapper(GridControl control, out GridControlWrapper wrapper) {
 
             wrapper = null;
