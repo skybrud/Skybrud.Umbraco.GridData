@@ -1,7 +1,7 @@
 Skybrud.Umbraco.GridData
 ========================
 
-**Skybrud.Umbraco.GridData** is a small package with a strongly typed model for the new grid in Umbraco 7.2.
+**Skybrud.Umbraco.GridData** is a small package with a strongly typed model for the new grid in Umbraco 7.2 and above.
 
 The package makes it easy to use the model in your MVC views, master pages or even in your custom logic - eg. to index the grid data in Examine for better searches.
 
