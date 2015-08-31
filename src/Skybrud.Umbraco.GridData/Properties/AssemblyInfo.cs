@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Skybrud.Umbraco.GridData")]
-[assembly: AssemblyDescription("Skybrud.Umbraco.GridData is a small package with a strongly typed model for the grid in Umbraco 7.2.")]
+[assembly: AssemblyDescription("Skybrud.Umbraco.GridData is a small package with a strongly typed model for the grid in Umbraco 7.2 and above.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Skybrud.dk")]
 [assembly: AssemblyProduct("Skybrud.Umbraco.GridData")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.1.0")]
-[assembly: AssemblyInformationalVersion("1.1.0")]
+[assembly: AssemblyVersion("1.5.0")]
+[assembly: AssemblyInformationalVersion("1.5.0")]
