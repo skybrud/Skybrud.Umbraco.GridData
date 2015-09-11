@@ -1,0 +1,433 @@
+{
+  "name": "1 column layout",
+  "sections": [
+    {
+      "grid": 12,
+      "rows": [
+        {
+          "name": "Full width content",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media",
+                "media_round",
+                "quote",
+                "headline"
+              ],
+              "controls": [
+                {
+                  "value": "Halløjsa",
+                  "editor": {
+                    "name": "Headline",
+                    "alias": "headline",
+                    "view": "textstring",
+                    "render": null,
+                    "icon": "icon-coin",
+                    "config": {
+                      "style": "font-size: 36px; line-height: 45px; font-weight: bold",
+                      "markup": "<h1>#value#</h1>"
+                    }
+                  }
+                },
+                {
+                  "value": "Her kommer noget klogt",
+                  "editor": {
+                    "name": "Quote",
+                    "alias": "quote",
+                    "view": "textstring",
+                    "render": null,
+                    "icon": "icon-quote",
+                    "config": {
+                      "style": "border-left: 3px solid #ccc; padding: 10px; color: #ccc; font-family: serif; font-variant: italic; font-size: 18px",
+                      "markup": "<blockquote>#value#</blockquote>"
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "id": "db8d0635-652d-c90b-808f-8ec1404c8fee"
+        },
+        {
+          "name": "Banner",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "banner_headline",
+                "banner_tagline"
+              ],
+              "config": {},
+              "styles": {
+                "margin-bottom": "60px"
+              },
+              "controls": [
+                {
+                  "value": "Welcome to Fanoe",
+                  "editor": {
+                    "name": "Banner Headline",
+                    "alias": "banner_headline",
+                    "view": "textstring",
+                    "render": null,
+                    "icon": "icon-coin",
+                    "config": {
+                      "style": "font-size: 36px; line-height: 45px; font-weight: bold; text-align:center",
+                      "markup": "<h1 style='font-size:62px;text-align:center'>#value#</h1>"
+                    }
+                  }
+                },
+                {
+                  "value": "This is the new default starter kit for Umbraco, we enjoy building things that not only look great, but also work great.",
+                  "editor": {
+                    "name": "Banner Tagline",
+                    "alias": "banner_tagline",
+                    "view": "textstring",
+                    "render": null,
+                    "icon": "icon-coin",
+                    "config": {
+                      "style": "font-size: 25px; line-height: 35px; font-weight: normal; text-align:center",
+                      "markup": "<h2 style='font-weight: 100; font-size: 40px;text-align:center'>#value#</h2>"
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media"
+              ],
+              "controls": [
+                {
+                  "value": "<h2>The starter kit</h2>\n<p>Congratulations on getting up and running with the “Fanoe” starter kit. It's a great way to get to know the Grid datatype.</p>\n<p><a href=\"/{localLink:1078}\" title=\"The starter kit\">Learn about the starter kit →</a><a href=\"/{localLink:1078}\" title=\"The Starterkit\"><br /></a></p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media"
+              ],
+              "controls": [
+                {
+                  "value": "<h2>Learn the basics</h2>\n<p>To get started on the right foot make sure to check out our documentation - from tutorials to API reference.</p>\n<p><a href=\"/{localLink:1079}\" title=\"Basics\">Off to the docs →</a></p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media"
+              ],
+              "controls": [
+                {
+                  "value": "<h2>Master classes</h2>\n<p>The best way to learn Umbraco is through the Master classes that’s running every month in most regions.</p>\n<p><a href=\"/{localLink:1080}\" title=\"Masterclasses\">Learn about the masterclasses →</a></p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            }
+          ],
+          "styles": {
+            "background-image": "url(/media/1044/14441035391_7ee1d0d166_h_darken.jpg)"
+          },
+          "config": {
+            "class": "dark"
+          },
+          "id": "d28a05da-2404-c1e7-6265-01b07fc5f722"
+        },
+        {
+          "name": "Two column",
+          "areas": [
+            {
+              "grid": 6,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media",
+                "media_round",
+                "quote"
+              ],
+              "controls": [
+                {
+                  "value": "<h1>Umbraco Forms</h1>\n<p>With our add-on product Umbraco Forms it’s a breeze to create any type of form you can imagine.</p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 6,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media",
+                "media_round",
+                "quote"
+              ],
+              "controls": [
+                {
+                  "value": "<h1>Package repository</h1>\n<p>At Our Umbraco you’ll find hundreds of free packages made and maintained by the community.</p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            }
+          ],
+          "styles": {
+            "background-image": "url(/media/1023/form-bg.png)"
+          },
+          "config": {
+            "class": "light"
+          },
+          "id": "5362ea7d-e729-078b-e717-a1e7aa69fd4b"
+        },
+        {
+          "name": "Full width image",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "media_wide_cropped",
+                "media_wide"
+              ],
+              "controls": [
+                {
+                  "value": {
+                    "focalPoint": {
+                      "left": 0.5,
+                      "top": 0.5
+                    },
+                    "id": 1127,
+                    "image": "/media/1046/14386124825_d43f359900_h_cropped.jpg"
+                  },
+                  "editor": {
+                    "name": "Image wide",
+                    "alias": "media_wide",
+                    "view": "media",
+                    "render": "/App_Plugins/Grid/Editors/Render/media_wide.cshtml",
+                    "icon": "icon-picture",
+                    "config": {}
+                  }
+                }
+              ]
+            }
+          ],
+          "styles": {},
+          "config": {
+            "class": "full triangle"
+          },
+          "id": "953b3802-6b4f-20ed-66f9-9a855e9afdd4"
+        },
+        {
+          "name": "Two column",
+          "areas": [
+            {
+              "grid": 6,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media",
+                "media_round",
+                "quote"
+              ],
+              "controls": [
+                {
+                  "value": "<h2>Sharing is caring</h2>\n<p>Our Umbraco is our community hub, bringing together over a hundred thousand people every month sharing knowledge in the forum, documentation, blogs, packages and much more.</p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 6,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media",
+                "media_round",
+                "quote"
+              ],
+              "controls": [
+                {
+                  "value": "<h2>Born global, loving local</h2>\n<p>If you can’t make it to CodeGarden, that doesn’t mean you have to miss the chance of hanging out with the Umbraco community. You can do just that through the many local user groups and meetups</p>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            }
+          ],
+          "styles": {},
+          "config": {
+            "class": "purple"
+          },
+          "id": "29cac0ff-d8e9-605b-9e7b-6809dce55edd"
+        },
+        {
+          "name": "Banner",
+          "areas": [
+            {
+              "grid": 12,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "banner_headline",
+                "banner_tagline"
+              ],
+              "controls": [
+                {
+                  "value": "<h1 style=\"text-align: center;\">CodeGarden</h1>\n<h5 style=\"text-align: center;\">Every year in June, around 500 Umbracians gather in Denmark for our annual conference “CodeGarden”.</h5>",
+                  "editor": {
+                    "name": "Rich text editor",
+                    "alias": "rte",
+                    "view": "rte",
+                    "render": null,
+                    "icon": "icon-article",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media"
+              ],
+              "controls": []
+            },
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media"
+              ],
+              "controls": []
+            },
+            {
+              "grid": 4,
+              "allowAll": false,
+              "allowed": [
+                "rte",
+                "media"
+              ],
+              "controls": []
+            }
+          ],
+          "styles": {
+            "background-image": "url(/media/1028/14435732345_c9f5b48dfa_h_dark.jpg)"
+          },
+          "config": {
+            "class": "dark"
+          },
+          "id": "0093bd05-735a-9623-8509-28085818745c"
+        },
+        {
+          "name": "Hest",
+          "areas": [
+            {
+              "grid": 4,
+              "allowAll": true,
+              "config": {
+                "class": "yellow"
+              },
+              "styles": {
+                "margin-bottom": "150px"
+              },
+              "controls": [
+                {
+                  "value": {
+                    "focalPoint": {
+                      "left": 0.5,
+                      "top": 0.5
+                    },
+                    "id": 1090,
+                    "image": "/media/1050/b72830727ba3ca99.jpg"
+                  },
+                  "editor": {
+                    "name": "Image",
+                    "alias": "media",
+                    "view": "media",
+                    "render": null,
+                    "icon": "icon-picture",
+                    "config": {}
+                  }
+                }
+              ]
+            },
+            {
+              "grid": 8,
+              "allowAll": true,
+              "controls": []
+            }
+          ],
+          "styles": {},
+          "config": {
+            "class": "dark"
+          },
+          "id": "2b641ce4-cde8-f1a2-5841-f4688cf75f5f"
+        }
+      ]
+    }
+  ]
+}

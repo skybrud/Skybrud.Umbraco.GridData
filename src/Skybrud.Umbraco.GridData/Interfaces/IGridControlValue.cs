@@ -1,5 +1,18 @@
-﻿namespace Skybrud.Umbraco.GridData.Interfaces {
+﻿using Newtonsoft.Json;
 
-    public interface IGridControlValue { }
+namespace Skybrud.Umbraco.GridData.Interfaces {
+
+    /// <summary>
+    /// Interface describing a grid control value.
+    /// </summary>
+    public interface IGridControlValue {
+
+        /// <summary>
+        /// Gets a reference to the parent control.
+        /// </summary>
+        [JsonIgnore]
+        GridControl Control { get; }
+
+    }
 
 }

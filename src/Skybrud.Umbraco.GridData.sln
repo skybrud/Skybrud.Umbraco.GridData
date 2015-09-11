@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "Cons
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Umbraco.GridData", "Skybrud.Umbraco.GridData\Skybrud.Umbraco.GridData.csproj", "{99DC24EA-4933-4BB9-B6A1-BF565E9E93C0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{65A596DD-3457-489F-B4FC-9713D1BB3B2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{99DC24EA-4933-4BB9-B6A1-BF565E9E93C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{99DC24EA-4933-4BB9-B6A1-BF565E9E93C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{99DC24EA-4933-4BB9-B6A1-BF565E9E93C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

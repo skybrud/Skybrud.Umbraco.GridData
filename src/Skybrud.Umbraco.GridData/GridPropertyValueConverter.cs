@@ -3,8 +3,14 @@ using Umbraco.Core.PropertyEditors;
 
 namespace Skybrud.Umbraco.GridData {
     
+    /// <summary>
+    /// Property value converter for the Umbraco Grid.
+    /// </summary>
     public class GridPropertyValueConverter : IPropertyValueConverter {
 
+        /// <summary>
+        /// Gets or sets whether this property value converter is enabled.
+        /// </summary>
         public static bool IsEnabled = true;
 
         public bool IsConverter(PublishedPropertyType propertyType) {
@@ -21,7 +27,7 @@ namespace Skybrud.Umbraco.GridData {
             string str = source as string;
 
             // Deserialize the string
-            return GridDataModel.Deserialize(str) ?? new GridDataModel();
+            return GridDataModel.Deserialize(str) ?? GridDataModel.GetEmptyModel();
 
         }
 
