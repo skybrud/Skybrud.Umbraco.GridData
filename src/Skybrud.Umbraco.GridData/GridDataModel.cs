@@ -36,6 +36,11 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         public GridSection[] Sections { get; private set; }
 
+        /// <summary>
+        /// Gets the alias of the document type property used for the grid.
+        /// </summary>
+        public string PropertyAlias { get; private set; }
+
         #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
 
         // ReSharper disable InconsistentNaming
@@ -134,15 +139,20 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
         /// when an actual Grid model isn't available.
         /// </summary>
-        public static GridDataModel GetEmptyModel() {
-            return new GridDataModel(null);
+        /// <param name="propertyTypeAlias">The alias of the doctype property</param>
+        public static GridDataModel GetEmptyModel(string propertyTypeAlias="")
+        {
+            var gdm = new GridDataModel(null);
+            gdm.PropertyAlias = propertyTypeAlias;
+            return gdm;
         }
 
         /// <summary>
         /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
-        public static GridDataModel Deserialize(string json) {
+        /// <param name="propertyTypeAlias">The alias of the doctype property providing the grid data</param>
+        public static GridDataModel Deserialize(string json, string propertyTypeAlias="") {
 
             // Validate the JSON
             if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
@@ -154,7 +164,8 @@ namespace Skybrud.Umbraco.GridData {
             GridDataModel model = new GridDataModel(obj) {
                 Raw = json,
                 Name = obj.GetString("name"),
-                IsValid = true
+                IsValid = true,
+                PropertyAlias = propertyTypeAlias
             };
 
             // Parse the sections

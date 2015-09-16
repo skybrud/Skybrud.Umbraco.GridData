@@ -27,7 +27,7 @@ namespace Skybrud.Umbraco.GridData {
             string str = source as string;
 
             // Deserialize the string
-            return GridDataModel.Deserialize(str) ?? GridDataModel.GetEmptyModel();
+            return GridDataModel.Deserialize(str, propertyType.PropertyTypeAlias) ?? GridDataModel.GetEmptyModel(propertyType.PropertyTypeAlias);
 
         }
 
