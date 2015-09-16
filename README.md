@@ -42,3 +42,28 @@ Unfortunately this will also break the existing logic in Umbraco's `GetGridHtml`
 ```C#
 GridPropertyValueConverter.IsEnabled = false;
 ```
+
+###Rendering in a View
+There are two ways to render the grid html in a view. 
+*In the examples below, "PageContent" is our strongly-typed GridDataModel property.*
+
+####1 - Using the Standard Umbraco GetGridHtml helper
+This will use the grid editors in the standard ~/Views/Partials/Grid/Editors folder. The "PropertyAlias" property on the GridDataModel will provide the Umbraco doctype alias for the property, so we can avoid relying upon "magic strings".
+
+```C#
+@if (Model.Content.PageContent.IsValid)
+{
+    @Model.Content.GetGridHtml(Model.Content.PageContent.PropertyAlias, "bootstrap3")
+}
+```
+
+
+####2 - Using the Provided GetHtml method on the GridDataModel
+This will look for grid editors in a folder named ~/Views/Partials/**TypedGrid**/Editors
+
+```C#
+@if (Model.Content.PageContent.IsValid)
+{
+    @Model.Content.PageContent.GetHtml(Html, "bootstrap3")
+}
+```
