@@ -41,6 +41,13 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         public string PropertyAlias { get; private set; }
 
+        /// <summary>
+        /// Gets whether a property alias has been specified for the model.
+        /// </summary>
+        public bool HasPropertyAlias {
+            get { return !String.IsNullOrWhiteSpace(PropertyAlias); }
+        }
+
         #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
 
         // ReSharper disable InconsistentNaming
@@ -139,12 +146,11 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
         /// when an actual Grid model isn't available.
         /// </summary>
-        /// <param name="propertyTypeAlias">The alias of the doctype property</param>
-        public static GridDataModel GetEmptyModel(string propertyTypeAlias="")
-        {
-            var gdm = new GridDataModel(null);
-            gdm.PropertyAlias = propertyTypeAlias;
-            return gdm;
+        /// <param name="propertyTypeAlias">The alias of the doctype property.</param>
+        public static GridDataModel GetEmptyModel(string propertyTypeAlias = "") {
+            return new GridDataModel(null) {
+                PropertyAlias = propertyTypeAlias
+            };
         }
 
         /// <summary>
@@ -152,7 +158,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
         /// <param name="propertyTypeAlias">The alias of the doctype property providing the grid data</param>
-        public static GridDataModel Deserialize(string json, string propertyTypeAlias="") {
+        public static GridDataModel Deserialize(string json, string propertyTypeAlias = "") {
 
             // Validate the JSON
             if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
