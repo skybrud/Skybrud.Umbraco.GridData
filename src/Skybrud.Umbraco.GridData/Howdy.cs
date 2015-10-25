@@ -32,9 +32,9 @@ namespace Skybrud.Umbraco.GridData {
             IGridConfig config = UmbracoConfig.For.GridConfig(
                 ApplicationContext.Current.ProfilingLogger.Logger,
                 ApplicationContext.Current.ApplicationCache.RuntimeCache,
-                new DirectoryInfo(HttpContext.Current.Server.MapPath(SystemDirectories.AppPlugins)),
-                new DirectoryInfo(HttpContext.Current.Server.MapPath(SystemDirectories.Config)),
-                HttpContext.Current.IsDebuggingEnabled
+                new DirectoryInfo(System.Web.Hosting.HostingEnvironment.MapPath(SystemDirectories.AppPlugins)),
+                new DirectoryInfo(System.Web.Hosting.HostingEnvironment.MapPath(SystemDirectories.Config)),
+                HttpContext.Current == null || HttpContext.Current.IsDebuggingEnabled
             );
 
             // Find the editor in the configuration
