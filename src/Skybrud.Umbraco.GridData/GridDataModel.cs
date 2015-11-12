@@ -146,8 +146,18 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
         /// when an actual Grid model isn't available.
         /// </summary>
-        /// <param name="propertyTypeAlias">The alias of the doctype property.</param>
-        public static GridDataModel GetEmptyModel(string propertyTypeAlias = "") {
+        public static GridDataModel GetEmptyModel() {
+            return new GridDataModel(null) {
+                PropertyAlias = ""
+            };
+        }
+
+        /// <summary>
+        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
+        /// when an actual Grid model isn't available.
+        /// </summary>
+        /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
+        public static GridDataModel GetEmptyModel(string propertyTypeAlias) {
             return new GridDataModel(null) {
                 PropertyAlias = propertyTypeAlias
             };
@@ -157,8 +167,16 @@ namespace Skybrud.Umbraco.GridData {
         /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
-        /// <param name="propertyTypeAlias">The alias of the doctype property providing the grid data</param>
-        public static GridDataModel Deserialize(string json, string propertyTypeAlias = "") {
+        public static GridDataModel Deserialize(string json) {
+            return Deserialize(json, "");
+        }
+
+        /// <summary>
+        /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
+        /// </summary>
+        /// <param name="json">The JSON string to be deserialized.</param>
+        /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
+        public static GridDataModel Deserialize(string json, string propertyTypeAlias) {
 
             // Validate the JSON
             if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
