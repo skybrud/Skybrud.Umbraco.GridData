@@ -15,11 +15,7 @@
     "grunt-contrib-copy": "~0.4.1",
     "grunt-nuget": "~0.1.4",
     "grunt-zip": "~0.17.0",
-    "grunt-umbraco-package": "0.0.6",
-    "guid": "0.0.12",
-    "archiver": "^0.15.0",
-    "grunt-contrib-clean": "^0.6.0",
-    "js2xmlparser": "^1.0.0",
-    "jszip": "^2.5.0"
+    "grunt-umbraco-package": "1.0.0",
+    "grunt-contrib-clean": "^0.6.0"
   }
 }

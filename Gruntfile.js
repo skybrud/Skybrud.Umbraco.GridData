@@ -46,18 +46,20 @@ module.exports = function(grunt) {
 			}
 		},
 		umbracoPackage: {
-			options: {
-				name: pkg.name,
-				version: version,
-				url: pkg.url,
-				license: pkg.license.name,
-				licenseUrl: pkg.license.url,
-				author: pkg.author.name,
-				authorUrl: pkg.author.url,
-				readme: pkg.readme,
-				sourceDir: 'files/',
-				outputDir: 'releases/umbraco',
-				outputName: pkg.name + '.v' + version + '.zip'
+			dist: {
+				src: 'files/',
+				dest: 'releases/umbraco',
+				options: {
+					name: pkg.name,
+					version: version,
+					url: pkg.url,
+					license: pkg.license.name,
+					licenseUrl: pkg.license.url,
+					author: pkg.author.name,
+					authorUrl: pkg.author.url,
+					readme: pkg.readme,
+					outputName: pkg.name + '.v' + version + '.zip'
+				}
 			}
 		},
 		nugetpack: {
