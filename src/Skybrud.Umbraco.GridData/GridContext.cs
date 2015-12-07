@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Web;
 using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;

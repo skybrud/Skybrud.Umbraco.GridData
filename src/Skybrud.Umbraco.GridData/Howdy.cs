@@ -17,6 +17,10 @@ namespace Skybrud.Umbraco.GridData {
     /// </summary>
     internal static class Howdy {
 
+        public static string MapPath(string virtualPath) {
+            return System.Web.Hosting.HostingEnvironment.MapPath(virtualPath);
+        }
+
         public static void ReplaceEditorObjectFromConfig(GridControl control) {
 
             // Get the "editor" object from the JSON
@@ -32,8 +36,8 @@ namespace Skybrud.Umbraco.GridData {
             IGridConfig config = UmbracoConfig.For.GridConfig(
                 ApplicationContext.Current.ProfilingLogger.Logger,
                 ApplicationContext.Current.ApplicationCache.RuntimeCache,
-                new DirectoryInfo(System.Web.Hosting.HostingEnvironment.MapPath(SystemDirectories.AppPlugins)),
-                new DirectoryInfo(System.Web.Hosting.HostingEnvironment.MapPath(SystemDirectories.Config)),
+                new DirectoryInfo(MapPath(SystemDirectories.AppPlugins)),
+                new DirectoryInfo(MapPath(SystemDirectories.Config)),
                 HttpContext.Current == null || HttpContext.Current.IsDebuggingEnabled
             );
 

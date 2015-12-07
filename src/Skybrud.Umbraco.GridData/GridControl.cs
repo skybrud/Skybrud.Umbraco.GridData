@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
@@ -7,7 +6,6 @@ using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using Umbraco.Core.Configuration;
 using Umbraco.Core.Logging;
-using IGridEditorConfig = Umbraco.Core.Configuration.Grid.IGridEditorConfig;
 
 namespace Skybrud.Umbraco.GridData {
 
