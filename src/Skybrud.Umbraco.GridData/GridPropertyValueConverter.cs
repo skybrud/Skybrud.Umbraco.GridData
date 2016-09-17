@@ -1,12 +1,13 @@
-﻿using Umbraco.Core.Models.PublishedContent;
+﻿using System;
+using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
 
 namespace Skybrud.Umbraco.GridData {
-    
+
     /// <summary>
     /// Property value converter for the Umbraco Grid.
     /// </summary>
-    public class GridPropertyValueConverter : IPropertyValueConverter {
+    public class GridPropertyValueConverter : IPropertyValueConverterMeta {
 
         /// <summary>
         /// Gets or sets whether this property value converter is enabled.
@@ -34,7 +35,34 @@ namespace Skybrud.Umbraco.GridData {
         public object ConvertSourceToXPath(PublishedPropertyType propertyType, object source, bool preview) {
             return null;
         }
-    
+
+        public PropertyCacheLevel GetPropertyCacheLevel(PublishedPropertyType propertyType,
+               PropertyCacheValue cacheValue)
+        {
+            PropertyCacheLevel propertyCacheLevel;
+            switch (cacheValue)
+            {
+                case PropertyCacheValue.Source:
+                    propertyCacheLevel = PropertyCacheLevel.Content;
+                    break;
+                case PropertyCacheValue.Object:
+                    propertyCacheLevel = PropertyCacheLevel.ContentCache;
+                    break;
+                case PropertyCacheValue.XPath:
+                    propertyCacheLevel = PropertyCacheLevel.Content;
+                    break;
+                default:
+                    propertyCacheLevel = PropertyCacheLevel.None;
+                    break;
+            }
+            return propertyCacheLevel;
+        }
+        
+        public virtual Type GetPropertyValueType(PublishedPropertyType propertyType)
+        {
+            return typeof(GridDataModel);
+        }
+
     }
 
 }
