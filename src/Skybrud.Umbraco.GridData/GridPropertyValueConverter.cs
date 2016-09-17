@@ -36,12 +36,9 @@ namespace Skybrud.Umbraco.GridData {
             return null;
         }
 
-        public PropertyCacheLevel GetPropertyCacheLevel(PublishedPropertyType propertyType,
-               PropertyCacheValue cacheValue)
-        {
+        public PropertyCacheLevel GetPropertyCacheLevel(PublishedPropertyType propertyType, PropertyCacheValue cacheValue) {
             PropertyCacheLevel propertyCacheLevel;
-            switch (cacheValue)
-            {
+            switch (cacheValue) {
                 case PropertyCacheValue.Source:
                     propertyCacheLevel = PropertyCacheLevel.Content;
                     break;
@@ -58,8 +55,7 @@ namespace Skybrud.Umbraco.GridData {
             return propertyCacheLevel;
         }
         
-        public virtual Type GetPropertyValueType(PublishedPropertyType propertyType)
-        {
+        public virtual Type GetPropertyValueType(PublishedPropertyType propertyType) {
             return typeof(GridDataModel);
         }
 
