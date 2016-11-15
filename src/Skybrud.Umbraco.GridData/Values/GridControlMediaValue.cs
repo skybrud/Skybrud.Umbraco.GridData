@@ -42,6 +42,16 @@ namespace Skybrud.Umbraco.GridData.Values {
         [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
         public string Caption { get; protected set; }
 
+        /// <summary>
+        /// Gets whether the value is valid. For an instance of <see cref="GridControlMediaValue"/>, this means
+        /// checking whether an image has been selected. The property will however not validate the image against the
+        /// media cache.
+        /// </summary>
+        [JsonIgnore]
+        public virtual bool IsValid {
+            get { return Id > 0; }
+        }
+
         #endregion
 
         #region Constructors

@@ -44,6 +44,14 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         public GridControl NextControl { get; internal set; }
 
+        /// <summary>
+        /// Gets whether the control and it's value is valid.
+        /// </summary>
+        [JsonIgnore]
+        public bool IsValid {
+            get { return Value != null && Value.IsValid; }
+        }
+
         #endregion
 
         #region Constructors

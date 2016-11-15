@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
@@ -34,6 +35,15 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         [JsonProperty("macroParamsDictionary")]
         public Dictionary<string, object> Parameters { get; set; }
+
+        /// <summary>
+        /// Gets whether the value is valid. For an instance of <see cref="GridControlMacroValue"/>, this means
+        /// checking whether a macro alias has been specified.
+        /// </summary>
+        [JsonIgnore]
+        public virtual bool IsValid {
+            get { return !String.IsNullOrWhiteSpace(MacroAlias); }
+        }
 
         #region Constructors
 

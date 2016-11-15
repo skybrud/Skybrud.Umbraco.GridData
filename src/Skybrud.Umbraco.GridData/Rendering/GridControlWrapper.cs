@@ -21,6 +21,13 @@ namespace Skybrud.Umbraco.GridData.Rendering {
             get { return Control == null ? null : Control.Editor; }
         }
 
+        /// <summary>
+        /// Gets whether the value of the grid control is valid.
+        /// </summary>
+        public bool IsValid {
+            get { return Control.Value != null && Control.Value.IsValid; }
+        }
+
         #endregion
 
         #region Constructors

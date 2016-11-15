@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json.Converters;
@@ -29,6 +30,15 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         [JsonProperty("value")]
         public string Value { get; protected set; }
+
+        /// <summary>
+        /// Gets whether the value is valid. For an instance of <see cref="GridControlTextValue"/>, this means
+        /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>).
+        /// </summary>
+        [JsonIgnore]
+        public virtual bool IsValid {
+            get { return String.IsNullOrWhiteSpace(Value); }
+        }
 
         #endregion
 
