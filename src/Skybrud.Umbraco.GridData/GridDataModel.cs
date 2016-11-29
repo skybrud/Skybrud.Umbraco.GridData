@@ -15,11 +15,14 @@ namespace Skybrud.Umbraco.GridData {
     public class GridDataModel : GridJsonObject {
 
         #region Properties
-        
+
         /// <summary>
-        /// Gets whether the model is valid.
+        /// Gets whether the model is valid. The model is considered valid if it has been parsed from a JSON value and
+        /// has at least one valid control.
         /// </summary>
-        public bool IsValid { get; private set; }
+        public bool IsValid {
+            get { return JObject != null && GetAllControls().All(x => x.IsValid); }
+        }
 
         /// <summary>
         /// Gets the raw JSON value this model was parsed from.
@@ -78,7 +81,6 @@ namespace Skybrud.Umbraco.GridData {
 
         private GridDataModel(JObject obj) : base(obj) {
             Sections = new GridSection[0];
-            IsValid = false;
         }
 
         #endregion
@@ -138,6 +140,14 @@ namespace Skybrud.Umbraco.GridData {
             return helper.GetTypedGridHtml(this, framework);
         }
 
+        /// <summary>
+        /// Gets a textual representation of the grid model - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the grid model.</returns>
+        public virtual string GetSearchableText() {
+            return Sections.Aggregate("", (current, section) => current + section.GetSearchableText());
+        }
+
         #endregion
 
         #region Static methods
@@ -188,7 +198,6 @@ namespace Skybrud.Umbraco.GridData {
             GridDataModel model = new GridDataModel(obj) {
                 Raw = json,
                 Name = obj.GetString("name"),
-                IsValid = true,
                 PropertyAlias = propertyTypeAlias
             };
 
@@ -201,9 +210,9 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Parses the specified <code>JObject</code> into an instance of <code>GridDataModel</code>.
+        /// Parses the specified <see cref="JObject"/> into an instance of <see cref="GridDataModel"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         [Obsolete("Use Deserialize method instead")]
         public static GridDataModel Parse(JObject obj) {
             if (obj == null) return null;

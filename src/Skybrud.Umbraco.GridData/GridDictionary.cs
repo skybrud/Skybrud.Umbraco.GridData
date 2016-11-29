@@ -71,7 +71,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Parses a dictionary from the specified <code>obj</code>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridDictionary Parse(JObject obj) {
 
             // Initialize an empty dictionary

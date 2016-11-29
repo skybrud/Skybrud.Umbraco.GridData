@@ -310,6 +310,7 @@
     <Compile Include="Values\GridControlEmbedValue.cs" />
     <Compile Include="Values\GridControlMacroValue.cs" />
     <Compile Include="Values\GridControlMediaValue.cs" />
+    <Compile Include="Values\GridControlValueBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

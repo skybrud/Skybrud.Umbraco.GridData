@@ -37,17 +37,30 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         [JsonIgnore]
         public virtual bool IsValid {
-            get { return String.IsNullOrWhiteSpace(Value); }
+            get { return !String.IsNullOrWhiteSpace(Value); }
         }
 
         #endregion
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JToken"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
         protected GridControlTextValue(GridControl control, JToken token) {
             Control = control;
             JToken = token;
-            Value = token.Value<string>();
+            Value = token.Value<string>() + "";
+        }
+
+        #endregion
+
+        #region Member methods
+
+        public virtual string GetSearchableText() {
+            return Value;
         }
 
         #endregion
@@ -55,13 +68,12 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Static methods
 
         /// <summary>
-        /// Gets a text value from the specified <code>JToken</code>.
+        /// Gets a text value from the specified <see cref="JToken"/>.
         /// </summary>
         /// <param name="control">The parent control.</param>
-        /// <param name="token">The instance of <code>JToken</code> to be parsed.</param>
+        /// <param name="token">The instance of <see cref="JToken"/> to be parsed.</param>
         public static GridControlTextValue Parse(GridControl control, JToken token) {
-            if (token == null) return null;
-            return new GridControlTextValue(control, token);
+            return token == null ? null : new GridControlTextValue(control, token);
         }
 
         #endregion

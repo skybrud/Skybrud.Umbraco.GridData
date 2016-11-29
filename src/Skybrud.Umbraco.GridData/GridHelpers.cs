@@ -11,7 +11,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Parses the specified <code>obj</code> into a dictionary.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns></returns>
         public static Dictionary<string, string> ParseDictionary(JObject obj) {
             Dictionary<string, string> settings = new Dictionary<string, string>();

@@ -20,7 +20,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Properties
 
         /// <summary>
-        /// Gets the singleton instance of the <code>GridContext</code> class.
+        /// Gets the singleton instance of the <see cref="GridContext"/> class.
         /// </summary>
         public static readonly GridContext Current = new GridContext();
         
@@ -42,7 +42,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Member methods
         
         /// <summary>
-        /// Gets an instance of <code>GridControlWrapper</code> based on the specified <code>control</code>.
+        /// Gets an instance of <see cref="GridControlWrapper"/> based on the specified <code>control</code>.
         /// </summary>
         /// <param name="control">The control to wrap.</param>
         public GridControlWrapper GetControlWrapper(GridControl control) {

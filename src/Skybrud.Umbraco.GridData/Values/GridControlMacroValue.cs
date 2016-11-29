@@ -3,20 +3,13 @@ using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
-using Skybrud.Umbraco.GridData.Interfaces;
-using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData.Values {
 
     /// <summary>
     /// Class representing the macro value of a control.
     /// </summary>
-    public class GridControlMacroValue : GridJsonObject, IGridControlValue {
-
-        /// <summary>
-        /// Gets a reference to the parent control.
-        /// </summary>
-        public GridControl Control { get; private set; }
+    public class GridControlMacroValue : GridControlValueBase {
 
         /// <summary>
         /// Gets the syntax of the macro.
@@ -41,14 +34,21 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// checking whether a macro alias has been specified.
         /// </summary>
         [JsonIgnore]
-        public virtual bool IsValid {
+        public override bool IsValid {
             get { return !String.IsNullOrWhiteSpace(MacroAlias); }
         }
 
         #region Constructors
 
-        protected GridControlMacroValue(GridControl control, JObject obj) : base(obj) {
-            Control = control;
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
+        protected GridControlMacroValue(GridControl control, JObject obj) : base(control, obj) {
+            Syntax = obj.GetString("syntax");
+            MacroAlias = obj.GetString("macroAlias");
+            Parameters = obj.GetObject("macroParamsDictionary").ToObject<Dictionary<string, object>>();
         }
 
         #endregion
@@ -56,17 +56,12 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Static methods
 
         /// <summary>
-        /// Gets a macro value from the specified <code>JsonObject</code>.
+        /// Gets a macro value from the specified <see cref="JObject"/>.
         /// </summary>
         /// <param name="control">The parent control.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridControlMacroValue Parse(GridControl control, JObject obj) {
-            if (obj == null) return null;
-            return new GridControlMacroValue(control, obj) {
-                Syntax = obj.GetString("syntax"),
-                MacroAlias = obj.GetString("macroAlias"),
-                Parameters = obj.GetObject("macroParamsDictionary").ToObject<Dictionary<string, object>>()
-            };
+            return obj == null ? null : new GridControlMacroValue(control, obj);
         }
 
         #endregion

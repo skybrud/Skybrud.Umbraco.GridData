@@ -15,7 +15,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent <code>GridRow</code>.
+        /// Gets a reference to the parent <see cref="GridRow"/>.
         /// </summary>
         [JsonIgnore]
         public GridRow Row { get; private set; }
@@ -31,7 +31,7 @@ namespace Skybrud.Umbraco.GridData {
         public bool AllowAll { get; private set; }
 
         /// <summary>
-        /// Gets an array of all editors allowed for this area. If <code>AllowAll</code> is <code>TRUE</code>, this
+        /// Gets an array of all editors allowed for this area. If <see cref="AllowAll"/> is <code>true</code>, this
         /// array may be empty.
         /// </summary>
         public string[] Allowed { get; private set; }
@@ -47,7 +47,7 @@ namespace Skybrud.Umbraco.GridData {
         public GridDictionary Styles { get; private set; }
 
         /// <summary>
-        /// Gets a dictionary representing the configuration (called Settings in the backoffice) of the area.
+        /// Gets a dictionary representing the configuration (called <strong>Settings</strong> in the backoffice) of the area.
         /// </summary>
         public GridDictionary Config { get; private set; }
 
@@ -70,7 +70,7 @@ namespace Skybrud.Umbraco.GridData {
 
         /// <summary>
         /// Gets the first control of the area. If the area doesn't contain
-        /// any controls, this property will return <code>NULL</code>.
+        /// any controls, this property will return <code>null</code>.
         /// </summary>
         public GridControl FirstControl {
             get { return Controls.FirstOrDefault(); }
@@ -78,7 +78,7 @@ namespace Skybrud.Umbraco.GridData {
 
         /// <summary>
         /// Gets the last control of the area. If the area doesn't contain
-        /// any controls, this property will return <code>NULL</code>.
+        /// any controls, this property will return <code>null</code>.
         /// </summary>
         public GridControl LastControl {
             get { return Controls.LastOrDefault(); }
@@ -88,7 +88,23 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the area.</param>
         protected GridArea(JObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets a textual representation of the area - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the area.</returns>
+        public virtual string GetSearchableText() {
+            return Controls.Aggregate("", (current, control) => current + control.GetSearchableText());
+        }
 
         #endregion
 

@@ -12,6 +12,11 @@ namespace Skybrud.Umbraco.GridData.Values {
         
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JToken"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
         protected GridControlEmbedValue(GridControl control, JToken token) : base(control, token) { }
 
         #endregion

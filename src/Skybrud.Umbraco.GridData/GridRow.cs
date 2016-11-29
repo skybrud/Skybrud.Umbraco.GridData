@@ -14,7 +14,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent <code>GridSection</code>.
+        /// Gets a reference to the parent <see cref="GridSection"/>.
         /// </summary>
         public GridSection Section { get; private set; }
 
@@ -67,16 +67,16 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets the first area of the row. If the row doesn't contain
-        /// any areas, this property will return <code>NULL</code>.
+        /// Gets the first area of the row. If the row doesn't contain any areas, this property will return
+        /// <code>null</code>.
         /// </summary>
         public GridArea FirstRow {
             get { return Areas.FirstOrDefault(); }
         }
 
         /// <summary>
-        /// Gets the last area of the row. If the row doesn't contain
-        /// any areas, this property will return <code>NULL</code>.
+        /// Gets the last area of the row. If the row doesn't contain any areas, this property will return
+        /// <code>null</code>.
         /// </summary>
         public GridArea LastRow {
             get { return Areas.LastOrDefault(); }
@@ -86,6 +86,10 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the row.</param>
         protected GridRow(JObject obj) : base(obj) { }
 
         #endregion
@@ -124,6 +128,14 @@ namespace Skybrud.Umbraco.GridData {
             ).ToArray();
         }
 
+        /// <summary>
+        /// Gets a textual representation of the row - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the row.</returns>
+        public virtual string GetSearchableText() {
+            return Areas.Aggregate("", (current, area) => current + area.GetSearchableText());
+        }
+
         #endregion
 
         #region Static methods
@@ -132,7 +144,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Parses a row from the specified <code>obj</code>.
         /// </summary>
         /// <param name="section">The parent section of the row.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridRow Parse(GridSection section, JObject obj) {
 
             // Some input validation

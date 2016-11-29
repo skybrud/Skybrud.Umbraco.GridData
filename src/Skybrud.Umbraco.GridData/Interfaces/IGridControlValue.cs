@@ -18,7 +18,13 @@ namespace Skybrud.Umbraco.GridData.Interfaces {
         /// </summary>
         [JsonIgnore]
         bool IsValid { get; }
-    
+
+        /// <summary>
+        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="System.String"/> with the value as a searchable text.</returns>
+        string GetSearchableText();
+
     }
 
 }

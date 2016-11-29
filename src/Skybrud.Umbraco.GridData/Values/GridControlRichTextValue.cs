@@ -12,6 +12,11 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JToken"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
         protected GridControlRichTextValue(GridControl control, JToken token) : base(control, token) { }
 
         #endregion
@@ -19,10 +24,10 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Static methods
 
         /// <summary>
-        /// Gets a rich text value from the specified <code>JToken</code>.
+        /// Gets a rich text value from the specified <see cref="JToken"/>.
         /// </summary>
         /// <param name="control">The parent control.</param>
-        /// <param name="token">The instance of <code>JToken</code> to be parsed.</param>
+        /// <param name="token">The instance of <see cref="JToken"/> to be parsed.</param>
         public new static GridControlRichTextValue Parse(GridControl control, JToken token) {
             return token == null ? null : new GridControlRichTextValue(control, token);
         }

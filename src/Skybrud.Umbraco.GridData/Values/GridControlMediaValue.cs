@@ -1,22 +1,15 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
-using Skybrud.Umbraco.GridData.Interfaces;
-using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData.Values {
 
     /// <summary>
     /// Class representing the media value of a control.
     /// </summary>
-    public class GridControlMediaValue : GridJsonObject, IGridControlValue {
+    public class GridControlMediaValue : GridControlValueBase {
 
         #region Properties
-
-        /// <summary>
-        /// Gets a reference to the parent control.
-        /// </summary>
-        public GridControl Control { get; private set; }
 
         /// <summary>
         /// Gets the focal point with information on how the iamge should be cropped.
@@ -48,7 +41,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// media cache.
         /// </summary>
         [JsonIgnore]
-        public virtual bool IsValid {
+        public override bool IsValid {
             get { return Id > 0; }
         }
 
@@ -56,26 +49,29 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Constructors
 
-        protected GridControlMediaValue(JObject obj) : base(obj) { }
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
+        protected GridControlMediaValue(GridControl control, JObject obj) : base(control, obj) {
+            FocalPoint = obj.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
+            Id = obj.GetInt32("id");
+            Image = obj.GetString("image");
+            Caption = obj.GetString("caption");
+        }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Gets a media value from the specified <code>JsonObject</code>.
+        /// Gets a media value from the specified <see cref="JObject"/>.
         /// </summary>
         /// <param name="control">The parent control.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridControlMediaValue Parse(GridControl control, JObject obj) {
-            if (obj == null) return null;
-            return new GridControlMediaValue(obj) {
-                Control = control,
-                FocalPoint = obj.GetObject("focalPoint", GridControlMediaFocalPoint.Parse),
-                Id = obj.GetInt32("id"),
-                Image = obj.GetString("image"),
-                Caption = obj.GetString("caption")
-            };
+            return obj == null ? null : new GridControlMediaValue(control, obj);
         }
 
         #endregion

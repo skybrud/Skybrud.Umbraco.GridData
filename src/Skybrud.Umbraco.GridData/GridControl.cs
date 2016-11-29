@@ -17,7 +17,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent <code>GridArea</code>.
+        /// Gets a reference to the parent <see cref="GridArea"/>.
         /// </summary>
         [JsonIgnore]
         public GridArea Area { get; private set; }
@@ -70,6 +70,18 @@ namespace Skybrud.Umbraco.GridData {
             return (T) Value;
         }
 
+        #region Member methods
+
+        /// <summary>
+        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="System.String"/> with the value as a searchable text.</returns>
+        public virtual string GetSearchableText() {
+            return IsValid ? Value.GetSearchableText() : "";
+        }
+
+        #endregion
+
         #endregion
 
         #region Static methods
@@ -78,7 +90,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Parses a control from the specified <code>obj</code>.
         /// </summary>
         /// <param name="area">The parent area of the control.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridControl Parse(GridArea area, JObject obj) {
             
             // Set basic properties

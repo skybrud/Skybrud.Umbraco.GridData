@@ -28,22 +28,25 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Constructors
 
-        protected GridControlMediaFocalPoint(JObject obj) : base(obj) { }
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the the focal point.</param>
+        protected GridControlMediaFocalPoint(JObject obj) : base(obj) {
+            Left = obj.GetFloat("left");
+            Top = obj.GetFloat("top");
+        }
 
         #endregion
 
         #region Static methods
 
         /// <summary>
-        /// Gets a focal point from the specified <code>JsonObject</code>.
+        /// Gets a focal point from the specified <see cref="JObject"/>.
         /// </summary>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridControlMediaFocalPoint Parse(JObject obj) {
-            if (obj == null) return null;
-            return new GridControlMediaFocalPoint(obj) {
-                Left = obj.GetFloat("left"),
-                Top = obj.GetFloat("top")
-            };
+            return obj == null ? null : new GridControlMediaFocalPoint(obj);
         }
 
         #endregion

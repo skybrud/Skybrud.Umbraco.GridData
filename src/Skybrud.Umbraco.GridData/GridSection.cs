@@ -14,7 +14,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent <code>GridDataModel</code>.
+        /// Gets a reference to the parent <see cref="GridDataModel"/>.
         /// </summary>
         public GridDataModel Model { get; private set; }
 
@@ -36,15 +36,16 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets the first row of the section. If the section doesn't contain
-        /// any rows, this property will return <code>NULL</code>.
+        /// Gets the first row of the section. If the section doesn't contain any rows, this property will return
+        /// <code>null</code>.
         /// </summary>
         public GridRow FirstRow {
             get { return Rows.FirstOrDefault(); }
         }
 
         /// <summary>
-        /// Gets the last row of the section. If the section doesn't contain any rows, this property will return <code>NULL</code>.
+        /// Gets the last row of the section. If the section doesn't contain any rows, this property will return
+        /// <code>null</code>.
         /// </summary>
         public GridRow LastRow {
             get { return Rows.LastOrDefault(); }
@@ -54,7 +55,23 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// </summary>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the section.</param>
         protected GridSection(JObject obj) : base(obj) { }
+
+        #endregion
+
+        #region Member methods
+
+        /// <summary>
+        /// Gets a textual representation of the section - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the section.</returns>
+        public virtual string GetSearchableText() {
+            return Rows.Aggregate("", (current, row) => current + row.GetSearchableText());
+        }
 
         #endregion
 
@@ -64,7 +81,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Parses a section from the specified <code>obj</code>.
         /// </summary>
         /// <param name="model">The parent model of the section.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridSection Parse(GridDataModel model, JObject obj) {
 
             // Some input validation

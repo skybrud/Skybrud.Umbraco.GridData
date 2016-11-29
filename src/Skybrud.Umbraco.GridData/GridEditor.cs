@@ -16,7 +16,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent <code>GridControl</code>.
+        /// Gets a reference to the parent <see cref="GridControl"/>.
         /// </summary>
         [JsonIgnore]
         public GridControl Control { get; private set; }
@@ -53,8 +53,8 @@ namespace Skybrud.Umbraco.GridData {
         public string Icon { get; private set; }
 
         /// <summary>
-        /// Gets the configuration object for the editor. This property will return <code>NULL</code> if the
-        /// corresponding property in the underlying JSON is also <code>NULL</code>.
+        /// Gets the configuration object for the editor. This property will return <code>null</code> if the
+        /// corresponding property in the underlying JSON is also <code>null</code>.
         /// </summary>
         [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
         public IGridEditorConfig Config { get; set; }
@@ -85,7 +85,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Parses an editor from the specified <code>obj</code>.
         /// </summary>
         /// <param name="control">The parent control of the editor.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridEditor Parse(GridControl control, JObject obj) {
 
             // Parse basic properties
