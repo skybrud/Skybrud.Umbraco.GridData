@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Json;
+using Skybrud.Umbraco.GridData.Rendering;
 
 namespace Skybrud.Umbraco.GridData {
 
@@ -28,6 +32,18 @@ namespace Skybrud.Umbraco.GridData {
         /// but will be available in 7.3 according to http://issues.umbraco.org/issue/U4-6533.
         /// </summary>
         public string Alias { get; private set; }
+
+        /// <summary>
+        /// Gets the label of the row.
+        /// </summary>
+        public string Label { get; private set; }
+
+        /// <summary>
+        /// Gets whether a label has been specified for the difinition of this row.
+        /// </summary>
+        public bool HasLabel {
+            get { return !String.IsNullOrWhiteSpace(Label); }
+        }
 
         /// <summary>
         /// Gets the name of the row.
@@ -129,6 +145,40 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
+        /// Generates the HTML for the Grid row.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
+        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        public HtmlString GetHtml(HtmlHelper helper) {
+            return GetHtml(helper, Name);
+        }
+
+        /// <summary>
+        /// Generates the HTML for the Grid row.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
+        /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid row.</param>
+        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        public HtmlString GetHtml(HtmlHelper helper, string partial) {
+
+            // Some input validation
+            if (helper == null) throw new ArgumentNullException("helper");
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+
+            // Prepend the path to the "Rows" folder if not already specified
+            if (!partial.StartsWith("~/") && !partial.StartsWith("~/")) {
+                partial = "~/Views/Partials/TypedGrid/Rows/" + partial;
+            }
+
+            // Append the ".cshtml" extension if not already specified
+            if (!partial.EndsWith(".cshtml")) partial += ".cshtml";
+
+            // Render the partial view
+            return helper.Partial(partial, this);
+
+        }
+
+        /// <summary>
         /// Gets a textual representation of the row - eg. to be used in Examine.
         /// </summary>
         /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the row.</returns>
@@ -155,6 +205,7 @@ namespace Skybrud.Umbraco.GridData {
                 Section = section,
                 Id = obj.GetString("id"),
                 Alias = obj.GetString("alias"),
+                Label = obj.GetString("label"),
                 Name = obj.GetString("name"),
                 Styles = obj.GetObject("styles", GridDictionary.Parse),
                 Config = obj.GetObject("config", GridDictionary.Parse)
