@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
+using Skybrud.Umbraco.GridData.Rendering;
 using Umbraco.Core.Configuration;
 using Umbraco.Core.Logging;
 
@@ -71,6 +75,49 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         #region Member methods
+
+        /// <summary>
+        /// Generates the HTML for the Grid control.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
+        /// <returns>Returns the Grid control as an instance of <see cref="HtmlString"/>.</returns>
+        public HtmlString GetHtml(HtmlHelper helper) {
+            return GetHtml(helper, Editor.Alias);
+        }
+
+        /// <summary>
+        /// Generates the HTML for the Grid control.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
+        /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid control.</param>
+        /// <returns>Returns the Grid control as an instance of <see cref="HtmlString"/>.</returns>
+        public HtmlString GetHtml(HtmlHelper helper, string partial) {
+
+            // Some input validation
+            if (helper == null) throw new ArgumentNullException("helper");
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+
+            // If the control isn't valid, we shouldn't render it
+            if (!IsValid) return new HtmlString("");
+
+            // Get a wrapper for the control
+            GridControlWrapper wrapper = GridContext.Current.GetControlWrapper(this);
+
+            // If the wrapper is NULL, we shouldn't render the control
+            if (wrapper == null) return new HtmlString("");
+
+            // Prepend the path to the "Controls" folder if not already specified
+            if (!partial.StartsWith("~/") && !partial.StartsWith("~/")) {
+                partial = "~/Views/Partials/TypedGrid/Controls/" + partial;
+            }
+
+            // Append the ".cshtml" extension if not already specified
+            if (!partial.EndsWith(".cshtml")) partial += ".cshtml";
+
+            // Render the partial view
+            return helper.Partial(partial, wrapper);
+
+        }
 
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
