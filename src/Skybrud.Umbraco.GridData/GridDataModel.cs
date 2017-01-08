@@ -21,7 +21,7 @@ namespace Skybrud.Umbraco.GridData {
         /// has at least one valid control.
         /// </summary>
         public bool IsValid {
-            get { return JObject != null && GetAllControls().All(x => x.IsValid); }
+            get { return JObject != null && GetAllControls().Any(x => x.IsValid); }
         }
 
         /// <summary>
