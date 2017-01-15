@@ -3,7 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using Newtonsoft.Json.Linq;
-using Skybrud.Umbraco.GridData.Extensions.Json;
+using Skybrud.Essentials.Json.Extensions;
 using Umbraco.Core;
 using Umbraco.Core.Configuration;
 using Umbraco.Core.Configuration.Grid;

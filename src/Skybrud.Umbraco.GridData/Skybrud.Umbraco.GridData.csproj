@@ -155,6 +155,10 @@
       <HintPath>..\packages\semver.1.1.2\lib\net45\Semver.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Skybrud.Essentials, Version=1.0.7.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Skybrud.Essentials.1.0.7\lib\net45\Skybrud.Essentials.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="SQLCE4Umbraco, Version=1.0.5711.25011, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\UmbracoCms.Core.7.3.0-RC\lib\SQLCE4Umbraco.dll</HintPath>
       <Private>True</Private>
@@ -284,8 +288,6 @@
     <Compile Include="Interfaces\IGridConverter.cs" />
     <Compile Include="Json\Converters\GridJsonConverter.cs" />
     <Compile Include="Json\Converters\GridControlValueStringConverter.cs" />
-    <Compile Include="Extensions\Json\JArrayExtensionMethods.cs" />
-    <Compile Include="Extensions\Json\JObjectExtensionMethods.cs" />
     <Compile Include="Extensions\TypedGridExtensionMethods.cs" />
     <Compile Include="GridArea.cs" />
     <Compile Include="GridContext.cs" />

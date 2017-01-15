@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Umbraco.GridData.Extensions.Json;
+using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Values {
 

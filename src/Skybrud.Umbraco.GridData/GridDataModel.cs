@@ -4,7 +4,7 @@ using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions;
-using Skybrud.Umbraco.GridData.Extensions.Json;
+using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData {
