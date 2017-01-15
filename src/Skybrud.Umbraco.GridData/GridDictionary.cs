@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Skybrud.Umbraco.GridData {
     /// <summary>
     /// Dictionary representing a configuration for an element in the Umbraco Grid.
     /// </summary>
-    public class GridDictionary : GridJsonObject {
+    public class GridDictionary : GridJsonObject, IEnumerable<GridDictionaryItem> {
 
         #region Private fields
 
@@ -26,6 +27,14 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonIgnore]
         public string[] Keys {
+            get { return _dictionary.Keys.ToArray(); }
+        }
+
+        /// <summary>
+        /// Gets the keys of the underlying dictionary.
+        /// </summary>
+        [JsonIgnore]
+        public string[] Values {
             get { return _dictionary.Keys.ToArray(); }
         }
 
@@ -57,11 +66,32 @@ namespace Skybrud.Umbraco.GridData {
         #region Member methods
 
         /// <summary>
-        /// Gets whether the specified <code>key</code> is contained in the dictionary.
+        /// Gets whether the specified <paramref name="key"/> is contained in the dictionary.
         /// </summary>
         /// <param name="key">The key.</param>
         public bool ContainsKey(string key) {
             return _dictionary.ContainsKey(key);
+        }
+
+        /// <summary>
+        /// Gets the value associated with the specified key.
+        /// </summary>
+        /// <param name="key">The key of the value to get.</param>
+        /// <param name="value">When this method returns, contains the value associated with the specified key, if the
+        /// key is found; otherwise, the default value for the type of the value parameter. This parameter is passed
+        /// uninitialized.</param>
+        /// <returns><code>true</code> if the dictionary contains an element with the specified key; otherwise,
+        /// <code>false</code>.</returns>
+        public bool TryGetValue(string key, out string value) {
+            return _dictionary.TryGetValue(key, out value);
+        }
+
+        public IEnumerator<GridDictionaryItem> GetEnumerator() {
+            return _dictionary.Select(x => new GridDictionaryItem(x.Key, x.Value)).GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator() {
+            return GetEnumerator();
         }
 
         #endregion
@@ -69,9 +99,10 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses a dictionary from the specified <code>obj</code>.
+        /// Parses the specified <code>obj</code> into an instance of <see cref="GridDictionary"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>Returns an instance of <see cref="GridDictionary"/>.</returns>
         public static GridDictionary Parse(JObject obj) {
 
             // Initialize an empty dictionary
