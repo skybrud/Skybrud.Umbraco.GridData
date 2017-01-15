@@ -20,7 +20,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets whetehr the element has one or more config values.
         /// </summary>
         public bool HasConfig {
-            get { return Config != null; }
+            get { return Config != null && Config.Count > 0; }
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets whetehr the element has one or more style values.
         /// </summary>
         public bool HasStyles {
-            get { return Config != null; }
+            get { return Styles != null && Styles.Count > 0; }
         }
 
         /// <summary>
