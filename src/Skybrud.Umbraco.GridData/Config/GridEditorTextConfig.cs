@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Interfaces;
@@ -14,10 +15,22 @@ namespace Skybrud.Umbraco.GridData.Config {
         #region Properties
 
         /// <summary>
+        /// Gets the parent editor of the configuration.
+        /// </summary>
+        public GridEditor Editor { get; private set; }
+
+        /// <summary>
         /// Gets the style properties for the text.
         /// </summary>
         [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
         public string Style { get; private set; }
+
+        /// <summary>
+        /// Gets whether the <see cref="Style"/> property has a value.
+        /// </summary>
+        public bool HasStyle {
+            get { return !String.IsNullOrWhiteSpace(Style); }
+        }
 
         /// <summary>
         /// Gets the markup for the text.
@@ -26,9 +39,11 @@ namespace Skybrud.Umbraco.GridData.Config {
         public string Markup { get; private set; }
 
         /// <summary>
-        /// Gets the parent editor of the configuration.
+        /// Gets whether the <see cref="Markup"/> property has a value.
         /// </summary>
-        public GridEditor Editor { get; private set; }
+        public bool HasMarkup {
+            get { return !String.IsNullOrWhiteSpace(Markup); }
+        }
 
         #endregion
 

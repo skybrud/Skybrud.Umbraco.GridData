@@ -20,22 +20,19 @@ namespace Skybrud.Umbraco.GridData.Values {
         public GridControl Control { get; private set; }
 
         /// <summary>
-        /// Gets a reference to the underlying instance of <code>JToken</code>.
+        /// Gets a reference to the underlying instance of <see cref="JToken"/>.
         /// </summary>
-        [JsonIgnore]
         public JToken JToken { get; private set; }
-        
+
         /// <summary>
         /// Gets a string representing the value.
         /// </summary>
-        [JsonProperty("value")]
         public string Value { get; protected set; }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlTextValue"/>, this means
         /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>).
         /// </summary>
-        [JsonIgnore]
         public virtual bool IsValid {
             get { return !String.IsNullOrWhiteSpace(Value); }
         }
@@ -60,6 +57,10 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Member methods
 
         public virtual string GetSearchableText() {
+            return Value;
+        }
+
+        public override string ToString() {
             return Value;
         }
 

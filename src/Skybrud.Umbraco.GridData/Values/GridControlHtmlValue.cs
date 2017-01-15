@@ -11,7 +11,7 @@ namespace Skybrud.Umbraco.GridData.Values {
     /// Class representing the HTML value of a control.
     /// </summary>
     [JsonConverter(typeof(GridControlValueStringConverter))]
-    public class GridControlHtmlValue : GridControlTextValue {
+    public class GridControlHtmlValue : GridControlTextValue, IHtmlString {
 
         #region Properties
 
@@ -51,6 +51,10 @@ namespace Skybrud.Umbraco.GridData.Values {
         public override string GetSearchableText() {
             return Regex.Replace(Value, "<.*?>", "");
         }
+        
+        public string ToHtmlString() {
+            return Value;
+        }
 
         #endregion
 
@@ -66,7 +70,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         }
 
         #endregion
-        
+
     }
 
 }
