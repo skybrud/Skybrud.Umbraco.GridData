@@ -5,15 +5,13 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
-using Skybrud.Umbraco.GridData.Json;
-using Skybrud.Umbraco.GridData.Rendering;
 
 namespace Skybrud.Umbraco.GridData {
 
     /// <summary>
     /// Class representing a row in an Umbraco Grid.
     /// </summary>
-    public class GridRow : GridJsonObject {
+    public class GridRow : GridElement {
 
         #region Properties
 
@@ -56,16 +54,6 @@ namespace Skybrud.Umbraco.GridData {
         public GridArea[] Areas { get; private set; }
 
         /// <summary>
-        /// Gets a dictionary representing the styles of the row.
-        /// </summary>
-        public GridDictionary Styles { get; private set; }
-
-        /// <summary>
-        /// Gets a dictionary representing the configuration (called Settings in the backoffice) of the row.
-        /// </summary>
-        public GridDictionary Config { get; private set; }
-
-        /// <summary>
         /// Gets a reference to the previous row.
         /// </summary>
         public GridRow PreviousRow { get; internal set; }
@@ -96,6 +84,13 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         public GridArea LastRow {
             get { return Areas.LastOrDefault(); }
+        }
+
+        /// <summary>
+        /// Gets whether at least one area or control within the row is valid.
+        /// </summary>
+        public override bool IsValid {
+            get { return Areas.Any(x => x.IsValid); }
         }
 
         #endregion
@@ -182,7 +177,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets a textual representation of the row - eg. to be used in Examine.
         /// </summary>
         /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the row.</returns>
-        public virtual string GetSearchableText() {
+        public override string GetSearchableText() {
             return Areas.Aggregate("", (current, area) => current + area.GetSearchableText());
         }
 
@@ -206,9 +201,7 @@ namespace Skybrud.Umbraco.GridData {
                 Id = obj.GetString("id"),
                 Alias = obj.GetString("alias"),
                 Label = obj.GetString("label"),
-                Name = obj.GetString("name"),
-                Styles = obj.GetObject("styles", GridDictionary.Parse),
-                Config = obj.GetObject("config", GridDictionary.Parse)
+                Name = obj.GetString("name")
             };
 
             // Parse the areas

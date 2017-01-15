@@ -3,14 +3,13 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Extensions.Json;
-using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData {
 
     /// <summary>
     /// Class representing an area in an Umbraco Grid.
     /// </summary>
-    public class GridArea : GridJsonObject {
+    public class GridArea : GridElement {
 
         #region Properties
 
@@ -40,16 +39,6 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an array of all controls added to this area.
         /// </summary>
         public GridControl[] Controls { get; private set; }
-        
-        /// <summary>
-        /// Gets a dictionary representing the styles of the area.
-        /// </summary>
-        public GridDictionary Styles { get; private set; }
-
-        /// <summary>
-        /// Gets a dictionary representing the configuration (called <strong>Settings</strong> in the backoffice) of the area.
-        /// </summary>
-        public GridDictionary Config { get; private set; }
 
         /// <summary>
         /// Gets a reference to the previous area.
@@ -84,6 +73,13 @@ namespace Skybrud.Umbraco.GridData {
             get { return Controls.LastOrDefault(); }
         }
 
+        /// <summary>
+        /// Gets whether at least one control within the area is valid.
+        /// </summary>
+        public override bool IsValid {
+            get { return Controls.Any(x => x.IsValid); }
+        }
+
         #endregion
 
         #region Constructors
@@ -102,7 +98,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets a textual representation of the area - eg. to be used in Examine.
         /// </summary>
         /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the area.</returns>
-        public virtual string GetSearchableText() {
+        public override string GetSearchableText() {
             return Controls.Aggregate("", (current, control) => current + control.GetSearchableText());
         }
 
@@ -128,9 +124,7 @@ namespace Skybrud.Umbraco.GridData {
                 Row = row,
                 Grid = obj.GetInt32("grid"),
                 AllowAll = obj.GetBoolean("allowAll"),
-                Allowed = allowed == null ? new string[0] : allowed.Select(x => (string)x).ToArray(),
-                Styles = obj.GetObject("styles", GridDictionary.Parse),
-                Config = obj.GetObject("config", GridDictionary.Parse)
+                Allowed = allowed == null ? new string[0] : allowed.Select(x => (string)x).ToArray()
             };
 
             // Parse the controls
