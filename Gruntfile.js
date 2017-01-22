@@ -18,7 +18,7 @@ module.exports = function(grunt) {
 		pkg: pkg,
 		clean: {
 			files: [
-				'files/**/*.*'
+				'releases/temp/'
 			]
 		},
 		copy: {
@@ -28,26 +28,28 @@ module.exports = function(grunt) {
 						expand: true,
 						cwd: projectRoot + 'bin/Release/',
 						src: [
+							'Skybrud.Essentials.dll',
+							'Skybrud.Essentials.xml',
 							pkg.name + '.dll',
 							pkg.name + '.xml'
 						],
-						dest: 'files/bin/'
+						dest: 'releases/temp/bin/'
 					}
 				]
 			}
 		},
 		zip: {
 			release: {
-				cwd: 'files/',
+				cwd: 'releases/temp/',
 				src: [
-					'files/**/*.*'
+					'releases/temp/**/*.*'
 				],
 				dest: 'releases/github/' + pkg.name + '.v' + version + '.zip'
 			}
 		},
 		umbracoPackage: {
 			dist: {
-				src: 'files/',
+				src: 'releases/temp/',
 				dest: 'releases/umbraco',
 				options: {
 					name: pkg.name,
@@ -76,8 +78,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-nuget');
 	grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('dev', ['copy', 'zip', 'umbracoPackage', 'nugetpack']);
+	grunt.registerTask('release', ['clean', 'copy', 'zip', 'umbracoPackage', 'nugetpack', 'clean']);
 
-	grunt.registerTask('default', ['dev']);
+	grunt.registerTask('default', ['release']);
 
 };
