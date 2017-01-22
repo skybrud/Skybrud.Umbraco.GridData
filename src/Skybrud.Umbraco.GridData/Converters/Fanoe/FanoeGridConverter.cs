@@ -1,7 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Config;
-using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Umbraco.GridData.Extensions.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
 using Skybrud.Umbraco.GridData.Values;
