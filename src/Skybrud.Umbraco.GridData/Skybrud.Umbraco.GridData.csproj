@@ -293,7 +293,6 @@
     <Compile Include="GridArea.cs" />
     <Compile Include="GridContext.cs" />
     <Compile Include="GridDictionary.cs" />
-    <Compile Include="GridHelpers.cs" />
     <Compile Include="GridSection.cs" />
     <Compile Include="GridControl.cs" />
     <Compile Include="GridDataModel.cs" />
