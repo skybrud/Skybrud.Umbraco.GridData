@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -104,13 +105,10 @@ namespace Skybrud.Umbraco.GridData {
             // If the wrapper is NULL, we shouldn't render the control
             if (wrapper == null) return new HtmlString("");
 
-            // Prepend the path to the "Controls" folder if not already specified
-            if (!partial.StartsWith("~/") && !partial.StartsWith("~/")) {
-                partial = "~/Views/Partials/TypedGrid/Controls/" + partial;
+            // Prepend the path to the "Editors" folder if not already specified
+            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$")) {
+                partial = "TypedGrid/Editors/" + partial;
             }
-
-            // Append the ".cshtml" extension if not already specified
-            if (!partial.EndsWith(".cshtml")) partial += ".cshtml";
 
             // Render the partial view
             return helper.Partial(partial, wrapper);

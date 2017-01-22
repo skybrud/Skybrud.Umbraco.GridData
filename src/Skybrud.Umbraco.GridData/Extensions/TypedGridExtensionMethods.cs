@@ -10,7 +10,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
     /// <summary>
     /// Class holding various extension methods for using the typed Grid.
     /// </summary>
-    public static class TypedGridExtensionMethods {
+    public static partial class TypedGridExtensionMethods {
 
         #region Constants
 
