@@ -7,14 +7,9 @@ namespace Skybrud.Umbraco.GridData.Config {
     /// <summary>
     /// Class representing the configuration of a media editor.
     /// </summary>
-    public class GridEditorMediaConfig : GridJsonObject, IGridEditorConfig {
+    public class GridEditorMediaConfig : GridEditorConfigBase {
 
         #region Properties
-
-        /// <summary>
-        /// Gets a reference to the parent editor.
-        /// </summary>
-        public GridEditor Editor { get; private set; }
 
         /// <summary>
         /// Gets an object describing the desired size of the media.
@@ -27,7 +22,6 @@ namespace Skybrud.Umbraco.GridData.Config {
         #region Constructors
 
         private GridEditorMediaConfig(GridEditor editor, JObject obj) : base(obj) {
-            Editor = editor;
         }
 
         #endregion

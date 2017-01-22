@@ -8,15 +8,10 @@ namespace Skybrud.Umbraco.GridData.Config {
     /// <summary>
     /// Class representing the configuration of a text editor.
     /// </summary>
-    public class GridEditorTextConfig : GridJsonObject, IGridEditorConfig {
+    public class GridEditorTextConfig : GridEditorConfigBase {
 
         #region Properties
-
-        /// <summary>
-        /// Gets the parent editor of the configuration.
-        /// </summary>
-        public GridEditor Editor { get; private set; }
-
+        
         /// <summary>
         /// Gets the style properties for the text.
         /// </summary>
@@ -48,7 +43,6 @@ namespace Skybrud.Umbraco.GridData.Config {
         #region Constructors
 
         private GridEditorTextConfig(GridEditor editor, JObject obj) : base(obj) {
-            Editor = editor;
         }
 
         #endregion

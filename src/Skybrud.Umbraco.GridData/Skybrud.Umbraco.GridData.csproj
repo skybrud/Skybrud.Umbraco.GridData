@@ -275,6 +275,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Config\GridEditorConfigBase.cs" />
     <Compile Include="Config\GridEditorMediaConfig.cs" />
     <Compile Include="Config\GridEditorMediaConfigSize.cs" />
     <Compile Include="Config\GridEditorTextConfig.cs" />
