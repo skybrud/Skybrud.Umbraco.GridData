@@ -33,7 +33,6 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// </summary>
         /// <param name="content">The parent content item.</param>
         public static GridDataModel GetTypedGrid(this IPublishedContent content) {
-            if (!GridPropertyValueConverter.IsEnabled) throw new Exception("The property value conveter for GridDataModel has been disabled");
             return content.GetPropertyValue<GridDataModel>(DefaultPropertyAlias);
         }
 
@@ -43,7 +42,6 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="content">The parent content item.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         public static GridDataModel GetTypedGrid(this IPublishedContent content, string propertyAlias) {
-            if (!GridPropertyValueConverter.IsEnabled) throw new Exception("The property value conveter for GridDataModel has been disabled");
             return content.GetPropertyValue<GridDataModel>(propertyAlias);
         }
 
@@ -52,7 +50,6 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// </summary>
         /// <param name="content">The parent content item.</param>
         public static GridDataModel GetGridModel(this IPublishedContent content) {
-            if (!GridPropertyValueConverter.IsEnabled) throw new Exception("The property value conveter for GridDataModel has been disabled");
             return content.GetPropertyValue<GridDataModel>(DefaultPropertyAlias);
         }
 
@@ -62,7 +59,6 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="content">The parent content item.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         public static GridDataModel GetGridModel(this IPublishedContent content, string propertyAlias) {
-            if (!GridPropertyValueConverter.IsEnabled) throw new Exception("The property value conveter for GridDataModel has been disabled");
             return content.GetPropertyValue<GridDataModel>(propertyAlias);
         }
 
