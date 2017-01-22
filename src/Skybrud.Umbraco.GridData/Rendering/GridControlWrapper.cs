@@ -33,7 +33,7 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         #region Constructors
 
         /// <summary>
-        /// Wraps an instance of <code>GridControl</code>.
+        /// Wraps an instance of <see cref="GridControl"/>.
         /// </summary>
         /// <param name="control">The control to be wrap.</param>
         public GridControlWrapper(GridControl control) {
@@ -63,7 +63,7 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         #region Constructors
 
         /// <summary>
-        /// Wraps an instance of <code>GridControl</code>.
+        /// Wraps an instance of <see cref="GridControl"/>.
         /// </summary>
         /// <param name="control">The control to be wrap.</param>
         /// <param name="value">The type of the value.</param>
@@ -95,7 +95,7 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         #region Constructors
 
         /// <summary>
-        /// Wraps an instance of <code>GridControl</code>.
+        /// Wraps an instance of <see cref="GridControl"/>.
         /// </summary>
         /// <param name="control">The control to be wrap.</param>
         /// <param name="value">The type of the value.</param>

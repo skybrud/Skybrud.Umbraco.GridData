@@ -85,7 +85,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the area.</param>
         protected GridArea(JObject obj) : base(obj) { }
@@ -107,10 +107,10 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses an area from the specified <code>obj</code>.
+        /// Parses an area from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="row">The parent row of the area.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridArea Parse(GridRow row, JObject obj) {
 
             // Some input validation

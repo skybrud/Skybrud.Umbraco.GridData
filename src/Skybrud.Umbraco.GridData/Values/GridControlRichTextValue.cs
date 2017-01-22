@@ -13,7 +13,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JToken"/>.
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="token"/>.
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
@@ -24,7 +24,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Static methods
 
         /// <summary>
-        /// Gets a rich text value from the specified <see cref="JToken"/>.
+        /// Gets a rich text value from the specified <paramref name="control"/> and <paramref name="token"/>.
         /// </summary>
         /// <param name="control">The parent control.</param>
         /// <param name="token">The instance of <see cref="JToken"/> to be parsed.</param>

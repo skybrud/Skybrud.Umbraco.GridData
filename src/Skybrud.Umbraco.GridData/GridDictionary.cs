@@ -46,7 +46,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets the value of an item with the specified <code>key</code>.
+        /// Gets the value of an item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the dictionary item.</param>
         public string this[string key] {
@@ -74,7 +74,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets the value associated with the specified key.
+        /// Gets the value associated with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the value to get.</param>
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the
@@ -99,7 +99,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <code>obj</code> into an instance of <see cref="GridDictionary"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GridDictionary"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>Returns an instance of <see cref="GridDictionary"/>.</returns>

@@ -98,7 +98,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the row.</param>
         protected GridRow(JObject obj) : base(obj) { }
@@ -119,7 +119,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls with the specified editor <code>alias</code>. 
+        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
         public GridControl[] GetAllControls(string alias) {
@@ -127,7 +127,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls matching the specified <code>predicate</code>. 
+        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
         public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
@@ -186,7 +186,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses a row from the specified <code>obj</code>.
+        /// Parses a row from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="section">The parent section of the row.</param>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>

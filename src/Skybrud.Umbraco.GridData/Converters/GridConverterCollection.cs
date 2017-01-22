@@ -8,7 +8,7 @@ using Skybrud.Umbraco.GridData.Interfaces;
 namespace Skybrud.Umbraco.GridData.Converters {
 
     /// <summary>
-    /// Collection of <code>IGridConverter</code>.
+    /// Collection of <see cref="IGridConverter"/>.
     /// </summary>
     public class GridConverterCollection : IEnumerable<IGridConverter> {
 
@@ -35,7 +35,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         #region Member methods
 
         /// <summary>
-        /// Adds the specified <code>converter</code> to the collection.
+        /// Adds the specified <paramref name="converter"/> to the collection.
         /// </summary>
         /// <param name="converter">The converter to be added.</param>
         public void Add(IGridConverter converter) {
@@ -43,7 +43,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         }
 
         /// <summary>
-        /// Adds the specified <code>converter</code> to the collection at <code>index</code>.
+        /// Adds the specified <paramref name="converter"/> to the collection at <paramref name="index"/>.
         /// </summary>
         /// <param name="index">The index.</param>
         /// <param name="converter">The converter to be added.</param>
@@ -59,7 +59,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         }
 
         /// <summary>
-        /// Removes the specified <code>converter</code> from the collection.
+        /// Removes the specified <paramref name="converter"/> from the collection.
         /// </summary>
         /// <param name="converter">The converter to be removed.</param>
         public void Remove(IGridConverter converter) {
@@ -67,7 +67,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         }
 
         /// <summary>
-        /// Removes all converters of type <code>T</code>.
+        /// Removes all converters of type <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the converters to be removed.</typeparam>
         public void Remove<T>() where T : IGridConverter {
@@ -77,7 +77,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         }
 
         /// <summary>
-        /// Removes the converter at the specified <code>index</code>.
+        /// Removes the converter at the specified <paramref name="index"/>.
         /// </summary>
         /// <param name="index">The index of the converter to be removed.</param>
         public void RemoveAt(int index) {

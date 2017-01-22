@@ -56,7 +56,7 @@ namespace Skybrud.Umbraco.GridData {
         // ReSharper disable InconsistentNaming
 
         /// <summary>
-        /// Same as <code>Name</code>.
+        /// Same as <see cref="Name"/>.
         /// </summary>
         [Obsolete]
         public string name {
@@ -101,7 +101,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls with the specified editor <code>alias</code>. 
+        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
         public GridControl[] GetAllControls(string alias) {
@@ -109,7 +109,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls matching the specified <code>predicate</code>. 
+        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
         public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
@@ -174,7 +174,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
+        /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
         public static GridDataModel Deserialize(string json) {
@@ -182,7 +182,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Deserializes the specified JSON string into an instance of <code>GridDataModel</code>.
+        /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
         /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
@@ -210,7 +210,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         /// <summary>
-        /// Parses the specified <see cref="JObject"/> into an instance of <see cref="GridDataModel"/>.
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GridDataModel"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         [Obsolete("Use Deserialize method instead")]

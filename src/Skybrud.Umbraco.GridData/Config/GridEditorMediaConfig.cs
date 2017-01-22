@@ -37,10 +37,10 @@ namespace Skybrud.Umbraco.GridData.Config {
         #region Static methods
 
         /// <summary>
-        /// Gets an instance of <code>GridEditorMediaConfig</code> from the specified <code>JsonObject</code>.
+        /// Gets an instance of <see cref="GridEditorMediaConfig"/> from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="editor">The parent editor.</param>
-        /// <param name="obj">The instance of <code>JObject</code> to be parsed.</param>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridEditorMediaConfig Parse(GridEditor editor, JObject obj) {
             if (obj == null) return null;
             return new GridEditorMediaConfig(editor, obj) {

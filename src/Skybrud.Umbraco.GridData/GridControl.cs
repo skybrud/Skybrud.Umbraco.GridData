@@ -27,7 +27,7 @@ namespace Skybrud.Umbraco.GridData {
         public GridArea Area { get; private set; }
 
         /// <summary>
-        /// Gets the value of the control. Alternately use the <code>GetValue&lt;T&gt;</code> method to get the type safe value.
+        /// Gets the value of the control. Alternately use the <see cref="GetValue{T}"/> method to get the type safe value.
         /// </summary>
         [JsonProperty("value")]
         public IGridControlValue Value { get; private set; }
@@ -67,7 +67,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Member methods
 
         /// <summary>
-        /// Gets the value of the control casted to the type of <code>T</code>.
+        /// Gets the value of the control casted to the type of <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value to be returned.</typeparam>
         public T GetValue<T>() where T : IGridControlValue {
@@ -134,7 +134,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses a control from the specified <code>obj</code>.
+        /// Parses a control from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="area">The parent area of the control.</param>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>

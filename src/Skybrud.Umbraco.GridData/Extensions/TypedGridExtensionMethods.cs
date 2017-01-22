@@ -67,9 +67,9 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         }
 
         /// <summary>
-        /// Gets the HTML for the Grid model based on the specified <code>framework</code>.
+        /// Gets the HTML for the Grid model based on the specified <paramref name="framework"/>.
         /// </summary>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="model">The Grid model to be rendered.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
         public static HtmlString GetTypedGridHtml(this HtmlHelper html, GridDataModel model, string framework = DefaultFramework) {
@@ -83,9 +83,9 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         }
 
         /// <summary>
-        /// Gets the HTML for the Grid model based on the specified <code>framework</code>.
+        /// Gets the HTML for the Grid model based on the specified <paramref name="framework"/>.
         /// </summary>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="property">The property holding the Grid model.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
         public static HtmlString GetTypedGridHtml(this HtmlHelper html, IPublishedProperty property, string framework = DefaultFramework) {
@@ -102,7 +102,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <summary>
         /// Gets the HTML for the Grid model based on default options.
         /// </summary>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="content">The parent content item.</param>
         public static HtmlString GetTypedGridHtml(this HtmlHelper html, IPublishedContent content) {
             return html.GetTypedGridHtml(content, DefaultPropertyAlias, DefaultFramework);
@@ -111,7 +111,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <summary>
         /// Gets the HTML for the Grid model based on default options.
         /// </summary>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="content">The parent content item.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         public static HtmlString GetTypedGridHtml(this HtmlHelper html, IPublishedContent content, string propertyAlias) {
@@ -121,7 +121,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <summary>
         /// Gets the HTML for the Grid model.
         /// </summary>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="content">The parent content item.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
@@ -144,7 +144,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// Gets the HTML for the Grid model.
         /// </summary>
         /// <param name="property">The property holding the Grid model.</param>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
         public static HtmlString GetTypedGridHtml(this IPublishedProperty property, HtmlHelper html, string framework = DefaultFramework) {
 
@@ -161,7 +161,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// Gets the HTML for the Grid model.
         /// </summary>
         /// <param name="content">The parent content item.</param>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         public static HtmlString GetTypedGridHtml(this IPublishedContent content, HtmlHelper html) {
             return GetTypedGridHtml(content, html, DefaultPropertyAlias, DefaultFramework);
         }
@@ -170,7 +170,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// Gets the HTML for the Grid model.
         /// </summary>
         /// <param name="content">The parent content item.</param>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         public static HtmlString GetTypedGridHtml(this IPublishedContent content, HtmlHelper html, string propertyAlias) {
             return GetTypedGridHtml(content, html, propertyAlias, DefaultFramework);
@@ -180,7 +180,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// Gets the HTML for the Grid model.
         /// </summary>
         /// <param name="content">The parent content item.</param>
-        /// <param name="html">The instance of <code>HtmlHelper</code>.</param>
+        /// <param name="html">The instance of <see cref="HtmlHelper"/>.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         /// <param name="framework">The framework used to render the Grid.</param>
         public static HtmlString GetTypedGridHtml(this IPublishedContent content, HtmlHelper html, string propertyAlias, string framework) {

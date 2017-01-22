@@ -25,7 +25,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="GridControl"/> and <see cref="JObject"/>.
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="obj"/>.
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>

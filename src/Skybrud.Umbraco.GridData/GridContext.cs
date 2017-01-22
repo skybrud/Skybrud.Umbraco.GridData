@@ -42,9 +42,10 @@ namespace Skybrud.Umbraco.GridData {
         #region Member methods
         
         /// <summary>
-        /// Gets an instance of <see cref="GridControlWrapper"/> based on the specified <code>control</code>.
+        /// Gets an instance of <see cref="GridControlWrapper"/> based on the specified <paramref name="control"/>.
         /// </summary>
         /// <param name="control">The control to wrap.</param>
+        /// <returns>An instance of <see cref="GridControlWrapper"/>.</returns>
         public GridControlWrapper GetControlWrapper(GridControl control) {
             foreach (IGridConverter converter in Converters) {
                 try {

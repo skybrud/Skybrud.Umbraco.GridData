@@ -29,7 +29,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the the focal point.</param>
         protected GridControlMediaFocalPoint(JObject obj) : base(obj) {
@@ -42,7 +42,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         #region Static methods
 
         /// <summary>
-        /// Gets a focal point from the specified <see cref="JObject"/>.
+        /// Gets a focal point from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridControlMediaFocalPoint Parse(JObject obj) {

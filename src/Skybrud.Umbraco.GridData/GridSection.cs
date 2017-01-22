@@ -56,7 +56,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <see cref="JObject"/>.
+        /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the section.</param>
         protected GridSection(JObject obj) : base(obj) { }
@@ -78,7 +78,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses a section from the specified <code>obj</code>.
+        /// Parses a section from the specified <paramref name="model"/> and <paramref name="obj"/>.
         /// </summary>
         /// <param name="model">The parent model of the section.</param>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>

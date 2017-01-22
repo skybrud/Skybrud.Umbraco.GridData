@@ -58,7 +58,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
         public IGridEditorConfig Config { get; set; }
-
+        
         #endregion
 
         #region Constructors
@@ -70,7 +70,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Member methods
 
         /// <summary>
-        /// Gets the config of the editor casted to the type of <code>T</code>.
+        /// Gets the config of the editor casted to the type of <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the config to be returned.</typeparam>
         public T GetConfig<T>() where T : IGridEditorConfig {
@@ -82,7 +82,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Static methods
 
         /// <summary>
-        /// Parses an editor from the specified <code>obj</code>.
+        /// Parses an editor from the specified <paramref name="control"/> and <paramref name="obj"/>.
         /// </summary>
         /// <param name="control">The parent control of the editor.</param>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
