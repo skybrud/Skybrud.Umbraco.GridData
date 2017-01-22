@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Skybrud.dk")]
 [assembly: AssemblyProduct("Skybrud.Umbraco.GridData")]
-[assembly: AssemblyCopyright("Copyright © 2016")]
+[assembly: AssemblyCopyright("Copyright © 2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,4 +32,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("2.0.0.0")]
-[assembly: AssemblyInformationalVersion("2.0.0-beta002")]
+[assembly: AssemblyInformationalVersion("2.0.0-beta003")]
