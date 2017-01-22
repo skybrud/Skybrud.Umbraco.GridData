@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
@@ -34,6 +35,13 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
         public string Caption { get; protected set; }
+
+        /// <summary>
+        /// Gets whether the <see cref="Caption"/> property has a value.
+        /// </summary>
+        public bool HasCaption {
+            get { return !String.IsNullOrWhiteSpace(Caption); }
+        }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlMediaValue"/>, this means

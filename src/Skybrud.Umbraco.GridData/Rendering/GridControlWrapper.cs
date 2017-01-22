@@ -28,6 +28,13 @@ namespace Skybrud.Umbraco.GridData.Rendering {
             get { return Control.Value != null && Control.Value.IsValid; }
         }
 
+        /// <summary>
+        /// Gets whether the editor has a configuration (meaning that <see cref="GridEditor.Config"/> isn't <code>null</code>).
+        /// </summary>
+        public bool HasConfig {
+            get { return Control != null && Control.Editor != null && Editor.Config != null; }
+        }
+
         #endregion
 
         #region Constructors

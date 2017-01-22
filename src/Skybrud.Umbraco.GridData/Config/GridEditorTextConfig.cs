@@ -42,7 +42,9 @@ namespace Skybrud.Umbraco.GridData.Config {
 
         #region Constructors
 
-        private GridEditorTextConfig(GridEditor editor, JObject obj) : base(obj) {
+        private GridEditorTextConfig(GridEditor editor, JObject obj) : base(editor, obj) {
+            Style = obj.GetString("style");
+            Markup = obj.GetString("markup");
         }
 
         #endregion
@@ -55,11 +57,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <param name="editor">The parent editor.</param>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridEditorTextConfig Parse(GridEditor editor, JObject obj) {
-            if (obj == null) return null;
-            return new GridEditorTextConfig(editor, obj) {
-                Style = obj.GetString("style"),
-                Markup = obj.GetString("markup")
-            };
+            return obj == null ? null : new GridEditorTextConfig(editor, obj);
         }
 
         #endregion

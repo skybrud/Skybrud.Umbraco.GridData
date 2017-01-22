@@ -21,7 +21,8 @@ namespace Skybrud.Umbraco.GridData.Config {
 
         #region Constructors
 
-        private GridEditorMediaConfig(GridEditor editor, JObject obj) : base(obj) {
+        private GridEditorMediaConfig(GridEditor editor, JObject obj) : base(editor, obj) {
+            Size = obj.GetObject("size", GridEditorMediaConfigSize.Parse);
         }
 
         #endregion
@@ -34,10 +35,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <param name="editor">The parent editor.</param>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         public static GridEditorMediaConfig Parse(GridEditor editor, JObject obj) {
-            if (obj == null) return null;
-            return new GridEditorMediaConfig(editor, obj) {
-                Size = obj.GetObject("size", GridEditorMediaConfigSize.Parse)
-            };
+            return obj == null ? null : new GridEditorMediaConfig(editor, obj);
         }
 
         #endregion
