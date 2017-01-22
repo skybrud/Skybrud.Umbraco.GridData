@@ -281,7 +281,6 @@
     <Compile Include="Converters\Fanoe\FanoeGridConverter.cs" />
     <Compile Include="Converters\Umbraco\UmbracoGridConverter.cs" />
     <Compile Include="Converters\GridConverterCollection.cs" />
-    <Compile Include="Extensions\Json\GridControlExtensions.cs" />
     <Compile Include="GridDictionaryItem.cs" />
     <Compile Include="GridElement.cs" />
     <Compile Include="GridUtils.cs" />

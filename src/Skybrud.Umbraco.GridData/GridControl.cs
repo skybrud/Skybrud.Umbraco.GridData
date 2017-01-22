@@ -74,8 +74,6 @@ namespace Skybrud.Umbraco.GridData {
             return (T) Value;
         }
 
-        #region Member methods
-
         /// <summary>
         /// Generates the HTML for the Grid control.
         /// </summary>
@@ -127,7 +125,37 @@ namespace Skybrud.Umbraco.GridData {
             return IsValid ? Value.GetSearchableText() : "";
         }
 
-        #endregion
+        /// <summary>
+        /// Initializes a new control wrapper around the control.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the control value.</typeparam>
+        public GridControlWrapper<TValue> GetControlWrapper<TValue>() where TValue : IGridControlValue {
+
+            // Get the value
+            TValue value = GetValue<TValue>();
+
+            // Wrap the control
+            return new GridControlWrapper<TValue>(this, value);
+
+        }
+
+        /// <summary>
+        /// Initializes a new control wrapper around the control.
+        /// </summary>
+        /// <typeparam name="TValue">The type of the control value.</typeparam>
+        /// <typeparam name="TConfig">The type of the editor config.</typeparam>
+        public GridControlWrapper<TValue, TConfig> GetControlWrapper<TValue, TConfig>() where TValue : IGridControlValue where TConfig : IGridEditorConfig {
+
+            // Get the value
+            TValue value = GetValue<TValue>();
+
+            // Get the configuration
+            TConfig config = Editor.GetConfig<TConfig>();
+
+            // Wrap the control
+            return new GridControlWrapper<TValue, TConfig>(this, value, config);
+
+        }
 
         #endregion
 
