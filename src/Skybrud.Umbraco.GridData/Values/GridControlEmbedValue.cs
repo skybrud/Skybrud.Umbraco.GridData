@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Json.Converters;
 
@@ -9,7 +10,15 @@ namespace Skybrud.Umbraco.GridData.Values {
     /// </summary>
     [JsonConverter(typeof(GridControlValueStringConverter))]
     public class GridControlEmbedValue : GridControlHtmlValue {
-        
+
+        #region Properties
+
+        public override bool IsValid {
+            get { return !String.IsNullOrWhiteSpace(Value); }
+        }
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
