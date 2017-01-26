@@ -81,7 +81,33 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
         /// <returns>Returns the Grid control as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper) {
-            return GetHtml(helper, Editor.Alias);
+
+            // Some input validation
+            if (helper == null) throw new ArgumentNullException("helper");
+
+            // If the control isn't valid, we shouldn't render it
+            if (Value == null || !IsValid) return new HtmlString("");
+
+            // Get the type name of the value instance
+            string typeName = Value.GetType().Name;
+
+            // Match the class name
+            Match match1 = Regex.Match(typeName, "^GridControl(.+?)Value$");
+            Match match2 = Regex.Match(typeName, "^(.+?)GridControl(.+?)Value$");
+
+            // Render the HTML
+            HtmlString html;
+            if (match1.Success) {
+                html = GetHtml(helper, "TypedGrid/Editors/" + match1.Groups[1].Value);
+            } else if (match2.Success) {
+                html = GetHtml(helper, "TypedGrid/Editors/" + match2.Groups[1].Value + "/" + match2.Groups[2].Value);
+            } else {
+                html = GetHtml(helper, Editor.Alias);
+            }
+
+            // Return the HTML
+            return html;
+
         }
 
         /// <summary>
