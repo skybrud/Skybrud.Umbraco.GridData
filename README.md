@@ -46,12 +46,6 @@ By default in Umbraco, calling `Model.Content.GetPropertyValue("body")` (assumin
 
 After installing the package, the property value converter will make sure that an instance of `GridDataModel` is returned instead.
 
-Unfortunately this will also break the existing logic in Umbraco's `GetGridHtml` extension methods. If you still wish to use `GetGridHtml` in your project, you can disable the property value converter by calling the following line during startup:
-
-```C#
-GridPropertyValueConverter.IsEnabled = false;
-```
-
 ###Rendering in a View
 There are two ways to render the grid html in a view. 
 *In the examples below, "PageContent" is our strongly-typed GridDataModel property.*
