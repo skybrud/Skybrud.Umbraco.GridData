@@ -272,6 +272,7 @@
     <Compile Include="Converters\GridConverterCollection.cs" />
     <Compile Include="Extensions\TypedGridExtensionMethods.Rows.cs" />
     <Compile Include="Extensions\TypedGridExtensionMethods.Controls.cs" />
+    <Compile Include="Extensions\ViewExtensions.cs" />
     <Compile Include="GridDictionaryItem.cs" />
     <Compile Include="GridElement.cs" />
     <Compile Include="GridUtils.cs" />
