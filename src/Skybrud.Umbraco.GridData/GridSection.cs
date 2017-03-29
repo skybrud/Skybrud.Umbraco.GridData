@@ -5,6 +5,10 @@ using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData {
+    using System.Text.RegularExpressions;
+    using System.Web;
+    using System.Web.Mvc;
+    using System.Web.Mvc.Html;
 
     /// <summary>
     /// Class representing a section in an Umbraco Grid.
@@ -12,6 +16,11 @@ namespace Skybrud.Umbraco.GridData {
     public class GridSection : GridJsonObject {
 
         #region Properties
+
+        /// <summary>
+        /// Gets the section name.
+        /// </summary>
+        public string Name { get; private set; }
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridDataModel"/>.
@@ -73,6 +82,40 @@ namespace Skybrud.Umbraco.GridData {
             return Rows.Aggregate("", (current, row) => current + row.GetSearchableText());
         }
 
+        /// <summary>
+        /// Generates the HTML for the Grid row.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
+        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        public HtmlString GetHtml(HtmlHelper helper)
+        {
+            return GetHtml(helper, Name);
+        }
+
+        /// <summary>
+        /// Generates the HTML for the Grid row.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
+        /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid row.</param>
+        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        public HtmlString GetHtml(HtmlHelper helper, string partial)
+        {
+
+            // Some input validation
+            if (helper == null) throw new ArgumentNullException("helper");
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+
+            // Prepend the path to the "Sections" folder if not already specified
+            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$"))
+            {
+                partial = "TypedGrid/Sections/" + partial;
+            }
+
+            // Render the partial view
+            return helper.Partial(partial, this);
+
+        }
+
         #endregion
 
         #region Static methods
@@ -90,7 +133,8 @@ namespace Skybrud.Umbraco.GridData {
             // Parse basic properties
             GridSection section = new GridSection(obj) {
                 Model = model,
-                Grid = obj.GetInt32("grid")
+                Grid = obj.GetInt32("grid"),
+                Name = obj.Root["name"].Value<string>()
             };
 
             // Parse the rows
@@ -104,7 +148,6 @@ namespace Skybrud.Umbraco.GridData {
 
             // Return the section
             return section;
-
         }
 
         #endregion
