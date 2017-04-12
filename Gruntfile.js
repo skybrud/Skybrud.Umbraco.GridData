@@ -1,24 +1,4 @@
 module.exports = function(grunt) {
-	
-	function ass(name) {
-
-		var projectRoot = 'src/' + name + '/';
-		
-		// Load information about the assembly
-		var assembly = grunt.file.readJSON(projectRoot + 'Properties/AssemblyInfo.json');
-
-		// Get the version of the package
-		var version = assembly.informationalVersion ? assembly.informationalVersion : assembly.version;
-		
-		return {
-			name: name,
-			projectRoot: projectRoot,
-			assembly: assembly,
-			description: assembly.description,
-			version: version
-		};
-	
-	}
 
 	var path = require('path');
 
@@ -28,10 +8,12 @@ module.exports = function(grunt) {
 	// get the root path of the project
 	var projectRoot = 'src/' + pkg.name + '/';
 
-	// Declare projects/packages
-	var gridData = ass(pkg.name);
-	var leBlender = ass(pkg.name + '.LeBlender');
-	
+	// Load information about the assembly
+	var assembly = grunt.file.readJSON(projectRoot + 'Properties/AssemblyInfo.json');
+
+	// Get the version of the package
+	var version = assembly.informationalVersion ? assembly.informationalVersion : assembly.version;
+
 	grunt.initConfig({
 		pkg: pkg,
 		clean: {
@@ -40,97 +22,52 @@ module.exports = function(grunt) {
 			]
 		},
 		copy: {
-			gridData: {
+			bacon: {
 				files: [
 					{
 						expand: true,
-						cwd: gridData.projectRoot + 'bin/Release/',
+						cwd: projectRoot + 'bin/Release/',
 						src: [
 							'Skybrud.Essentials.dll',
 							'Skybrud.Essentials.xml',
 							pkg.name + '.dll',
 							pkg.name + '.xml'
 						],
-						dest: 'releases/temp/GridData/bin/'
-					}
-				]
-			},
-			leBlender: {
-				files: [
-					{
-						expand: true,
-						cwd: leBlender.projectRoot + 'bin/Release/',
-						src: [
-							'Lecoati.LeBlender.Extension.dll',
-							'Lecoati.LeBlender.Extension.xml',
-							'Skybrud.Essentials.dll',
-							'Skybrud.Essentials.xml',
-							pkg.name + '.dll',
-							pkg.name + '.xml',
-							pkg.name + '.LeBlender.dll',
-							pkg.name + '.LeBlender.xml'
-						],
-						dest: 'releases/temp/LeBlender/bin/'
+						dest: 'releases/temp/bin/'
 					}
 				]
 			}
 		},
 		zip: {
-			gridData: {
-				cwd: 'releases/temp/GridData/',
+			release: {
+				cwd: 'releases/temp/',
 				src: [
-					'releases/temp/GridData/**/*.*'
+					'releases/temp/**/*.*'
 				],
-				dest: 'releases/GridData/github/' + gridData.name + '.v' + gridData.version + '.zip'
-			},
-			leBlender: {
-				cwd: 'releases/temp/LeBlender/',
-				src: [
-					'releases/temp/LeBlender/**/*.*'
-				],
-				dest: 'releases/LeBlender/github/' + leBlender.name + '.v' + leBlender.version + '.zip'
+				dest: 'releases/github/' + pkg.name + '.v' + version + '.zip'
 			}
 		},
 		umbracoPackage: {
-			gridData: {
-				src: 'releases/temp/GridData/',
-				dest: 'releases/GridData/umbraco',
+			dist: {
+				src: 'releases/temp/',
+				dest: 'releases/umbraco',
 				options: {
-					name: gridData.name,
-					version: gridData.version,
+					name: pkg.name,
+					version: version,
 					url: pkg.url,
 					license: pkg.license.name,
 					licenseUrl: pkg.license.url,
 					author: pkg.author.name,
 					authorUrl: pkg.author.url,
-					readme: gridData.readme,
-					outputName: gridData.name + '.v' + gridData.version + '.zip'
-				}
-			},
-			leBlender: {
-				src: 'releases/temp/LeBlender/',
-				dest: 'releases/LeBlender/umbraco',
-				options: {
-					name: leBlender.name,
-					version: leBlender.version,
-					url: pkg.url,
-					license: pkg.license.name,
-					licenseUrl: pkg.license.url,
-					author: pkg.author.name,
-					authorUrl: pkg.author.url,
-					readme: leBlender.readme,
-					outputName: leBlender.name + '.v' + leBlender.version + '.zip'
+					readme: pkg.readme,
+					outputName: pkg.name + '.v' + version + '.zip'
 				}
 			}
 		},
 		nugetpack: {
-			gridData: {
-				src: 'src/' + gridData.name + '/' + gridData.name + '.csproj',
-				dest: 'releases/GridData/nuget/'
-			},
-			leBlender: {
-				src: 'src/' + leBlender.name + '/' + leBlender.name + '.csproj',
-				dest: 'releases/LeBlender/nuget/'
+			dist: {
+				src: 'src/' + pkg.name + '/' + pkg.name + '.csproj',
+				dest: 'releases/nuget/'
 			}
 		}
 	});
@@ -141,10 +78,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-nuget');
 	grunt.loadNpmTasks('grunt-zip');
 
-	grunt.registerTask('release', ['clean', 'copy:gridData', 'zip:gridData', 'umbracoPackage:gridData', 'nugetpack:gridData', 'clean']);
-	grunt.registerTask('gridData', ['clean', 'copy:gridData', 'zip:gridData', 'umbracoPackage:gridData', 'nugetpack:gridData', 'clean']);
-	grunt.registerTask('leBlender', ['clean', 'copy:leBlender', 'zip:leBlender', 'umbracoPackage:leBlender', 'nugetpack:leBlender', 'clean']);
-	grunt.registerTask('all', ['clean', 'copy', 'zip', 'umbracoPackage', 'nugetpack', 'clean']);
+	grunt.registerTask('release', ['clean', 'copy', 'zip', 'umbracoPackage', 'nugetpack', 'clean']);
 
 	grunt.registerTask('default', ['release']);
 
