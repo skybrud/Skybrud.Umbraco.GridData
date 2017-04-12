@@ -1,15 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.40629.0
-MinimumVisualStudioVersion = 10.0.40219.1
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication1", "ConsoleApplication1\ConsoleApplication1.csproj", "{638AF5B0-7C02-45D0-9104-56B056133CDF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Umbraco.GridData", "Skybrud.Umbraco.GridData\Skybrud.Umbraco.GridData.csproj", "{99DC24EA-4933-4BB9-B6A1-BF565E9E93C0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestProject1", "UnitTestProject1\UnitTestProject1.csproj", "{65A596DD-3457-489F-B4FC-9713D1BB3B2A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skybrud.Umbraco.GridData.LeBlender", "Skybrud.Umbraco.GridData.LeBlender\Skybrud.Umbraco.GridData.LeBlender.csproj", "{FC85F051-1F15-4B92-8FA0-6D3CA10CB6E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +25,6 @@ Global
 		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65A596DD-3457-489F-B4FC-9713D1BB3B2A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FC85F051-1F15-4B92-8FA0-6D3CA10CB6E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FC85F051-1F15-4B92-8FA0-6D3CA10CB6E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FC85F051-1F15-4B92-8FA0-6D3CA10CB6E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FC85F051-1F15-4B92-8FA0-6D3CA10CB6E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
