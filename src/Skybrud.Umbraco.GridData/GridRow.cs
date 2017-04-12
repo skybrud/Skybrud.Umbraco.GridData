@@ -33,12 +33,12 @@ namespace Skybrud.Umbraco.GridData {
         public string Alias { get; private set; }
 
         /// <summary>
-        /// Gets the label of the row.
+        /// Gets the label of the row. Use <see cref="HasLabel"/> to check whether a label has been specified.
         /// </summary>
         public string Label { get; private set; }
 
         /// <summary>
-        /// Gets whether a label has been specified for the difinition of this row.
+        /// Gets whether a label has been specified for the definition of this row.
         /// </summary>
         public bool HasLabel {
             get { return !String.IsNullOrWhiteSpace(Label); }
