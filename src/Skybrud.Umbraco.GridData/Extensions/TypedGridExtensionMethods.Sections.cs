@@ -1,4 +1,5 @@
-﻿using System.Web;
+﻿using System.Text.RegularExpressions;
+using System.Web;
 using System.Web.Mvc;
 
 namespace Skybrud.Umbraco.GridData.Extensions {
@@ -14,8 +15,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="helper">The instance of <see cref="HtmlHelper"/> used for rendering the row.</param>
         /// <param name="section">The section to be rendered.</param>
         /// <returns>An instance of <see cref="HtmlString"/>.</returns>
-        public static HtmlString RenderGridSection(this HtmlHelper helper, GridSection section)
-        {
+        public static HtmlString RenderGridSection(this HtmlHelper helper, GridSection section) {
             if (helper == null || section == null) return new HtmlString("");
             return section.GetHtml(helper);
         }
@@ -27,8 +27,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="section">The section to be rendered.</param>
         /// <param name="partial">The partial view to be used for the rendering.</param>
         /// <returns>An instance of <see cref="HtmlString"/>.</returns>
-        public static HtmlString RenderGridSection(this HtmlHelper helper, GridSection section, string partial)
-        {
+        public static HtmlString RenderGridSection(this HtmlHelper helper, GridSection section, string partial) {
             if (helper == null || section == null) return new HtmlString("");
             return section.GetHtml(helper, partial);
         }
