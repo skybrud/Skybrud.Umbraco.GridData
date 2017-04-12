@@ -61,7 +61,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
             }
 
             // Do we have a partial view or should we use the fallback?
-            return helper.ViewExists(partial) ? helper.RenderGridRow(row) : helper.RenderGridRow(row, fallbackPartial);
+            return helper.ViewExists(partial) ? helper.RenderGridRow(row, partial) : helper.RenderGridRow(row, fallbackPartial);
 
         }
     
