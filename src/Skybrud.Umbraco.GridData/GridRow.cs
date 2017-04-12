@@ -192,6 +192,8 @@ namespace Skybrud.Umbraco.GridData {
 
             // Some input validation
             if (obj == null) throw new ArgumentNullException("obj");
+
+            #pragma warning disable 618
             
             // Parse basic properties
             GridRow row = new GridRow(obj) {
@@ -201,6 +203,8 @@ namespace Skybrud.Umbraco.GridData {
                 Label = obj.GetString("label"),
                 Name = obj.GetString("name")
             };
+
+            #pragma warning restore 618
 
             // Parse the areas
             row.Areas = obj.GetArray("areas", x => GridArea.Parse(row, x)) ?? new GridArea[0];

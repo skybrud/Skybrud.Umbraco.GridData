@@ -1,6 +1,5 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using System.Text.RegularExpressions;
 
 namespace Skybrud.Umbraco.GridData.Extensions {
 
@@ -33,7 +32,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         }
 
         /// <summary>
-        /// Gets the HTML of the specified <paramref name="row" /> or falls back to <see cref="fallbackPartial"/> if no row view is found.
+        /// Gets the HTML of the specified <paramref name="row" /> or falls back to <paramref name="fallbackPartial"/> if no row view is found.
         /// </summary>
         /// <param name="helper">The instance of <see cref="T:System.Web.Mvc.HtmlHelper" /> used for rendering the row.</param>
         /// <param name="row">The row to be rendered.</param>
@@ -45,7 +44,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         }
 
         /// <summary>
-        /// Gets the HTML of the specified <paramref name="row" /> or falls back to <see cref="fallbackPartial"/> if <paramref name="partial"/> isn't found.
+        /// Gets the HTML of the specified <paramref name="row" /> or falls back to <paramref name="fallbackPartial"/> if <paramref name="partial"/> isn't found.
         /// </summary>
         /// <param name="helper">The instance of <see cref="T:System.Web.Mvc.HtmlHelper" /> used for rendering the row.</param>
         /// <param name="row">The row to be rendered.</param>

@@ -86,6 +86,10 @@ namespace Skybrud.Umbraco.GridData {
             return _dictionary.TryGetValue(key, out value);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>An enumerator that can be used to iterate through the collection.</returns>
         public IEnumerator<GridDictionaryItem> GetEnumerator() {
             return _dictionary.Select(x => new GridDictionaryItem(x.Key, x.Value)).GetEnumerator();
         }

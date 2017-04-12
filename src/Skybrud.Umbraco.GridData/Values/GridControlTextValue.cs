@@ -56,10 +56,18 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
             return Value;
         }
 
+        /// <summary>
+        /// Gets a string representing the raw value of the control.
+        /// </summary>
+        /// <returns>An instance of <see cref="System.String"/>.</returns>
         public override string ToString() {
             return Value;
         }

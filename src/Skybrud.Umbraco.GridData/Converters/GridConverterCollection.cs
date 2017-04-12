@@ -84,6 +84,10 @@ namespace Skybrud.Umbraco.GridData.Converters {
             _converters.RemoveAt(index);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the <see cref="List{IGridConverter}"/>.
+        /// </summary>
+        /// <returns>A <see cref="List{T}.Enumerator"/> for the <see cref="List{IGridConverter}"/>.</returns>
         public IEnumerator<IGridConverter> GetEnumerator() {
             return _converters.GetEnumerator();
         }

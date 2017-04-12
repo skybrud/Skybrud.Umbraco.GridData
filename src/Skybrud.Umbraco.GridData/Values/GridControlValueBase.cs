@@ -12,9 +12,15 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the parent <see cref="GridControl"/>.
+        /// </summary>
         [JsonIgnore]
         public GridControl Control { get; private set; }
         
+        /// <summary>
+        /// Gets whether the control is valid (eg. whether it has a value).
+        /// </summary>
         [JsonIgnore]
         public virtual bool IsValid {
             get { return true; }
@@ -37,6 +43,10 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Member methods
 
+        /// <summary>
+        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// </summary>
+        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
             return "";
         }

@@ -8,7 +8,7 @@ namespace Skybrud.Umbraco.GridData.Interfaces {
     public interface IGridControlValue {
 
         /// <summary>
-        /// Gets a reference to the parent control.
+        /// Gets a reference to the parent <see cref="GridControl"/>.
         /// </summary>
         [JsonIgnore]
         GridControl Control { get; }
@@ -22,7 +22,7 @@ namespace Skybrud.Umbraco.GridData.Interfaces {
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="System.String"/> with the value as a searchable text.</returns>
+        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         string GetSearchableText();
 
     }

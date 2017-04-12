@@ -1,5 +1,4 @@
-﻿using System.Text.RegularExpressions;
-using System.Web;
+﻿using System.Web;
 using System.Web.Mvc;
 
 namespace Skybrud.Umbraco.GridData.Extensions {
@@ -33,7 +32,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         }
 
         /// <summary>
-        /// Gets the HTML of the specified <paramref name="section" /> or falls back to <see cref="fallbackPartial"/> if no section view is found.
+        /// Gets the HTML of the specified <paramref name="section" /> or falls back to <paramref name="fallbackPartial"/> if no section view is found.
         /// </summary>
         /// <param name="helper">The instance of <see cref="T:System.Web.Mvc.HtmlHelper" /> used for rendering the section.</param>
         /// <param name="section">The section to be rendered.</param>
@@ -45,7 +44,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         }
 
         /// <summary>
-        /// Gets the HTML of the specified <paramref name="section" /> or falls back to <see cref="fallbackPartial"/> if <paramref name="partial"/> isn't found.
+        /// Gets the HTML of the specified <paramref name="section" /> or falls back to <paramref name="fallbackPartial"/> if <paramref name="partial"/> isn't found.
         /// </summary>
         /// <param name="helper">The instance of <see cref="T:System.Web.Mvc.HtmlHelper" /> used for rendering the section.</param>
         /// <param name="section">The section to be rendered.</param>

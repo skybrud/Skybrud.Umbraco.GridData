@@ -13,6 +13,9 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         #region Properties
 
+        /// <summary>
+        /// Gets whether the value of the control is valid.
+        /// </summary>
         public override bool IsValid {
             get { return !String.IsNullOrWhiteSpace(Value); }
         }
