@@ -45,8 +45,8 @@ namespace Skybrud.Umbraco.GridData.Extensions {
 
             // Determine the partial view
             string partial = section.Name;
-            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$")) {
-                partial = "TypedGrid/Rows/" + partial;
+            if (GridUtils.IsValidPartialName(partial)) {
+                partial = "TypedGrid/Sections/" + partial;
             }
 
             // Do we have a partial view or should we use the fallback?

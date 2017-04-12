@@ -45,7 +45,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
 
             // Determine the partial view
             string partial = row.Name;
-            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$")) {
+            if (GridUtils.IsValidPartialName(partial)) {
                 partial = "TypedGrid/Rows/" + partial;
             }
 

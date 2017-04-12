@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Text.RegularExpressions;
 
 namespace Skybrud.Umbraco.GridData {
     
     /// <summary>
     /// Various utility methods for the grid.
     /// </summary>
-    public class GridUtils {
+    public static class GridUtils {
 
         #region Version specific methods
 
@@ -61,6 +62,19 @@ namespace Skybrud.Umbraco.GridData {
 
         }
         
+        #endregion
+
+        #region Rendering
+
+        /// <summary>
+        /// Gets whether the specified <paramref name="name"/> is a valid partial name.
+        /// </summary>
+        /// <param name="name">The name of the partial.</param>
+        /// <returns><code>TRUE</code> if <paramref name="name"/> is valid; otherwise <code>false</code>.</returns>
+        public static bool IsValidPartialName(string name) {
+            return Regex.IsMatch(name ?? "", "^[a-zA-Z0-9-_ ]+$");
+        }
+
         #endregion
 
     }

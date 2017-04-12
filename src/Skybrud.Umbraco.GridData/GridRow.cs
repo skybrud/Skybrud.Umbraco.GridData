@@ -162,7 +162,7 @@ namespace Skybrud.Umbraco.GridData {
             if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
 
             // Prepend the path to the "Rows" folder if not already specified
-            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$")) {
+            if (GridUtils.IsValidPartialName(partial)) {
                 partial = "TypedGrid/Rows/" + partial;
             }
 
