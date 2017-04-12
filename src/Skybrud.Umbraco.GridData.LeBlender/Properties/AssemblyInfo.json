@@ -1,0 +1,10 @@
+{
+  "title": "Skybrud.Umbraco.GridData.LeBlender",
+  "description": "LeBlender addon for Skybrud.Umbraco.GridData.",
+  "company": "Skybrud.dk",
+  "product": "Skybrud.Umbraco.GridData",
+  "copyright": "Copyright © 2017",
+  "version": "1.0.0.0",
+  "informationalVersion": "1.0.0-beta001",
+  "fileVersion": "0.0.0.1"
+}
