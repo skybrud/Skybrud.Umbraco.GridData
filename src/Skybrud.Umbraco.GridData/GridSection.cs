@@ -134,7 +134,7 @@ namespace Skybrud.Umbraco.GridData {
             GridSection section = new GridSection(obj) {
                 Model = model,
                 Grid = obj.GetInt32("grid"),
-                Name = obj.Root["name"].Value<string>()
+                Name = model.Name
             };
 
             // Parse the rows
