@@ -27,9 +27,9 @@ namespace Skybrud.Umbraco.GridData {
         public string Id { get; private set; }
 
         /// <summary>
-        /// Gets the alias of the row. This property is not part of the official Umbraco Grid in 7.2.x,
-        /// but will be available in 7.3 according to http://issues.umbraco.org/issue/U4-6533.
+        /// Gets the alias of the row.
         /// </summary>
+        [Obsolete("Use Name instead")]
         public string Alias { get; private set; }
 
         /// <summary>
