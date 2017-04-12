@@ -32,6 +32,28 @@ namespace Skybrud.Umbraco.GridData.Extensions {
             return section.GetHtml(helper, partial);
         }
 
+        /// <summary>
+        /// Gets the HTML of the specified <paramref name="section" /> or falls back to <see cref="fallbackPartial"/> if no section view is found.
+        /// </summary>
+        /// <param name="helper">The instance of <see cref="T:System.Web.Mvc.HtmlHelper" /> used for rendering the section.</param>
+        /// <param name="section">The section to be rendered.</param>
+        /// <param name="fallbackPartial">The fallback partial view to be used if no section partial is found by <see cref="GridSection.Name"/> for the rendering.</param>
+        /// <returns>An instance of <see cref="T:System.Web.HtmlString" />.</returns>
+        public static HtmlString RenderGridSectionOrFallback(this HtmlHelper helper, GridSection section, string fallbackPartial) {
+
+            if (helper == null || section == null) return new HtmlString("");
+
+            // Determine the partial view
+            string partial = section.Name;
+            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$")) {
+                partial = "TypedGrid/Rows/" + partial;
+            }
+
+            // Do we have a partial view or should we use the fallback?
+            return helper.ViewExists(partial) ? helper.RenderGridSection(section) : helper.RenderGridSection(section, fallbackPartial);
+
+        }
+
     }
 
 }
