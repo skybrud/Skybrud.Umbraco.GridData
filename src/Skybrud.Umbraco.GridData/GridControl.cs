@@ -6,6 +6,7 @@ using System.Web.Mvc.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using Skybrud.Umbraco.GridData.Rendering;
@@ -109,7 +110,7 @@ namespace Skybrud.Umbraco.GridData {
             return html;
 
         }
-
+        
         /// <summary>
         /// Generates the HTML for the Grid control.
         /// </summary>
@@ -132,12 +133,87 @@ namespace Skybrud.Umbraco.GridData {
             if (wrapper == null) return new HtmlString("");
 
             // Prepend the path to the "Editors" folder if not already specified
-            if (Regex.IsMatch(partial, "^[a-zA-Z0-9-_]+$")) {
+            if (GridUtils.IsValidPartialName(partial)) {
                 partial = "TypedGrid/Editors/" + partial;
             }
 
             // Render the partial view
             return helper.Partial(partial, wrapper);
+
+        }
+
+        /// <summary>
+        /// Generates the HTML for the Grid control based on either a partial view found using conventions, or
+        /// <see cref="fallbackPartial"/> if a partial could not be found.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
+        /// <param name="fallbackPartial">The fallback partial view to be used if a partial view could not be found.</param>
+        /// <returns>An instance of <see cref="T:System.Web.HtmlString" />.</returns>
+        public HtmlString GetHtmlOrFallback(HtmlHelper helper, string fallbackPartial) {
+
+            // Some input validation
+            if (helper == null) throw new ArgumentNullException("helper");
+
+            // If the control isn't valid, we shouldn't render it
+            if (Value == null || !IsValid) return new HtmlString("");
+
+            // Get the type name of the value instance
+            string typeName = Value.GetType().Name;
+
+            // Match the class name
+            Match match1 = Regex.Match(typeName, "^GridControl(.+?)Value$");
+            Match match2 = Regex.Match(typeName, "^(.+?)GridControl(.+?)Value$");
+
+            // Determine the virtual path to the partial view
+            string partial;
+            if (match1.Success) {
+                partial = "TypedGrid/Editors/" + match1.Groups[1].Value;
+            } else if (match2.Success) {
+                partial = "TypedGrid/Editors/" + match2.Groups[1].Value + "/" + match2.Groups[2].Value;
+            } else {
+                partial = Editor.Alias;
+            }
+
+            // Return the HTML
+            return GetHtmlOrFallback(helper, partial, fallbackPartial);
+
+        }
+
+        /// <summary>
+        /// Generates the HTML for the Grid control based on the specified <paramref name="partial"/> view, or
+        /// <see cref="fallbackPartial"/> if <paramref name="partial"/> could not be found.
+        /// </summary>
+        /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
+        /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid control.</param>
+        /// <param name="fallbackPartial">The fallback partial view to be used if <paramref name="partial"/> isn't found.</param>
+        /// <returns>An instance of <see cref="T:System.Web.HtmlString" />.</returns>
+        public HtmlString GetHtmlOrFallback(HtmlHelper helper, string partial, string fallbackPartial) {
+
+            // Some input validation
+            if (helper == null) throw new ArgumentNullException("helper");
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+
+            // If the control isn't valid, we shouldn't render it
+            if (!IsValid) return new HtmlString("");
+
+            // Get a wrapper for the control
+            GridControlWrapper wrapper = GridContext.Current.GetControlWrapper(this);
+
+            // If the wrapper is NULL, we shouldn't render the control
+            if (wrapper == null) return new HtmlString("");
+
+            // Prepend the path to the "Editors" folder if not already specified
+            if (GridUtils.IsValidPartialName(partial)) {
+                partial = "TypedGrid/Editors/" + partial;
+            }
+
+            // Prepend the path to the "Editors" folder if not already specified
+            if (GridUtils.IsValidPartialName(fallbackPartial)) {
+                fallbackPartial = "TypedGrid/Editors/" + fallbackPartial;
+            }
+
+            // Render the partial view
+            return helper.ViewExists(partial) ? helper.Partial(partial, wrapper) : helper.Partial(fallbackPartial, wrapper);
 
         }
 
