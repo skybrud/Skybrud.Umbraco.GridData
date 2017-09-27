@@ -28,7 +28,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         [JsonIgnore]
         public override bool IsValid {
-            get { return !String.IsNullOrWhiteSpace(GetSearchableText()); }
+            get { return !String.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", "")); }
         }
 
         #endregion
