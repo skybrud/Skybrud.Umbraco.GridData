@@ -33,7 +33,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// </summary>
         /// <param name="content">The parent content item.</param>
         public static GridDataModel GetTypedGrid(this IPublishedContent content) {
-            return content.GetPropertyValue<GridDataModel>(DefaultPropertyAlias);
+            return content.GetPropertyValue<GridDataModel>(DefaultPropertyAlias) ?? GridDataModel.GetEmptyModel();
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="content">The parent content item.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         public static GridDataModel GetTypedGrid(this IPublishedContent content, string propertyAlias) {
-            return content.GetPropertyValue<GridDataModel>(propertyAlias);
+            return content.GetPropertyValue<GridDataModel>(propertyAlias) ?? GridDataModel.GetEmptyModel();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// </summary>
         /// <param name="content">The parent content item.</param>
         public static GridDataModel GetGridModel(this IPublishedContent content) {
-            return content.GetPropertyValue<GridDataModel>(DefaultPropertyAlias);
+            return content.GetPropertyValue<GridDataModel>(DefaultPropertyAlias) ?? GridDataModel.GetEmptyModel();
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="content">The parent content item.</param>
         /// <param name="propertyAlias">The alias of the property.</param>
         public static GridDataModel GetGridModel(this IPublishedContent content, string propertyAlias) {
-            return content.GetPropertyValue<GridDataModel>(propertyAlias);
+            return content.GetPropertyValue<GridDataModel>(propertyAlias) ?? GridDataModel.GetEmptyModel();
         }
 
         /// <summary>
