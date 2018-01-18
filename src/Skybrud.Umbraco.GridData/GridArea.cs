@@ -12,7 +12,19 @@ namespace Skybrud.Umbraco.GridData {
     public class GridArea : GridElement {
 
         #region Properties
+        
+        /// <summary>
+        /// Gets a reference to the entire <see cref="GridDataModel"/>.
+        /// </summary>
+        [JsonIgnore]
+        public GridDataModel Model => Section?.Model;
 
+        /// <summary>
+        /// Gets a reference to the parent <see cref="GridSection"/>.
+        /// </summary>
+        [JsonIgnore]
+        public GridSection Section => Row?.Section;
+        
         /// <summary>
         /// Gets a reference to the parent <see cref="GridRow"/>.
         /// </summary>
