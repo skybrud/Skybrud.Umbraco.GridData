@@ -268,6 +268,7 @@
     <Compile Include="Config\GridEditorMediaConfigSize.cs" />
     <Compile Include="Config\GridEditorTextConfig.cs" />
     <Compile Include="Converters\Fanoe\FanoeGridConverter.cs" />
+    <Compile Include="Converters\GridConverterBase.cs" />
     <Compile Include="Converters\Umbraco\UmbracoGridConverter.cs" />
     <Compile Include="Converters\GridConverterCollection.cs" />
     <Compile Include="Extensions\TypedGridExtensionMethods.Sections.cs" />
