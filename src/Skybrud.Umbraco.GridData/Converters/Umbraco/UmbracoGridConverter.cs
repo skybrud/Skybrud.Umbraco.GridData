@@ -21,29 +21,16 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             
             value = null;
 
-            switch (control.Editor.Alias) {
-
-                case "media":
-                    value = GridControlMediaValue.Parse(control, token as JObject);
-                    break;
-
-                case "embed":
-                    value = GridControlEmbedValue.Parse(control, token);
-                    break;
-
-                case "rte":
-                    value = GridControlRichTextValue.Parse(control, token);
-                    break;
-
-                case "macro":
-                    value = GridControlMacroValue.Parse(control, token as JObject);
-                    break;
-
-                case "headline":
-                case "quote":
-                    value = GridControlTextValue.Parse(control, token);
-                    break;
-
+            if (IsEmbedEditor(control.Editor)) {
+                value = GridControlEmbedValue.Parse(control, token);
+            } else if (IsMacroEditor(control.Editor)) {
+                value = GridControlMacroValue.Parse(control, token as JObject);
+            } else if (IsMediaEditor(control.Editor)) {
+                value = GridControlMediaValue.Parse(control, token as JObject);
+            } else if (IsRichTextEditor(control.Editor)) {
+                value = GridControlRichTextValue.Parse(control, token);
+            } else if (IsTextStringEditor(control.Editor)) {
+                value = GridControlTextValue.Parse(control, token);
             }
             
             return value != null;
@@ -60,17 +47,10 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
        
             config = null;
 
-            switch (editor.Alias) {
-
-                case "media":
-                    config = GridEditorMediaConfig.Parse(editor, token as JObject);
-                    break;
-
-                case "headline":
-                case "quote":
-                    config = GridEditorTextConfig.Parse(editor, token as JObject);
-                    break;
-
+            if (IsMediaEditor(editor)) {
+                config = GridEditorMediaConfig.Parse(editor, token as JObject);
+            } else if (IsTextStringEditor(editor)) {
+                config = GridEditorTextConfig.Parse(editor, token as JObject);
             }
 
             return config != null;
@@ -86,35 +66,42 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
             wrapper = null;
             
-            switch (control.Editor.Alias) {
-
-                case "media":
-                    wrapper = control.GetControlWrapper<GridControlMediaValue, GridEditorMediaConfig>();
-                    break;
-
-                case "embed":
-                    wrapper = control.GetControlWrapper<GridControlEmbedValue>();
-                    break;
-
-                case "rte":
-                    wrapper = control.GetControlWrapper<GridControlRichTextValue>();
-                    break;
-
-                case "macro":
-                    wrapper = control.GetControlWrapper<GridControlMacroValue>();
-                    break;
-
-                case "quote":
-                case "headline":
-                    wrapper = control.GetControlWrapper<GridControlTextValue, GridEditorTextConfig>();
-                    break;
-
+            if (IsEmbedEditor(control.Editor)) {
+                wrapper = control.GetControlWrapper<GridControlEmbedValue>();
+            } else if (IsMacroEditor(control.Editor)) {
+                wrapper = control.GetControlWrapper<GridControlMacroValue>();
+            } else if (IsMediaEditor(control.Editor)) {
+                wrapper = control.GetControlWrapper<GridControlMediaValue, GridEditorMediaConfig>();
+            } else if (IsRichTextEditor(control.Editor)) {
+                wrapper = control.GetControlWrapper<GridControlRichTextValue>();
+            } else if (IsTextStringEditor(control.Editor)) {
+                wrapper = control.GetControlWrapper<GridControlTextValue, GridEditorTextConfig>();
             }
 
             return wrapper != null;
 
         }
-    
+
+        private bool IsEmbedEditor(GridEditor editor) {
+            return editor != null && editor.View == "embed";
+        }
+
+        private bool IsTextStringEditor(GridEditor editor) {
+            return editor != null && editor.View == "textstring";
+        }
+
+        private bool IsMediaEditor(GridEditor editor) {
+            return editor != null && editor.View == "media";
+        }
+
+        private bool IsMacroEditor(GridEditor editor) {
+            return editor != null && editor.View == "macro";
+        }
+
+        private bool IsRichTextEditor(GridEditor editor) {
+            return editor != null && editor.View == "rte";
+        }
+
     }
 
 }
