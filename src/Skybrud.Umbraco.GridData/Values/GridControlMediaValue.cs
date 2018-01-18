@@ -34,14 +34,14 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets the alt text of the media.
         /// </summary>
         [JsonProperty("altText", NullValueHandling = NullValueHandling.Ignore)]
-        public string AltText { get; protected set; }
+        public string AlternativeText { get; protected set; }
 
         /// <summary>
-        /// Gets whether the <see cref="AltText"/> property has a value.
+        /// Gets whether the <see cref="AlternativeText"/> property has a value.
         /// </summary>
-        public bool HasAltText
-        {
-            get { return !String.IsNullOrWhiteSpace(AltText); }
+        [JsonIgnore]
+        public bool HasAlternativeText {
+            get { return !String.IsNullOrWhiteSpace(AlternativeText); }
         }
 
         /// <summary>
@@ -80,7 +80,7 @@ namespace Skybrud.Umbraco.GridData.Values {
             FocalPoint = obj.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
             Id = obj.GetInt32("id");
             Image = obj.GetString("image");
-            AltText = obj.GetString("altText");
+            AlternativeText = obj.GetString("altText");
             Caption = obj.GetString("caption");
         }
 
