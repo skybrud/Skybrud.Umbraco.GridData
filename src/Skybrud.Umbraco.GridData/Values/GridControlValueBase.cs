@@ -16,15 +16,13 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets a reference to the parent <see cref="GridControl"/>.
         /// </summary>
         [JsonIgnore]
-        public GridControl Control { get; private set; }
+        public GridControl Control { get; }
         
         /// <summary>
         /// Gets whether the control is valid (eg. whether it has a value).
         /// </summary>
         [JsonIgnore]
-        public virtual bool IsValid {
-            get { return true; }
-        }
+        public virtual bool IsValid => true;
 
         #endregion
 

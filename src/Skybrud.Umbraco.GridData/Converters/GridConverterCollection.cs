@@ -26,9 +26,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// <summary>
         /// Gets the amount of converters added to the collection.
         /// </summary>
-        public int Count {
-            get { return _converters.Count; }
-        }
+        public int Count => _converters.Count;
 
         #endregion
 

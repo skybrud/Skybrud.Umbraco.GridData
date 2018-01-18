@@ -16,7 +16,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// Gets a reference to the parent editor of the configuration.
         /// </summary>
         [JsonIgnore]
-        public GridEditor Editor { get; private set; }
+        public GridEditor Editor { get; }
 
         #endregion
 

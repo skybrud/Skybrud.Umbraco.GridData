@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
@@ -40,9 +39,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether a label has been specified for the definition of this row.
         /// </summary>
-        public bool HasLabel {
-            get { return !String.IsNullOrWhiteSpace(Label); }
-        }
+        public bool HasLabel => !String.IsNullOrWhiteSpace(Label);
 
         /// <summary>
         /// Gets the name of the row.
@@ -67,25 +64,19 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether the row has any areas.
         /// </summary>
-        public bool HasAreas {
-            get { return Areas.Length > 0; }
-        }
+        public bool HasAreas => Areas.Length > 0;
 
         /// <summary>
         /// Gets the first area of the row. If the row doesn't contain any areas, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridArea FirstRow {
-            get { return Areas.FirstOrDefault(); }
-        }
+        public GridArea FirstRow => Areas.FirstOrDefault();
 
         /// <summary>
         /// Gets the last area of the row. If the row doesn't contain any areas, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridArea LastRow {
-            get { return Areas.LastOrDefault(); }
-        }
+        public GridArea LastRow => Areas.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one area or control within the row is valid.
@@ -191,7 +182,7 @@ namespace Skybrud.Umbraco.GridData {
         public static GridRow Parse(GridSection section, JObject obj) {
 
             // Some input validation
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             #pragma warning disable 618
             

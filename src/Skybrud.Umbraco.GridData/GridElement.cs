@@ -14,26 +14,22 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a dictionary representing the configuration (called <strong>Settings</strong> in the backoffice) of the element.
         /// </summary>
-        public GridDictionary Config { get; private set; }
+        public GridDictionary Config { get; }
 
         /// <summary>
         /// Gets whetehr the element has one or more config values.
         /// </summary>
-        public bool HasConfig {
-            get { return Config != null && Config.Count > 0; }
-        }
+        public bool HasConfig => Config != null && Config.Count > 0;
 
         /// <summary>
         /// Gets a dictionary representing the styles of the element.
         /// </summary>
-        public GridDictionary Styles { get; private set; }
+        public GridDictionary Styles { get; }
 
         /// <summary>
         /// Gets whetehr the element has one or more style values.
         /// </summary>
-        public bool HasStyles {
-            get { return Styles != null && Styles.Count > 0; }
-        }
+        public bool HasStyles => Styles != null && Styles.Count > 0;
 
         /// <summary>
         /// Gets whether at least one control within the element is valid.

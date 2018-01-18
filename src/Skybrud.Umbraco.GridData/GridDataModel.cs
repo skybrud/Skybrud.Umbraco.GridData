@@ -47,9 +47,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether a property alias has been specified for the model.
         /// </summary>
-        public bool HasPropertyAlias {
-            get { return !String.IsNullOrWhiteSpace(PropertyAlias); }
-        }
+        public bool HasPropertyAlias => !String.IsNullOrWhiteSpace(PropertyAlias);
 
         #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
 
@@ -59,18 +57,14 @@ namespace Skybrud.Umbraco.GridData {
         /// Same as <see cref="Name"/>.
         /// </summary>
         [Obsolete]
-        public string name {
-            get { return Name; }
-        }
+        public string name => Name;
 
         /// <summary>
         /// Gets the underlying JSON array for the <code>sections</code> property. 
         /// </summary>
         [Obsolete]
-        public dynamic sections {
-            get { return ((dynamic) JObject).sections; }
-        }
-        
+        public dynamic sections => ((dynamic) JObject).sections;
+
         // ReSharper restore InconsistentNaming
 
         #endregion

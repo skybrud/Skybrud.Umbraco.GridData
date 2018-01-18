@@ -1,14 +1,13 @@
-﻿using System;
-using System.Linq;
-using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Json;
+using System;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Mvc.Html;
 
 namespace Skybrud.Umbraco.GridData {
-    using System.Text.RegularExpressions;
-    using System.Web;
-    using System.Web.Mvc;
-    using System.Web.Mvc.Html;
 
     /// <summary>
     /// Class representing a section in an Umbraco Grid.
@@ -40,25 +39,19 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether the section has any rows.
         /// </summary>
-        public bool HasRows {
-            get { return Rows.Length > 0; }
-        }
+        public bool HasRows => Rows.Length > 0;
 
         /// <summary>
         /// Gets the first row of the section. If the section doesn't contain any rows, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridRow FirstRow {
-            get { return Rows.FirstOrDefault(); }
-        }
+        public GridRow FirstRow => Rows.FirstOrDefault();
 
         /// <summary>
         /// Gets the last row of the section. If the section doesn't contain any rows, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridRow LastRow {
-            get { return Rows.LastOrDefault(); }
-        }
+        public GridRow LastRow => Rows.LastOrDefault();
 
         #endregion
 
@@ -100,8 +93,8 @@ namespace Skybrud.Umbraco.GridData {
         public HtmlString GetHtml(HtmlHelper helper, string partial) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // Prepend the path to the "Sections" folder if not already specified
             if (GridUtils.IsValidPartialName(partial)) {
@@ -125,7 +118,7 @@ namespace Skybrud.Umbraco.GridData {
         public static GridSection Parse(GridDataModel model, JObject obj) {
 
             // Some input validation
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
 
             // Parse basic properties
             GridSection section = new GridSection(obj) {

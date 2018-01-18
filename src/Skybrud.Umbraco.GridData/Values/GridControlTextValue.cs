@@ -17,12 +17,12 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// <summary>
         /// Gets a reference to the parent control.
         /// </summary>
-        public GridControl Control { get; private set; }
+        public GridControl Control { get; }
 
         /// <summary>
         /// Gets a reference to the underlying instance of <see cref="JToken"/>.
         /// </summary>
-        public JToken JToken { get; private set; }
+        public JToken JToken { get; }
 
         /// <summary>
         /// Gets a string representing the value.
@@ -33,9 +33,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets whether the value is valid. For an instance of <see cref="GridControlTextValue"/>, this means
         /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>).
         /// </summary>
-        public virtual bool IsValid {
-            get { return !String.IsNullOrWhiteSpace(Value); }
-        }
+        public virtual bool IsValid => !String.IsNullOrWhiteSpace(Value);
 
         #endregion
 

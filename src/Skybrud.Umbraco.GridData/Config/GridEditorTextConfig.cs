@@ -21,9 +21,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <summary>
         /// Gets whether the <see cref="Style"/> property has a value.
         /// </summary>
-        public bool HasStyle {
-            get { return !String.IsNullOrWhiteSpace(Style); }
-        }
+        public bool HasStyle => !String.IsNullOrWhiteSpace(Style);
 
         /// <summary>
         /// Gets the markup for the text.
@@ -34,9 +32,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <summary>
         /// Gets whether the <see cref="Markup"/> property has a value.
         /// </summary>
-        public bool HasMarkup {
-            get { return !String.IsNullOrWhiteSpace(Markup); }
-        }
+        public bool HasMarkup => !String.IsNullOrWhiteSpace(Markup);
 
         #endregion
 

@@ -39,9 +39,7 @@ namespace Skybrud.Umbraco.GridData.Json.Converters {
         /// <summary>
         /// Gets a value indicating whether this Newtonsoft.Json.JsonConverter can read JSON.
         /// </summary>
-        public override bool CanRead {
-            get { return false; }
-        }
+        public override bool CanRead => false;
 
         /// <summary>
         /// Determines whether this instance can convert the specified object type.

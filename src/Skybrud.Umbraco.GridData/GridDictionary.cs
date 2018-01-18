@@ -26,32 +26,24 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the keys of the underlying dictionary.
         /// </summary>
         [JsonIgnore]
-        public string[] Keys {
-            get { return _dictionary.Keys.ToArray(); }
-        }
+        public string[] Keys => _dictionary.Keys.ToArray();
 
         /// <summary>
         /// Gets the keys of the underlying dictionary.
         /// </summary>
         [JsonIgnore]
-        public string[] Values {
-            get { return _dictionary.Keys.ToArray(); }
-        }
+        public string[] Values => _dictionary.Keys.ToArray();
 
         /// <summary>
         /// Gets the amount of items in the dictionary.
         /// </summary>
-        public int Count {
-            get { return _dictionary.Count; }
-        }
+        public int Count => _dictionary.Count;
 
         /// <summary>
         /// Gets the value of an item with the specified <paramref name="key"/>.
         /// </summary>
         /// <param name="key">The key of the dictionary item.</param>
-        public string this[string key] {
-            get { return _dictionary[key]; }
-        }
+        public string this[string key] => _dictionary[key];
 
         #endregion
 

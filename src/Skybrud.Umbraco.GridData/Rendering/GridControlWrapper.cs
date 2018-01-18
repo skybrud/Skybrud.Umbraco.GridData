@@ -12,28 +12,22 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         /// <summary>
         /// Gets a reference to the wrapped control.
         /// </summary>
-        public GridControl Control { get; private set; }
+        public GridControl Control { get; }
 
         /// <summary>
         /// Gets a reference to the control editor.
         /// </summary>
-        public GridEditor Editor {
-            get { return Control == null ? null : Control.Editor; }
-        }
+        public GridEditor Editor => Control == null ? null : Control.Editor;
 
         /// <summary>
         /// Gets whether the value of the grid control is valid.
         /// </summary>
-        public bool IsValid {
-            get { return Control.Value != null && Control.Value.IsValid; }
-        }
+        public bool IsValid => Control.Value != null && Control.Value.IsValid;
 
         /// <summary>
         /// Gets whether the editor has a configuration (meaning that <see cref="GridEditor.Config"/> isn't <code>null</code>).
         /// </summary>
-        public bool HasConfig {
-            get { return Control != null && Control.Editor != null && Editor.Config != null; }
-        }
+        public bool HasConfig => Control != null && Control.Editor != null && Editor.Config != null;
 
         #endregion
 
@@ -63,7 +57,7 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         /// <summary>
         /// Gets a referece to the control value.
         /// </summary>
-        public TValue Value { get; private set; }
+        public TValue Value { get; }
 
         #endregion
 
@@ -95,7 +89,7 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         /// <summary>
         /// Gets a referece to the editor config.
         /// </summary>
-        public TConfig Config { get; private set; }
+        public TConfig Config { get; }
 
         #endregion
 

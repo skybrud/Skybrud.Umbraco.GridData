@@ -65,17 +65,13 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether the area has any controls.
         /// </summary>
-        public bool HasControls {
-            get { return Controls.Length > 0; }
-        }
+        public bool HasControls => Controls.Length > 0;
 
         /// <summary>
         /// Gets the first control of the area. If the area doesn't contain
         /// any controls, this property will return <code>null</code>.
         /// </summary>
-        public GridControl FirstControl {
-            get { return Controls.FirstOrDefault(); }
-        }
+        public GridControl FirstControl => Controls.FirstOrDefault();
 
         /// <summary>
         /// Gets the last control of the area. If the area doesn't contain
@@ -136,7 +132,7 @@ namespace Skybrud.Umbraco.GridData {
                 Row = row,
                 Grid = obj.GetInt32("grid"),
                 AllowAll = obj.GetBoolean("allowAll"),
-                Allowed = allowed == null ? new string[0] : allowed.Select(x => (string)x).ToArray()
+                Allowed = allowed == null ? new string[0] : allowed.Select(x => (string) x).ToArray()
             };
 
             // Parse the controls

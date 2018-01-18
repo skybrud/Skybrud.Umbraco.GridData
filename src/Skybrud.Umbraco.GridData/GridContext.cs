@@ -13,8 +13,6 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Private fields
 
-        readonly GridConverterCollection _converters = new GridConverterCollection();
-
         #endregion
 
         #region Properties
@@ -27,9 +25,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets the collection of Grid converters.
         /// </summary>
-        public GridConverterCollection Converters {
-            get { return _converters; }
-        }
+        public GridConverterCollection Converters { get; } = new GridConverterCollection();
 
         #endregion
 

@@ -72,9 +72,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets whether the control and it's value is valid.
         /// </summary>
         [JsonIgnore]
-        public bool IsValid {
-            get { return Value != null && Value.IsValid; }
-        }
+        public bool IsValid => Value != null && Value.IsValid;
 
         #endregion
 
@@ -102,7 +100,7 @@ namespace Skybrud.Umbraco.GridData {
         public HtmlString GetHtml(HtmlHelper helper) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
 
             // If the control isn't valid, we shouldn't render it
             if (Value == null || !IsValid) return new HtmlString("");
@@ -138,8 +136,8 @@ namespace Skybrud.Umbraco.GridData {
         public HtmlString GetHtml(HtmlHelper helper, string partial) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // If the control isn't valid, we shouldn't render it
             if (!IsValid) return new HtmlString("");
@@ -162,7 +160,7 @@ namespace Skybrud.Umbraco.GridData {
 
         /// <summary>
         /// Generates the HTML for the Grid control based on either a partial view found using conventions, or
-        /// <see cref="fallbackPartial"/> if a partial could not be found.
+        /// <paramref name="fallbackPartial"/> if a partial could not be found.
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
         /// <param name="fallbackPartial">The fallback partial view to be used if a partial view could not be found.</param>
@@ -170,7 +168,7 @@ namespace Skybrud.Umbraco.GridData {
         public HtmlString GetHtmlOrFallback(HtmlHelper helper, string fallbackPartial) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
 
             // If the control isn't valid, we shouldn't render it
             if (Value == null || !IsValid) return new HtmlString("");
@@ -199,7 +197,7 @@ namespace Skybrud.Umbraco.GridData {
 
         /// <summary>
         /// Generates the HTML for the Grid control based on the specified <paramref name="partial"/> view, or
-        /// <see cref="fallbackPartial"/> if <paramref name="partial"/> could not be found.
+        /// <paramref name="fallbackPartial"/> if <paramref name="partial"/> could not be found.
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
         /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid control.</param>
@@ -208,8 +206,8 @@ namespace Skybrud.Umbraco.GridData {
         public HtmlString GetHtmlOrFallback(HtmlHelper helper, string partial, string fallbackPartial) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
+            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // If the control isn't valid, we shouldn't render it
             if (!IsValid) return new HtmlString("");

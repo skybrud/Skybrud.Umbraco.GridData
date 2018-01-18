@@ -19,7 +19,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets an instance of <see cref="HtmlString"/> representing the text value.
         /// </summary>
         [JsonIgnore]
-        public HtmlString HtmlValue { get; private set; }
+        public HtmlString HtmlValue { get; }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlHtmlValue"/>, this means
@@ -27,9 +27,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// against the value returned by the <see cref="GetSearchableText"/> method).
         /// </summary>
         [JsonIgnore]
-        public override bool IsValid {
-            get { return !String.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", "")); }
-        }
+        public override bool IsValid => !String.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", ""));
 
         #endregion
 

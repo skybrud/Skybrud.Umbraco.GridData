@@ -10,12 +10,12 @@
         /// <summary>
         /// Gets the key of the item.
         /// </summary>
-        public string Key { get; private set; }
+        public string Key { get; }
 
         /// <summary>
         /// Gets the value of the item.
         /// </summary>
-        public string Value { get; private set; }
+        public string Value { get; }
 
         #endregion
 
