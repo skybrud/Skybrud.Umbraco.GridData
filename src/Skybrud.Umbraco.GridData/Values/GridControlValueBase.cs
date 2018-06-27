@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
+using System;
 
 namespace Skybrud.Umbraco.GridData.Values {
     
@@ -46,7 +47,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
-            return "";
+            return Environment.NewLine;
         }
 
         #endregion

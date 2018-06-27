@@ -59,7 +59,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
-            return Value;
+            return Value + Environment.NewLine;
         }
 
         /// <summary>
