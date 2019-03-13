@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
@@ -6,6 +7,7 @@ using System.Web.Mvc.Html;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Attributes;
 using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
@@ -105,6 +107,10 @@ namespace Skybrud.Umbraco.GridData {
             // If the control isn't valid, we shouldn't render it
             if (Value == null || !IsValid) return new HtmlString("");
 
+            // Does the control specify it's own path?
+            GridViewAttribute attr = Value.GetType().GetCustomAttributes(true).OfType<GridViewAttribute>().FirstOrDefault();
+            if (attr != null) return GetHtml(helper, attr.ViewPath);
+            
             // Get the type name of the value instance
             string typeName = Value.GetType().Name;
 

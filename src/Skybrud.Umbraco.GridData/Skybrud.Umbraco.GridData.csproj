@@ -263,6 +263,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\GridViewAttribute.cs" />
     <Compile Include="Config\GridEditorConfigBase.cs" />
     <Compile Include="Config\GridEditorMediaConfig.cs" />
     <Compile Include="Config\GridEditorMediaConfigSize.cs" />
