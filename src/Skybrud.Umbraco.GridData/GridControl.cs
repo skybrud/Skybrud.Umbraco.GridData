@@ -310,7 +310,7 @@ namespace Skybrud.Umbraco.GridData {
                     control.Value = converted;
                     break;
                 } catch (Exception ex) {
-                    LogHelper.Error<GridControl>("Converter of type " + converter + " failed for ConvertControlValue()", ex);
+                    global::Umbraco.Core.Composing.Current.Logger.Error<GridControl>(ex, "Converter of type " + converter + " failed for ConvertControlValue()");
                 }
             }
             

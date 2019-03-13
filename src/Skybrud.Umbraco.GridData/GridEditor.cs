@@ -107,7 +107,7 @@ namespace Skybrud.Umbraco.GridData {
                     editor.Config = converted;
                     break;
                 } catch (Exception ex) {
-                    LogHelper.Error<GridEditor>("Converter of type " + converter + " failed for ConvertEditorConfig()", ex);
+                    global::Umbraco.Core.Composing.Current.Logger.Error<GridEditor>(ex, "Converter of type " + converter + " failed for ConvertEditorConfig()");
                 }
             }
 

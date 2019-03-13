@@ -5,6 +5,7 @@ using System.Web;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Umbraco.Core;
+using Umbraco.Core.Composing;
 using Umbraco.Core.Configuration;
 using Umbraco.Core.Configuration.Grid;
 using Umbraco.Core.IO;
@@ -33,13 +34,16 @@ namespace Skybrud.Umbraco.GridData {
             if (String.IsNullOrWhiteSpace(alias)) return;
 
             // Get a reference to the grid configuration
-            IGridConfig config = UmbracoConfig.For.GridConfig(
-                ApplicationContext.Current.ProfilingLogger.Logger,
-                ApplicationContext.Current.ApplicationCache.RuntimeCache,
-                new DirectoryInfo(MapPath(SystemDirectories.AppPlugins)),
-                new DirectoryInfo(MapPath(SystemDirectories.Config)),
-                HttpContext.Current == null || HttpContext.Current.IsDebuggingEnabled
-            );
+            IGridConfig config = Current.Configs.GetConfig<IGridConfig>();
+
+            //// Get a reference to the grid configuration
+            //IGridConfig config = UmbracoConfig.For.GridConfig(
+            //    ApplicationContext.Current.ProfilingLogger.Logger,
+            //    ApplicationContext.Current.ApplicationCache.RuntimeCache,
+            //    new DirectoryInfo(MapPath(SystemDirectories.AppPlugins)),
+            //    new DirectoryInfo(MapPath(SystemDirectories.Config)),
+            //    HttpContext.Current == null || HttpContext.Current.IsDebuggingEnabled
+            //);
 
             // Find the editor in the configuration
             IGridEditorConfig found = config.EditorsConfig.Editors.FirstOrDefault(x => x.Alias == alias);

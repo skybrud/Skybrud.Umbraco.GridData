@@ -3,9 +3,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
-using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Json;
+using Umbraco.Core.Configuration.Grid;
 
 namespace Skybrud.Umbraco.GridData {
 
@@ -181,6 +182,29 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="json">The JSON string to be deserialized.</param>
         /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
         public static GridDataModel Deserialize(string json, string propertyTypeAlias) {
+
+            // Validate the JSON
+            if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
+
+            // Deserialize the JSON
+            JObject obj = JObject.Parse(json);
+
+            // Parse basic properties
+            GridDataModel model = new GridDataModel(obj) {
+                Raw = json,
+                Name = obj.GetString("name"),
+                PropertyAlias = propertyTypeAlias
+            };
+
+            // Parse the sections
+            model.Sections = obj.GetArray("sections", x => GridSection.Parse(model, x)) ?? new GridSection[0];
+
+            // Return the model
+            return model;
+
+        }
+
+        public static GridDataModel Deserialize(string json, string propertyTypeAlias, IGridConfig config) {
 
             // Validate the JSON
             if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
