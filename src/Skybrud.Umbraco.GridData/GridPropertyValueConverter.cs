@@ -8,21 +8,13 @@ namespace Skybrud.Umbraco.GridData {
     /// <summary>
     /// Property value converter for the Umbraco Grid.
     /// </summary>
-    public class GridPropertyValueConverter : PropertyValueConverterBase {
+    class GridPropertyValueConverter : PropertyValueConverterBase {
 
         private readonly IGridConfig _config;
-
-
-
-
 
         public GridPropertyValueConverter(IGridConfig config) {
             _config = config;
         }
-
-
-
-
 
         /// <summary>
         /// Gets a value indicating whether the converter supports a property type.
