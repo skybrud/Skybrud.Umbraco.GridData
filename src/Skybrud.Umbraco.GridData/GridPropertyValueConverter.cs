@@ -21,23 +21,23 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="propertyType">The property type.</param>
         /// <returns>A value indicating whether the converter supports a property type.</returns>
-        public override bool IsConverter(PublishedPropertyType propertyType) {
+        public override bool IsConverter(IPublishedPropertyType propertyType) {
             return propertyType.EditorAlias == "Umbraco.Grid";
         }
         
-        public override object ConvertSourceToIntermediate(IPublishedElement owner, PublishedPropertyType propertyType, object source, bool preview) {
+        public override object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview) {
             return GridDataModel.Deserialize(source as string, propertyType.Alias, _config);
         }
         
-        public override object ConvertIntermediateToObject(IPublishedElement owner, PublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
+        public override object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
             return inter;
         }
 
-        public override object ConvertIntermediateToXPath(IPublishedElement owner, PublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
+        public override object ConvertIntermediateToXPath(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
             return null;
         }
 
-        public override PropertyCacheLevel GetPropertyCacheLevel(PublishedPropertyType propertyType) {
+        public override PropertyCacheLevel GetPropertyCacheLevel(IPublishedPropertyType propertyType) {
             return PropertyCacheLevel.None;
         }
         
@@ -46,7 +46,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="propertyType">The property type.</param>
         /// <returns>The CLR type of values returned by the converter.</returns>
-        public override Type GetPropertyValueType(PublishedPropertyType propertyType) {
+        public Type GetPropertyValueType(IPublishedPropertyType propertyType) {
             return typeof(GridDataModel);
         }
 

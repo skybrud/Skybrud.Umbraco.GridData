@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="RIDER_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/Microsoft.VC90.CRT/msvcr90.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/sqlceca40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/sqlcecompact40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/sqlceer40EN.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/sqlceme40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/sqlceqp40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x64/native/sqlcese40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/Microsoft.VC90.CRT/Microsoft.VC90.CRT.manifest" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/Microsoft.VC90.CRT/msvcr90.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/sqlceca40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/sqlcecompact40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/sqlceer40EN.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/sqlceme40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/sqlceqp40.dll" />
+    <content url="file://$USER_HOME$/.nuget/packages/umbraco.sqlserverce/4.0.0.1/runtimes/win-x86/native/sqlcese40.dll" />
+    <content url="file://$MODULE_DIR$/../.." />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

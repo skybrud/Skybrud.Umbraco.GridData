@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\projects\Skybrud.Umbraco.GridData\src" t="IncludeFlat">
+      <e p="ConsoleApplication1" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="ConsoleApplication1.csproj" t="IncludeRecursive" />
+        <e p="Example.json" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+      </e>
+      <e p="packages" t="ExcludeRecursive" />
+      <e p="Skybrud.Umbraco.GridData" t="IncludeRecursive">
+        <e p="amd64" t="Include">
+          <e p="Microsoft.VC90.CRT" t="Include" />
+        </e>
+        <e p="Attributes" t="Include">
+          <e p="GridViewAttribute.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="Config" t="Include">
+          <e p="GridEditorConfigBase.cs" t="Include" />
+          <e p="GridEditorMediaConfig.cs" t="Include" />
+          <e p="GridEditorMediaConfigSize.cs" t="Include" />
+          <e p="GridEditorTextConfig.cs" t="Include" />
+        </e>
+        <e p="Converters" t="Include">
+          <e p="GridConverterBase.cs" t="Include" />
+          <e p="GridConverterCollection.cs" t="Include" />
+          <e p="Umbraco" t="Include">
+            <e p="UmbracoGridConverter.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Extensions" t="Include">
+          <e p="TypedGridExtensionMethods.Controls.cs" t="Include" />
+          <e p="TypedGridExtensionMethods.cs" t="Include" />
+          <e p="TypedGridExtensionMethods.Rows.cs" t="Include" />
+          <e p="TypedGridExtensionMethods.Sections.cs" t="Include" />
+          <e p="ViewExtensions.cs" t="Include" />
+        </e>
+        <e p="GridArea.cs" t="Include" />
+        <e p="GridContext.cs" t="Include" />
+        <e p="GridControl.cs" t="Include" />
+        <e p="GridDataModel.cs" t="Include" />
+        <e p="GridDictionary.cs" t="Include" />
+        <e p="GridDictionaryItem.cs" t="Include" />
+        <e p="GridEditor.cs" t="Include" />
+        <e p="GridElement.cs" t="Include" />
+        <e p="GridPropertyValueConverter.cs" t="Include" />
+        <e p="GridRow.cs" t="Include" />
+        <e p="GridSection.cs" t="Include" />
+        <e p="GridUtils.cs" t="Include" />
+        <e p="Howdy.cs" t="Include" />
+        <e p="Interfaces" t="Include">
+          <e p="IGridControlValue.cs" t="Include" />
+          <e p="IGridConverter.cs" t="Include" />
+          <e p="IGridEditorConfig.cs" t="Include" />
+        </e>
+        <e p="Json" t="Include">
+          <e p="Converters" t="Include">
+            <e p="GridControlValueStringConverter.cs" t="Include" />
+            <e p="GridJsonConverter.cs" t="Include" />
+          </e>
+          <e p="GridJsonObject.cs" t="Include" />
+        </e>
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net472" t="Include">
+              <e p="Skybrud.Umbraco.GridData.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="PiggyBank.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.json" t="Include" />
+        </e>
+        <e p="Rendering" t="Include">
+          <e p="GridControlWrapper.cs" t="Include" />
+        </e>
+        <e p="Skybrud.Umbraco.GridData.csproj" t="IncludeRecursive" />
+        <e p="Skybrud.Umbraco.GridData.nuspec" t="Include" />
+        <e p="Values" t="Include">
+          <e p="GridControlEmbedValue.cs" t="Include" />
+          <e p="GridControlHtmlValue.cs" t="Include" />
+          <e p="GridControlMacroValue.cs" t="Include" />
+          <e p="GridControlMediaFocalPoint.cs" t="Include" />
+          <e p="GridControlMediaValue.cs" t="Include" />
+          <e p="GridControlRichTextValue.cs" t="Include" />
+          <e p="GridControlTextValue.cs" t="Include" />
+          <e p="GridControlValueBase.cs" t="Include" />
+        </e>
+        <e p="x86" t="Include">
+          <e p="Microsoft.VC90.CRT" t="Include" />
+        </e>
+      </e>
+      <e p="Skybrud.Umbraco.GridData.sln" t="IncludeFlat" />
+      <e p="UnitTestProject1" t="IncludeRecursive">
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="FanoeUnitTests.cs" t="Include" />
+        <e p="obj" t="ExcludeRecursive" />
+        <e p="packages.config" t="Include" />
+        <e p="PathResolver.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="AssemblyInfo.cs" t="Include" />
+        </e>
+        <e p="Samples" t="Include">
+          <e p="Sample1.json" t="Include" />
+        </e>
+        <e p="UnitTest1.cs" t="Include" />
+        <e p="UnitTestProject1.csproj" t="IncludeRecursive" />
+      </e>
+    </e>
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\Microsoft.VC90.CRT\msvcr90.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\sqlceca40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\sqlcecompact40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\sqlceer40EN.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\sqlceme40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\sqlceqp40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x64\native\sqlcese40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\Microsoft.VC90.CRT\Microsoft.VC90.CRT.manifest" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\Microsoft.VC90.CRT\msvcr90.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\sqlceca40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\sqlcecompact40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\sqlceer40EN.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\sqlceme40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\sqlceqp40.dll" t="Include" />
+    <e p="C:\Users\abi\.nuget\packages\umbraco.sqlserverce\4.0.0.1\runtimes\win-x86\native\sqlcese40.dll" t="Include" />
+    <e p="C:\Users\abi\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\abi\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_Skybrud.Umbraco.GridData.-1615317077.00" t="ExcludeRecursive" />
+  </component>
+</project>
