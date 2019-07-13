@@ -38,7 +38,7 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         public override PropertyCacheLevel GetPropertyCacheLevel(IPublishedPropertyType propertyType) {
-            return PropertyCacheLevel.None;
+            return PropertyCacheLevel.Snapshot;
         }
         
         /// <summary>
