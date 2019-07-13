@@ -14,7 +14,7 @@
 
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData</PackageId>
-    <PackageTags>Skybrud, Essentials</PackageTags>
+    <PackageTags>Skybrud, Umbraco, Grid, JSON</PackageTags>
     <PackageLicenseUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData/blob/master/LICENSE.md</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData</PackageProjectUrl>
     <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
