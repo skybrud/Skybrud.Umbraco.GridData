@@ -204,6 +204,12 @@ namespace Skybrud.Umbraco.GridData {
 
         }
 
+        /// <summary>
+        /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
+        /// </summary>
+        /// <param name="json">The JSON string to be deserialized.</param>
+        /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
+        /// <param name="config">The Grid configuration to be used.</param>
         public static GridDataModel Deserialize(string json, string propertyTypeAlias, IGridConfig config) {
 
             // Validate the JSON
