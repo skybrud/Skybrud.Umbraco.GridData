@@ -46,7 +46,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="propertyType">The property type.</param>
         /// <returns>The CLR type of values returned by the converter.</returns>
-        public Type GetPropertyValueType(IPublishedPropertyType propertyType) {
+        public override Type GetPropertyValueType(IPublishedPropertyType propertyType) {
             return typeof(GridDataModel);
         }
 
