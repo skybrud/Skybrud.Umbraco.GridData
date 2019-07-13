@@ -48,7 +48,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether a property alias has been specified for the model.
         /// </summary>
-        public bool HasPropertyAlias => !String.IsNullOrWhiteSpace(PropertyAlias);
+        public bool HasPropertyAlias => !string.IsNullOrWhiteSpace(PropertyAlias);
 
         #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
 

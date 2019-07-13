@@ -8,7 +8,7 @@ namespace Skybrud.Umbraco.GridData.Attributes {
         public string ViewPath { get; }
 
         public GridViewAttribute(string viewPath) {
-            if (String.IsNullOrWhiteSpace(viewPath)) throw new ArgumentNullException(nameof(viewPath));
+            if (string.IsNullOrWhiteSpace(viewPath)) throw new ArgumentNullException(nameof(viewPath));
             ViewPath = viewPath;
         }
 
