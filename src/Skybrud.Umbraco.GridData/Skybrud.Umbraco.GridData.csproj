@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472</TargetFrameworks>
+    <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -36,8 +36,13 @@
     </PackageReference>
   </ItemGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
-    <Exec Command="&quot;$(ProjectDir)..\build\UpdateAssemblyInfoJson.exe&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageOutputPath>../../releases/nuget/</PackageOutputPath>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release'">
+    <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
 
 </Project>
