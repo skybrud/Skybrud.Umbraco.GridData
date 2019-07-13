@@ -61,7 +61,7 @@ namespace Skybrud.Umbraco.GridData {
         public string name => Name;
 
         /// <summary>
-        /// Gets the underlying JSON array for the <code>sections</code> property. 
+        /// Gets the underlying JSON array for the <c>sections</c> property. 
         /// </summary>
         [Obsolete]
         public dynamic sections => ((dynamic) JObject).sections;
