@@ -296,7 +296,7 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             // As of Umbraco 7.3, information about the editor is no longer saved in the JSON, since these should be read from the configuration
-            if (UmbracoVersion.Current.Major == 7 && UmbracoVersion.Current.Minor >= 3) Howdy.ReplaceEditorObjectFromConfig(control);
+            if (UmbracoVersion.Current.Major > 7 || (UmbracoVersion.Current.Major == 7 && UmbracoVersion.Current.Minor >= 3)) Howdy.ReplaceEditorObjectFromConfig(control);
 
             // Parse the editor
             control.Editor = obj.GetObject("editor", x => GridEditor.Parse(control, x));
