@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.0.0-beta002</Version>
+    <Version>3.0.0-beta003</Version>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
     <Company>Skybrud.dk</Company>
     <Description>Strongly typed models for the grid in Umbraco 8.</Description>
@@ -41,7 +41,7 @@
     <PackageOutputPath>../../releases/nuget/</PackageOutputPath>
   </PropertyGroup>
 
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release'">
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release' AND '$(BuildTools)'=='1'">
     <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
   </Target>
 
