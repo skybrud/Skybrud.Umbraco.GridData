@@ -1,18 +1,18 @@
-﻿using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Umbraco.GridData.Json;
-using System;
+﻿using System;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Json;
 
-namespace Skybrud.Umbraco.GridData {
+namespace Skybrud.Umbraco.GridData.Models {
 
     /// <summary>
     /// Class representing a section in an Umbraco Grid.
     /// </summary>
-    public class GridSection : GridJsonObject {
+    public class GridSection : GridJsonObject, IGridSection {
 
         #region Properties
 
@@ -22,9 +22,9 @@ namespace Skybrud.Umbraco.GridData {
         public string Name { get; private set; }
 
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridDataModel"/>.
+        /// Gets a reference to the parent <see cref="IGridDataModel"/>.
         /// </summary>
-        public GridDataModel Model { get; private set; }
+        public IGridDataModel Model { get; private set; }
 
         /// <summary>
         /// Gets the overall column width of the section.
@@ -34,7 +34,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an array of all rows in the sections.
         /// </summary>
-        public GridRow[] Rows { get; private set; }
+        public IGridRow[] Rows { get; private set; }
 
         /// <summary>
         /// Gets whether the section has any rows.
@@ -45,13 +45,13 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the first row of the section. If the section doesn't contain any rows, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridRow FirstRow => Rows.FirstOrDefault();
+        public IGridRow FirstRow => Rows.FirstOrDefault();
 
         /// <summary>
         /// Gets the last row of the section. If the section doesn't contain any rows, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridRow LastRow => Rows.LastOrDefault();
+        public IGridRow LastRow => Rows.LastOrDefault();
 
         #endregion
 
@@ -94,7 +94,7 @@ namespace Skybrud.Umbraco.GridData {
 
             // Some input validation
             if (helper == null) throw new ArgumentNullException(nameof(helper));
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // Prepend the path to the "Sections" folder if not already specified
             if (GridUtils.IsValidPartialName(partial)) {
@@ -128,12 +128,12 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             // Parse the rows
-            section.Rows = obj.GetArray("rows", x => GridRow.Parse(section, x)) ?? new GridRow[0];
+            section.Rows = obj.GetArray("rows", x => (IGridRow) GridRow.Parse(section, x)) ?? new IGridRow[0];
 
             // Update "PreviousRow" and "NextRow" properties
             for (int i = 1; i < section.Rows.Length; i++) {
-                section.Rows[i - 1].NextRow = section.Rows[i];
-                section.Rows[i].PreviousRow = section.Rows[i - 1];
+                ((GridRow) section.Rows[i - 1]).NextRow = section.Rows[i];
+                ((GridRow) section.Rows[i]).PreviousRow = section.Rows[i - 1];
             }
 
             // Return the section

@@ -6,30 +6,24 @@ using System.Web.Mvc.Html;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
-namespace Skybrud.Umbraco.GridData {
+namespace Skybrud.Umbraco.GridData.Models {
 
     /// <summary>
     /// Class representing a row in an Umbraco Grid.
     /// </summary>
-    public class GridRow : GridElement {
+    public class GridRow : GridElement, IGridRow {
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridSection"/>.
+        /// Gets a reference to the parent <see cref="IGridSection"/>.
         /// </summary>
-        public GridSection Section { get; private set; }
+        public IGridSection Section { get; private set; }
 
         /// <summary>
         /// Gets the unique ID of the row.
         /// </summary>
         public string Id { get; private set; }
-
-        /// <summary>
-        /// Gets the alias of the row.
-        /// </summary>
-        [Obsolete("Use Name instead")]
-        public string Alias { get; private set; }
 
         /// <summary>
         /// Gets the label of the row. Use <see cref="HasLabel"/> to check whether a label has been specified.
@@ -39,7 +33,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether a label has been specified for the definition of this row.
         /// </summary>
-        public bool HasLabel => !String.IsNullOrWhiteSpace(Label);
+        public bool HasLabel => !string.IsNullOrWhiteSpace(Label);
 
         /// <summary>
         /// Gets the name of the row.
@@ -49,17 +43,17 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an array of all areas in the row.
         /// </summary>
-        public GridArea[] Areas { get; private set; }
+        public IGridArea[] Areas { get; private set; }
 
         /// <summary>
         /// Gets a reference to the previous row.
         /// </summary>
-        public GridRow PreviousRow { get; internal set; }
+        public IGridRow PreviousRow { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next row.
         /// </summary>
-        public GridRow NextRow { get; internal set; }
+        public IGridRow NextRow { get; internal set; }
 
         /// <summary>
         /// Gets whether the row has any areas.
@@ -70,13 +64,13 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the first area of the row. If the row doesn't contain any areas, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridArea FirstRow => Areas.FirstOrDefault();
+        public IGridArea FirstRow => Areas.FirstOrDefault();
 
         /// <summary>
         /// Gets the last area of the row. If the row doesn't contain any areas, this property will return
         /// <code>null</code>.
         /// </summary>
-        public GridArea LastRow => Areas.LastOrDefault();
+        public IGridArea LastRow => Areas.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one area or control within the row is valid.
@@ -102,7 +96,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an array of all nested controls. 
         /// </summary>
-        public GridControl[] GetAllControls() {
+        public IGridControl[] GetAllControls() {
             return (
                 from area in Areas
                 from control in area.Controls
@@ -114,7 +108,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
-        public GridControl[] GetAllControls(string alias) {
+        public IGridControl[] GetAllControls(string alias) {
             return GetAllControls(x => x.Editor.Alias == alias);
         }
 
@@ -122,7 +116,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
-        public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
+        public IGridControl[] GetAllControls(Func<IGridControl, bool> predicate) {
             return (
                 from area in Areas
                 from control in area.Controls
@@ -149,8 +143,8 @@ namespace Skybrud.Umbraco.GridData {
         public HtmlString GetHtml(HtmlHelper helper, string partial) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // Prepend the path to the "Rows" folder if not already specified
             if (GridUtils.IsValidPartialName(partial)) {
@@ -190,7 +184,6 @@ namespace Skybrud.Umbraco.GridData {
             GridRow row = new GridRow(obj) {
                 Section = section,
                 Id = obj.GetString("id"),
-                Alias = obj.GetString("alias"),
                 Label = obj.GetString("label"),
                 Name = obj.GetString("name")
             };
@@ -198,12 +191,12 @@ namespace Skybrud.Umbraco.GridData {
             #pragma warning restore 618
 
             // Parse the areas
-            row.Areas = obj.GetArray("areas", x => GridArea.Parse(row, x)) ?? new GridArea[0];
+            row.Areas = obj.GetArray("areas", x => (IGridArea) GridArea.Parse(row, x)) ?? new IGridArea[0];
 
             // Update "PreviousArea" and "NextArea" properties
             for (int i = 1; i < row.Areas.Length; i++) {
-                row.Areas[i - 1].NextArea = row.Areas[i];
-                row.Areas[i].PreviousArea = row.Areas[i - 1];
+                ((GridArea) row.Areas[i - 1]).NextArea = row.Areas[i];
+                ((GridArea) row.Areas[i]).PreviousArea = row.Areas[i - 1];
             }
 
             // Return the row

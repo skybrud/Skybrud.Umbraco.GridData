@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Core.Configuration.Grid;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Core.PropertyEditors;
@@ -47,7 +48,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="propertyType">The property type.</param>
         /// <returns>The CLR type of values returned by the converter.</returns>
         public override Type GetPropertyValueType(IPublishedPropertyType propertyType) {
-            return typeof(GridDataModel);
+            return typeof(IGridDataModel);
         }
 
     }

@@ -12,41 +12,40 @@ using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using Skybrud.Umbraco.GridData.Rendering;
-using Umbraco.Core.Configuration;
 using Umbraco.Core.Logging;
 
-namespace Skybrud.Umbraco.GridData {
+namespace Skybrud.Umbraco.GridData.Models {
 
     /// <summary>
     /// Class representing a control in an Umbraco Grid.
     /// </summary>
-    public class GridControl : GridJsonObject {
+    public class GridControl : GridJsonObject, IGridControl {
 
         #region Properties
 
         /// <summary>
-        /// Gets a reference to the entire <see cref="GridDataModel"/>.
+        /// Gets a reference to the entire <see cref="IGridDataModel"/>.
         /// </summary>
         [JsonIgnore]
-        public GridDataModel Model => Section?.Model;
+        public IGridDataModel Model => Section?.Model;
 
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridSection"/>.
+        /// Gets a reference to the parent <see cref="IGridSection"/>.
         /// </summary>
         [JsonIgnore]
-        public GridSection Section => Row?.Section;
+        public IGridSection Section => Row?.Section;
 
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridRow"/>.
+        /// Gets a reference to the parent <see cref="IGridRow"/>.
         /// </summary>
         [JsonIgnore]
-        public GridRow Row => Area?.Row;
+        public IGridRow Row => Area?.Row;
 
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridArea"/>.
+        /// Gets a reference to the parent <see cref="IGridArea"/>.
         /// </summary>
         [JsonIgnore]
-        public GridArea Area { get; private set; }
+        public IGridArea Area { get; private set; }
 
         /// <summary>
         /// Gets the value of the control. Alternately use the <see cref="GetValue{T}"/> method to get the type safe value.
@@ -63,12 +62,12 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a reference to the previous control.
         /// </summary>
-        public GridControl PreviousControl { get; internal set; }
+        public IGridControl PreviousControl { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next control.
         /// </summary>
-        public GridControl NextControl { get; internal set; }
+        public IGridControl NextControl { get; internal set; }
 
         /// <summary>
         /// Gets whether the control and it's value is valid.
@@ -244,7 +243,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
-            return IsValid ? Value?.GetSearchableText() ?? String.Empty : String.Empty;
+            return IsValid ? Value?.GetSearchableText() ?? string.Empty : string.Empty;
         }
 
         /// <summary>

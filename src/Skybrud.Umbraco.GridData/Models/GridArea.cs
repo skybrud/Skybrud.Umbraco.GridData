@@ -4,32 +4,32 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
-namespace Skybrud.Umbraco.GridData {
+namespace Skybrud.Umbraco.GridData.Models {
 
     /// <summary>
     /// Class representing an area in an Umbraco Grid.
     /// </summary>
-    public class GridArea : GridElement {
+    public class GridArea : GridElement, IGridArea {
 
         #region Properties
         
         /// <summary>
-        /// Gets a reference to the entire <see cref="GridDataModel"/>.
+        /// Gets a reference to the entire <see cref="IGridDataModel"/>.
         /// </summary>
         [JsonIgnore]
-        public GridDataModel Model => Section?.Model;
+        public IGridDataModel Model => Section?.Model;
 
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridSection"/>.
+        /// Gets a reference to the parent <see cref="IGridSection"/>.
         /// </summary>
         [JsonIgnore]
-        public GridSection Section => Row?.Section;
-        
+        public IGridSection Section => Row?.Section;
+
         /// <summary>
-        /// Gets a reference to the parent <see cref="GridRow"/>.
+        /// Gets a reference to the parent <see cref="IGridRow"/>.
         /// </summary>
         [JsonIgnore]
-        public GridRow Row { get; private set; }
+        public IGridRow Row { get; private set; }
 
         /// <summary>
         /// Gets the column width of the area.
@@ -50,17 +50,17 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an array of all controls added to this area.
         /// </summary>
-        public GridControl[] Controls { get; private set; }
+        public IGridControl[] Controls { get; private set; }
 
         /// <summary>
         /// Gets a reference to the previous area.
         /// </summary>
-        public GridArea PreviousArea { get; internal set; }
+        public IGridArea PreviousArea { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next area.
         /// </summary>
-        public GridArea NextArea { get; internal set; }
+        public IGridArea NextArea { get; internal set; }
 
         /// <summary>
         /// Gets whether the area has any controls.
@@ -71,13 +71,13 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the first control of the area. If the area doesn't contain
         /// any controls, this property will return <code>null</code>.
         /// </summary>
-        public GridControl FirstControl => Controls.FirstOrDefault();
+        public IGridControl FirstControl => Controls.FirstOrDefault();
 
         /// <summary>
         /// Gets the last control of the area. If the area doesn't contain
         /// any controls, this property will return <code>null</code>.
         /// </summary>
-        public GridControl LastControl {
+        public IGridControl LastControl {
             get { return Controls.LastOrDefault(); }
         }
 
@@ -105,7 +105,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the area - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the area.</returns>
+        /// <returns>Returns an instance of <see cref="string"/> representing the value of the area.</returns>
         public override string GetSearchableText() {
             return Controls.Aggregate("", (current, control) => current + control.GetSearchableText());
         }
@@ -122,7 +122,7 @@ namespace Skybrud.Umbraco.GridData {
         public static GridArea Parse(GridRow row, JObject obj) {
 
             // Some input validation
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
             
             // Parse the array of allow blocks
             JArray allowed = obj.GetArray("allowed");
@@ -136,12 +136,12 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             // Parse the controls
-            area.Controls = obj.GetArray("controls", x => GridControl.Parse(area, x)) ?? new GridControl[0];
+            area.Controls = obj.GetArray("controls", x => (IGridControl) GridControl.Parse(area, x)) ?? new IGridControl[0];
             
             // Update "PreviousArea" and "NextArea" properties
             for (int i = 1; i < area.Controls.Length; i++) {
-                area.Controls[i - 1].NextControl = area.Controls[i];
-                area.Controls[i].PreviousControl = area.Controls[i - 1];
+                ((GridControl) area.Controls[i - 1]).NextControl = area.Controls[i];
+                ((GridControl)area.Controls[i]).PreviousControl = area.Controls[i - 1];
             }
             
             // Return the row

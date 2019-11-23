@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using System;
+using Skybrud.Umbraco.GridData.Models;
 
 namespace Skybrud.Umbraco.GridData.Values {
     

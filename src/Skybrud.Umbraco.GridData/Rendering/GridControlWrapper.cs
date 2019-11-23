@@ -1,4 +1,5 @@
 ﻿using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Models;
 
 namespace Skybrud.Umbraco.GridData.Rendering {
 

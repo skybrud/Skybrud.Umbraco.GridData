@@ -8,12 +8,12 @@ using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Json;
 using Umbraco.Core.Configuration.Grid;
 
-namespace Skybrud.Umbraco.GridData {
-
+namespace Skybrud.Umbraco.GridData.Models {
+    
     /// <summary>
     /// Class representing the value/model saved by an Umbraco Grid property.
     /// </summary>
-    public class GridDataModel : GridJsonObject {
+    public class GridDataModel : GridJsonObject, IGridDataModel {
 
         #region Properties
 
@@ -38,7 +38,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        public GridSection[] Sections { get; private set; }
+        public IGridSection[] Sections { get; private set; }
 
         /// <summary>
         /// Gets the alias of the document type property used for the grid.
@@ -75,7 +75,7 @@ namespace Skybrud.Umbraco.GridData {
         #region Constructors
 
         private GridDataModel(JObject obj) : base(obj) {
-            Sections = new GridSection[0];
+            Sections = new IGridSection[0];
         }
 
         #endregion
@@ -85,7 +85,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets an array of all nested controls. 
         /// </summary>
-        public GridControl[] GetAllControls() {
+        public IGridControl[] GetAllControls() {
             return (
                 from section in Sections
                 from row in section.Rows
@@ -99,7 +99,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
-        public GridControl[] GetAllControls(string alias) {
+        public IGridControl[] GetAllControls(string alias) {
             return GetAllControls(x => x.Editor.Alias == alias);
         }
 
@@ -107,7 +107,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
-        public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
+        public IGridControl[] GetAllControls(Func<IGridControl, bool> predicate) {
             return (
                 from section in Sections
                 from row in section.Rows
@@ -151,7 +151,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
         /// when an actual Grid model isn't available.
         /// </summary>
-        public static GridDataModel GetEmptyModel() {
+        public static IGridDataModel GetEmptyModel() {
             return new GridDataModel(null) {
                 PropertyAlias = ""
             };
@@ -162,7 +162,7 @@ namespace Skybrud.Umbraco.GridData {
         /// when an actual Grid model isn't available.
         /// </summary>
         /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
-        public static GridDataModel GetEmptyModel(string propertyTypeAlias) {
+        public static IGridDataModel GetEmptyModel(string propertyTypeAlias) {
             return new GridDataModel(null) {
                 PropertyAlias = propertyTypeAlias
             };
@@ -172,7 +172,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
-        public static GridDataModel Deserialize(string json) {
+        public static IGridDataModel Deserialize(string json) {
             return Deserialize(json, "");
         }
 
@@ -181,7 +181,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
         /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
-        public static GridDataModel Deserialize(string json, string propertyTypeAlias) {
+        public static IGridDataModel Deserialize(string json, string propertyTypeAlias) {
 
             // Validate the JSON
             if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
@@ -197,7 +197,7 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             // Parse the sections
-            model.Sections = obj.GetArray("sections", x => GridSection.Parse(model, x)) ?? new GridSection[0];
+            model.Sections = obj.GetArray("sections", x => (IGridSection) GridSection.Parse(model, x)) ?? new IGridSection[0];
 
             // Return the model
             return model;
@@ -226,7 +226,7 @@ namespace Skybrud.Umbraco.GridData {
             };
 
             // Parse the sections
-            model.Sections = obj.GetArray("sections", x => GridSection.Parse(model, x)) ?? new GridSection[0];
+            model.Sections = obj.GetArray("sections", x => (IGridSection) GridSection.Parse(model, x)) ?? new IGridSection[0];
 
             // Return the model
             return model;
@@ -243,7 +243,7 @@ namespace Skybrud.Umbraco.GridData {
             return new GridDataModel(obj) {
                 Raw = obj.ToString(),
                 Name = obj.GetString("name"),
-                Sections = obj.GetArray("sections", x => GridSection.Parse(null, obj)) ?? new GridSection[0]
+                Sections = obj.GetArray("sections", x => (IGridSection) GridSection.Parse(null, obj)) ?? new IGridSection[0]
             };
         }
 

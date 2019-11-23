@@ -1,6 +1,7 @@
 ﻿using System;
 using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Rendering;
 using Umbraco.Core.Logging;
 

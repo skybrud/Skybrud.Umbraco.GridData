@@ -2,6 +2,7 @@
 using System.Globalization;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Rendering;
 
 namespace Skybrud.Umbraco.GridData.Converters {

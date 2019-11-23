@@ -1,5 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
+using Skybrud.Umbraco.GridData.Models;
 
 namespace Skybrud.Umbraco.GridData.Extensions {
 
