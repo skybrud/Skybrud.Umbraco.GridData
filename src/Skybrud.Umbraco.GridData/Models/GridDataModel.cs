@@ -2,11 +2,13 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Extensions;
+using Skybrud.Umbraco.GridData.Factories;
 using Skybrud.Umbraco.GridData.Json;
-using Umbraco.Core.Configuration.Grid;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace Skybrud.Umbraco.GridData.Models {
     
@@ -26,29 +28,36 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets the raw JSON value this model was parsed from.
-        /// </summary>
-        public string Raw { get; private set; }
-
-        /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
+
+        /// <summary>
+        /// Gets a reference to the parent <see cref="IPublishedElement"/>, if the Grid model was loaded directly from a property value.
+        /// </summary>
+        [JsonIgnore]
+        public IPublishedElement Owner { get; }
+
+        /// <summary>
+        /// Gets whether the grid model has a reference to it's <see cref="IPublishedElement"/> owner.
+        /// </summary>
+        [JsonIgnore]
+        public bool HasOwner => Owner != null;
 
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        public IGridSection[] Sections { get; private set; }
+        public IGridSection[] Sections { get; }
+        
+        /// <summary>
+        /// Gets a reference to the parent property type, if the Grid model was loaded directly from a property value.
+        /// </summary>
+        public IPublishedPropertyType PropertyType { get; }
 
         /// <summary>
-        /// Gets the alias of the document type property used for the grid.
+        /// Gets whether a property type has been specified for the model.
         /// </summary>
-        public string PropertyAlias { get; private set; }
-
-        /// <summary>
-        /// Gets whether a property alias has been specified for the model.
-        /// </summary>
-        public bool HasPropertyAlias => !string.IsNullOrWhiteSpace(PropertyAlias);
+        public bool HasPropertyType => PropertyType != null;
 
         #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
 
@@ -58,12 +67,14 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Same as <see cref="Name"/>.
         /// </summary>
         [Obsolete]
+        [JsonIgnore]
         public string name => Name;
 
         /// <summary>
         /// Gets the underlying JSON array for the <c>sections</c> property. 
         /// </summary>
         [Obsolete]
+        [JsonIgnore]
         public dynamic sections => ((dynamic) JObject).sections;
 
         // ReSharper restore InconsistentNaming
@@ -74,8 +85,20 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #region Constructors
 
-        private GridDataModel(JObject obj) : base(obj) {
-            Sections = new IGridSection[0];
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
+        ///
+        /// <paramref name="owner"/> and <paramref name="propertyType"/> may be specified if the grid value comes directly from a property value. If either aren't available, it's fine to specify <c>null</c> for both of them.
+        /// </summary>
+        /// <param name="owner">An instance of <see cref="IPublishedElement"/> representing the owner holding the grid value.</param>
+        /// <param name="propertyType">An instance of <see cref="IPublishedPropertyType"/> representing the property holding the grid value.</param>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the grid model.</param>
+        /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
+        public GridDataModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject json, IGridFactory factory) : base(json) {
+            Owner = owner;
+            PropertyType = propertyType;
+            Name = json.GetString("name");
+            Sections = json.GetArray("sections", x => factory.CreateGridSection(x, this)) ?? new IGridSection[0];
         }
 
         #endregion
@@ -140,7 +163,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the grid model.</returns>
         public virtual string GetSearchableText() {
-            return Sections.Aggregate("", (current, section) => current + section.GetSearchableText());
+            return Sections.Aggregate(string.Empty, (current, section) => current + section.GetSearchableText());
         }
 
         #endregion
@@ -148,103 +171,19 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Static methods
 
         /// <summary>
-        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
-        /// when an actual Grid model isn't available.
+        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
         /// </summary>
         public static IGridDataModel GetEmptyModel() {
-            return new GridDataModel(null) {
-                PropertyAlias = ""
-            };
+            return new GridDataModel(null, null, null, null);
         }
 
         /// <summary>
-        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for
-        /// when an actual Grid model isn't available.
+        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
         /// </summary>
-        /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
-        public static IGridDataModel GetEmptyModel(string propertyTypeAlias) {
-            return new GridDataModel(null) {
-                PropertyAlias = propertyTypeAlias
-            };
-        }
-
-        /// <summary>
-        /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
-        /// </summary>
-        /// <param name="json">The JSON string to be deserialized.</param>
-        public static IGridDataModel Deserialize(string json) {
-            return Deserialize(json, "");
-        }
-
-        /// <summary>
-        /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
-        /// </summary>
-        /// <param name="json">The JSON string to be deserialized.</param>
-        /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
-        public static IGridDataModel Deserialize(string json, string propertyTypeAlias) {
-
-            // Validate the JSON
-            if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
-
-            // Deserialize the JSON
-            JObject obj = JObject.Parse(json);
-
-            // Parse basic properties
-            GridDataModel model = new GridDataModel(obj) {
-                Raw = json,
-                Name = obj.GetString("name"),
-                PropertyAlias = propertyTypeAlias
-            };
-
-            // Parse the sections
-            model.Sections = obj.GetArray("sections", x => (IGridSection) GridSection.Parse(model, x)) ?? new IGridSection[0];
-
-            // Return the model
-            return model;
-
-        }
-
-        /// <summary>
-        /// Deserializes the specified <paramref name="json"/> string into an instance of <see cref="GridDataModel"/>.
-        /// </summary>
-        /// <param name="json">The JSON string to be deserialized.</param>
-        /// <param name="propertyTypeAlias">The alias of the property the Grid model is representing.</param>
-        /// <param name="config">The Grid configuration to be used.</param>
-        public static GridDataModel Deserialize(string json, string propertyTypeAlias, IGridConfig config) {
-
-            // Validate the JSON
-            if (json == null || !json.StartsWith("{") || !json.EndsWith("}")) return null;
-
-            // Deserialize the JSON
-            JObject obj = JObject.Parse(json);
-
-            // Parse basic properties
-            GridDataModel model = new GridDataModel(obj) {
-                Raw = json,
-                Name = obj.GetString("name"),
-                PropertyAlias = propertyTypeAlias
-            };
-
-            // Parse the sections
-            model.Sections = obj.GetArray("sections", x => (IGridSection) GridSection.Parse(model, x)) ?? new IGridSection[0];
-
-            // Return the model
-            return model;
-
-        }
-
-        /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GridDataModel"/>.
-        /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        [Obsolete("Use Deserialize method instead")]
-        public static GridDataModel Parse(JObject obj) {
-            if (obj == null) return null;
-            return new GridDataModel(obj) {
-                Raw = obj.ToString(),
-                Name = obj.GetString("name"),
-                Sections = obj.GetArray("sections", x => (IGridSection) GridSection.Parse(null, obj)) ?? new IGridSection[0]
-            };
+        /// <param name="owner">An instance of <see cref="IPublishedElement"/> representing the owner holding the grid value.</param>
+        /// <param name="propertyType">An instance of <see cref="IPublishedPropertyType"/> representing the property holding the grid value.</param>
+        public static IGridDataModel GetEmptyModel(IPublishedElement owner, IPublishedPropertyType propertyType) {
+            return new GridDataModel(owner, propertyType, null, null);
         }
 
         #endregion

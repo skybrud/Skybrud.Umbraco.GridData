@@ -2,6 +2,7 @@
 using Skybrud.Umbraco.GridData.Config;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Models;
+using Skybrud.Umbraco.GridData.Models.Editors;
 using Skybrud.Umbraco.GridData.Rendering;
 using Skybrud.Umbraco.GridData.Values;
 
@@ -83,23 +84,23 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
         }
 
-        private bool IsEmbedEditor(GridEditor editor) {
+        private bool IsEmbedEditor(IGridEditor editor) {
             return editor != null && editor.View == "embed";
         }
 
-        private bool IsTextStringEditor(GridEditor editor) {
+        private bool IsTextStringEditor(IGridEditor editor) {
             return editor != null && editor.View == "textstring";
         }
 
-        private bool IsMediaEditor(GridEditor editor) {
+        private bool IsMediaEditor(IGridEditor editor) {
             return editor != null && editor.View == "media";
         }
 
-        private bool IsMacroEditor(GridEditor editor) {
+        private bool IsMacroEditor(IGridEditor editor) {
             return editor != null && editor.View == "macro";
         }
 
-        private bool IsRichTextEditor(GridEditor editor) {
+        private bool IsRichTextEditor(IGridEditor editor) {
             return editor != null && editor.View == "rte";
         }
 

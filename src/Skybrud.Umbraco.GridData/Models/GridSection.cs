@@ -5,6 +5,7 @@ using System.Web.Mvc;
 using System.Web.Mvc.Html;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Factories;
 using Skybrud.Umbraco.GridData.Json;
 
 namespace Skybrud.Umbraco.GridData.Models {
@@ -19,22 +20,22 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets the section name.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets a reference to the parent <see cref="IGridDataModel"/>.
         /// </summary>
-        public IGridDataModel Model { get; private set; }
+        public IGridDataModel Model { get; }
 
         /// <summary>
         /// Gets the overall column width of the section.
         /// </summary>
-        public int Grid { get; private set; }
+        public int Grid { get; }
 
         /// <summary>
         /// Gets an array of all rows in the sections.
         /// </summary>
-        public IGridRow[] Rows { get; private set; }
+        public IGridRow[] Rows { get; }
 
         /// <summary>
         /// Gets whether the section has any rows.
@@ -58,10 +59,26 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object, <paramref name="grid"/> model and <paramref name="factory"/>.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the section.</param>
-        protected GridSection(JObject obj) : base(obj) { }
+        /// <param name="json">An instance of <see cref="JObject"/> representing the section.</param>
+        /// <param name="grid">The parent grid model.</param>
+        /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
+        public GridSection(JObject json, IGridDataModel grid, IGridFactory factory) : base(json) {
+
+            Model = grid;
+            Grid = json.GetInt32("grid");
+            Name = grid.Name;
+            Rows = json.GetArray("rows", x => factory.CreateGridRow(json, this)) ?? new IGridRow[0];
+
+            // Update "PreviousRow" and "NextRow" properties
+            for (int i = 1; i < Rows.Length; i++) {
+                // TODO: Due to the factory, we can no longer assume rows are GridRow
+                ((GridRow) Rows[i - 1]).NextRow = Rows[i];
+                ((GridRow) Rows[i]).PreviousRow = Rows[i - 1];
+            }
+
+        }
 
         #endregion
 
@@ -104,40 +121,6 @@ namespace Skybrud.Umbraco.GridData.Models {
             // Render the partial view
             return helper.Partial(partial, this);
 
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses a section from the specified <paramref name="model"/> and <paramref name="obj"/>.
-        /// </summary>
-        /// <param name="model">The parent model of the section.</param>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridSection Parse(GridDataModel model, JObject obj) {
-
-            // Some input validation
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-
-            // Parse basic properties
-            GridSection section = new GridSection(obj) {
-                Model = model,
-                Grid = obj.GetInt32("grid"),
-                Name = model.Name
-            };
-
-            // Parse the rows
-            section.Rows = obj.GetArray("rows", x => (IGridRow) GridRow.Parse(section, x)) ?? new IGridRow[0];
-
-            // Update "PreviousRow" and "NextRow" properties
-            for (int i = 1; i < section.Rows.Length; i++) {
-                ((GridRow) section.Rows[i - 1]).NextRow = section.Rows[i];
-                ((GridRow) section.Rows[i]).PreviousRow = section.Rows[i - 1];
-            }
-
-            // Return the section
-            return section;
         }
 
         #endregion

@@ -1,4 +1,7 @@
-﻿namespace Skybrud.Umbraco.GridData.Models {
+﻿using Newtonsoft.Json;
+using Umbraco.Core.Models.PublishedContent;
+
+namespace Skybrud.Umbraco.GridData.Models {
 
     /// <summary>
     /// Interface describing the value/model saved by an Umbraco Grid property.
@@ -8,32 +11,44 @@
         /// <summary>
         /// Gets whether the model is valid.
         /// </summary>
+        [JsonIgnore]
         bool IsValid { get; }
-
-        /// <summary>
-        /// Gets the raw JSON value this model was parsed from.
-        /// </summary>
-        string Raw { get; }
 
         /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
+        [JsonProperty("name")]
         string Name { get; }
 
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
+        [JsonProperty("sections")]
         IGridSection[] Sections { get; }
 
         /// <summary>
-        /// Gets the alias of the property property used for the grid.
+        /// Gets a reference to the parent <see cref="IPublishedElement"/>, if the Grid model was loaded directly from a property value.
         /// </summary>
-        string PropertyAlias { get; }
+        [JsonIgnore]
+        IPublishedElement Owner { get; }
 
         /// <summary>
-        /// Gets whether a property alias has been specified for the model.
+        /// Gets whether the grid model has a reference to it's <see cref="IPublishedElement"/> owner.
         /// </summary>
-        bool HasPropertyAlias { get; }
+        [JsonIgnore]
+        bool HasOwner { get; }
+
+        /// <summary>
+        /// Gets a reference to the parent property type, if the Grid model was loaded directly from a property value.
+        /// </summary>
+        [JsonIgnore]
+        IPublishedPropertyType PropertyType { get; }
+
+        /// <summary>
+        /// Gets whether a property type has been specified for the model.
+        /// </summary>
+        [JsonIgnore]
+        bool HasPropertyType { get; }
 
     }
 

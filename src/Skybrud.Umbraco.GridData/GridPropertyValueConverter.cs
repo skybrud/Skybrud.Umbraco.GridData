@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Umbraco.GridData.Factories;
 using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Core.Configuration.Grid;
 using Umbraco.Core.Models.PublishedContent;
@@ -13,8 +14,11 @@ namespace Skybrud.Umbraco.GridData {
 
         private readonly IGridConfig _config;
 
+        private readonly IGridFactory _factory;
+
         public GridPropertyValueConverter(IGridConfig config) {
             _config = config;
+            _factory = new DefaultGridFactory();
         }
 
         /// <summary>
@@ -27,7 +31,7 @@ namespace Skybrud.Umbraco.GridData {
         }
         
         public override object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview) {
-            return GridDataModel.Deserialize(source as string, propertyType.Alias, _config);
+            return _factory.ParseGridModel(owner, propertyType, source, preview);
         }
         
         public override object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {

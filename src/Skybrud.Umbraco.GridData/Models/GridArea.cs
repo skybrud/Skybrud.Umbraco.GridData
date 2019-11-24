@@ -1,8 +1,8 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Factories;
 
 namespace Skybrud.Umbraco.GridData.Models {
 
@@ -29,28 +29,28 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets a reference to the parent <see cref="IGridRow"/>.
         /// </summary>
         [JsonIgnore]
-        public IGridRow Row { get; private set; }
+        public IGridRow Row { get; }
 
         /// <summary>
         /// Gets the column width of the area.
         /// </summary>
-        public int Grid { get; private set; }
+        public int Grid { get; }
 
         /// <summary>
         /// Gets wether all editors are allowed for this area.
         /// </summary>
-        public bool AllowAll { get; private set; }
+        public bool AllowAll { get; }
 
         /// <summary>
-        /// Gets an array of all editors allowed for this area. If <see cref="AllowAll"/> is <code>true</code>, this
+        /// Gets an array of all editors allowed for this area. If <see cref="AllowAll"/> is <c>true</c>, this
         /// array may be empty.
         /// </summary>
-        public string[] Allowed { get; private set; }
+        public string[] Allowed { get; }
 
         /// <summary>
         /// Gets an array of all controls added to this area.
         /// </summary>
-        public IGridControl[] Controls { get; private set; }
+        public IGridControl[] Controls { get; }
 
         /// <summary>
         /// Gets a reference to the previous area.
@@ -68,18 +68,14 @@ namespace Skybrud.Umbraco.GridData.Models {
         public bool HasControls => Controls.Length > 0;
 
         /// <summary>
-        /// Gets the first control of the area. If the area doesn't contain
-        /// any controls, this property will return <code>null</code>.
+        /// Gets the first control of the area. If the area doesn't contain any controls, this property will return <c>null</c>.
         /// </summary>
         public IGridControl FirstControl => Controls.FirstOrDefault();
 
         /// <summary>
-        /// Gets the last control of the area. If the area doesn't contain
-        /// any controls, this property will return <code>null</code>.
+        /// Gets the last control of the area. If the area doesn't contain any controls, this property will return <c>null</c>.
         /// </summary>
-        public IGridControl LastControl {
-            get { return Controls.LastOrDefault(); }
-        }
+        public IGridControl LastControl => Controls.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one control within the area is valid.
@@ -93,60 +89,38 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object, <paramref name="row"/> and <paramref name="factory"/>.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the area.</param>
-        protected GridArea(JObject obj) : base(obj) { }
+        /// <param name="json">An instance of <see cref="JObject"/> representing the section.</param>
+        /// <param name="row">The parent row.</param>
+        /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
+        public GridArea(JObject json, IGridRow row, IGridFactory factory) : base(json) {
+
+            Row = row;
+            Grid = json.GetInt32("grid");
+            AllowAll = json.GetBoolean("allowAll");
+            Allowed = json.GetStringArray("allowed");
+            Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? new IGridControl[0];
+
+            // Update "PreviousControl" and "NextControl" properties
+            for (int i = 1; i <  Controls.Length; i++) {
+                // TODO: Due to the factory, we can no longer assume rows are GridControl
+                ((GridControl) Controls[i - 1]).NextControl = Controls[i];
+                ((GridControl) Controls[i]).PreviousControl = Controls[i - 1];
+            }
+
+        }
 
         #endregion
 
         #region Member methods
 
         /// <summary>
-        /// Gets a textual representation of the area - eg. to be used in Examine.
+        /// Returns a textual representation of the area - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="string"/> representing the value of the area.</returns>
+        /// <returns>An instance of <see cref="string"/> representing the value of the area.</returns>
         public override string GetSearchableText() {
             return Controls.Aggregate("", (current, control) => current + control.GetSearchableText());
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses an area from the specified <paramref name="obj"/>.
-        /// </summary>
-        /// <param name="row">The parent row of the area.</param>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridArea Parse(GridRow row, JObject obj) {
-
-            // Some input validation
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-            
-            // Parse the array of allow blocks
-            JArray allowed = obj.GetArray("allowed");
-            
-            // Parse basic properties
-            GridArea area = new GridArea(obj) {
-                Row = row,
-                Grid = obj.GetInt32("grid"),
-                AllowAll = obj.GetBoolean("allowAll"),
-                Allowed = allowed == null ? new string[0] : allowed.Select(x => (string) x).ToArray()
-            };
-
-            // Parse the controls
-            area.Controls = obj.GetArray("controls", x => (IGridControl) GridControl.Parse(area, x)) ?? new IGridControl[0];
-            
-            // Update "PreviousArea" and "NextArea" properties
-            for (int i = 1; i < area.Controls.Length; i++) {
-                ((GridControl) area.Controls[i - 1]).NextControl = area.Controls[i];
-                ((GridControl)area.Controls[i]).PreviousControl = area.Controls[i - 1];
-            }
-            
-            // Return the row
-            return area;
-        
         }
 
         #endregion

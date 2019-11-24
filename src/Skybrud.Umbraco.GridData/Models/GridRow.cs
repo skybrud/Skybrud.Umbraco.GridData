@@ -3,8 +3,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Factories;
 
 namespace Skybrud.Umbraco.GridData.Models {
 
@@ -18,63 +20,69 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets a reference to the parent <see cref="IGridSection"/>.
         /// </summary>
-        public IGridSection Section { get; private set; }
+        [JsonIgnore]
+        public IGridSection Section { get; }
 
         /// <summary>
         /// Gets the unique ID of the row.
         /// </summary>
-        public string Id { get; private set; }
+        public string Id { get; }
 
         /// <summary>
         /// Gets the label of the row. Use <see cref="HasLabel"/> to check whether a label has been specified.
         /// </summary>
-        public string Label { get; private set; }
+        public string Label { get; }
 
         /// <summary>
         /// Gets whether a label has been specified for the definition of this row.
         /// </summary>
+        [JsonIgnore]
         public bool HasLabel => !string.IsNullOrWhiteSpace(Label);
 
         /// <summary>
         /// Gets the name of the row.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets an array of all areas in the row.
         /// </summary>
-        public IGridArea[] Areas { get; private set; }
+        public IGridArea[] Areas { get; }
 
         /// <summary>
         /// Gets a reference to the previous row.
         /// </summary>
+        [JsonIgnore]
         public IGridRow PreviousRow { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next row.
         /// </summary>
+        [JsonIgnore]
         public IGridRow NextRow { get; internal set; }
 
         /// <summary>
         /// Gets whether the row has any areas.
         /// </summary>
+        [JsonIgnore]
         public bool HasAreas => Areas.Length > 0;
 
         /// <summary>
-        /// Gets the first area of the row. If the row doesn't contain any areas, this property will return
-        /// <code>null</code>.
+        /// Gets the first area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
+        [JsonIgnore]
         public IGridArea FirstRow => Areas.FirstOrDefault();
 
         /// <summary>
-        /// Gets the last area of the row. If the row doesn't contain any areas, this property will return
-        /// <code>null</code>.
+        /// Gets the last area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
+        [JsonIgnore]
         public IGridArea LastRow => Areas.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one area or control within the row is valid.
         /// </summary>
+        [JsonIgnore]
         public override bool IsValid {
             get { return Areas.Any(x => x.IsValid); }
         }
@@ -88,6 +96,30 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the row.</param>
         protected GridRow(JObject obj) : base(obj) { }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="json"/> object, <paramref name="section"/> and <paramref name="factory"/>.
+        /// </summary>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the section.</param>
+        /// <param name="section">The parent section.</param>
+        /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
+        public GridRow(JObject json, IGridSection section, IGridFactory factory) : base(json) {
+
+            Section = section;
+            Id = json.GetString("id");
+            Label = json.GetString("label");
+            Name = json.GetString("name");
+
+            Areas = json.GetArray("areas", x => factory.CreateGridArea(x, this)) ?? new IGridArea[0];
+
+            // Update "PreviousArea" and "NextArea" properties
+            for (int i = 1; i < Areas.Length; i++) {
+                // TODO: Due to the factory, we can no longer assume rows are GridArea
+                ((GridArea) Areas[i - 1]).NextArea = Areas[i];
+                ((GridArea) Areas[i]).PreviousArea = Areas[i - 1];
+            }
+
+        }
 
         #endregion
 
@@ -162,46 +194,6 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the row.</returns>
         public override string GetSearchableText() {
             return Areas.Aggregate("", (current, area) => current + area.GetSearchableText());
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses a row from the specified <paramref name="obj"/>.
-        /// </summary>
-        /// <param name="section">The parent section of the row.</param>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridRow Parse(GridSection section, JObject obj) {
-
-            // Some input validation
-            if (obj == null) throw new ArgumentNullException(nameof(obj));
-
-            #pragma warning disable 618
-            
-            // Parse basic properties
-            GridRow row = new GridRow(obj) {
-                Section = section,
-                Id = obj.GetString("id"),
-                Label = obj.GetString("label"),
-                Name = obj.GetString("name")
-            };
-
-            #pragma warning restore 618
-
-            // Parse the areas
-            row.Areas = obj.GetArray("areas", x => (IGridArea) GridArea.Parse(row, x)) ?? new IGridArea[0];
-
-            // Update "PreviousArea" and "NextArea" properties
-            for (int i = 1; i < row.Areas.Length; i++) {
-                ((GridArea) row.Areas[i - 1]).NextArea = row.Areas[i];
-                ((GridArea) row.Areas[i]).PreviousArea = row.Areas[i - 1];
-            }
-
-            // Return the row
-            return row;
-
         }
 
         #endregion

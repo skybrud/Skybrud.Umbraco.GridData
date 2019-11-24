@@ -9,8 +9,10 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Attributes;
 using Skybrud.Umbraco.GridData.Extensions;
+using Skybrud.Umbraco.GridData.Factories;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
+using Skybrud.Umbraco.GridData.Models.Editors;
 using Skybrud.Umbraco.GridData.Rendering;
 using Umbraco.Core.Logging;
 
@@ -51,13 +53,13 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the value of the control. Alternately use the <see cref="GetValue{T}"/> method to get the type safe value.
         /// </summary>
         [JsonProperty("value")]
-        public IGridControlValue Value { get; private set; }
+        public IGridControlValue Value { get; }
 
         /// <summary>
         /// Gets a reference to the editor of the control.
         /// </summary>
         [JsonProperty("editor")]
-        public GridEditor Editor { get; private set; }
+        public IGridEditor Editor { get; }
 
         /// <summary>
         /// Gets a reference to the previous control.
@@ -79,7 +81,35 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #region Constructors
 
-        private GridControl(JObject obj) : base(obj) { }
+        /// <summary>
+        /// Initializes a new instance from the specified <paramref name="json"/> object, <paramref name="area"/> and <paramref name="factory"/>.
+        /// </summary>
+        /// <param name="json">The instance of <see cref="JObject"/> representing the control.</param>
+        /// <param name="area">An instance of <see cref="IGridArea"/> representing the parent area.</param>
+        /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
+        public GridControl(JObject json, IGridArea area, IGridFactory factory) : base(json) {
+
+            // Set basic properties
+            Area = area;
+
+            Howdy.ReplaceEditorObjectFromConfig(this);
+
+            // Parse the editor
+            Editor = json.GetObject("editor", x => factory.CreateGridEditor(x, this));
+
+            // Parse the control value
+            JToken value = json.GetValue("value");
+            foreach (IGridConverter converter in GridContext.Current.Converters) {
+                try {
+                    if (!converter.ConvertControlValue(this, value, out IGridControlValue converted)) continue;
+                    Value = converted;
+                    break;
+                } catch (Exception ex) {
+                    global::Umbraco.Core.Composing.Current.Logger.Error<GridControl>(ex, "Converter of type " + converter + " failed for ConvertControlValue()");
+                }
+            }
+
+        }
 
         #endregion
 
@@ -142,7 +172,7 @@ namespace Skybrud.Umbraco.GridData.Models {
 
             // Some input validation
             if (helper == null) throw new ArgumentNullException(nameof(helper));
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // If the control isn't valid, we shouldn't render it
             if (!IsValid) return new HtmlString("");
@@ -212,7 +242,7 @@ namespace Skybrud.Umbraco.GridData.Models {
 
             // Some input validation
             if (helper == null) throw new ArgumentNullException(nameof(helper));
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // If the control isn't valid, we shouldn't render it
             if (!IsValid) return new HtmlString("");
@@ -239,9 +269,9 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// Returns the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
-        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
+        /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
             return IsValid ? Value?.GetSearchableText() ?? string.Empty : string.Empty;
         }
@@ -275,44 +305,6 @@ namespace Skybrud.Umbraco.GridData.Models {
 
             // Wrap the control
             return new GridControlWrapper<TValue, TConfig>(this, value, config);
-
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Parses a control from the specified <paramref name="obj"/>.
-        /// </summary>
-        /// <param name="area">The parent area of the control.</param>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridControl Parse(GridArea area, JObject obj) {
-            
-            // Set basic properties
-            GridControl control = new GridControl(obj) {
-                Area = area
-            };
-
-            Howdy.ReplaceEditorObjectFromConfig(control);
-
-            // Parse the editor
-            control.Editor = obj.GetObject("editor", x => GridEditor.Parse(control, x));
-
-            // Parse the control value
-            JToken value = obj.GetValue("value");
-            foreach (IGridConverter converter in GridContext.Current.Converters) {
-                try {
-                    IGridControlValue converted;
-                    if (!converter.ConvertControlValue(control, value, out converted)) continue;
-                    control.Value = converted;
-                    break;
-                } catch (Exception ex) {
-                    global::Umbraco.Core.Composing.Current.Logger.Error<GridControl>(ex, "Converter of type " + converter + " failed for ConvertControlValue()");
-                }
-            }
-            
-            return control;
 
         }
 

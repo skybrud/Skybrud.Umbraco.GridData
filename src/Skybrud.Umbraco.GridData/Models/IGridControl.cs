@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Skybrud.Umbraco.GridData.Models.Editors;
 
 namespace Skybrud.Umbraco.GridData.Models {
 
@@ -44,7 +45,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets a reference to the editor of the control.
         /// </summary>
         [JsonProperty("editor")]
-        GridEditor Editor { get; }
+        IGridEditor Editor { get; }
 
         /// <summary>
         /// Gets a reference to the previous control.

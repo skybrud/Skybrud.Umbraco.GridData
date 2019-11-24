@@ -1,5 +1,6 @@
 ﻿using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Models;
+using Skybrud.Umbraco.GridData.Models.Editors;
 
 namespace Skybrud.Umbraco.GridData.Rendering {
 
@@ -13,12 +14,12 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         /// <summary>
         /// Gets a reference to the wrapped control.
         /// </summary>
-        public GridControl Control { get; }
+        public IGridControl Control { get; }
 
         /// <summary>
         /// Gets a reference to the control editor.
         /// </summary>
-        public GridEditor Editor => Control == null ? null : Control.Editor;
+        public IGridEditor Editor => Control?.Editor;
 
         /// <summary>
         /// Gets whether the value of the grid control is valid.
@@ -26,19 +27,19 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         public bool IsValid => Control.Value != null && Control.Value.IsValid;
 
         /// <summary>
-        /// Gets whether the editor has a configuration (meaning that <see cref="GridEditor.Config"/> isn't <code>null</code>).
+        /// Gets whether the editor has a configuration (meaning that <see cref="IGridEditor.Config"/> isn't <c>null</c>).
         /// </summary>
-        public bool HasConfig => Control != null && Control.Editor != null && Editor.Config != null;
+        public bool HasConfig => Control?.Editor != null && Editor.Config != null;
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Wraps an instance of <see cref="GridControl"/>.
+        /// Wraps an instance of <see cref="IGridControl"/>.
         /// </summary>
         /// <param name="control">The control to be wrap.</param>
-        public GridControlWrapper(GridControl control) {
+        public GridControlWrapper(IGridControl control) {
             Control = control;
         }
 
@@ -65,11 +66,11 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         #region Constructors
 
         /// <summary>
-        /// Wraps an instance of <see cref="GridControl"/>.
+        /// Wraps an instance of <see cref="IGridControl"/>.
         /// </summary>
         /// <param name="control">The control to be wrap.</param>
         /// <param name="value">The type of the value.</param>
-        public GridControlWrapper(GridControl control, TValue value) : base(control) {
+        public GridControlWrapper(IGridControl control, TValue value) : base(control) {
             Value = value;
         }
 
@@ -97,12 +98,12 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         #region Constructors
 
         /// <summary>
-        /// Wraps an instance of <see cref="GridControl"/>.
+        /// Wraps an instance of <see cref="IGridControl"/>.
         /// </summary>
         /// <param name="control">The control to be wrap.</param>
         /// <param name="value">The type of the value.</param>
         /// <param name="config">The type of the editor config.</param>
-        public GridControlWrapper(GridControl control, TValue value, TConfig config) : base(control, value) {
+        public GridControlWrapper(IGridControl control, TValue value, TConfig config) : base(control, value) {
             Config = config;
         }
 
