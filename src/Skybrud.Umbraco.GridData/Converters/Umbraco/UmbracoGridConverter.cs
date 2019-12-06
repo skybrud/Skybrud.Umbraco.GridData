@@ -22,7 +22,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             value = null;
 
             if (IsEmbedEditor(control.Editor)) {
-                value = GridControlEmbedValue.Parse(control, token);
+                value = GridControlEmbedValue.Parse(control, token as JObject);
             } else if (IsMacroEditor(control.Editor)) {
                 value = GridControlMacroValue.Parse(control, token as JObject);
             } else if (IsMediaEditor(control.Editor)) {
