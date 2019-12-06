@@ -6,7 +6,6 @@ using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Json.Converters;
 
 namespace Skybrud.Umbraco.GridData.Values {
-{
 
     /// <summary>
     /// Class representing the embed value of a control.
