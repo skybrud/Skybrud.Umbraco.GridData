@@ -1,58 +1,111 @@
 ﻿using System;
+using System.Text.RegularExpressions;
 using System.Web;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json.Converters;
 
-namespace Skybrud.Umbraco.GridData.Values
-{
+namespace Skybrud.Umbraco.GridData.Values {
 
     /// <summary>
     /// Class representing the embed value of a control.
     /// </summary>
     [JsonConverter(typeof(GridControlValueStringConverter))]
-    public class GridControlEmbedValue : GridControlValueBase
-    {
+    public class GridControlEmbedValue : IGridControlValue, IHtmlString {
 
         #region Properties
+
         /// <summary>
-        /// Gets the width of the embed.
+        /// Gets a reference to the parent control.
         /// </summary>
-        [JsonProperty("width")]
-        public int Width { get; set; }
+        public GridControl Control { get; }
+
         /// <summary>
-        /// Gets the height of the embed.
+        /// Gets a reference to the underlying instance of <see cref="JToken"/>.
         /// </summary>
-        [JsonProperty("height")]
-        public int Height { get; set; }
+        public JToken JToken { get; }
+
         /// <summary>
-        /// Gets the url of the embed.
+        /// Gets a string representing the value.
         /// </summary>
-        [JsonProperty("url")]
-        public string Url { get; set; }
-        /// <summary>
-        /// Gets the info of the embed.
-        /// </summary>
-        [JsonProperty("info")]
-        public string Info { get; set; }
-        /// <summary>
-        /// Gets the preview html of the embed.
-        /// </summary>
-        [JsonProperty("preview")]
-        public HtmlString Preview { get; set; }
+        public string Value { get; protected set; }
 
         /// <summary>
         /// Gets an instance of <see cref="HtmlString"/> representing the text value.
         /// </summary>
         [JsonIgnore]
-        public HtmlString HtmlValue { get; }
+        public HtmlString HtmlValue { get; protected set; }
 
         /// <summary>
-        /// Gets whether the value of the control is valid.
+        /// Gets whether the value is valid. For an instance of <see cref="GridControlHtmlValue"/>, this means
+        /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>
+        /// against the value returned by the <see cref="GetSearchableText"/> method).
         /// </summary>
-        public override bool IsValid => !String.IsNullOrWhiteSpace(HtmlValue.ToHtmlString());
+        [JsonIgnore]
+        public bool IsValid => string.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", string.Empty)) == false;
 
+        /// <summary>
+        /// Gets the width of the embed.
+        /// </summary>
+        [JsonProperty("width")]
+        public int Width { get; set; }
+        
+        /// <summary>
+        /// Gets the height of the embed.
+        /// </summary>
+        [JsonProperty("height")]
+        public int Height { get; set; }
+        
+        /// <summary>
+        /// Gets the url of the embed.
+        /// </summary>
+        [JsonProperty("url")]
+        public string Url { get; set; }
+        
+        /// <summary>
+        /// Gets the info of the embed.
+        /// </summary>
+        [JsonProperty("info")]
+        public string Info { get; set; }
+
+        /// <summary>
+        /// Gets the preview html of the embed.
+        /// </summary>
+        [JsonProperty("preview")]
+        public HtmlString Preview => HtmlValue;
+
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="token"/>.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        /// <param name="token">An instance of <see cref="Newtonsoft.Json.Linq.JToken"/> representing the value of the control</param>
+        protected GridControlEmbedValue(GridControl control, JToken token) {
+
+            Control = control;
+            JToken = token;
+
+            // Handle values prior to Umbraco 8.2
+            if (!(token is JObject obj)) {
+                Value = token.ToString();
+                HtmlValue = new HtmlString(Value);
+                return;
+            }
+
+            Value = obj.GetString("preview");
+            HtmlValue = new HtmlString(Value);
+
+            Width = obj.GetInt16("width");
+            Height = obj.GetInt16("height");
+            Url = obj.GetString("url");
+            Info = obj.GetString("info") ?? string.Empty;
+
+        }
 
         #endregion
 
@@ -61,41 +114,25 @@ namespace Skybrud.Umbraco.GridData.Values
         /// <summary>
         /// Gets a string representing the raw value of the control.
         /// </summary>
-        /// <returns>An instance of <see cref="System.String"/>.</returns>
-        public override string ToString()
-        {
+        /// <returns>An instance of <see cref="string"/>.</returns>
+        public override string ToString() {
             return HtmlValue.ToHtmlString();
         }
-
-        #endregion
-
-        #region Constructors
+        
+        /// <summary>
+        /// Gets a HTML representing the value of the control.
+        /// </summary>
+        /// <returns>An instance of <see cref="string"/>.</returns>
+        public string ToHtmlString() {
+            return Value;
+        }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="obj"/>.
+        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control</param>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        protected GridControlEmbedValue(GridControl control, JToken token, JObject obj = null) : base(control, obj)
-        {
-            if (obj == null)
-            {
-                HtmlValue = new HtmlString(token.ToString());
-            }
-            else
-            {
-                Width = obj.GetInt16("width");
-                Height = obj.GetInt16("height");
-                Url = obj.GetString("url");
-                Info = obj.GetString("info");
-                var previewValue = obj.GetString("preview");
-                if (!string.IsNullOrEmpty(previewValue))
-                {
-                    Preview = new HtmlString(previewValue);
-                    HtmlValue = Preview;
-                }
-            }
+        /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
+        public string GetSearchableText() {
+            return Regex.Replace(Value, "<.*?>", string.Empty) + Environment.NewLine;
         }
 
         #endregion
@@ -106,21 +143,9 @@ namespace Skybrud.Umbraco.GridData.Values
         /// Gets an embed value from the specified <paramref name="control"/> and <paramref name="token"/>.
         /// </summary>
         /// <param name="control">The parent control.</param>
-        /// <param name="token">The instance of <code>JToken</code> to be parsed.</param>
-        public static GridControlEmbedValue Parse(GridControl control, JToken token)
-        {
-            if (token != null)
-            {
-                // legacy: JValue
-                if (token.GetType() == typeof(JValue))
-                {
-                    return new GridControlEmbedValue(control, token);
-                }
-                // Umbraco 8.2+ JObject
-                return new GridControlEmbedValue(control, null, token as JObject);
-            }
-
-            return null;
+        /// <param name="token">The instance of <see cref="Newtonsoft.Json.Linq.JToken"/> to be parsed.</param>
+        public static GridControlEmbedValue Parse(GridControl control, JToken token) {
+            return token == null ? null : new GridControlEmbedValue(control, token);
         }
 
         #endregion
