@@ -51,7 +51,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
         public override string GetSearchableText() {
-            return Regex.Replace(Value, "<.*?>", "") + Environment.NewLine;
+            return Regex.Replace(Value, "<.*?>", " ") + Environment.NewLine;
         }
         
         /// <summary>
