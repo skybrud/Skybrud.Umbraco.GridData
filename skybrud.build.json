@@ -22,39 +22,6 @@
             ]
           }
         ]
-      },
-      {
-        "alias": "umbraco__",
-        "destination": "releases/umbraco/{packageName}.v{version}.zip",
-        "info": {
-          "name": "{packageName}",
-          "version": "{version}",
-          "url": "{projectUrl}",
-          "license": "{license}",
-          "licenseUrl": "{licenseUrl}",
-          "readme": "{description}",
-          "requirements": "8.0.0",
-          "author": {
-            "name": "{company}",
-            "url": "https://www.skybrud.dk/"
-          },
-          "contributors": [
-            "Anders Bjerner",
-            "René Pjengaard"
-          ]
-        },
-        "files": [
-          {
-            "source": "src/{packageName}/bin/Release/net472",
-            "destination": "bin/",
-            "patterns": [
-              "Skybrud.Essentials.dll",
-              "Skybrud.Essentials.xml",
-              "{packageName}.dll",
-              "{packageName}.xml"
-            ]
-          }
-        ]
       }
     ]
   }
