@@ -37,6 +37,7 @@ namespace UnitTestProject1 {
             Assert.AreEqual(null, embed.Info);
             Assert.AreEqual("<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/VTnDYxwhSaI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>", embed.Preview + "");
 
+            Assert.AreEqual("<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/VTnDYxwhSaI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>", embed.Value);
             Assert.AreEqual("<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/VTnDYxwhSaI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>", embed.HtmlValue + "");
 
         }
@@ -66,6 +67,7 @@ namespace UnitTestProject1 {
             Assert.AreEqual("", embed.Info);
             Assert.AreEqual("<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/VTnDYxwhSaI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>", embed.Preview + "");
 
+            Assert.AreEqual("<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/VTnDYxwhSaI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>", embed.Value);
             Assert.AreEqual("<iframe width=\"360\" height=\"203\" src=\"https://www.youtube.com/embed/VTnDYxwhSaI?feature=oembed\" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>", embed.HtmlValue + "");
 
         }

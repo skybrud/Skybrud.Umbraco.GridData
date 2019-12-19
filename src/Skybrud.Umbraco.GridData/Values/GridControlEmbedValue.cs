@@ -39,12 +39,11 @@ namespace Skybrud.Umbraco.GridData.Values {
         public HtmlString HtmlValue { get; protected set; }
 
         /// <summary>
-        /// Gets whether the value is valid. For an instance of <see cref="GridControlHtmlValue"/>, this means
-        /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>
-        /// against the value returned by the <see cref="GetSearchableText"/> method).
+        /// Gets whether the value is valid. For an instance of <see cref="GridControlEmbedValue"/>, this means
+        /// checking whether the <see cref="Value"/> property has a value.
         /// </summary>
         [JsonIgnore]
-        public bool IsValid => string.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", string.Empty)) == false;
+        public bool IsValid => string.IsNullOrWhiteSpace(Value) == false;
 
         /// <summary>
         /// Gets the width of the embed.
