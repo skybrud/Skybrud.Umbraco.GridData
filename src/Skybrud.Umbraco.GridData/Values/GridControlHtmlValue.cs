@@ -23,11 +23,11 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlHtmlValue"/>, this means
-        /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>
+        /// checking whether the specified text is not an empty string (using <see cref="string.IsNullOrWhiteSpace"/>
         /// against the value returned by the <see cref="GetSearchableText"/> method).
         /// </summary>
         [JsonIgnore]
-        public override bool IsValid => !String.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", ""));
+        public override bool IsValid => !string.IsNullOrWhiteSpace(Regex.Replace(Value, "<(p|/p)>", string.Empty));
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
-        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
+        /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
         public override string GetSearchableText() {
             return Regex.Replace(Value, "<.*?>", "") + Environment.NewLine;
         }
@@ -57,7 +57,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// <summary>
         /// Gets a string representing the raw value of the control.
         /// </summary>
-        /// <returns>An instance of <see cref="System.String"/>.</returns>
+        /// <returns>An instance of <see cref="string"/>.</returns>
         public string ToHtmlString() {
             return Value;
         }
