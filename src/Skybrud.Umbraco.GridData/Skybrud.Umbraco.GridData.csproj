@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.0.0-beta004</Version>
+    <Version>3.0.0</Version>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
     <Company>Skybrud.dk</Company>
     <Description>Strongly typed models for the grid in Umbraco 8.</Description>
-    <Copyright>Copyright © 2019</Copyright>
+    <Copyright>Copyright © 2020</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
