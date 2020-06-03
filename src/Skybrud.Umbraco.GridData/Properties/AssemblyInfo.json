@@ -3,8 +3,8 @@
   "description": "Skybrud.Umbraco.GridData is a small package with a strongly typed model for the grid in Umbraco 7.2 and above.",
   "company": "Skybrud.dk",
   "product": "Skybrud.Umbraco.GridData",
-  "copyright": "Copyright © 2018",
-  "version": "2.0.6.0",
-  "informationalVersion": "2.0.6",
-  "fileVersion": "0.0.1378.1"
+  "copyright": "Copyright © 2020",
+  "version": "2.0.7.0",
+  "informationalVersion": "2.0.7",
+  "fileVersion": "0.0.2085.2"
 }
