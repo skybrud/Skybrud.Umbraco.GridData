@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Extensions;
@@ -58,12 +59,14 @@ namespace Skybrud.Umbraco.GridData {
         /// Same as <see cref="Name"/>.
         /// </summary>
         [Obsolete]
+        [JsonIgnore]
         public string name => Name;
 
         /// <summary>
         /// Gets the underlying JSON array for the <c>sections</c> property. 
         /// </summary>
         [Obsolete]
+        [JsonIgnore]
         public dynamic sections => ((dynamic) JObject).sections;
 
         // ReSharper restore InconsistentNaming
