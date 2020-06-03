@@ -42,14 +42,12 @@ namespace Skybrud.Umbraco.GridData {
         public bool HasRows => Rows.Length > 0;
 
         /// <summary>
-        /// Gets the first row of the section. If the section doesn't contain any rows, this property will return
-        /// <code>null</code>.
+        /// Gets the first row of the section. If the section doesn't contain any rows, this property will return <c>null</c>.
         /// </summary>
         public GridRow FirstRow => Rows.FirstOrDefault();
 
         /// <summary>
-        /// Gets the last row of the section. If the section doesn't contain any rows, this property will return
-        /// <code>null</code>.
+        /// Gets the last row of the section. If the section doesn't contain any rows, this property will return <c>null</c>.
         /// </summary>
         public GridRow LastRow => Rows.LastOrDefault();
 
@@ -70,7 +68,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the section - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the section.</returns>
+        /// <returns>An instance of <see cref="System.String"/> representing the value of the section.</returns>
         public virtual string GetSearchableText() {
             return Rows.Aggregate("", (current, row) => current + row.GetSearchableText());
         }
@@ -79,7 +77,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Generates the HTML for the Grid row.
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
-        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        /// <returns>The grid row as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper) {
             return GetHtml(helper, Name);
         }
@@ -89,12 +87,12 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
         /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid row.</param>
-        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        /// <returns>The grid row as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper, string partial) {
 
             // Some input validation
             if (helper == null) throw new ArgumentNullException(nameof(helper));
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // Prepend the path to the "Sections" folder if not already specified
             if (GridUtils.IsValidPartialName(partial)) {

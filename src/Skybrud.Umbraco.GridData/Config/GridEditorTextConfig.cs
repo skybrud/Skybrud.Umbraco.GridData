@@ -1,5 +1,4 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
@@ -21,7 +20,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <summary>
         /// Gets whether the <see cref="Style"/> property has a value.
         /// </summary>
-        public bool HasStyle => !String.IsNullOrWhiteSpace(Style);
+        public bool HasStyle => !string.IsNullOrWhiteSpace(Style);
 
         /// <summary>
         /// Gets the markup for the text.
@@ -32,7 +31,7 @@ namespace Skybrud.Umbraco.GridData.Config {
         /// <summary>
         /// Gets whether the <see cref="Markup"/> property has a value.
         /// </summary>
-        public bool HasMarkup => !String.IsNullOrWhiteSpace(Markup);
+        public bool HasMarkup => !string.IsNullOrWhiteSpace(Markup);
 
         #endregion
 

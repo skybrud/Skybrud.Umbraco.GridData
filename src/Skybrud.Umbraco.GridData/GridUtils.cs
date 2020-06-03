@@ -37,7 +37,7 @@ namespace Skybrud.Umbraco.GridData {
             string str = GetFileVersion().Split('.')[2];
 
             // Parse the string into an integer
-            return Int32.Parse(str);
+            return int.Parse(str);
 
         }
 
@@ -58,7 +58,7 @@ namespace Skybrud.Umbraco.GridData {
             string str = GetFileVersion().Split('.')[3];
 
             // Parse the string into an integer
-            return Int32.Parse(str);
+            return int.Parse(str);
 
         }
         
@@ -70,7 +70,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets whether the specified <paramref name="name"/> is a valid partial name.
         /// </summary>
         /// <param name="name">The name of the partial.</param>
-        /// <returns><code>true</code> if <paramref name="name"/> is valid; otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if <paramref name="name"/> is valid; otherwise <c>false</c>.</returns>
         public static bool IsValidPartialName(string name) {
             return Regex.IsMatch(name ?? "", "^[a-zA-Z0-9-\\._ ]+$");
         }

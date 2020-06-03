@@ -45,8 +45,7 @@ namespace Skybrud.Umbraco.GridData {
         public GridControlWrapper GetControlWrapper(GridControl control) {
             foreach (IGridConverter converter in Converters) {
                 try {
-                    GridControlWrapper wrapper;
-                    if (converter.GetControlWrapper(control, out wrapper)) return wrapper; 
+                    if (converter.GetControlWrapper(control, out GridControlWrapper wrapper)) return wrapper; 
                 } catch (Exception ex) {
                     global::Umbraco.Core.Composing.Current.Logger.Error<GridContext>(ex, "Converter of type " + converter + " failed for GetControlWrapper()");
                 }

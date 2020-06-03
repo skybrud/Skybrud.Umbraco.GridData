@@ -1,14 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Web;
+﻿using System.Linq;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
-using Umbraco.Core;
 using Umbraco.Core.Composing;
-using Umbraco.Core.Configuration;
 using Umbraco.Core.Configuration.Grid;
-using Umbraco.Core.IO;
 
 namespace Skybrud.Umbraco.GridData {
     
@@ -28,10 +22,10 @@ namespace Skybrud.Umbraco.GridData {
             JObject editor = control.JObject.GetObject("editor");
 
             // Get the alias of the editor
-            string alias = editor == null ? null : editor.GetString("alias");
+            string alias = editor?.GetString("alias");
 
             // Skip if we dont have an alias
-            if (String.IsNullOrWhiteSpace(alias)) return;
+            if (string.IsNullOrWhiteSpace(alias)) return;
 
             // Get a reference to the grid configuration
             IGridConfig config = Current.Configs.GetConfig<IGridConfig>();

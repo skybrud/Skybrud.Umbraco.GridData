@@ -34,7 +34,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// checking whether a macro alias has been specified.
         /// </summary>
         [JsonIgnore]
-        public override bool IsValid => !String.IsNullOrWhiteSpace(MacroAlias);
+        public override bool IsValid => !string.IsNullOrWhiteSpace(MacroAlias);
 
         #region Constructors
 

@@ -48,10 +48,10 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// </summary>
         /// <param name="source">The source string.</param>
         /// <param name="value">The value to search for.</param>
-        /// <returns><code>true</code> if <paramref name="source"/> contains <paramref name="value"/>; otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if <paramref name="source"/> contains <paramref name="value"/>; otherwise <c>false</c>.</returns>
         protected bool ContainsIgnoreCase(string source, string value) {
-            if (String.IsNullOrWhiteSpace(source)) return false;
-            if (String.IsNullOrWhiteSpace(value)) return false;
+            if (string.IsNullOrWhiteSpace(source)) return false;
+            if (string.IsNullOrWhiteSpace(value)) return false;
             return CultureInfo.InvariantCulture.CompareInfo.IndexOf(source, value, CompareOptions.IgnoreCase) >= 0;
         }
 
@@ -60,10 +60,10 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// </summary>
         /// <param name="source">The source string.</param>
         /// <param name="value">The value to search for.</param>
-        /// <returns><code>true</code> if <paramref name="value"/> equal to <paramref name="source"/>; otherwise <code>false</code>.</returns>
+        /// <returns><c>true</c> if <paramref name="value"/> equal to <paramref name="source"/>; otherwise <c>false</c>.</returns>
         protected bool EqualsIgnoreCase(string source, string value) {
-            if (String.IsNullOrWhiteSpace(source)) return false;
-            if (String.IsNullOrWhiteSpace(value)) return false;
+            if (string.IsNullOrWhiteSpace(source)) return false;
+            if (string.IsNullOrWhiteSpace(value)) return false;
             return source.Equals(value, StringComparison.InvariantCultureIgnoreCase);
         }
 

@@ -72,8 +72,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="value">When this method returns, contains the value associated with the specified key, if the
         /// key is found; otherwise, the default value for the type of the value parameter. This parameter is passed
         /// uninitialized.</param>
-        /// <returns><code>true</code> if the dictionary contains an element with the specified key; otherwise,
-        /// <code>false</code>.</returns>
+        /// <returns><c>true</c> if the dictionary contains an element with the specified key; otherwise, <c>false</c>.</returns>
         public bool TryGetValue(string key, out string value) {
             return _dictionary.TryGetValue(key, out value);
         }
@@ -98,7 +97,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GridDictionary"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        /// <returns>Returns an instance of <see cref="GridDictionary"/>.</returns>
+        /// <returns>An instance of <see cref="GridDictionary"/>.</returns>
         public static GridDictionary Parse(JObject obj) {
 
             // Initialize an empty dictionary
@@ -107,7 +106,7 @@ namespace Skybrud.Umbraco.GridData {
             // Add all properties to the dictionary
             if (obj != null) {
                 foreach (JProperty property in obj.Properties()) {
-                    config.Add(property.Name, String.Format(CultureInfo.InvariantCulture, "{0}", property.Value));
+                    config.Add(property.Name, string.Format(CultureInfo.InvariantCulture, "{0}", property.Value));
                 }
             }
 

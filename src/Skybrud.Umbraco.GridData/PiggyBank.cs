@@ -10,15 +10,11 @@ namespace Skybrud.Umbraco.GridData {
     /// memories. It is however not recommended to use this class.
     /// </summary>
     public class PiggyBank {
-
-        private static readonly PiggyBank NomNom = new PiggyBank();
-
+        
         /// <summary>
         /// Gets one little piggy.
         /// </summary>
-        public static PiggyBank OneLittlePiggy {
-            get { return NomNom; }
-        }
+        public static PiggyBank OneLittlePiggy { get; } = new PiggyBank();
 
         private PiggyBank() { }
         

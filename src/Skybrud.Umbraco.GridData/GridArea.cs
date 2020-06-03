@@ -42,7 +42,7 @@ namespace Skybrud.Umbraco.GridData {
         public bool AllowAll { get; private set; }
 
         /// <summary>
-        /// Gets an array of all editors allowed for this area. If <see cref="AllowAll"/> is <code>true</code>, this
+        /// Gets an array of all editors allowed for this area. If <see cref="AllowAll"/> is <c>true</c>, this
         /// array may be empty.
         /// </summary>
         public string[] Allowed { get; private set; }
@@ -69,17 +69,15 @@ namespace Skybrud.Umbraco.GridData {
 
         /// <summary>
         /// Gets the first control of the area. If the area doesn't contain
-        /// any controls, this property will return <code>null</code>.
+        /// any controls, this property will return <c>null</c>.
         /// </summary>
         public GridControl FirstControl => Controls.FirstOrDefault();
 
         /// <summary>
         /// Gets the last control of the area. If the area doesn't contain
-        /// any controls, this property will return <code>null</code>.
+        /// any controls, this property will return <c>null</c>.
         /// </summary>
-        public GridControl LastControl {
-            get { return Controls.LastOrDefault(); }
-        }
+        public GridControl LastControl => Controls.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one control within the area is valid.
@@ -105,7 +103,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the area - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the area.</returns>
+        /// <returns>An instance of <see cref="System.String"/> representing the value of the area.</returns>
         public override string GetSearchableText() {
             return Controls.Aggregate("", (current, control) => current + control.GetSearchableText());
         }

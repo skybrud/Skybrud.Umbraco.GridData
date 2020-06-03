@@ -53,8 +53,8 @@ namespace Skybrud.Umbraco.GridData {
         public string Icon { get; private set; }
 
         /// <summary>
-        /// Gets the configuration object for the editor. This property will return <code>null</code> if the
-        /// corresponding property in the underlying JSON is also <code>null</code>.
+        /// Gets the configuration object for the editor. This property will return <c>null</c> if the
+        /// corresponding property in the underlying JSON is also <c>null</c>.
         /// </summary>
         [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
         public IGridEditorConfig Config { get; set; }
@@ -102,8 +102,7 @@ namespace Skybrud.Umbraco.GridData {
             JToken config = obj.GetValue("config");
             foreach (IGridConverter converter in GridContext.Current.Converters) {
                 try {
-                    IGridEditorConfig converted;
-                    if (!converter.ConvertEditorConfig(editor, config, out converted)) continue;
+                    if (!converter.ConvertEditorConfig(editor, config, out IGridEditorConfig converted)) continue;
                     editor.Config = converted;
                     break;
                 } catch (Exception ex) {

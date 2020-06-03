@@ -15,7 +15,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="row">The row to be rendered.</param>
         /// <returns>An instance of <see cref="HtmlString"/>.</returns>
         public static HtmlString RenderGridRow(this HtmlHelper helper, GridRow row) {
-            if (helper == null || row == null) return new HtmlString("");
+            if (helper == null || row == null) return new HtmlString(string.Empty);
             return row.GetHtml(helper);
         }
 
@@ -27,7 +27,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="partial">The partial view to be used for the rendering.</param>
         /// <returns>An instance of <see cref="HtmlString"/>.</returns>
         public static HtmlString RenderGridRow(this HtmlHelper helper, GridRow row, string partial) {
-            if (helper == null || row == null) return new HtmlString("");
+            if (helper == null || row == null) return new HtmlString(string.Empty);
             return row.GetHtml(helper, partial);
         }
 
@@ -39,7 +39,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <param name="fallbackPartial">The fallback partial view to be used if no row partial is found by <see cref="GridRow.Name"/> for the rendering.</param>
         /// <returns>An instance of <see cref="T:System.Web.HtmlString" />.</returns>
         public static HtmlString RenderGridRowOrFallback(this HtmlHelper helper, GridRow row, string fallbackPartial) {
-            if (helper == null || row == null) return new HtmlString("");
+            if (helper == null || row == null) return new HtmlString(string.Empty);
             return RenderGridRowOrFallback(helper, row, row.Name, fallbackPartial);
         }
 
@@ -53,7 +53,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// <returns>An instance of <see cref="T:System.Web.HtmlString" />.</returns>
         public static HtmlString RenderGridRowOrFallback(this HtmlHelper helper, GridRow row, string partial, string fallbackPartial) {
 
-            if (helper == null || row == null) return new HtmlString("");
+            if (helper == null || row == null) return new HtmlString(string.Empty);
 
             // Append the virtual path to the folder?
             if (GridUtils.IsValidPartialName(partial)) {

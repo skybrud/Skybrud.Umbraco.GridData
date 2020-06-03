@@ -138,9 +138,9 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the grid model - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the grid model.</returns>
+        /// <returns>An instance of <see cref="string"/> representing the value of the grid model.</returns>
         public virtual string GetSearchableText() {
-            return Sections.Aggregate("", (current, section) => current + section.GetSearchableText());
+            return Sections.Aggregate(string.Empty, (current, section) => current + section.GetSearchableText());
         }
 
         #endregion
@@ -153,7 +153,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         public static GridDataModel GetEmptyModel() {
             return new GridDataModel(null) {
-                PropertyAlias = ""
+                PropertyAlias = string.Empty
             };
         }
 
@@ -173,7 +173,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="json">The JSON string to be deserialized.</param>
         public static GridDataModel Deserialize(string json) {
-            return Deserialize(json, "");
+            return Deserialize(json, string.Empty);
         }
 
         /// <summary>

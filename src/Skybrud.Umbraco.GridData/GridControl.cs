@@ -12,7 +12,6 @@ using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using Skybrud.Umbraco.GridData.Rendering;
-using Umbraco.Core.Configuration;
 using Umbraco.Core.Logging;
 
 namespace Skybrud.Umbraco.GridData {
@@ -98,7 +97,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Generates the HTML for the Grid control.
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
-        /// <returns>Returns the Grid control as an instance of <see cref="HtmlString"/>.</returns>
+        /// <returns>The Grid control as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper) {
 
             // Some input validation
@@ -138,12 +137,12 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid control.</param>
         /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid control.</param>
-        /// <returns>Returns the Grid control as an instance of <see cref="HtmlString"/>.</returns>
+        /// <returns>The Grid control as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper, string partial) {
 
             // Some input validation
             if (helper == null) throw new ArgumentNullException(nameof(helper));
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // If the control isn't valid, we shouldn't render it
             if (!IsValid) return new HtmlString("");
@@ -213,7 +212,7 @@ namespace Skybrud.Umbraco.GridData {
 
             // Some input validation
             if (helper == null) throw new ArgumentNullException(nameof(helper));
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // If the control isn't valid, we shouldn't render it
             if (!IsValid) return new HtmlString("");
@@ -244,7 +243,7 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
         public virtual string GetSearchableText() {
-            return IsValid ? Value?.GetSearchableText() ?? String.Empty : String.Empty;
+            return IsValid ? Value?.GetSearchableText() ?? string.Empty : string.Empty;
         }
 
         /// <summary>
@@ -304,8 +303,7 @@ namespace Skybrud.Umbraco.GridData {
             JToken value = obj.GetValue("value");
             foreach (IGridConverter converter in GridContext.Current.Converters) {
                 try {
-                    IGridControlValue converted;
-                    if (!converter.ConvertControlValue(control, value, out converted)) continue;
+                    if (!converter.ConvertControlValue(control, value, out IGridControlValue converted)) continue;
                     control.Value = converted;
                     break;
                 } catch (Exception ex) {

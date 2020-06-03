@@ -40,7 +40,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets whether the <see cref="AlternativeText"/> property has a value.
         /// </summary>
         [JsonIgnore]
-        public bool HasAlternativeText => !String.IsNullOrWhiteSpace(AlternativeText);
+        public bool HasAlternativeText => !string.IsNullOrWhiteSpace(AlternativeText);
 
         /// <summary>
         /// Gets the caption of the media.
@@ -51,7 +51,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// <summary>
         /// Gets whether the <see cref="Caption"/> property has a value.
         /// </summary>
-        public bool HasCaption => !String.IsNullOrWhiteSpace(Caption);
+        public bool HasCaption => !string.IsNullOrWhiteSpace(Caption);
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlMediaValue"/>, this means

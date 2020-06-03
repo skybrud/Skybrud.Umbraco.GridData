@@ -17,7 +17,7 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         /// <summary>
         /// Gets a reference to the control editor.
         /// </summary>
-        public GridEditor Editor => Control == null ? null : Control.Editor;
+        public GridEditor Editor => Control?.Editor;
 
         /// <summary>
         /// Gets whether the value of the grid control is valid.
@@ -25,9 +25,9 @@ namespace Skybrud.Umbraco.GridData.Rendering {
         public bool IsValid => Control.Value != null && Control.Value.IsValid;
 
         /// <summary>
-        /// Gets whether the editor has a configuration (meaning that <see cref="GridEditor.Config"/> isn't <code>null</code>).
+        /// Gets whether the editor has a configuration (meaning that <see cref="GridEditor.Config"/> isn't <c>null</c>).
         /// </summary>
-        public bool HasConfig => Control != null && Control.Editor != null && Editor.Config != null;
+        public bool HasConfig => Control?.Editor != null && Editor.Config != null;
 
         #endregion
 

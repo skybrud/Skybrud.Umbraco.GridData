@@ -2,7 +2,6 @@
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Mvc.Html;
-using Umbraco.Core.Models;
 using Umbraco.Core.Models.PublishedContent;
 using Umbraco.Web;
 
@@ -72,7 +71,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         public static HtmlString GetTypedGridHtml(this HtmlHelper html, GridDataModel model, string framework = DefaultFramework) {
 
             // Return an empty string if the model is empty.
-            if (model == null) return new HtmlString(String.Empty);
+            if (model == null) return new HtmlString(string.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, model);
@@ -89,7 +88,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
 
             // Get the property value
             GridDataModel value = property.Value() as GridDataModel;
-            if (value == null) return new HtmlString(String.Empty);
+            if (value == null) return new HtmlString(string.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, value);
@@ -130,7 +129,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
 
             // Get the property value
             GridDataModel value = property.Value() as GridDataModel;
-            if (value == null) return new HtmlString(String.Empty);
+            if (value == null) return new HtmlString(string.Empty);
             
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, value);
@@ -147,7 +146,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
 
             // Get the property value
             GridDataModel value = property.Value() as GridDataModel;
-            if (value == null) return new HtmlString(String.Empty);
+            if (value == null) return new HtmlString(string.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, value);
@@ -188,7 +187,7 @@ namespace Skybrud.Umbraco.GridData.Extensions {
 
             // Get the property value
             GridDataModel value = property.Value() as GridDataModel;
-            if (value == null) return new HtmlString(String.Empty);
+            if (value == null) return new HtmlString(string.Empty);
 
             // Load the partial view based on the specified framework
             return html.Partial("TypedGrid/" + framework, value);

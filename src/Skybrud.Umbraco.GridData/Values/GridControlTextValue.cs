@@ -31,9 +31,9 @@ namespace Skybrud.Umbraco.GridData.Values {
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlTextValue"/>, this means
-        /// checking whether the specified text is not an empty string (using <see cref="String.IsNullOrWhiteSpace"/>).
+        /// checking whether the specified text is not an empty string (using <see cref="string.IsNullOrWhiteSpace"/>).
         /// </summary>
-        public virtual bool IsValid => !String.IsNullOrWhiteSpace(Value);
+        public virtual bool IsValid => !string.IsNullOrWhiteSpace(Value);
 
         #endregion
 
@@ -47,7 +47,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         protected GridControlTextValue(GridControl control, JToken token) {
             Control = control;
             JToken = token;
-            Value = token.Value<string>() + "";
+            Value = token.Value<string>() + string.Empty;
         }
 
         #endregion

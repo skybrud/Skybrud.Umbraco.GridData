@@ -39,7 +39,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets whether a label has been specified for the definition of this row.
         /// </summary>
-        public bool HasLabel => !String.IsNullOrWhiteSpace(Label);
+        public bool HasLabel => string.IsNullOrWhiteSpace(Label) == false;
 
         /// <summary>
         /// Gets the name of the row.
@@ -67,14 +67,12 @@ namespace Skybrud.Umbraco.GridData {
         public bool HasAreas => Areas.Length > 0;
 
         /// <summary>
-        /// Gets the first area of the row. If the row doesn't contain any areas, this property will return
-        /// <code>null</code>.
+        /// Gets the first area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
         public GridArea FirstRow => Areas.FirstOrDefault();
 
         /// <summary>
-        /// Gets the last area of the row. If the row doesn't contain any areas, this property will return
-        /// <code>null</code>.
+        /// Gets the last area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
         public GridArea LastRow => Areas.LastOrDefault();
 
@@ -135,7 +133,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Generates the HTML for the Grid row.
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
-        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        /// <returns>The grid row as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper) {
             return GetHtml(helper, Name);
         }
@@ -145,12 +143,12 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
         /// <param name="partial">The alias or virtual path to the partial view for rendering the Grid row.</param>
-        /// <returns>Returns the Grid row as an instance of <see cref="HtmlString"/>.</returns>
+        /// <returns>The grid row as an instance of <see cref="HtmlString"/>.</returns>
         public HtmlString GetHtml(HtmlHelper helper, string partial) {
 
             // Some input validation
-            if (helper == null) throw new ArgumentNullException("helper");
-            if (String.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException("partial");
+            if (helper == null) throw new ArgumentNullException(nameof(helper));
+            if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
 
             // Prepend the path to the "Rows" folder if not already specified
             if (GridUtils.IsValidPartialName(partial)) {
@@ -165,7 +163,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the row - eg. to be used in Examine.
         /// </summary>
-        /// <returns>Returns an instance of <see cref="System.String"/> representing the value of the row.</returns>
+        /// <returns>An instance of <see cref="System.String"/> representing the value of the row.</returns>
         public override string GetSearchableText() {
             return Areas.Aggregate("", (current, area) => current + area.GetSearchableText());
         }
