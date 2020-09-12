@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
 using Umbraco.Core.Logging;
@@ -100,7 +101,7 @@ namespace Skybrud.Umbraco.GridData {
 
             // Parse the editor configuration
             JToken config = obj.GetValue("config");
-            foreach (IGridConverter converter in GridContext.Current.Converters) {
+            foreach (IGridConverter converter in GridConverterCollection.Current) {
                 try {
                     if (!converter.ConvertEditorConfig(editor, config, out IGridEditorConfig converted)) continue;
                     editor.Config = converted;

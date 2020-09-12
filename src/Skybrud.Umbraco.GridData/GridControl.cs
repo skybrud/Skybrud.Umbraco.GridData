@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Attributes;
+using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Extensions;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Json;
@@ -301,7 +302,7 @@ namespace Skybrud.Umbraco.GridData {
 
             // Parse the control value
             JToken value = obj.GetValue("value");
-            foreach (IGridConverter converter in GridContext.Current.Converters) {
+            foreach (IGridConverter converter in GridConverterCollection.Current) {
                 try {
                     if (!converter.ConvertControlValue(control, value, out IGridControlValue converted)) continue;
                     control.Value = converted;

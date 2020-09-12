@@ -3,13 +3,76 @@ using System.Collections.Generic;
 using System.Linq;
 using Skybrud.Umbraco.GridData.Converters.Umbraco;
 using Skybrud.Umbraco.GridData.Interfaces;
+using Umbraco.Core;
+using Umbraco.Core.Composing;
 
 namespace Skybrud.Umbraco.GridData.Converters {
+
 
     /// <summary>
     /// Collection of <see cref="IGridConverter"/>.
     /// </summary>
-    public class GridConverterCollection : IEnumerable<IGridConverter> {
+    public class GridConverterCollection : BuilderCollectionBase<IGridConverter> {
+
+        /// <summary>
+        /// Gets the current converter collection.
+        /// </summary>
+        public static GridConverterCollection Current => global::Umbraco.Core.Composing.Current.Factory.GetInstance<GridConverterCollection>();
+
+        /// <summary>
+        /// Initializes a new converter collection based on the specified <paramref name="items"/>.
+        /// </summary>
+        /// <param name="items">The items to make up the collection.</param>
+        public GridConverterCollection(IEnumerable<IGridConverter> items) : base(items) { }
+
+    }
+
+
+    
+
+    public class GridConverterCollectionBuilder : OrderedCollectionBuilderBase<GridConverterCollectionBuilder, GridConverterCollection, IGridConverter> {
+        
+        /// <inheritdoc />
+        protected override GridConverterCollectionBuilder This => this;
+
+    }
+    
+    /// <summary>
+    /// Provides extension methods to the <see cref="Composition"/> class.
+    /// </summary>
+    public static class GridCompositionExtensions {
+
+        /// <summary>
+        /// Gets the video picker provider collection builder.
+        /// </summary>
+        /// <param name="composition">The composition.</param>
+        public static GridConverterCollectionBuilder GridConverters(this Composition composition) {
+            return composition.WithCollectionBuilder<GridConverterCollectionBuilder>();
+        }
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /// <summary>
+    /// Collection of <see cref="IGridConverter"/>.
+    /// </summary>
+    public class GridConverterCollectionOld : IEnumerable<IGridConverter> {
 
         #region Private fields
 
