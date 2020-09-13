@@ -242,9 +242,10 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
-        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
-        public virtual string GetSearchableText() {
-            return IsValid ? Value?.GetSearchableText() ?? string.Empty : string.Empty;
+        /// <param name="context">The current grid context.</param>
+        /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
+        public virtual string GetSearchableText(GridContext context) {
+            return IsValid ? Value?.GetSearchableText(context) ?? string.Empty : string.Empty;
         }
 
         /// <summary>

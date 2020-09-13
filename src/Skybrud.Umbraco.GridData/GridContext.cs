@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Linq;
 using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
 using Umbraco.Core;
 using Umbraco.Core.Logging;
+using Umbraco.Core.Models.PublishedContent;
+using Umbraco.Web.PublishedCache;
 
 namespace Skybrud.Umbraco.GridData {
     
@@ -36,6 +39,17 @@ namespace Skybrud.Umbraco.GridData {
         #endregion
 
         #region Member methods
+
+        public virtual string GetSearchableText(IPublishedElement element) {
+            foreach (IGridElementConverter converter in _converters.OfType<IGridElementConverter>()) {
+                try {
+                    if (converter.GetSearchableText(this, element, out string text)) return text;
+                } catch (Exception ex)  {
+                    global::Umbraco.Core.Composing.Current.Logger.Error<GridContext>(ex, "Converter of type " + converter + " failed for GetSearchableText()");
+                }
+            }
+            return string.Empty;
+        }
         
         /// <summary>
         /// Gets an instance of <see cref="GridControlWrapper"/> based on the specified <paramref name="control"/>.

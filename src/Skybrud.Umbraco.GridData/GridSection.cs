@@ -69,8 +69,8 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets a textual representation of the section - eg. to be used in Examine.
         /// </summary>
         /// <returns>An instance of <see cref="System.String"/> representing the value of the section.</returns>
-        public virtual string GetSearchableText() {
-            return Rows.Aggregate("", (current, row) => current + row.GetSearchableText());
+        public virtual string GetSearchableText(GridContext context) {
+            return Rows.Aggregate("", (current, row) => current + row.GetSearchableText(context));
         }
 
         /// <summary>

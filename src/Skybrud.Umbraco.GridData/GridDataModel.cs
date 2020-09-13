@@ -143,7 +143,16 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <returns>An instance of <see cref="string"/> representing the value of the grid model.</returns>
         public virtual string GetSearchableText() {
-            return Sections.Aggregate(string.Empty, (current, section) => current + section.GetSearchableText());
+            return GetSearchableText(GridContext.Current);
+        }
+
+        /// <summary>
+        /// Gets a textual representation of the grid model - eg. to be used in Examine.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <returns>An instance of <see cref="string"/> representing the value of the grid model.</returns>
+        public virtual string GetSearchableText(GridContext context) {
+            return Sections.Aggregate(Environment.NewLine, (current, section) => current + section.GetSearchableText(context));
         }
 
         #endregion

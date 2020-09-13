@@ -22,8 +22,9 @@ namespace Skybrud.Umbraco.GridData.Interfaces {
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
-        /// <returns>An instance of <see cref="System.String"/> with the value as a searchable text.</returns>
-        string GetSearchableText();
+        /// <param name="context">The current grid context.</param>
+        /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
+        string GetSearchableText(GridContext context);
 
     }
 

@@ -56,8 +56,9 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the element - eg. to be used in Examine.
         /// </summary>
+        /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="string"/> representing the value of the element.</returns>
-        public abstract string GetSearchableText();
+        public abstract string GetSearchableText(GridContext context);
 
         #endregion
 

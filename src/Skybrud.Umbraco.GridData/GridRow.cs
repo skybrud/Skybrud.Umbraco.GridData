@@ -163,9 +163,10 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the row - eg. to be used in Examine.
         /// </summary>
+        /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="System.String"/> representing the value of the row.</returns>
-        public override string GetSearchableText() {
-            return Areas.Aggregate("", (current, area) => current + area.GetSearchableText());
+        public override string GetSearchableText(GridContext context) {
+            return Areas.Aggregate(Environment.NewLine, (current, area) => current + area.GetSearchableText(context));
         }
 
         #endregion

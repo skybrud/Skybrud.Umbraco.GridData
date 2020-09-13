@@ -103,9 +103,10 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets a textual representation of the area - eg. to be used in Examine.
         /// </summary>
+        /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="System.String"/> representing the value of the area.</returns>
-        public override string GetSearchableText() {
-            return Controls.Aggregate("", (current, control) => current + control.GetSearchableText());
+        public override string GetSearchableText(GridContext context) {
+            return Controls.Aggregate(Environment.NewLine, (current, control) => current + control.GetSearchableText(context));
         }
 
         #endregion
@@ -120,7 +121,7 @@ namespace Skybrud.Umbraco.GridData {
         public static GridArea Parse(GridRow row, JObject obj) {
 
             // Some input validation
-            if (obj == null) throw new ArgumentNullException("obj");
+            if (obj == null) throw new ArgumentNullException(nameof(obj));
             
             // Parse the array of allow blocks
             JArray allowed = obj.GetArray("allowed");

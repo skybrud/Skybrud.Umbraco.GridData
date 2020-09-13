@@ -128,8 +128,9 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
+        /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
-        public string GetSearchableText() {
+        public string GetSearchableText(GridContext context) {
             return Environment.NewLine;
         }
 
