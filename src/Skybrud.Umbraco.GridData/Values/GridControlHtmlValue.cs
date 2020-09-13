@@ -19,7 +19,7 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// Gets an instance of <see cref="HtmlString"/> representing the text value.
         /// </summary>
         [JsonIgnore]
-        public HtmlString HtmlValue { get; }
+        public HtmlString HtmlValue { get; protected set; }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlHtmlValue"/>, this means

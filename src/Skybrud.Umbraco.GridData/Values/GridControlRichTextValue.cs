@@ -1,6 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using System.Web;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Json.Converters;
+using Umbraco.Web.Composing;
+using Umbraco.Web.Templates;
 
 namespace Skybrud.Umbraco.GridData.Values {
 
@@ -17,7 +20,18 @@ namespace Skybrud.Umbraco.GridData.Values {
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
-        protected GridControlRichTextValue(GridControl control, JToken token) : base(control, token) { }
+        protected GridControlRichTextValue(GridControl control, JToken token) : base(control, token) {
+
+            string html = HtmlValue.ToString();
+
+            // TODO: Methods are obsolete from 8.6. Should we upgrade the Umbraco dependency and use DI instead?
+            html = TemplateUtilities.ParseInternalLinks(html, Current.UmbracoContext.UrlProvider);
+            html = TemplateUtilities.ResolveUrlsFromTextString(html);
+            html = TemplateUtilities.ResolveMediaFromTextString(html);
+
+            HtmlValue = new HtmlString(html);
+
+        }
 
         #endregion
 
