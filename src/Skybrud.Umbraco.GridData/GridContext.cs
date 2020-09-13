@@ -14,6 +14,8 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Private fields
 
+        private readonly GridConverterCollection _converters;
+
         #endregion
 
         #region Properties
@@ -22,17 +24,14 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the singleton instance of the <see cref="GridContext"/> class.
         /// </summary>
         public static readonly GridContext Current = global::Umbraco.Core.Composing.Current.Factory.GetInstance<GridContext>();
-        
-        ///// <summary>
-        ///// Gets the collection of Grid converters.
-        ///// </summary>
-        //public GridConverterCollection Converters { get; } = new GridConverterCollection();
 
         #endregion
 
         #region Constructors
 
-        private GridContext() { }
+        public GridContext(GridConverterCollection converters) {
+            _converters = converters;
+        }
 
         #endregion
 
@@ -44,7 +43,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="control">The control to wrap.</param>
         /// <returns>An instance of <see cref="GridControlWrapper"/>.</returns>
         public GridControlWrapper GetControlWrapper(GridControl control) {
-            foreach (IGridConverter converter in GridConverterCollection.Current) {
+            foreach (IGridConverter converter in _converters) {
                 try {
                     if (converter.GetControlWrapper(control, out GridControlWrapper wrapper)) return wrapper; 
                 } catch (Exception ex) {
