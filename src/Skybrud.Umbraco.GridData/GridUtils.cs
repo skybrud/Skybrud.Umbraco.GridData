@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
 using System.Text.RegularExpressions;
+using Skybrud.Essentials.Reflection;
 
 namespace Skybrud.Umbraco.GridData {
     
@@ -15,7 +16,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the assembly version as a string.
         /// </summary>
         public static string GetVersion() {
-            return typeof(GridUtils).Assembly.GetName().Version.ToString();
+            return ReflectionUtils.GetVersion(typeof(GridUtils).Assembly);
         }
 
         /// <summary>
@@ -37,7 +38,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <param name="name">The name of the partial.</param>
         /// <returns><c>true</c> if <paramref name="name"/> is valid; otherwise <c>false</c>.</returns>
         public static bool IsValidPartialName(string name) {
-            return Regex.IsMatch(name ?? "", "^[a-zA-Z0-9-\\._ ]+$");
+            return Regex.IsMatch(name ?? string.Empty, "^[a-zA-Z0-9-\\._ ]+$");
         }
 
         #endregion

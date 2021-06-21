@@ -1,8 +1,9 @@
 ﻿using System;
+using System.IO;
+using System.Text;
+using Microsoft.Extensions.Logging;
 using Skybrud.Umbraco.GridData.Converters;
-using Skybrud.Umbraco.GridData.Interfaces;
-using Skybrud.Umbraco.GridData.Rendering;
-using Umbraco.Core.Logging;
+using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Skybrud.Umbraco.GridData {
     
@@ -10,47 +11,36 @@ namespace Skybrud.Umbraco.GridData {
     /// Singleton class used for configuring and using the grid.
     /// </summary>
     public class GridContext {
-
-        #region Private fields
-
-        #endregion
-
-        #region Properties
-
-        /// <summary>
-        /// Gets the singleton instance of the <see cref="GridContext"/> class.
-        /// </summary>
-        public static readonly GridContext Current = new GridContext();
         
-        /// <summary>
-        /// Gets the collection of Grid converters.
-        /// </summary>
-        public GridConverterCollection Converters { get; } = new GridConverterCollection();
-
-        #endregion
+        private readonly ILogger<GridContext> _logger;
+        private readonly GridConverterCollection _converterCollection;
 
         #region Constructors
 
-        private GridContext() { }
+        public GridContext(ILogger<GridContext> logger, GridConverterCollection converterCollection) {
+            _logger = logger;
+            _converterCollection = converterCollection;
+        }
 
         #endregion
 
         #region Member methods
         
-        /// <summary>
-        /// Gets an instance of <see cref="GridControlWrapper"/> based on the specified <paramref name="control"/>.
-        /// </summary>
-        /// <param name="control">The control to wrap.</param>
-        /// <returns>An instance of <see cref="GridControlWrapper"/>.</returns>
-        public GridControlWrapper GetControlWrapper(GridControl control) {
-            foreach (IGridConverter converter in Converters) {
+        public virtual void WriteSearchableText(IPublishedElement element, TextWriter writer) {
+            foreach (IGridConverter converter in _converterCollection) {
                 try {
-                    if (converter.GetControlWrapper(control, out GridControlWrapper wrapper)) return wrapper; 
-                } catch (Exception ex) {
-                    global::Umbraco.Core.Composing.Current.Logger.Error<GridContext>(ex, "Converter of type " + converter + " failed for GetControlWrapper()");
+                    if (converter.WriteSearchableText(this, element, writer)) return;
+                } catch (Exception ex)  {
+                    _logger.LogError(ex, $"Converter of type {converter} failed for WriteSearchableText()");
                 }
             }
-            return null;
+        }
+        
+        public virtual string GetSearchableText(IPublishedElement element) {
+            StringBuilder sb = new();
+            using TextWriter writer = new StringWriter(sb);
+            WriteSearchableText(element, writer);
+            return sb.ToString();
         }
 
         #endregion

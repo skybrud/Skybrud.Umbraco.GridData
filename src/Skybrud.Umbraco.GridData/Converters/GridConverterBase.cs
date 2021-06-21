@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using Newtonsoft.Json.Linq;
-using Skybrud.Umbraco.GridData.Interfaces;
-using Skybrud.Umbraco.GridData.Rendering;
+using Skybrud.Umbraco.GridData.Models;
+using Skybrud.Umbraco.GridData.Models.Config;
+using Skybrud.Umbraco.GridData.Models.Values;
+using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Skybrud.Umbraco.GridData.Converters {
 
@@ -10,6 +13,16 @@ namespace Skybrud.Umbraco.GridData.Converters {
     /// Abstract base implementation of <see cref="IGridConverter"/>.
     /// </summary>
     public abstract class GridConverterBase : IGridConverter {
+
+        public virtual bool GetConfigType(GridEditor editor, out Type type) {
+            type = null;
+            return false;
+        }
+
+        public virtual bool GetValueType(GridControl control, out Type type) {
+            type = null;
+            return false;
+        }
 
         /// <summary>
         /// Converts the specified <paramref name="token"/> into an instance of <see cref="IGridControlValue"/>.
@@ -33,13 +46,17 @@ namespace Skybrud.Umbraco.GridData.Converters {
             return false;
         }
 
-        /// <summary>
-        /// Gets an instance <see cref="GridControlWrapper"/> for the specified <paramref name="control"/>.
-        /// </summary>
-        /// <param name="control">The control to be wrapped.</param>
-        /// <param name="wrapper">The wrapper.</param>
-        public virtual bool GetControlWrapper(GridControl control, out GridControlWrapper wrapper) {
-            wrapper = null;
+        public virtual bool WriteSearchableText(GridContext context, IPublishedElement element, TextWriter writer) {
+            return false;
+        }
+
+        public virtual bool IsValid(IGridControlValue value, out bool result) {
+            result = false;
+            return false;
+        }
+
+        public virtual bool IsValid(IPublishedElement element, out bool result) {
+            result = false;
             return false;
         }
 
