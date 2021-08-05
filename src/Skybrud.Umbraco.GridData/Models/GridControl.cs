@@ -2,6 +2,7 @@
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Umbraco.GridData.Models.Config;
 using Skybrud.Umbraco.GridData.Models.Values;
 
 namespace Skybrud.Umbraco.GridData.Models {
@@ -80,6 +81,10 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         internal GridControl(GridControl control) : base(control.JObject) {
             Area = control.Area;
+            Value = control.Value;
+            Editor = control.Editor;
+            PreviousControl = control.PreviousControl;
+            NextControl = control.NextControl;
         }
 
         #endregion
@@ -261,9 +266,27 @@ namespace Skybrud.Umbraco.GridData.Models {
     
     public class GridControl<TValue> : GridControl where TValue : IGridControlValue {
 
+        /// <summary>
+        /// Gets the value of the control.
+        /// </summary>
+        [JsonProperty("value")]
         public new TValue Value => (TValue) base.Value;
-
+        
         public GridControl(GridControl control) : base(control) { }
+
+    }
+    
+    public class GridControl<TValue, TConfig> : GridControl<TValue> where TValue : IGridControlValue where TConfig : IGridEditorConfig {
+
+        /// <summary>
+        /// Gets a reference to the editor of the control.
+        /// </summary>
+        [JsonProperty("editor")]
+        public new GridEditor<TConfig> Editor { get; }
+
+        public GridControl(GridControl control, GridEditor<TConfig> editor) : base(control) {
+            Editor = editor;
+        }
 
     }
 

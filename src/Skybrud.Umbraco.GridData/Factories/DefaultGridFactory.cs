@@ -58,30 +58,40 @@ namespace Skybrud.Umbraco.GridData.Factories {
             // The saved JSON for the editor only contains the alias of the editor as other information may change over
             // time. As a result of this, we need to inject a new editor object into the JSON.
             ReplaceEditorObjectFromConfig(json);
-
-
-            // Parse the Grid editor
-            var editor = json.GetObject("editor", CreateGridEditor);
-
-
-            //Type valueType = null;
-
-            //foreach (var converter in conver)
-
-
-
-
+            
+            // Parse the Grid editor (undelrying type may be generic ... or not)
+            GridEditor editor = json.GetObject("editor", CreateGridEditor);
+            
             // Initialize a new Grid control
             GridControl control = new GridControl(json, area);
 
+            // Make sure to set the editor before we parse the control value
             control.Editor = editor;
 
             // Parse the control value
             control.Value = ParseGridControlValue(control);
 
+            // Get the type of the editor config (it may not have a config)
+            Type configType = control.Editor.Config?.GetType();
 
+            // Determine the value type
+            Type valueType = null;
+            foreach (IGridConverter converter in _converters) {
+                if (converter.GetValueType(control, out valueType)) break;
+            }
+            
+            // If no converters specify a value type, we just return the control right away
+            if (valueType == null) return control;
 
-
+            // If the editor doesn't have a configuration, we can create a new generic type from just the value type.
+            // If we both have a value type and config type, we create a new generic type from both types
+            if (configType == null)  {
+                Type genericType = typeof(GridControl<>).MakeGenericType(valueType);
+                control = (GridControl) Activator.CreateInstance(genericType, control);
+            } else  {
+                Type genericType = typeof(GridControl<,>).MakeGenericType(valueType, configType);
+                control = (GridControl) Activator.CreateInstance(genericType, control, editor);
+            }
 
             // Return the control
             return control;
@@ -151,6 +161,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
             return null;
 
         }
+
 
         protected virtual void ReplaceEditorObjectFromConfig(JObject json) {
 
