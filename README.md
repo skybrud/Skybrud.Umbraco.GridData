@@ -1,4 +1,4 @@
-❗ README may not be up-to-date for Umbraco 9. This will be fixed soon.
+⚠️⚠️ README may not be up-to-date for Umbraco 9. This will be fixed soon. ⚠️⚠️
 
 Skybrud.Umbraco.GridData
 ========================
