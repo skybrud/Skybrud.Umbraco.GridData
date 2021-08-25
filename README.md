@@ -1,7 +1,9 @@
+❗ README may not be up-to-date for Umbraco 9. This will be fixed soon.
+
 Skybrud.Umbraco.GridData
 ========================
 
-**Skybrud.Umbraco.GridData** is a small package with a strongly typed model for the new grid in Umbraco 7.2 and above.
+**Skybrud.Umbraco.GridData** is a package with a strongly typed model for the new grid in Umbraco.
 
 The package makes it easy to use the model in your MVC views, master pages or even in your custom logic - eg. to index the grid data in Examine for better searches.
 
@@ -12,25 +14,27 @@ The package makes it easy to use the model in your MVC views, master pages or ev
 - <a href="#indexing-with-examine">Indexing with Examine</a>
 - <a href="#rendering-the-grid">Rendering the grid</a>
 - <a href="#extending-the-grid">Extending the grid</a>
-- <a href="#leblender">LeBlender</a>
 
 
 
 
 ## Installation
 
-1. [**NuGet Package**][NuGetPackage]  
-Install this NuGet package in your Visual Studio project. Makes updating easy.
+The Umbraco 9 version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
 
-1. [**Umbraco package**][UmbracoPackage]  
-Install the package through the Umbraco backoffice.
+```
+dotnet add package Skybrud.Umbraco.GridData --version 4.0.0-alpha001
+```
 
-1. [**ZIP file**][GitHubRelease]  
-Grab a ZIP file of the latest release; unzip and move the contents to the root directory of your web application.
+or the older NuGet Package Manager:
 
-[NuGetPackage]: https://www.nuget.org/packages/Skybrud.Umbraco.GridData
-[UmbracoPackage]: https://our.umbraco.org/projects/developer-tools/skybrudumbracogriddata/
-[GitHubRelease]: https://github.com/skybrud/Skybrud.Umbraco.GridData
+```
+https://www.nuget.org/packages/Skybrud.Umbraco.GridData/4.0.0-alpha001
+```
+
+**Umbraco 8**  
+For the Umbraco 8 version of this package, see the [**v3/main**](https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main) branch instead.
+
 
 
 
@@ -132,12 +136,3 @@ The package will only provide models for the grid editors thats comes with Umbra
 This process might however be a bit complex, so I've written an article for [**Skrift.io**](http://skrift.io/) that describes this a bit further:
 
 http://skrift.io/articles/archive/strongly-typed-models-in-the-umbraco-grid/
-
-
-
-
-## LeBlender
-
-The main Skybrud.Umbraco.GridData doesn't support the [LeBlender](https://github.com/Lecoati/LeBlender) package, since it would result in another dependency. But you can install an addon that adds support for controls added with LeBlender:
-
-https://github.com/skybrud/Skybrud.Umbraco.GridData.LeBlender
