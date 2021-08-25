@@ -1,6 +1,22 @@
-| ⚠️ NOTICE ⚠️ |
-|:-----------|
-| This branch is for the **Umbraco 9** version of this package. For the Umbraco 8 package, see [**v3/main**](https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main) branch. |
+<table>
+  <thead>
+    <tr>
+      <td align="left">
+        :warning:
+      </td>
+      <td align="left" width="100%">
+          <strong>NOTICE</strong>
+      </td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td colspan="2">
+          This branch is for the <strong>Umbraco 9</strong> version of this package. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><strong>v3/main</strong></a> branch.
+      </td>
+    </tr>
+  </tbody>
+</table>
 
 Skybrud.Umbraco.GridData
 ========================
