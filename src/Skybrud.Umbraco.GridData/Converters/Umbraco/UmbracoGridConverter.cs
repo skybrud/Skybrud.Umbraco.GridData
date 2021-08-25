@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Config;
 using Skybrud.Umbraco.GridData.Models.Values;
+using Umbraco.Cms.Core.Web;
 
 // ReSharper disable InconsistentNaming
 
@@ -12,6 +13,12 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
     /// Converter for handling the default editors (and their values and configs) of Umbraco.
     /// </summary>
     public class UmbracoGridConverter : GridConverterBase {
+        
+        private readonly IUmbracoContextAccessor _umbracoContextAccessor;
+
+        public UmbracoGridConverter(IUmbracoContextAccessor umbracoContextAccessor) {
+            _umbracoContextAccessor = umbracoContextAccessor;
+        }
 
         public override bool GetConfigType(GridEditor editor, out Type type) {
 
@@ -62,7 +69,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             } else if (IsMacroEditor(control.Editor)) {
                 value = new GridControlMacroValue(control, token as JObject);
             } else if (IsMediaEditor(control.Editor)) {
-                value = new GridControlMediaValue(control, token as JObject);
+                value = ParseGridControlMediaValue(control, token as JObject);
             } else if (IsRichTextEditor(control.Editor)) {
                 value = new GridControlRichTextValue(control, token);
             } else if (IsTextStringEditor(control.Editor)) {
@@ -71,6 +78,18 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             
             return value != null;
         
+        }
+
+        protected virtual IGridControlValue ParseGridControlMediaValue(GridControl control, JObject json) {
+            
+            GridControlMediaValue value = new GridControlMediaValue(control, json);
+            
+            if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext context)) {
+                value.PublishedImage = context.Media.GetById(value.Id);
+            }
+
+            return value;
+
         }
 
         /// <summary>

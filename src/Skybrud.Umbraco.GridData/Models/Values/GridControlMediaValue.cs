@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
+using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Skybrud.Umbraco.GridData.Models.Values {
 
@@ -59,6 +60,9 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         [JsonIgnore]
         public override bool IsValid => Id > 0;
+
+        [JsonIgnore]
+        public IPublishedContent PublishedImage { get; internal set; }
 
         #endregion
 
