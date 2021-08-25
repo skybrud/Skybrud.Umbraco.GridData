@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Umbraco.Cms.Core.Composing;
 
 namespace Skybrud.Umbraco.GridData.Converters {
@@ -12,7 +13,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// Initializes a new converter collection based on the specified <paramref name="items"/>.
         /// </summary>
         /// <param name="items">The items to make up the collection.</param>
-        public GridConverterCollection(IEnumerable<IGridConverter> items) : base(items) { }
+        public GridConverterCollection(Func<IEnumerable<IGridConverter>> items) : base(items) { }
 
     }
 
