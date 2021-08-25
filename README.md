@@ -1,3 +1,9 @@
+<div class="Box">
+    <div class="Box-row flash flash-full flash-warn mt-0">
+        <p>This branch is for Umbraco 8. For the Umbraco 9 version of this package, see the <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main">v4/main</a> branch.</p>
+    </div>
+</div>
+
 Skybrud.Umbraco.GridData
 ========================
 
