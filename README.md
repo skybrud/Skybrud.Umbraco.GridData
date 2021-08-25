@@ -1,4 +1,6 @@
-⚠️⚠️ README may not be up-to-date for Umbraco 9. This will be fixed soon. ⚠️⚠️
+| ⚠️ NOTICE ⚠️ |
+|:-----------|
+| This branch is for the **Umbraco 9** version of this package. For the Umbraco 8 package, see [**v3/main**](https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main) branch. |
 
 Skybrud.Umbraco.GridData
 ========================
