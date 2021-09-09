@@ -47,7 +47,7 @@ dotnet add package Skybrud.Umbraco.GridData --version 4.0.0-alpha001
 or the older NuGet Package Manager:
 
 ```
-https://www.nuget.org/packages/Skybrud.Umbraco.GridData/4.0.0-alpha001
+Install-Package Skybrud.Umbraco.GridData -Version 4.0.0-alpha001
 ```
 
 **Umbraco 8**  
