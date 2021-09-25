@@ -79,7 +79,15 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Constructors
 
-        private GridControl(JObject obj) : base(obj) { }
+        internal GridControl(JObject obj) : base(obj) { }
+        
+        internal GridControl(GridControl control) : base(control.JObject) {
+            Area = control.Area;
+            Value = control.Value;
+            Editor = control.Editor;
+            PreviousControl = control.PreviousControl;
+            NextControl = control.NextControl;
+        }
 
         #endregion
 
@@ -298,6 +306,14 @@ namespace Skybrud.Umbraco.GridData {
 
             // Parse the editor
             control.Editor = obj.GetObject("editor", x => GridEditor.Parse(control, x));
+            
+            // Get the type of the editor config (it may not have a config)
+            Type configType = control.Editor.Config?.GetType();
+
+            if (configType != null) {
+                Type genericType = typeof(GridEditor<>).MakeGenericType(configType);
+                control.Editor = (GridEditor) Activator.CreateInstance(genericType, control.Editor);
+            }
 
             // Parse the control value
             JToken value = obj.GetValue("value");
@@ -310,12 +326,60 @@ namespace Skybrud.Umbraco.GridData {
                     global::Umbraco.Core.Composing.Current.Logger.Error<GridControl>(ex, "Converter of type " + converter + " failed for ConvertControlValue()");
                 }
             }
+
+            // Get the value type
+            Type valueType = control.Value?.GetType();
+            if (valueType == null) return control;
+            
+            // If the editor doesn't have a configuration, we can create a new generic type from just the value type.
+            // If we both have a value type and config type, we create a new generic type from both types
+            if (configType == null) {
+                Type genericType = typeof(GridControl<>).MakeGenericType(valueType);
+                control = (GridControl) Activator.CreateInstance(genericType, control);
+            } else  {
+                Type genericType = typeof(GridControl<,>).MakeGenericType(valueType, configType);
+                control = (GridControl) Activator.CreateInstance(genericType, control);
+            }
             
             return control;
 
         }
 
         #endregion
+
+    }
+    
+    /// <summary>
+    /// Generic version of <see cref="GridControl"/> where the <see cref="Value"/> property is of type <typeparamref name="TValue"/>.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    public class GridControl<TValue> : GridControl where TValue : IGridControlValue {
+
+        /// <summary>
+        /// Gets the value of the control.
+        /// </summary>
+        [JsonProperty("value")]
+        public new TValue Value => (TValue) base.Value;
+        
+        internal GridControl(GridControl control) : base(control) { }
+
+    }
+
+    /// <summary>
+    /// Generic version of <see cref="GridControl"/> where the <see cref="GridControl{TValue}.Value"/> property is of
+    /// type <typeparamref name="TValue"/>, and the <see cref="Editor"/> property is of type <see cref="GridEditor{TConfig}"/>.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <typeparam name="TConfig"></typeparam>
+    public class GridControl<TValue, TConfig> : GridControl<TValue> where TValue : IGridControlValue where TConfig : IGridEditorConfig {
+
+        /// <summary>
+        /// Gets a reference to the editor of the control.
+        /// </summary>
+        [JsonProperty("editor")]
+        public new GridEditor<TConfig> Editor { get; }
+
+        internal GridControl(GridControl control) : base(control) { }
 
     }
 

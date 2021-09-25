@@ -65,6 +65,17 @@ namespace Skybrud.Umbraco.GridData {
 
         private GridEditor(JObject obj) : base(obj) { }
 
+        internal GridEditor(GridEditor editor) : base(editor.JObject) {
+            
+            Control = editor.Control;
+            Name = editor.Name;
+            Alias = editor.Alias;
+            View = editor.View;
+            Render = editor.Render;
+            Icon = editor.Icon;
+            Config = editor.Config;
+        }
+
         #endregion
 
         #region Member methods
@@ -115,6 +126,23 @@ namespace Skybrud.Umbraco.GridData {
         }
 
         #endregion
+
+    }
+
+    /// <summary>
+    /// Generic version of <see cref="GridEditor"/> where the <see cref="Config"/> property is of type <typeparamref name="TConfig"/>.
+    /// </summary>
+    /// <typeparam name="TConfig">The type of the config</typeparam>
+    public class GridEditor<TConfig> : GridEditor where TConfig : IGridEditorConfig {
+        
+        /// <summary>
+        /// Gets the configuration object for the editor. This property will return <c>null</c> if the
+        /// corresponding property in the underlying JSON is also <c>null</c>.
+        /// </summary>
+        [JsonProperty("config")]
+        public new TConfig Config => (TConfig) base.Config;
+
+        internal GridEditor(GridEditor editor) : base(editor) { }
 
     }
 
