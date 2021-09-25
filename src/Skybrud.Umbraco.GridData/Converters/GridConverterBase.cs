@@ -3,13 +3,14 @@ using System.Globalization;
 using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Interfaces;
 using Skybrud.Umbraco.GridData.Rendering;
+using Umbraco.Core.Models.PublishedContent;
 
 namespace Skybrud.Umbraco.GridData.Converters {
 
     /// <summary>
     /// Abstract base implementation of <see cref="IGridConverter"/>.
     /// </summary>
-    public abstract class GridConverterBase : IGridConverter {
+    public abstract class GridConverterBase : IGridElementConverter {
 
         /// <summary>
         /// Converts the specified <paramref name="token"/> into an instance of <see cref="IGridControlValue"/>.
@@ -40,6 +41,17 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// <param name="wrapper">The wrapper.</param>
         public virtual bool GetControlWrapper(GridControl control, out GridControlWrapper wrapper) {
             wrapper = null;
+            return false;
+        }
+        
+        /// <summary>
+        /// Attempts to get the the searchable text for the specified <paramref name="element"/>.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="text">When this method returns, contains the searchable text for <paramref name="element"/>.</param>
+        /// <returns><c>true</c> if <paramref name="element"/> was recognized by this converter; otherwise <c>false</c>.</returns>
+        public virtual bool TryGetSearchableText(IPublishedElement element, out string text) {
+            text = null;
             return false;
         }
 
