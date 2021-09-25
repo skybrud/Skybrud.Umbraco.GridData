@@ -142,7 +142,11 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("config")]
         public new TConfig Config => (TConfig) base.Config;
 
-        internal GridEditor(GridEditor editor) : base(editor) { }
+        /// <summary>
+        /// Initializes a new generic editor based on the specified <paramref name="editor"/>.
+        /// </summary>
+        /// <param name="editor">The editor this editor should be based on.</param>
+        public GridEditor(GridEditor editor) : base(editor) { }
 
     }
 

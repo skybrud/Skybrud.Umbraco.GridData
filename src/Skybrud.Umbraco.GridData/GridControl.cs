@@ -361,7 +361,11 @@ namespace Skybrud.Umbraco.GridData {
         [JsonProperty("value")]
         public new TValue Value => (TValue) base.Value;
         
-        internal GridControl(GridControl control) : base(control) { }
+        /// <summary>
+        /// Initializes a new generic control based on the specified <paramref name="control"/>.
+        /// </summary>
+        /// <param name="control">The control this control should be based on.</param>
+        public GridControl(GridControl control) : base(control) { }
 
     }
 
@@ -378,8 +382,12 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         [JsonProperty("editor")]
         public new GridEditor<TConfig> Editor { get; }
-
-        internal GridControl(GridControl control) : base(control) { }
+        
+        /// <summary>
+        /// Initializes a new generic control based on the specified <paramref name="control"/>.
+        /// </summary>
+        /// <param name="control">The control this control should be based on.</param>
+        public GridControl(GridControl control) : base(control) { }
 
     }
 
