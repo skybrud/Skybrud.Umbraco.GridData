@@ -7,23 +7,27 @@
   <PropertyGroup>
     <Version>3.0.1</Version>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
-    <Company>Skybrud.dk</Company>
+    <Company>Limbo</Company>
     <Description>Strongly typed models for the grid in Umbraco 8.</Description>
-    <Copyright>Copyright © 2020</Copyright>
+    <Copyright>Copyright © 2021</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData</PackageId>
-    <PackageTags>Skybrud, Umbraco, Grid, JSON</PackageTags>
+    <PackageTags>Skybrud, Limbo, Umbraco, Grid, JSON</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData</PackageProjectUrl>
-    <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
+    <PackageIcon>Limbo.png</PackageIcon>
     <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData/</RepositoryUrl>
   </PropertyGroup>
 
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Umbraco.GridData.xml</DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="../build/Limbo.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="System.Web" />
