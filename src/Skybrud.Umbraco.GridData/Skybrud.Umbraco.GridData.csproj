@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.0.1</Version>
+    <Version>3.0.2</Version>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
     <Company>Limbo</Company>
     <Description>Strongly typed models for the grid in Umbraco 8.</Description>
