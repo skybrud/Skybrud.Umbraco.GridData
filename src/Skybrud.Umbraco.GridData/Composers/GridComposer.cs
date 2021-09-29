@@ -6,7 +6,7 @@ using Umbraco.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Composers {
     
-    internal class GridComposer : IUserComposer {
+    internal class GridComposer : IComposer {
 
         public void Compose(IUmbracoBuilder builder) {
 
