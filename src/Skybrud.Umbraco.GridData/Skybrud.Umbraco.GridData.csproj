@@ -21,9 +21,9 @@
     <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData/</RepositoryUrl>
   </PropertyGroup>
 
-  <!--<PropertyGroup>
+  <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Umbraco.GridData.xml</DocumentationFile>
-  </PropertyGroup>-->
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Skybrud.Essentials" Version="1.1.30" />
