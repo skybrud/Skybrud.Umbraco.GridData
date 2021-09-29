@@ -20,6 +20,11 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         [JsonIgnore]
         bool IsValid { get; }
 
+        /// <summary>
+        /// Writes a textual representation of this control value to the specified <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="context">The current <see cref="GridContext"/>.</param>
+        /// <param name="writer">The writer to write to.</param>
         void WriteSearchableText(GridContext context, TextWriter writer);
 
         /// <summary>
