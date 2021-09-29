@@ -7,30 +7,30 @@
   <PropertyGroup>
     <Version>4.0.0-alpha001</Version>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
-    <Company>Skybrud.dk</Company>
+    <Company>Limbo</Company>
     <Description>Strongly typed models for the grid in Umbraco 9.</Description>
     <Copyright>Copyright © 2021</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData</PackageId>
-    <PackageTags>Skybrud, Umbraco, Grid, JSON</PackageTags>
+    <PackageTags>Skybrud, Limbo, Umbraco, Grid, JSON</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData</PackageProjectUrl>
-    <PackageIcon>Skybrud.png</PackageIcon>
+    <PackageIcon>Limbo.png</PackageIcon>
     <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData/</RepositoryUrl>
   </PropertyGroup>
 
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Umbraco.GridData.xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
   <ItemGroup>
     <PackageReference Include="Skybrud.Essentials" Version="1.1.30" />
     <PackageReference Include="Umbraco.Cms.Core" Version="9.0.0" />
     <PackageReference Include="Umbraco.Cms.Web.Website" Version="9.0.0" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
-    <None Include="Images\Skybrud.png" Pack="true" PackagePath="\"/>
+    <None Include="../build/Limbo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
   
   <!--<Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
