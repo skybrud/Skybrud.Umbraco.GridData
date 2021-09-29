@@ -16,32 +16,32 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the name of the editor.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets the alias of the editor.
         /// </summary>
         [JsonProperty("alias")]
-        public string Alias { get; private set; }
+        public string Alias { get; }
 
         /// <summary>
         /// Gets the view of the editor.
         /// </summary>
         [JsonProperty("view")]
-        public string View { get; private set; }
+        public string View { get; }
 
         /// <summary>
         /// Gets renderer for the control/editor. If specified, the renderer refers to a partial
         /// view that should be used for rendering the control.
         /// </summary>
         [JsonProperty("render")]
-        public string Render { get; private set; }
+        public string Render { get; }
 
         /// <summary>
         /// Gets the icon of the editor.
         /// </summary>
         [JsonProperty("icon")]
-        public string Icon { get; private set; }
+        public string Icon { get; }
 
         /// <summary>
         /// Gets the configuration object for the editor. This property will return <c>null</c> if the

@@ -94,37 +94,6 @@ namespace Skybrud.Umbraco.GridData.Models {
             return sb.ToString();
         }
 
-        ///// <summary>
-        ///// Generates the HTML for the Grid row.
-        ///// </summary>
-        ///// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
-        ///// <returns>The grid row as an instance of <see cref="HtmlString"/>.</returns>
-        //public HtmlString GetHtml(HtmlHelper helper) {
-        //    return GetHtml(helper, Name);
-        //}
-
-        ///// <summary>
-        ///// Generates the HTML for the Grid row.
-        ///// </summary>
-        ///// <param name="helper">The <see cref="HtmlHelper"/> used for rendering the Grid row.</param>
-        ///// <param name="partial">The alias or virtual path to the partial view for rendering the Grid row.</param>
-        ///// <returns>The grid row as an instance of <see cref="HtmlString"/>.</returns>
-        //public HtmlString GetHtml(HtmlHelper helper, string partial) {
-
-        //    // Some input validation
-        //    if (helper == null) throw new ArgumentNullException(nameof(helper));
-        //    if (string.IsNullOrWhiteSpace(partial)) throw new ArgumentNullException(nameof(partial));
-
-        //    // Prepend the path to the "Sections" folder if not already specified
-        //    if (GridUtils.IsValidPartialName(partial)) {
-        //        partial = "TypedGrid/Sections/" + partial;
-        //    }
-
-        //    // Render the partial view
-        //    return helper.Partial(partial, this);
-
-        //}
-
         #endregion
 
     }

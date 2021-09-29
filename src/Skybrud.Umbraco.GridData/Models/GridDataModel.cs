@@ -24,12 +24,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         public bool IsValid {
             get { return JObject != null && GetAllControls().Any(x => x.IsValid); }
         }
-
-        /// <summary>
-        /// Gets the raw JSON value this model was parsed from.
-        /// </summary>
-        public string Raw { get; private set; }
-
+        
         /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
@@ -143,23 +138,6 @@ namespace Skybrud.Umbraco.GridData.Models {
                 select control
             ).ToArray();
         }
-
-        ///// <summary>
-        ///// Generates the HTML for the Grid model.
-        ///// </summary>
-        ///// <param name="helper">The HTML helper used for rendering the Grid.</param>
-        //public HtmlString GetHtml(HtmlHelper helper) {
-        //    return helper.GetTypedGridHtml(this);
-        //}
-
-        ///// <summary>
-        ///// Generates the HTML for the Grid model.
-        ///// </summary>
-        ///// <param name="helper">The HTML helper used for rendering the Grid.</param>
-        ///// <param name="framework">The framework used to render the Grid.</param>
-        //public HtmlString GetHtml(HtmlHelper helper, string framework) {
-        //    return helper.GetTypedGridHtml(this, framework);
-        //}
 
         public void WriteSearchableText(GridContext context, TextWriter writer) {
             foreach (GridSection section in Sections) section.WriteSearchableText(context, writer);

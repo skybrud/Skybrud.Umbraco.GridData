@@ -90,7 +90,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
             JToken = token;
 
             // Handle values prior to Umbraco 8.2
-            if (!(token is JObject obj)) {
+            if (token is not JObject obj) {
                 Value = token.ToString();
                 HtmlValue = new HtmlString(Value);
                 return;

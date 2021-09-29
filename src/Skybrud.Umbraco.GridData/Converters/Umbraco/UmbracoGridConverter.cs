@@ -113,23 +113,23 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         }
 
         protected bool IsEmbedEditor(GridEditor editor) {
-            return editor != null && editor.View == "embed";
+            return editor?.View == "embed";
         }
 
         protected bool IsTextStringEditor(GridEditor editor) {
-            return editor != null && editor.View == "textstring";
+            return editor?.View == "textstring";
         }
 
         protected bool IsMediaEditor(GridEditor editor) {
-            return editor != null && editor.View == "media";
+            return editor?.View == "media";
         }
 
         protected bool IsMacroEditor(GridEditor editor) {
-            return editor != null && editor.View == "macro";
+            return editor?.View == "macro";
         }
 
         protected bool IsRichTextEditor(GridEditor editor) {
-            return editor != null && editor.View == "rte";
+            return editor?.View == "rte";
         }
 
     }

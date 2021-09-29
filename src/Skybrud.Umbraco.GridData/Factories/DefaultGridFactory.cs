@@ -34,22 +34,22 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
         /// <inheritdoc />
         public virtual GridDataModel CreateGridModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject json, bool preview) {
-            return new GridDataModel(owner, propertyType, json, this);
+            return new(owner, propertyType, json, this);
         }
 
         /// <inheritdoc />
         public virtual GridSection CreateGridSection(JObject json, GridDataModel grid) {
-            return new GridSection(json, grid, this);
+            return new(json, grid, this);
         }
 
         /// <inheritdoc />
         public virtual GridRow CreateGridRow(JObject json, GridSection section) {
-            return new GridRow(json, section, this);
+            return new(json, section, this);
         }
 
         /// <inheritdoc />
         public virtual GridArea CreateGridArea(JObject json, GridRow row) {
-            return new GridArea(json, row, this);
+            return new(json, row, this);
         }
 
         /// <inheritdoc />
@@ -104,7 +104,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
             Type configType = null;
 
             // Initialize a new Grid editor
-            GridEditor editor = new GridEditor(json);
+            GridEditor editor = new(json);
 
             foreach (var converter in _converters) {
 
@@ -121,7 +121,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
             }
 
             // Parse the grid editor configuration
-            editor.Config = ParseGridEditorConfig(editor);
+            if (editor != null) editor.Config = ParseGridEditorConfig(editor);
 
             // Return the editor
             return editor;
