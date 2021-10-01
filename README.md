@@ -41,13 +41,13 @@ The package makes it easy to use the model in your MVC views, master pages or ev
 The Umbraco 9 version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
 
 ```
-dotnet add package Skybrud.Umbraco.GridData --version 4.0.0-alpha001
+dotnet add package Skybrud.Umbraco.GridData --version 4.0.0-alpha002
 ```
 
 or the older NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Umbraco.GridData -Version 4.0.0-alpha001
+Install-Package Skybrud.Umbraco.GridData -Version 4.0.0-alpha002
 ```
 
 **Umbraco 8**  
