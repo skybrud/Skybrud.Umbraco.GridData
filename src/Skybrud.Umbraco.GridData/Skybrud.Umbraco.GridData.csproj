@@ -1,15 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
     <Version>4.0.0-alpha002</Version>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
     <Company>Limbo</Company>
-    <Description>Strongly typed models for the grid in Umbraco 9.</Description>
-    <Copyright>Copyright © 2021</Copyright>
+    <Description>Strongly typed models for the grid in Umbraco 10+.</Description>
+    <Copyright>Copyright © 2022</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -26,9 +26,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Skybrud.Essentials" Version="1.1.30" />
-    <PackageReference Include="Umbraco.Cms.Core" Version="9.0.0" />
-    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="9.0.0" />
+    <PackageReference Include="Skybrud.Essentials" Version="1.1.43" />
+    <PackageReference Include="Umbraco.Cms.Core" Version="[10.0.0,12.0)" />
+    <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="[10.0.0,12.0)" />
     <None Include="../build/Limbo.png" Pack="true" PackagePath="\"/>
   </ItemGroup>
   

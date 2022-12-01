@@ -10,7 +10,7 @@ namespace Skybrud.Umbraco.GridData.Composers {
 
         public void Compose(IUmbracoBuilder builder) {
 
-            builder.Services.AddUnique<GridContext>();
+            builder.Services.AddScoped<GridContext>();
             builder.Services.AddUnique<IGridFactory, DefaultGridFactory>();
             
             builder.GridConverters().Append<UmbracoGridConverter>();
