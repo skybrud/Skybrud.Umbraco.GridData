@@ -3,16 +3,16 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-	<Nullable>enable</Nullable>
-	<WarningsAsErrors>Nullable</WarningsAsErrors>
+    <Nullable>enable</Nullable>
+    <WarningsAsErrors>Nullable</WarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>4.0.0-alpha002</Version>
-    <Authors>Anders Bjerner, René Pjengaard</Authors>
+    <Version>5.0.0-alpha001</Version>
+    <Authors>Anders Bjerner, René Pjengaard, Rick Butterfield</Authors>
     <Company>Limbo</Company>
-    <Description>Strongly typed models for the grid in Umbraco 9.</Description>
-    <Copyright>Copyright © 2021</Copyright>
+    <Description>Strongly typed models for the grid in Umbraco 10+.</Description>
+    <Copyright>Copyright © 2022</Copyright>
   </PropertyGroup>
 
   <PropertyGroup>
