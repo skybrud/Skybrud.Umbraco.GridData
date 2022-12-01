@@ -19,7 +19,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
         /// <param name="json">The instance of <see cref="JObject"/> representing the grid model.</param>
         /// <param name="preview"></param>
         /// <returns>An instance of <see cref="GridDataModel"/> representing the grid model.</returns>
-        GridDataModel CreateGridModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject json, bool preview);
+        GridDataModel? CreateGridModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject? json, bool preview);
 
         /// <summary>
         /// Returns a new instance of <see cref="GridSection"/> from the specified <paramref name="json"/> object.
@@ -27,7 +27,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
         /// <param name="json">The instance of <see cref="JObject"/> representing the grid section.</param>
         /// <param name="grid">An instance of <see cref="GridDataModel"/> representing the parent grid model.</param>
         /// <returns>An instance of <see cref="GridSection"/> representing the grid section.</returns>
-        GridSection CreateGridSection(JObject json, GridDataModel grid);
+        GridSection? CreateGridSection(JObject json, GridDataModel grid);
 
         GridRow CreateGridRow(JObject json, GridSection section);
 
@@ -35,7 +35,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
         GridControl CreateGridControl(JObject json, GridArea area);
 
-        GridEditor CreateGridEditor(JObject json);
+        GridEditor? CreateGridEditor(JObject json);
 
     }
 

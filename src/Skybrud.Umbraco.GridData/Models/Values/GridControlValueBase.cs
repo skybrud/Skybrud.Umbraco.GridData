@@ -16,13 +16,13 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets a reference to the parent <see cref="GridControl"/>.
         /// </summary>
         [JsonIgnore]
-        public GridControl Control { get; }
+        public GridControl? Control { get; }
         
         /// <summary>
         /// Gets whether the control is valid (eg. whether it has a value).
         /// </summary>
         [JsonIgnore]
-        public virtual bool IsValid => true;
+        public virtual bool? IsValid => true;
 
         #endregion
 
@@ -33,7 +33,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        protected GridControlValueBase(GridControl control, JObject obj) : base(obj) {
+        protected GridControlValueBase(GridControl control, JObject? obj) : base(obj) {
             Control = control;
         }
 
@@ -41,9 +41,9 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
 
         #region Member methods
         
-        public virtual void WriteSearchableText(GridContext context, TextWriter writer) { }
+        public virtual void WriteSearchableText(GridContext? context, TextWriter writer) { }
         
-        public virtual string GetSearchableText(GridContext context) {
+        public virtual string? GetSearchableText(GridContext? context) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);
             WriteSearchableText(context, writer);

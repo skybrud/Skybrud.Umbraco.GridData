@@ -44,7 +44,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets a focal point from the specified <paramref name="obj"/>.
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridControlMediaFocalPoint Parse(JObject obj) {
+        public static GridControlMediaFocalPoint? Parse(JObject obj) {
             return obj == null ? null : new GridControlMediaFocalPoint(obj);
         }
 

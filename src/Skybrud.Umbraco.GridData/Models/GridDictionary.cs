@@ -47,7 +47,7 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #region Constructors
 
-        private GridDictionary(Dictionary<string, string> config, JObject obj) : base(obj) {
+        private GridDictionary(Dictionary<string, string> config, JObject? obj) : base(obj) {
             _dictionary = config;
         }
 
@@ -71,7 +71,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// key is found; otherwise, the default value for the type of the value parameter. This parameter is passed
         /// uninitialized.</param>
         /// <returns><c>true</c> if the dictionary contains an element with the specified key; otherwise, <c>false</c>.</returns>
-        public bool TryGetValue(string key, out string value) {
+        public bool TryGetValue(string key, out string? value) {
             return _dictionary.TryGetValue(key, out value);
         }
 

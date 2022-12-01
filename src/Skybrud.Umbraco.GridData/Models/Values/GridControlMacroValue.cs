@@ -14,26 +14,26 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets the syntax of the macro.
         /// </summary>
         [JsonProperty("syntax")]
-        public string Syntax { get; set; }
+        public string? Syntax { get; set; }
 
         /// <summary>
         /// Gets the alias of the macro.
         /// </summary>
         [JsonProperty("macroAlias")]
-        public string MacroAlias { get; set; }
+        public string? MacroAlias { get; set; }
 
         /// <summary>
         /// Gets a dictionary containing the macro parameters.
         /// </summary>
         [JsonProperty("macroParamsDictionary")]
-        public Dictionary<string, object> Parameters { get; set; }
+        public Dictionary<string, object>? Parameters { get; set; }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlMacroValue"/>, this means
         /// checking whether a macro alias has been specified.
         /// </summary>
         [JsonIgnore]
-        public override bool IsValid => !string.IsNullOrWhiteSpace(MacroAlias);
+        public override bool? IsValid => !string.IsNullOrWhiteSpace(MacroAlias);
 
         #region Constructors
 
@@ -42,10 +42,10 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        public GridControlMacroValue(GridControl control, JObject obj) : base(control, obj) {
+        public GridControlMacroValue(GridControl control, JObject? obj) : base(control, obj) {
             Syntax = obj.GetString("syntax");
             MacroAlias = obj.GetString("macroAlias");
-            Parameters = obj.GetObject("macroParamsDictionary").ToObject<Dictionary<string, object>>();
+            Parameters = obj.GetObject("macroParamsDictionary")?.ToObject<Dictionary<string, object>?>();
         }
 
         #endregion

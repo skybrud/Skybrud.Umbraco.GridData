@@ -15,29 +15,29 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
         /// Gets the style properties for the text.
         /// </summary>
         [JsonProperty("style", NullValueHandling = NullValueHandling.Ignore)]
-        public string Style { get; private set; }
+        public string? Style { get; private set; }
 
         /// <summary>
         /// Gets whether the <see cref="Style"/> property has a value.
         /// </summary>
-        public bool HasStyle => !string.IsNullOrWhiteSpace(Style);
+        public bool? HasStyle => !string.IsNullOrWhiteSpace(Style);
 
         /// <summary>
         /// Gets the markup for the text.
         /// </summary>
         [JsonProperty("markup", NullValueHandling = NullValueHandling.Ignore)]
-        public string Markup { get; private set; }
+        public string? Markup { get; private set; }
 
         /// <summary>
         /// Gets whether the <see cref="Markup"/> property has a value.
         /// </summary>
-        public bool HasMarkup => !string.IsNullOrWhiteSpace(Markup);
+        public bool? HasMarkup => !string.IsNullOrWhiteSpace(Markup);
 
         #endregion
 
         #region Constructors
 
-        public GridEditorTextConfig(GridEditor editor, JObject obj) : base(editor, obj) {
+        public GridEditorTextConfig(GridEditor? editor, JObject? obj) : base(editor, obj) {
             Style = obj.GetString("style");
             Markup = obj.GetString("markup");
         }

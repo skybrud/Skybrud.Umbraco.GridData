@@ -16,14 +16,14 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets a reference to the underlying instance of <see cref="JObject"/>.
         /// </summary>
         [JsonIgnore]
-        public JObject JObject { get; }
+        public JObject? JObject { get; }
 
         #endregion
 
         #region Constructors
 
         /// <param name="obj">The underlying instance of <see cref="JObject"/>.</param>
-        public GridJsonObject(JObject obj) {
+        public GridJsonObject(JObject? obj) {
             JObject = obj;
         }
 

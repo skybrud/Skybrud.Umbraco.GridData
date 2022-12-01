@@ -15,7 +15,7 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
         /// Gets a reference to the parent editor of the configuration.
         /// </summary>
         [JsonIgnore]
-        public GridEditor Editor { get; }
+        public GridEditor? Editor { get; }
 
         #endregion
 
@@ -26,7 +26,7 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
         /// </summary>
         /// <param name="editor">An instance of <see cref="GridEditor"/> representing the parent editor.</param>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the configuration of the editor.</param>
-        protected GridEditorConfigBase(GridEditor editor, JObject obj) : base(obj) {
+        protected GridEditorConfigBase(GridEditor? editor, JObject? obj) : base(obj) {
             Editor = editor;
         }
 

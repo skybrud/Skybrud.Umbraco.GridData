@@ -28,7 +28,7 @@ namespace Skybrud.Umbraco.GridData {
             return propertyType.EditorAlias == "Umbraco.Grid";
         }
         
-        public override object ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object source, bool preview) {
+        public override object? ConvertSourceToIntermediate(IPublishedElement owner, IPublishedPropertyType propertyType, object? source, bool preview) {
 
             if (source is string {Length: > 0} json && json[0] == '{') {
                 return JsonUtils.ParseJsonObject(json);
@@ -38,11 +38,11 @@ namespace Skybrud.Umbraco.GridData {
 
         }
         
-        public override object ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
+        public override object? ConvertIntermediateToObject(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object? inter, bool preview) {
             return _factory.CreateGridModel(owner, propertyType, inter as JObject, preview);
         }
 
-        public override object ConvertIntermediateToXPath(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object inter, bool preview) {
+        public override object? ConvertIntermediateToXPath(IPublishedElement owner, IPublishedPropertyType propertyType, PropertyCacheLevel referenceCacheLevel, object? inter, bool preview) {
             return null;
         }
 

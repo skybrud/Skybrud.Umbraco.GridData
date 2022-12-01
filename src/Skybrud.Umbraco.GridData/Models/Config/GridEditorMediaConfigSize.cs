@@ -40,7 +40,7 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
         /// Gets an instance of <see cref="GridEditorMediaConfigSize"/> from the specified <paramref name="json"/> object.
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridEditorMediaConfigSize Parse(JObject json)  {
+        public static GridEditorMediaConfigSize? Parse(JObject json)  {
             return json == null ? null : new GridEditorMediaConfigSize(json);
         }
 

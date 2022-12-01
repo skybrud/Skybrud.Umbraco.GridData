@@ -15,7 +15,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
-        public GridControlRichTextValue(GridControl control, JToken token) : base(control, token) { }
+        public GridControlRichTextValue(GridControl control, JToken? token) : base(control, token) { }
 
     }
 

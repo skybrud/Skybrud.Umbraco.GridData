@@ -20,7 +20,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             _umbracoContextAccessor = umbracoContextAccessor;
         }
 
-        public override bool GetConfigType(GridEditor editor, out Type type) {
+        public override bool GetConfigType(GridEditor? editor, out Type? type) {
 
             type = null;
 
@@ -34,19 +34,19 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
         }
 
-        public override bool GetValueType(GridControl control, out Type type) {
+        public override bool GetValueType(GridControl? control, out Type? type) {
 
             type = null;
 
-            if (IsEmbedEditor(control.Editor)) {
+            if (IsEmbedEditor(control?.Editor)) {
                 type = typeof(GridControlEmbedValue);
-            } else if (IsMacroEditor(control.Editor)) {
+            } else if (IsMacroEditor(control?.Editor)) {
                 type = typeof(GridControlMacroValue);
-            } else if (IsMediaEditor(control.Editor)) {
+            } else if (IsMediaEditor(control?.Editor)) {
                 type = typeof(GridControlMediaValue);
-            } else if (IsRichTextEditor(control.Editor)) {
+            } else if (IsRichTextEditor(control?.Editor)) {
                 type = typeof(GridControlRichTextValue);
-            } else if (IsTextStringEditor(control.Editor)) {
+            } else if (IsTextStringEditor(control?.Editor)) {
                 type = typeof(GridControlTextValue);
             }
 
@@ -60,7 +60,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         /// <param name="control">The parent control.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted value.</param>
-        public override bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
+        public override bool ConvertControlValue(GridControl control, JToken? token, out IGridControlValue? value) {
             
             value = null;
 
@@ -80,12 +80,12 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         
         }
 
-        protected virtual IGridControlValue ParseGridControlMediaValue(GridControl control, JObject json) {
+        protected virtual IGridControlValue? ParseGridControlMediaValue(GridControl control, JObject? json) {
             
             GridControlMediaValue value = new GridControlMediaValue(control, json);
             
-            if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext context)) {
-                value.PublishedImage = context.Media.GetById(value.Id);
+            if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context)) {
+                value.PublishedImage = context.Media?.GetById(value.Id);
             }
 
             return value;
@@ -98,7 +98,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         /// <param name="editor"></param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
         /// <param name="config">The converted config.</param>
-        public override bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
+        public override bool ConvertEditorConfig(GridEditor? editor, JToken? token, out IGridEditorConfig? config) {
        
             config = null;
 
@@ -112,23 +112,23 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         
         }
 
-        protected bool IsEmbedEditor(GridEditor editor) {
+        protected bool IsEmbedEditor(GridEditor? editor) {
             return editor?.View == "embed";
         }
 
-        protected bool IsTextStringEditor(GridEditor editor) {
+        protected bool IsTextStringEditor(GridEditor? editor) {
             return editor?.View == "textstring";
         }
 
-        protected bool IsMediaEditor(GridEditor editor) {
+        protected bool IsMediaEditor(GridEditor? editor) {
             return editor?.View == "media";
         }
 
-        protected bool IsMacroEditor(GridEditor editor) {
+        protected bool IsMacroEditor(GridEditor? editor) {
             return editor?.View == "macro";
         }
 
-        protected bool IsRichTextEditor(GridEditor editor) {
+        protected bool IsRichTextEditor(GridEditor? editor) {
             return editor?.View == "rte";
         }
 

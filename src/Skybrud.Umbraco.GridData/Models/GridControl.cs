@@ -18,53 +18,53 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets a reference to the entire <see cref="GridDataModel"/>.
         /// </summary>
         [JsonIgnore]
-        public GridDataModel Model => Section?.Model;
+        public GridDataModel? Model => Section?.Model;
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridSection"/>.
         /// </summary>
         [JsonIgnore]
-        public GridSection Section => Row?.Section;
+        public GridSection? Section => Row?.Section;
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridRow"/>.
         /// </summary>
         [JsonIgnore]
-        public GridRow Row => Area?.Row;
+        public GridRow? Row => Area?.Row;
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridArea"/>.
         /// </summary>
         [JsonIgnore]
-        public GridArea Area { get; private set; }
+        public GridArea? Area { get; private set; }
 
         /// <summary>
         /// Gets the value of the control. Alternately use the <see cref="GetValue{T}"/> method to get the type safe value.
         /// </summary>
         [JsonProperty("value")]
-        public IGridControlValue Value { get; internal set; }
+        public IGridControlValue? Value { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the editor of the control.
         /// </summary>
         [JsonProperty("editor")]
-        public GridEditor Editor { get; internal set; }
+        public GridEditor? Editor { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the previous control.
         /// </summary>
-        public GridControl PreviousControl { get; internal set; }
+        public GridControl? PreviousControl { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next control.
         /// </summary>
-        public GridControl NextControl { get; internal set; }
+        public GridControl? NextControl { get; internal set; }
 
         /// <summary>
         /// Gets whether the control and it's value is valid.
         /// </summary>
         [JsonIgnore]
-        public bool IsValid => Value != null && Value.IsValid;
+        public bool? IsValid => Value?.IsValid == true;
 
         #endregion
 
@@ -95,11 +95,11 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the value of the control casted to the type of <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value to be returned.</typeparam>
-        public T GetValue<T>() where T : IGridControlValue {
-            return (T) Value;
+        public T? GetValue<T>() where T : IGridControlValue {
+            return (T?) Value;
         }
         
-        public void WriteSearchableText(GridContext context, TextWriter writer) {
+        public void WriteSearchableText(GridContext? context, TextWriter writer) {
             Value?.WriteSearchableText(context, writer);
         }
         
@@ -125,7 +125,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the value of the control.
         /// </summary>
         [JsonProperty("value")]
-        public new TValue Value => (TValue) base.Value;
+        public new TValue? Value => (TValue?) base.Value;
         
         public GridControl(GridControl control) : base(control) { }
 

@@ -5,27 +5,29 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Factories;
 
-namespace Skybrud.Umbraco.GridData.Models {
+namespace Skybrud.Umbraco.GridData.Models
+{
 
     /// <summary>
     /// Class representing an area in an Umbraco Grid.
     /// </summary>
-    public class GridArea : GridElement {
+    public class GridArea : GridElement
+    {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets a reference to the entire <see cref="GridDataModel"/>.
         /// </summary>
         [JsonIgnore]
-        public GridDataModel Model => Section?.Model;
+        public GridDataModel? Model => Section?.Model;
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridSection"/>.
         /// </summary>
         [JsonIgnore]
-        public GridSection Section => Row?.Section;
-        
+        public GridSection? Section => Row?.Section;
+
         /// <summary>
         /// Gets a reference to the parent <see cref="GridRow"/>.
         /// </summary>
@@ -51,40 +53,41 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of all controls added to this area.
         /// </summary>
-        public GridControl[] Controls { get; private set; }
+        public GridControl[]? Controls { get; private set; }
 
         /// <summary>
         /// Gets a reference to the previous area.
         /// </summary>
-        public GridArea PreviousArea { get; internal set; }
+        public GridArea? PreviousArea { get; set; }
 
         /// <summary>
         /// Gets a reference to the next area.
         /// </summary>
-        public GridArea NextArea { get; internal set; }
+        public GridArea? NextArea { get; internal set; }
 
         /// <summary>
         /// Gets whether the area has any controls.
         /// </summary>
-        public bool HasControls => Controls.Length > 0;
+        public bool? HasControls => Controls?.Length > 0;
 
         /// <summary>
         /// Gets the first control of the area. If the area doesn't contain
         /// any controls, this property will return <c>null</c>.
         /// </summary>
-        public GridControl FirstControl => Controls.FirstOrDefault();
+        public GridControl? FirstControl => Controls?.FirstOrDefault();
 
         /// <summary>
         /// Gets the last control of the area. If the area doesn't contain
         /// any controls, this property will return <c>null</c>.
         /// </summary>
-        public GridControl LastControl => Controls.LastOrDefault();
+        public GridControl? LastControl => Controls?.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one control within the area is valid.
         /// </summary>
-        public override bool IsValid {
-            get { return Controls.Any(x => x.IsValid); }
+        public override bool? IsValid
+        {
+            get { return Controls?.Any(x => x?.IsValid == true); }
         }
 
         #endregion
@@ -97,7 +100,8 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <param name="json">An instance of <see cref="JObject"/> representing the section.</param>
         /// <param name="row">The parent row.</param>
         /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
-        public GridArea(JObject json, GridRow row, IGridFactory factory) : base(json) {
+        public GridArea(JObject json, GridRow row, IGridFactory factory) : base(json)
+        {
 
             Row = row;
             Grid = json.GetInt32("grid");
@@ -106,19 +110,26 @@ namespace Skybrud.Umbraco.GridData.Models {
             Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? new GridControl[0];
 
             // Update "PreviousControl" and "NextControl" properties
-            for (int i = 1; i <  Controls.Length; i++) {
+            for (int i = 1; i < Controls?.Length; i++)
+            {
                 Controls[i - 1].NextControl = Controls[i];
-                Controls[i].PreviousControl = Controls[i - 1];
+                Controls[i].PreviousControl = Controls?[i - 1];
             }
-
         }
 
         #endregion
 
         #region Member methods
-        
-        public override void WriteSearchableText(GridContext context, TextWriter writer) {
-            foreach (GridControl control in Controls) control.WriteSearchableText(context, writer);
+
+        public override void WriteSearchableText(GridContext? context, TextWriter writer)
+        {
+            if (Controls != null)
+            {
+                foreach (GridControl? control in Controls)
+                {
+                    control?.WriteSearchableText(context, writer);
+                }
+            }
         }
 
         #endregion

@@ -23,7 +23,7 @@ namespace Skybrud.Umbraco.GridData {
         /// Gets the file version as a string.
         /// </summary>
         /// <returns></returns>
-        public static string GetFileVersion() {
+        public static string? GetFileVersion() {
             Assembly assembly = typeof(GridUtils).Assembly;
             return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
         }

@@ -2,8 +2,10 @@
 using System.IO;
 using System.Linq;
 using System.Text;
+using Lucene.Net.Analysis.Standard;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Org.BouncyCastle.Asn1;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Umbraco.GridData.Factories;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -22,24 +24,26 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// has at least one valid control.
         /// </summary>
         public bool IsValid {
-            get { return JObject != null && GetAllControls().Any(x => x.IsValid); }
+            get {
+                return JObject != null && GetAllControls()?.Any(x => x?.IsValid == true) == true;
+            }
         }
         
         /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
-        public string Name { get; private set; }
+        public string? Name { get; private set; }
 
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        public GridSection[] Sections { get; private set; }
+        public GridSection?[]? Sections { get; private set; }
         
         /// <summary>
         /// Gets a reference to the parent <see cref="IPublishedElement"/>, if the Grid model was loaded directly from a property value.
         /// </summary>
         [JsonIgnore]
-        public IPublishedElement Owner { get; }
+        public IPublishedElement? Owner { get; }
 
         /// <summary>
         /// Gets whether the grid model has a reference to it's <see cref="IPublishedElement"/> owner.
@@ -50,7 +54,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets a reference to the parent property type, if the Grid model was loaded directly from a property value.
         /// </summary>
-        public IPublishedPropertyType PropertyType { get; }
+        public IPublishedPropertyType? PropertyType { get; }
 
         /// <summary>
         /// Gets whether a property type has been specified for the model.
@@ -66,14 +70,14 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         [Obsolete]
         [JsonIgnore]
-        public string name => Name;
+        public string? name => Name;
 
         /// <summary>
         /// Gets the underlying JSON array for the <c>sections</c> property. 
         /// </summary>
         [Obsolete]
         [JsonIgnore]
-        public dynamic sections => ((dynamic) JObject).sections;
+        public dynamic? sections => JObject?.GetObject<dynamic>("sections");
 
         // ReSharper restore InconsistentNaming
 
@@ -92,11 +96,11 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <param name="propertyType">An instance of <see cref="IPublishedPropertyType"/> representing the property holding the grid value.</param>
         /// <param name="json">An instance of <see cref="JObject"/> representing the grid model.</param>
         /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
-        public GridDataModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject json, IGridFactory factory) : base(json) {
+        public GridDataModel(IPublishedElement? owner, IPublishedPropertyType? propertyType, JObject? json, IGridFactory? factory) : base(json) {
             Owner = owner;
             PropertyType = propertyType;
             Name = json.GetString("name");
-            Sections = json.GetArray("sections", x => factory.CreateGridSection(x, this)) ?? Array.Empty<GridSection>();
+            Sections = json.GetArray("sections", x => factory?.CreateGridSection(x, this)) ?? Array.Empty<GridSection?>();
         }
 
         #endregion
@@ -106,41 +110,31 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of all nested controls. 
         /// </summary>
-        public GridControl[] GetAllControls() {
-            return (
-                from section in Sections
-                from row in section.Rows
-                from area in row.Areas
-                from control in area.Controls
-                select control
-            ).ToArray();
+        public GridControl?[]? GetAllControls() {
+            return Sections?
+                .SelectMany(x => x?.Rows ?? Array.Empty<GridRow?>())
+                .SelectMany(x => x?.Areas ?? Array.Empty<GridArea?>())
+                .SelectMany(x => x?.Controls ?? Array.Empty<GridControl?>())
+                .ToArray();
         }
 
         /// <summary>
         /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
-        public GridControl[] GetAllControls(string alias) {
-            return GetAllControls(x => x.Editor.Alias == alias);
-        }
-
-        /// <summary>
-        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
-        /// </summary>
-        /// <param name="predicate">The predicate (callback function) used for comparison.</param>
-        public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
-            return (
-                from section in Sections
-                from row in section.Rows
-                from area in row.Areas
-                from control in area.Controls
-                where predicate(control)
-                select control
-            ).ToArray();
+        public GridControl?[]? GetAllControls(string alias)
+        {
+            return GetAllControls()?.Where(x => x?.Editor?.Alias == alias).ToArray();
         }
 
         public void WriteSearchableText(GridContext context, TextWriter writer) {
-            foreach (GridSection section in Sections) section.WriteSearchableText(context, writer);
+            if (Sections != null)
+            {
+                foreach (GridSection? section in Sections)
+                {
+                    section?.WriteSearchableText(context, writer);
+                }
+            }
         }
 
         /// <summary>
