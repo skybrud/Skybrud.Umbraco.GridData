@@ -58,7 +58,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whether the row has any areas.
         /// </summary>
-        public bool? HasAreas => Areas?.Length > 0;
+        public bool HasAreas => Areas?.Length > 0;
 
         /// <summary>
         /// Gets the first area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.

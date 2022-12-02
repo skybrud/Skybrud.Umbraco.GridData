@@ -38,7 +38,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whether the section has any rows.
         /// </summary>
-        public bool? HasRows => Rows?.Length > 0;
+        public bool HasRows => Rows?.Length > 0;
 
         /// <summary>
         /// Gets the first row of the section. If the section doesn't contain any rows, this property will return <c>null</c>.

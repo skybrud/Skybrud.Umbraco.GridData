@@ -68,7 +68,7 @@ namespace Skybrud.Umbraco.GridData.Models
         /// <summary>
         /// Gets whether the area has any controls.
         /// </summary>
-        public bool? HasControls => Controls?.Length > 0;
+        public bool HasControls => Controls?.Length > 0;
 
         /// <summary>
         /// Gets the first control of the area. If the area doesn't contain
