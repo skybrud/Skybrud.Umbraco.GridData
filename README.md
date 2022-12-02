@@ -12,7 +12,7 @@
   <tbody>
     <tr>
       <td colspan="2">
-          This branch is for the <strong>Umbraco 10+</strong> version of this package. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><strong>v3/main</strong></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><strong>v3/main</strong></a> branch.
+          This branch is for the <strong>Umbraco 10+</strong> version of this package. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><strong>v4/main</strong></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><strong>v3/main</strong></a> branch.
       </td>
     </tr>
   </tbody>
