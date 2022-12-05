@@ -12,7 +12,7 @@
   <tbody>
     <tr>
       <td colspan="2">
-          This branch is for the <strong>Umbraco 10+</strong> version of this package. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><strong>v4/main</strong></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><strong>v3/main</strong></a> branch.
+          This branch is for the <strong>Umbraco 9</strong> version of this package. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><strong>v3/main</strong></a> branch.
       </td>
     </tr>
   </tbody>
@@ -38,20 +38,17 @@ The package makes it easy to use the model in your MVC views, master pages or ev
 
 ## Installation
 
-The Umbraco 10+ version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
+The Umbraco 9 version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
 
 ```
-dotnet add package Skybrud.Umbraco.GridData --version 5.0.0-alpha001
+dotnet add package Skybrud.Umbraco.GridData --version 4.0.0-alpha002
 ```
 
 or the older NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Umbraco.GridData -Version 5.0.0-alpha001
+Install-Package Skybrud.Umbraco.GridData -Version 4.0.0-alpha002
 ```
-
-**Umbraco 9**  
-For the Umbraco 9 version of this package, see the [**v4/main**](https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main) branch instead.
 
 **Umbraco 8**  
 For the Umbraco 8 version of this package, see the [**v3/main**](https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main) branch instead.

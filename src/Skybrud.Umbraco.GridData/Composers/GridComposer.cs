@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Skybrud.Umbraco.GridData.Converters.Umbraco;
+﻿using Skybrud.Umbraco.GridData.Converters.Umbraco;
 using Skybrud.Umbraco.GridData.Factories;
 using Umbraco.Cms.Core.Composing;
 using Umbraco.Cms.Core.DependencyInjection;
@@ -11,7 +10,7 @@ namespace Skybrud.Umbraco.GridData.Composers {
 
         public void Compose(IUmbracoBuilder builder) {
 
-            builder.Services.AddSingleton<GridContext>();
+            builder.Services.AddScoped<GridContext>();
             builder.Services.AddUnique<IGridFactory, DefaultGridFactory>();
             
             builder.GridConverters().Append<UmbracoGridConverter>();
