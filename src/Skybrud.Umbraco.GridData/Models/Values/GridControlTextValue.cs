@@ -53,11 +53,11 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #endregion
 
         #region Member methods
-        
+
         public virtual void WriteSearchableText(GridContext context, TextWriter writer) {
             if (Value != null) writer.WriteLine(Value);
         }
-        
+
         public virtual string GetSearchableText(GridContext context) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);

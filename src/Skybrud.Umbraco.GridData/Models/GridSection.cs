@@ -77,7 +77,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #endregion
 
         #region Member methods
-        
+
         public void WriteSearchableText(GridContext context, TextWriter writer) {
             foreach (GridRow row in Rows) row.WriteSearchableText(context, writer);
         }

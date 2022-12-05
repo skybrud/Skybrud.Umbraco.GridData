@@ -13,7 +13,7 @@ namespace Skybrud.Umbraco.GridData.Models {
     public class GridArea : GridElement {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets a reference to the entire <see cref="GridDataModel"/>.
         /// </summary>
@@ -25,7 +25,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         [JsonIgnore]
         public GridSection Section => Row?.Section;
-        
+
         /// <summary>
         /// Gets a reference to the parent <see cref="GridRow"/>.
         /// </summary>
@@ -106,7 +106,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? new GridControl[0];
 
             // Update "PreviousControl" and "NextControl" properties
-            for (int i = 1; i <  Controls.Length; i++) {
+            for (int i = 1; i < Controls.Length; i++) {
                 Controls[i - 1].NextControl = Controls[i];
                 Controls[i].PreviousControl = Controls[i - 1];
             }
@@ -116,7 +116,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #endregion
 
         #region Member methods
-        
+
         public override void WriteSearchableText(GridContext context, TextWriter writer) {
             foreach (GridControl control in Controls) control.WriteSearchableText(context, writer);
         }

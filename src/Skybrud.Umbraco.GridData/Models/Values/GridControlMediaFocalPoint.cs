@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Models.Values {
-    
+
     /// <summary>
     /// Class representing the focal point of a media.
     /// </summary>
@@ -16,7 +16,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         [JsonProperty("left")]
         public float Left { get; private set; }
-        
+
         /// <summary>
         /// The vertical (Y-axis) coordinate of the focal point.
         /// </summary>

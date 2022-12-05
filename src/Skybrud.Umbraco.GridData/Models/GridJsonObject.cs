@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Json.Converters;
 
 namespace Skybrud.Umbraco.GridData.Models {
-    
+
     /// <summary>
     /// Class representing an object derived from an instance of <see cref="JObject"/>.
     /// </summary>

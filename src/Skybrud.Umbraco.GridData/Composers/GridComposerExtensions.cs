@@ -4,7 +4,7 @@ using Umbraco.Cms.Core.DependencyInjection;
 // ReSharper disable InconsistentNaming
 
 namespace Skybrud.Umbraco.GridData.Composers {
-    
+
     /// <summary>
     /// Static class with extension methods for composing the grid.
     /// </summary>

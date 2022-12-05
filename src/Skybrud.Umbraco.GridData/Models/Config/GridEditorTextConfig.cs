@@ -3,14 +3,14 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Models.Config {
-    
+
     /// <summary>
     /// Class representing the configuration of a text editor.
     /// </summary>
     public class GridEditorTextConfig : GridEditorConfigBase {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets the style properties for the text.
         /// </summary>

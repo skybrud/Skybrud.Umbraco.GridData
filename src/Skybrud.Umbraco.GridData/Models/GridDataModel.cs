@@ -24,7 +24,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         public bool IsValid {
             get { return JObject != null && GetAllControls().Any(x => x.IsValid); }
         }
-        
+
         /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
@@ -34,7 +34,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets an array of the columns in the grid.
         /// </summary>
         public GridSection[] Sections { get; private set; }
-        
+
         /// <summary>
         /// Gets a reference to the parent <see cref="IPublishedElement"/>, if the Grid model was loaded directly from a property value.
         /// </summary>
@@ -78,7 +78,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         // ReSharper restore InconsistentNaming
 
         #endregion
-        
+
         #endregion
 
         #region Constructors

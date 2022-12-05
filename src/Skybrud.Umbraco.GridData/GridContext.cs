@@ -6,12 +6,12 @@ using Skybrud.Umbraco.GridData.Converters;
 using Umbraco.Cms.Core.Models.PublishedContent;
 
 namespace Skybrud.Umbraco.GridData {
-    
+
     /// <summary>
     /// Singleton class used for configuring and using the grid.
     /// </summary>
     public class GridContext {
-        
+
         private readonly ILogger<GridContext> _logger;
         private readonly GridConverterCollection _converterCollection;
 
@@ -25,17 +25,17 @@ namespace Skybrud.Umbraco.GridData {
         #endregion
 
         #region Member methods
-        
+
         public virtual void WriteSearchableText(IPublishedElement element, TextWriter writer) {
             foreach (IGridConverter converter in _converterCollection) {
                 try {
                     if (converter.WriteSearchableText(this, element, writer)) return;
-                } catch (Exception ex)  {
+                } catch (Exception ex) {
                     _logger.LogError(ex, $"Converter of type {converter} failed for WriteSearchableText()");
                 }
             }
         }
-        
+
         public virtual string GetSearchableText(IPublishedElement element) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);

@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using Skybrud.Essentials.Reflection;
 
 namespace Skybrud.Umbraco.GridData {
-    
+
     /// <summary>
     /// Various utility methods for the grid.
     /// </summary>
@@ -27,7 +27,7 @@ namespace Skybrud.Umbraco.GridData {
             Assembly assembly = typeof(GridUtils).Assembly;
             return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
         }
-        
+
         #endregion
 
         #region Rendering

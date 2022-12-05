@@ -50,19 +50,19 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         [JsonProperty("width")]
         public int Width { get; set; }
-        
+
         /// <summary>
         /// Gets the height of the embed.
         /// </summary>
         [JsonProperty("height")]
         public int Height { get; set; }
-        
+
         /// <summary>
         /// Gets the url of the embed.
         /// </summary>
         [JsonProperty("url")]
         public string Url { get; set; }
-        
+
         /// <summary>
         /// Gets the info of the embed.
         /// </summary>
@@ -117,7 +117,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         public override string ToString() {
             return HtmlValue.ToHtmlString();
         }
-        
+
         /// <summary>
         /// Gets a HTML representing the value of the control.
         /// </summary>
@@ -125,9 +125,9 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         public string ToHtmlString() {
             return Value;
         }
-        
+
         public virtual void WriteSearchableText(GridContext context, TextWriter writer) { }
-        
+
         public virtual string GetSearchableText(GridContext context) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);

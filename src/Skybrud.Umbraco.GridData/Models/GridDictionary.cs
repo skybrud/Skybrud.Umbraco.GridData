@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Umbraco.GridData.Models {
-    
+
     /// <summary>
     /// Dictionary representing a configuration for an element in the Umbraco Grid.
     /// </summary>

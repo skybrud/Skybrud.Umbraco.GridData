@@ -1,5 +1,5 @@
 ﻿namespace Skybrud.Umbraco.GridData.Models {
-    
+
     /// <summary>
     /// Class representing an item of <see cref="GridDictionary"/>.
     /// </summary>

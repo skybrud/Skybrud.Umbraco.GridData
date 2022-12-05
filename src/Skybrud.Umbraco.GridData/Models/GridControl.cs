@@ -98,11 +98,11 @@ namespace Skybrud.Umbraco.GridData.Models {
         public T GetValue<T>() where T : IGridControlValue {
             return (T) Value;
         }
-        
+
         public void WriteSearchableText(GridContext context, TextWriter writer) {
             Value?.WriteSearchableText(context, writer);
         }
-        
+
         /// <summary>
         /// Gets the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
@@ -118,7 +118,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #endregion
 
     }
-    
+
     public class GridControl<TValue> : GridControl where TValue : IGridControlValue {
 
         /// <summary>
@@ -126,11 +126,11 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         [JsonProperty("value")]
         public new TValue Value => (TValue) base.Value;
-        
+
         public GridControl(GridControl control) : base(control) { }
 
     }
-    
+
     public class GridControl<TValue, TConfig> : GridControl<TValue> where TValue : IGridControlValue where TConfig : IGridEditorConfig {
 
         /// <summary>

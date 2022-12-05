@@ -32,7 +32,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
         /// <param name="config">The converted config.</param>
         bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config);
-        
+
         bool WriteSearchableText(GridContext context, IPublishedElement element, TextWriter writer);
 
         bool IsValid(IGridControlValue value, out bool result);

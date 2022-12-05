@@ -49,7 +49,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
         public IGridEditorConfig Config { get; internal set; }
-        
+
         #endregion
 
         #region Constructors
@@ -76,7 +76,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Icon = json.GetString("icon");
 
         }
-        
+
         public GridEditor(GridEditor editor) : base(editor.JObject) {
             Name = editor.Name;
             Alias = editor.Alias;

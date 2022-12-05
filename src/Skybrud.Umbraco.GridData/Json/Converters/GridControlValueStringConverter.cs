@@ -16,12 +16,12 @@ namespace Skybrud.Umbraco.GridData.Json.Converters {
         /// <param name="value">The value.</param>
         /// <param name="serializer">The calling serializer.</param>
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer) {
-            
+
             if (value is GridControlTextValue text) {
                 writer.WriteValue(text.Value);
                 return;
             }
-            
+
             serializer.Serialize(writer, value);
 
         }
@@ -51,7 +51,7 @@ namespace Skybrud.Umbraco.GridData.Json.Converters {
         public override bool CanConvert(Type type) {
             return false;
         }
-    
+
     }
 
 }

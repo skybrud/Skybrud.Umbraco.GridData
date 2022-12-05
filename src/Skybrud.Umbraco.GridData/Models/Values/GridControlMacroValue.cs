@@ -49,7 +49,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         }
 
         #endregion
-        
+
     }
 
 }

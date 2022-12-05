@@ -3,14 +3,14 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Models.Values;
 
 namespace Skybrud.Umbraco.GridData.Models.Config {
-    
+
     /// <summary>
     /// Abstract class with a basic implementation of the <see cref="IGridControlValue"/> interface.
     /// </summary>
     public abstract class GridEditorConfigBase : GridJsonObject, IGridEditorConfig {
 
         #region Properties
-        
+
         /// <summary>
         /// Gets a reference to the parent editor of the configuration.
         /// </summary>

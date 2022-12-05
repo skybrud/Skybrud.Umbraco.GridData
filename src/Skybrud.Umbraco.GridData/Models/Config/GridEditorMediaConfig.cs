@@ -3,7 +3,7 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Models.Config {
-    
+
     /// <summary>
     /// Class representing the configuration of a media editor.
     /// </summary>

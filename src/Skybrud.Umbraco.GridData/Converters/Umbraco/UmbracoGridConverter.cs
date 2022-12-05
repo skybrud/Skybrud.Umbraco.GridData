@@ -13,7 +13,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
     /// Converter for handling the default editors (and their values and configs) of Umbraco.
     /// </summary>
     public class UmbracoGridConverter : GridConverterBase {
-        
+
         private readonly IUmbracoContextAccessor _umbracoContextAccessor;
 
         public UmbracoGridConverter(IUmbracoContextAccessor umbracoContextAccessor) {
@@ -61,7 +61,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted value.</param>
         public override bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
-            
+
             value = null;
 
             if (IsEmbedEditor(control.Editor)) {
@@ -75,15 +75,15 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             } else if (IsTextStringEditor(control.Editor)) {
                 value = new GridControlTextValue(control, token);
             }
-            
+
             return value != null;
-        
+
         }
 
         protected virtual IGridControlValue ParseGridControlMediaValue(GridControl control, JObject json) {
-            
+
             GridControlMediaValue value = new GridControlMediaValue(control, json);
-            
+
             if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext context)) {
                 value.PublishedImage = context.Media.GetById(value.Id);
             }
@@ -99,7 +99,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
         /// <param name="config">The converted config.</param>
         public override bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
-       
+
             config = null;
 
             if (IsMediaEditor(editor)) {
@@ -109,7 +109,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             }
 
             return config != null;
-        
+
         }
 
         protected bool IsEmbedEditor(GridEditor editor) {

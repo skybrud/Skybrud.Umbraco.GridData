@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace Skybrud.Umbraco.GridData.Models.Values {
-    
+
     /// <summary>
     /// Abstract class with a basic implementation of the <see cref="IGridControlValue"/> interface.
     /// </summary>
@@ -17,7 +17,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         [JsonIgnore]
         public GridControl Control { get; }
-        
+
         /// <summary>
         /// Gets whether the control is valid (eg. whether it has a value).
         /// </summary>
@@ -40,9 +40,9 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #endregion
 
         #region Member methods
-        
+
         public virtual void WriteSearchableText(GridContext context, TextWriter writer) { }
-        
+
         public virtual string GetSearchableText(GridContext context) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);
