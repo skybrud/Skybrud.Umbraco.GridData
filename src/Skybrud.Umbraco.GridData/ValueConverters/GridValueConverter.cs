@@ -1,6 +1,6 @@
 ﻿using System;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json;
+using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Umbraco.GridData.Factories;
 using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
