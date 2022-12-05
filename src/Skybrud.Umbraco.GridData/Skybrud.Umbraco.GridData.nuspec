@@ -8,7 +8,7 @@
     <owners>Anders Bjerner, René Pjengaard</owners>
     <licenseUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData/blob/master/LICENSE.md</licenseUrl>
     <projectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/skybrud/Skybrud.Umbraco.GridData/v1/main/src/build/Limbo.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/skybrud/Skybrud.Umbraco.GridData/v2/main/src/build/Limbo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <tags>Skybrud, Limbo, Umbraco, Grid, JSON, Umbraco-Marketplace</tags>
