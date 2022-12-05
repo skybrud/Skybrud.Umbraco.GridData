@@ -6,7 +6,7 @@ using Skybrud.Umbraco.GridData.Models;
 using Umbraco.Cms.Core.Models.PublishedContent;
 using Umbraco.Cms.Core.PropertyEditors;
 
-namespace Skybrud.Umbraco.GridData {
+namespace Skybrud.Umbraco.GridData.ValueConverters {
 
     /// <summary>
     /// Property value converter for the Umbraco Grid.
