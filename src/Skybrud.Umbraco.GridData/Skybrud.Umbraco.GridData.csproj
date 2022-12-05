@@ -1,47 +1,48 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net472</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
-    <Version>3.0.2</Version>
-    <Authors>Anders Bjerner, René Pjengaard</Authors>
+    <VersionPrefix>3.0.2</VersionPrefix>
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
     <Company>Limbo</Company>
+    <Authors>Anders Bjerner, René Pjengaard</Authors>
+    <Copyright>Copyright © 2022</Copyright>
+    <Title>Skybrud Grid Data</Title>
     <Description>Strongly typed models for the grid in Umbraco 8.</Description>
-    <Copyright>Copyright © 2021</Copyright>
   </PropertyGroup>
 
+  <!-- Information for the NuGet package -->
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData</PackageId>
-    <PackageTags>Skybrud, Limbo, Umbraco, Grid, JSON</PackageTags>
+    <PackageTags>Skybrud, Limbo, Umbraco, Grid, JSON, Umbraco-Marketplace</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData</PackageProjectUrl>
+    <PackageProjectUrl>https://packages.skybrud.dk/skybrud.umbraco.griddata/</PackageProjectUrl>
     <PackageIcon>Limbo.png</PackageIcon>
+    <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/skybrud/Skybrud.Umbraco.GridData/</RepositoryUrl>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\Skybrud.Umbraco.GridData.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <None Include="../build/Limbo.png" Pack="true" PackagePath="\"/>
-  </ItemGroup>
-
+  <!-- Include NuGet dependencies -->
   <ItemGroup>
     <Reference Include="System.Web" />
     <PackageReference Include="Skybrud.Essentials" Version="1.1.21" />
-    <PackageReference Include="UmbracoCms.Core" Version="8.1.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="UmbracoCms.Web" Version="8.1.0">
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
+    <PackageReference Include="UmbracoCms.Core" Version="[8.1.0,9.0)" />
+    <PackageReference Include="UmbracoCms.Web" Version="[8.1.0,9.0)" />
   </ItemGroup>
-  
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(ConfigurationName)'=='Release' AND '$(BuildTools)'=='1'">
-    <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
-  </Target>
+
+  <!-- Include package icon for NuGet -->
+  <ItemGroup>
+    <Content Include="../build/Limbo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Generate XML documentation -->
+  <PropertyGroup>
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
 
 </Project>
