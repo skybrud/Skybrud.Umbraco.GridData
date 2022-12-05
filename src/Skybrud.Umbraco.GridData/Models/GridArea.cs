@@ -105,7 +105,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Grid = json.GetInt32("grid");
             AllowAll = json.GetBoolean("allowAll");
             Allowed = json.GetStringArray("allowed");
-            Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? new GridControl[0];
+            Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? Array.Empty<GridControl>();
 
             // Update "PreviousControl" and "NextControl" properties
             for (int i = 1; i < Controls.Count; i++) {

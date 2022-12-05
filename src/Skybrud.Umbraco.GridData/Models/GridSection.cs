@@ -66,7 +66,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Model = grid;
             Grid = json.GetInt32("grid");
             Name = grid.Name;
-            Rows = json.GetArray("rows", x => factory.CreateGridRow(x, this)) ?? new GridRow[0];
+            Rows = json.GetArray("rows", x => factory.CreateGridRow(x, this)) ?? Array.Empty<GridRow>();
 
             // Update "PreviousRow" and "NextRow" properties
             for (int i = 1; i < Rows.Count; i++) {

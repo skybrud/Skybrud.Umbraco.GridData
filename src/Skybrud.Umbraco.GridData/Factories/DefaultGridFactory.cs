@@ -34,22 +34,22 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
         /// <inheritdoc />
         public virtual GridDataModel CreateGridModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject json, bool preview) {
-            return new(owner, propertyType, json, this);
+            return new GridDataModel(owner, propertyType, json, this);
         }
 
         /// <inheritdoc />
         public virtual GridSection CreateGridSection(JObject json, GridDataModel grid) {
-            return new(json, grid, this);
+            return new GridSection(json, grid, this);
         }
 
         /// <inheritdoc />
         public virtual GridRow CreateGridRow(JObject json, GridSection section) {
-            return new(json, section, this);
+            return new GridRow(json, section, this);
         }
 
         /// <inheritdoc />
         public virtual GridArea CreateGridArea(JObject json, GridRow row) {
-            return new(json, row, this);
+            return new GridArea(json, row, this);
         }
 
         /// <inheritdoc />
@@ -63,7 +63,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
             GridEditor editor = json.GetObject("editor", CreateGridEditor);
 
             // Initialize a new Grid control
-            GridControl control = new GridControl(json, area);
+            GridControl control = new(json, area);
 
             // Make sure to set the editor before we parse the control value
             control.Editor = editor;
@@ -72,7 +72,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
             control.Value = ParseGridControlValue(control);
 
             // Get the type of the editor config (it may not have a config)
-            Type configType = control.Editor.Config?.GetType();
+            Type configType = control.Editor?.Config?.GetType();
 
             // Determine the value type
             Type valueType = null;

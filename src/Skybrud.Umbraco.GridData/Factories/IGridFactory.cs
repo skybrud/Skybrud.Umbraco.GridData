@@ -11,7 +11,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
         /// <summary>
         /// Returns a new <see cref="GridDataModel"/> from the specified <paramref name="json"/> object.
-        /// 
+        ///
         /// <paramref name="owner"/> and <paramref name="propertyType"/> may be specified if the grid value comes directly from a property value. If either aren't available, it's fine to specify <c>null</c> for both of them.
         /// </summary>
         /// <param name="owner">An instance of <see cref="IPublishedElement"/> representing the owner holding the grid value.</param>

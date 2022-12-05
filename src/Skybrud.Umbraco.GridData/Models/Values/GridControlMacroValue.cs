@@ -45,7 +45,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         public GridControlMacroValue(GridControl control, JObject obj) : base(control, obj) {
             Syntax = obj.GetString("syntax");
             MacroAlias = obj.GetString("macroAlias");
-            Parameters = obj.GetObject("macroParamsDictionary").ToObject<Dictionary<string, object>>();
+            Parameters = obj.GetObject("macroParamsDictionary")?.ToObject<Dictionary<string, object>>();
         }
 
         #endregion

@@ -70,7 +70,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         public string name => Name;
 
         /// <summary>
-        /// Gets the underlying JSON array for the <c>sections</c> property. 
+        /// Gets the underlying JSON array for the <c>sections</c> property.
         /// </summary>
         [Obsolete]
         [JsonIgnore]
@@ -105,7 +105,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Member methods
 
         /// <summary>
-        /// Gets an array of all nested controls. 
+        /// Gets an array of all nested controls.
         /// </summary>
         public GridControl[] GetAllControls() {
             return (
@@ -118,7 +118,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
+        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
         public GridControl[] GetAllControls(string alias) {
@@ -126,7 +126,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
+        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>.
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
         public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {

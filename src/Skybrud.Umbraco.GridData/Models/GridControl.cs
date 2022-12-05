@@ -64,7 +64,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets whether the control and it's value is valid.
         /// </summary>
         [JsonIgnore]
-        public bool IsValid => Value != null && Value.IsValid;
+        public bool IsValid => Value is { IsValid: true };
 
         #endregion
 

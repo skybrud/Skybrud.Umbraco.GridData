@@ -20,7 +20,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whetehr the element has one or more config values.
         /// </summary>
-        public bool HasConfig => Config != null && Config.Count > 0;
+        public bool HasConfig => Config is { Count: > 0 };
 
         /// <summary>
         /// Gets a dictionary representing the styles of the element.
@@ -30,7 +30,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whetehr the element has one or more style values.
         /// </summary>
-        public bool HasStyles => Styles != null && Styles.Count > 0;
+        public bool HasStyles => Styles is { Count: > 0 };
 
         /// <summary>
         /// Gets whether at least one control within the element is valid.

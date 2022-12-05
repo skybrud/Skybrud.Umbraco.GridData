@@ -99,7 +99,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         public static GridDictionary Parse(JObject obj) {
 
             // Initialize an empty dictionary
-            Dictionary<string, string> config = new Dictionary<string, string>();
+            Dictionary<string, string> config = new();
 
             // Add all properties to the dictionary
             if (obj != null) {

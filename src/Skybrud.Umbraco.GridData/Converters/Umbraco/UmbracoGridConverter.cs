@@ -82,10 +82,10 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
         protected virtual IGridControlValue ParseGridControlMediaValue(GridControl control, JObject json) {
 
-            GridControlMediaValue value = new GridControlMediaValue(control, json);
+            GridControlMediaValue value = new(control, json);
 
             if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext context)) {
-                value.PublishedImage = context.Media.GetById(value.Id);
+                value.PublishedImage = context.Media?.GetById(value.Id);
             }
 
             return value;
