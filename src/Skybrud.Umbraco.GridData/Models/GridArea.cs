@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -51,7 +53,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of all controls added to this area.
         /// </summary>
-        public GridControl[] Controls { get; private set; }
+        public IReadOnlyList<GridControl> Controls { get; private set; }
 
         /// <summary>
         /// Gets a reference to the previous area.
@@ -66,7 +68,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whether the area has any controls.
         /// </summary>
-        public bool HasControls => Controls.Length > 0;
+        public bool HasControls => Controls.Count > 0;
 
         /// <summary>
         /// Gets the first control of the area. If the area doesn't contain
@@ -106,7 +108,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? new GridControl[0];
 
             // Update "PreviousControl" and "NextControl" properties
-            for (int i = 1; i < Controls.Length; i++) {
+            for (int i = 1; i < Controls.Count; i++) {
                 Controls[i - 1].NextControl = Controls[i];
                 Controls[i].PreviousControl = Controls[i - 1];
             }

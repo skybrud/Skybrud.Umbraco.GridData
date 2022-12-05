@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
@@ -32,12 +34,12 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of all rows in the sections.
         /// </summary>
-        public GridRow[] Rows { get; private set; }
+        public IReadOnlyList<GridRow> Rows { get; private set; }
 
         /// <summary>
         /// Gets whether the section has any rows.
         /// </summary>
-        public bool HasRows => Rows.Length > 0;
+        public bool HasRows => Rows.Count > 0;
 
         /// <summary>
         /// Gets the first row of the section. If the section doesn't contain any rows, this property will return <c>null</c>.
@@ -67,7 +69,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Rows = json.GetArray("rows", x => factory.CreateGridRow(x, this)) ?? new GridRow[0];
 
             // Update "PreviousRow" and "NextRow" properties
-            for (int i = 1; i < Rows.Length; i++) {
+            for (int i = 1; i < Rows.Count; i++) {
                 Rows[i - 1].NextRow = Rows[i];
                 Rows[i].PreviousRow = Rows[i - 1];
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Newtonsoft.Json.Linq;
@@ -42,7 +43,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of all areas in the row.
         /// </summary>
-        public GridArea[] Areas { get; private set; }
+        public IReadOnlyList<GridArea> Areas { get; private set; }
 
         /// <summary>
         /// Gets a reference to the previous row.
@@ -57,7 +58,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whether the row has any areas.
         /// </summary>
-        public bool HasAreas => Areas.Length > 0;
+        public bool HasAreas => Areas.Count > 0;
 
         /// <summary>
         /// Gets the first area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
@@ -96,7 +97,7 @@ namespace Skybrud.Umbraco.GridData.Models {
             Areas = json.GetArray("areas", x => factory.CreateGridArea(x, this)) ?? new GridArea[0];
 
             // Update "PreviousArea" and "NextArea" properties
-            for (int i = 1; i < Areas.Length; i++) {
+            for (int i = 1; i < Areas.Count; i++) {
                 Areas[i - 1].NextArea = Areas[i];
                 Areas[i].PreviousArea = Areas[i - 1];
             }
@@ -108,7 +109,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Member methods
 
         /// <summary>
-        /// Gets an array of all nested controls. 
+        /// Gets an array of all nested controls.
         /// </summary>
         public GridControl[] GetAllControls() {
             return (
@@ -119,7 +120,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>. 
+        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
         public GridControl[] GetAllControls(string alias) {
@@ -127,7 +128,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>. 
+        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>.
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
         public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {

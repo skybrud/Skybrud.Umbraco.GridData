@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        public GridSection[] Sections { get; private set; }
+        public IReadOnlyList<GridSection> Sections { get; private set; }
 
         /// <summary>
         /// Gets a reference to the parent <see cref="IPublishedElement"/>, if the Grid model was loaded directly from a property value.
