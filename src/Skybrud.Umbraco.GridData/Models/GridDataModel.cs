@@ -58,28 +58,6 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// </summary>
         public bool HasPropertyType => PropertyType != null;
 
-        #region Exposing properties from the JSON due to http://issues.umbraco.org/issue/U4-5750
-
-        // ReSharper disable InconsistentNaming
-
-        /// <summary>
-        /// Same as <see cref="Name"/>.
-        /// </summary>
-        [Obsolete]
-        [JsonIgnore]
-        public string name => Name;
-
-        /// <summary>
-        /// Gets the underlying JSON array for the <c>sections</c> property.
-        /// </summary>
-        [Obsolete]
-        [JsonIgnore]
-        public dynamic sections => ((dynamic) JObject).sections;
-
-        // ReSharper restore InconsistentNaming
-
-        #endregion
-
         #endregion
 
         #region Constructors
