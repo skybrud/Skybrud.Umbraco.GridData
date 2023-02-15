@@ -47,7 +47,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         public GridControlTextValue(GridControl control, JToken token) {
             Control = control;
             JToken = token;
-            Value = token.Value<string>();
+            Value = token.Value<string>() ?? string.Empty;
         }
 
         #endregion
@@ -55,7 +55,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Member methods
 
         public virtual void WriteSearchableText(GridContext context, TextWriter writer) {
-            if (Value != null) writer.WriteLine(Value);
+            writer.WriteLine(Value);
         }
 
         public virtual string GetSearchableText(GridContext context) {

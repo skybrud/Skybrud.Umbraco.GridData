@@ -37,9 +37,9 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
 
         #region Constructors
 
-        public GridEditorTextConfig(GridEditor editor, JObject obj) : base(editor, obj) {
-            Style = obj.GetString("style");
-            Markup = obj.GetString("markup");
+        public GridEditorTextConfig(GridEditor editor, JObject json) : base(editor, json) {
+            Style = json.GetString("style")!;
+            Markup = json.GetString("markup")!;
         }
 
         #endregion

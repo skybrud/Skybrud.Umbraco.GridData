@@ -5,6 +5,7 @@
   <PropertyGroup>
     <LangVersion>11.0</LangVersion>
     <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -41,8 +42,8 @@
   </ItemGroup>
 
   <!-- Generate XML documentation -->
-  <PropertyGroup>
+  <!--<PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-  </PropertyGroup>
+  </PropertyGroup>-->
 
 </Project>

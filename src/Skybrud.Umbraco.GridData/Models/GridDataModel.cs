@@ -23,24 +23,24 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// has at least one valid control.
         /// </summary>
         public bool IsValid {
-            get { return JObject != null && GetAllControls().Any(x => x.IsValid); }
+            get { return JObject != null! && GetAllControls().Any(x => x.IsValid); }
         }
 
         /// <summary>
         /// Gets the name of the selected layout.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets an array of the columns in the grid.
         /// </summary>
-        public IReadOnlyList<GridSection> Sections { get; private set; }
+        public IReadOnlyList<GridSection> Sections { get; }
 
         /// <summary>
         /// Gets a reference to the parent <see cref="IPublishedElement"/>, if the Grid model was loaded directly from a property value.
         /// </summary>
         [JsonIgnore]
-        public IPublishedElement Owner { get; }
+        public IPublishedElement? Owner { get; }
 
         /// <summary>
         /// Gets whether the grid model has a reference to it's <see cref="IPublishedElement"/> owner.
@@ -51,7 +51,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets a reference to the parent property type, if the Grid model was loaded directly from a property value.
         /// </summary>
-        public IPublishedPropertyType PropertyType { get; }
+        public IPublishedPropertyType? PropertyType { get; }
 
         /// <summary>
         /// Gets whether a property type has been specified for the model.
@@ -93,11 +93,18 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <param name="propertyType">An instance of <see cref="IPublishedPropertyType"/> representing the property holding the grid value.</param>
         /// <param name="json">An instance of <see cref="JObject"/> representing the grid model.</param>
         /// <param name="factory">The factory used for parsing subsequent parts of the grid.</param>
-        public GridDataModel(IPublishedElement owner, IPublishedPropertyType propertyType, JObject json, IGridFactory factory) : base(json) {
+        public GridDataModel(IPublishedElement? owner, IPublishedPropertyType? propertyType, JObject? json, IGridFactory? factory) : base(json ?? new JObject()) {
+
             Owner = owner;
             PropertyType = propertyType;
-            Name = json.GetString("name");
-            Sections = json.GetArray("sections", x => factory.CreateGridSection(x, this)) ?? Array.Empty<GridSection>();
+            Name = json.GetString("name")!;
+
+            if (factory is null) {
+                Sections = Array.Empty<GridSection>();
+            } else {
+                Sections = json.GetArray("sections", x => factory.CreateGridSection(x, this)) ?? Array.Empty<GridSection>();
+            }
+
         }
 
         #endregion
@@ -164,7 +171,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
         /// </summary>
         public static GridDataModel GetEmptyModel() {
-            return new(null, null, null, null);
+            return new GridDataModel(null, null, null, null);
         }
 
         /// <summary>
@@ -173,7 +180,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <param name="owner">An instance of <see cref="IPublishedElement"/> representing the owner holding the grid value.</param>
         /// <param name="propertyType">An instance of <see cref="IPublishedPropertyType"/> representing the property holding the grid value.</param>
         public static GridDataModel GetEmptyModel(IPublishedElement owner, IPublishedPropertyType propertyType) {
-            return new(owner, propertyType, null, null);
+            return new GridDataModel(owner, propertyType, null, null);
         }
 
         #endregion

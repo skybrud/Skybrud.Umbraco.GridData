@@ -80,29 +80,22 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="token"/>.
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="json"/> object.
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        /// <param name="token">An instance of <see cref="Newtonsoft.Json.Linq.JToken"/> representing the value of the control</param>
-        public GridControlEmbedValue(GridControl control, JToken token) {
+        /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control</param>
+        public GridControlEmbedValue(GridControl control, JObject json) {
 
             Control = control;
-            JToken = token;
+            JToken = json;
 
-            // Handle values prior to Umbraco 8.2
-            if (token is not JObject obj) {
-                Value = token.ToString();
-                HtmlValue = new HtmlString(Value);
-                return;
-            }
-
-            Value = obj.GetString("preview");
+            Value = json.GetString("preview")!;
             HtmlValue = new HtmlString(Value);
 
-            Width = obj.GetInt32("width");
-            Height = obj.GetInt32("height");
-            Url = obj.GetString("url");
-            Info = obj.GetString("info") ?? string.Empty;
+            Width = json.GetInt32("width");
+            Height = json.GetInt32("height");
+            Url = json.GetString("url")!;
+            Info = json.GetString("info") ?? string.Empty;
 
         }
 

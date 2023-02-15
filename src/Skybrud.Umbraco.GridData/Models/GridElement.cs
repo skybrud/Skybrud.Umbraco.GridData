@@ -44,10 +44,10 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Initializes a new instance based on the specified <see cref="JObject"/>.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the area.</param>
-        protected GridElement(JObject obj) : base(obj) {
-            Styles = obj.GetObject("styles", GridDictionary.Parse);
-            Config = obj.GetObject("config", GridDictionary.Parse);
+        /// <param name="json">An instance of <see cref="JObject"/> representing the area.</param>
+        protected GridElement(JObject json) : base(json) {
+            Styles = json.GetObject("styles", GridDictionary.Parse)!;
+            Config = json.GetObject("config", GridDictionary.Parse)!;
         }
 
         #endregion

@@ -19,22 +19,22 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets the section name.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridDataModel"/>.
         /// </summary>
-        public GridDataModel Model { get; private set; }
+        public GridDataModel Model { get; }
 
         /// <summary>
         /// Gets the overall column width of the section.
         /// </summary>
-        public int Grid { get; private set; }
+        public int Grid { get; }
 
         /// <summary>
         /// Gets an array of all rows in the sections.
         /// </summary>
-        public IReadOnlyList<GridRow> Rows { get; private set; }
+        public IReadOnlyList<GridRow> Rows { get;  }
 
         /// <summary>
         /// Gets whether the section has any rows.
@@ -44,12 +44,12 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets the first row of the section. If the section doesn't contain any rows, this property will return <c>null</c>.
         /// </summary>
-        public GridRow FirstRow => Rows.FirstOrDefault();
+        public GridRow? FirstRow => Rows.FirstOrDefault();
 
         /// <summary>
         /// Gets the last row of the section. If the section doesn't contain any rows, this property will return <c>null</c>.
         /// </summary>
-        public GridRow LastRow => Rows.LastOrDefault();
+        public GridRow? LastRow => Rows.LastOrDefault();
 
         #endregion
 

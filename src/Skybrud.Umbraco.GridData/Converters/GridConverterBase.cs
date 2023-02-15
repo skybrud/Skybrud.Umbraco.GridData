@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Newtonsoft.Json.Linq;
@@ -14,12 +15,12 @@ namespace Skybrud.Umbraco.GridData.Converters {
     /// </summary>
     public abstract class GridConverterBase : IGridConverter {
 
-        public virtual bool GetConfigType(GridEditor editor, out Type type) {
+        public virtual bool GetConfigType(GridEditor editor, [NotNullWhen(true)] out Type? type) {
             type = null;
             return false;
         }
 
-        public virtual bool GetValueType(GridControl control, out Type type) {
+        public virtual bool GetValueType(GridControl control, [NotNullWhen(true)] out Type? type) {
             type = null;
             return false;
         }
@@ -30,7 +31,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// <param name="control">A reference to the parent <see cref="GridControl"/>.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted control value.</param>
-        public virtual bool ConvertControlValue(GridControl control, JToken token, out IGridControlValue value) {
+        public virtual bool ConvertControlValue(GridControl control, JToken token, [NotNullWhen(true)] out IGridControlValue? value) {
             value = null;
             return false;
         }
@@ -41,7 +42,7 @@ namespace Skybrud.Umbraco.GridData.Converters {
         /// <param name="editor">A reference to the parent <see cref="GridEditor"/>.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
         /// <param name="config">The converted editor config.</param>
-        public virtual bool ConvertEditorConfig(GridEditor editor, JToken token, out IGridEditorConfig config) {
+        public virtual bool ConvertEditorConfig(GridEditor editor, JToken token, [NotNullWhen(true)] out IGridEditorConfig? config) {
             config = null;
             return false;
         }

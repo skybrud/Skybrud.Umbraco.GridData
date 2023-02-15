@@ -16,7 +16,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the name of the editor.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; }
+        public string? Name { get; }
 
         /// <summary>
         /// Gets the alias of the editor.
@@ -28,27 +28,27 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the view of the editor.
         /// </summary>
         [JsonProperty("view")]
-        public string View { get; }
+        public string? View { get; }
 
         /// <summary>
         /// Gets renderer for the control/editor. If specified, the renderer refers to a partial
         /// view that should be used for rendering the control.
         /// </summary>
         [JsonProperty("render")]
-        public string Render { get; }
+        public string? Render { get; }
 
         /// <summary>
         /// Gets the icon of the editor.
         /// </summary>
         [JsonProperty("icon")]
-        public string Icon { get; }
+        public string? Icon { get; }
 
         /// <summary>
         /// Gets the configuration object for the editor. This property will return <c>null</c> if the
         /// corresponding property in the underlying JSON is also <c>null</c>.
         /// </summary>
         [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
-        public IGridEditorConfig Config { get; internal set; }
+        public IGridEditorConfig? Config { get; internal set; }
 
         #endregion
 
@@ -58,7 +58,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Initializes a new instance with the specified <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The alias of the editor.</param>
-        public GridEditor(string alias) : base(null) {
+        public GridEditor(string alias) : base(null ?? new JObject()) {
             Alias = alias;
         }
 
@@ -69,11 +69,11 @@ namespace Skybrud.Umbraco.GridData.Models {
         public GridEditor(JObject json) : base(json) {
 
             // Parse basic properties
-            Name = json.GetString("name");
-            Alias = json.GetString("alias");
-            View = json.GetString("view");
+            Name = json.GetString("name")!;
+            Alias = json.GetString("alias")!;
+            View = json.GetString("view")!;
             Render = json.GetString("render");
-            Icon = json.GetString("icon");
+            Icon = json.GetString("icon")!;
 
         }
 
@@ -93,8 +93,8 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the config of the editor casted to the type of <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the config to be returned.</typeparam>
-        public T GetConfig<T>() where T : IGridEditorConfig {
-            return (T) Config;
+        public T? GetConfig<T>() where T : IGridEditorConfig {
+            return Config is T value ? value : default;
         }
 
         #endregion
@@ -103,7 +103,7 @@ namespace Skybrud.Umbraco.GridData.Models {
 
     public class GridEditor<TConfig> : GridEditor where TConfig : IGridEditorConfig {
 
-        public new TConfig Config => (TConfig) base.Config;
+        public new TConfig Config => (TConfig) base.Config!;
 
         public GridEditor(GridEditor editor) : base(editor) { }
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
@@ -40,7 +41,8 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
         /// Gets an instance of <see cref="GridEditorMediaConfigSize"/> from the specified <paramref name="json"/> object.
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridEditorMediaConfigSize Parse(JObject json) {
+        [return: NotNullIfNotNull("json")]
+        public static GridEditorMediaConfigSize? Parse(JObject? json) {
             return json == null ? null : new GridEditorMediaConfigSize(json);
         }
 

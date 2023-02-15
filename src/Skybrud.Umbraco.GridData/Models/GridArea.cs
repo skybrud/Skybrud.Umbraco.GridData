@@ -20,50 +20,50 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets a reference to the entire <see cref="GridDataModel"/>.
         /// </summary>
         [JsonIgnore]
-        public GridDataModel Model => Section?.Model;
+        public GridDataModel Model => Section.Model;
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridSection"/>.
         /// </summary>
         [JsonIgnore]
-        public GridSection Section => Row?.Section;
+        public GridSection Section => Row.Section;
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridRow"/>.
         /// </summary>
         [JsonIgnore]
-        public GridRow Row { get; private set; }
+        public GridRow Row { get; }
 
         /// <summary>
         /// Gets the column width of the area.
         /// </summary>
-        public int Grid { get; private set; }
+        public int Grid { get; }
 
         /// <summary>
         /// Gets wether all editors are allowed for this area.
         /// </summary>
-        public bool AllowAll { get; private set; }
+        public bool AllowAll { get; }
 
         /// <summary>
         /// Gets an array of all editors allowed for this area. If <see cref="AllowAll"/> is <c>true</c>, this
         /// array may be empty.
         /// </summary>
-        public string[] Allowed { get; private set; }
+        public string[] Allowed { get; }
 
         /// <summary>
         /// Gets an array of all controls added to this area.
         /// </summary>
-        public IReadOnlyList<GridControl> Controls { get; private set; }
+        public IReadOnlyList<GridControl> Controls { get; }
 
         /// <summary>
         /// Gets a reference to the previous area.
         /// </summary>
-        public GridArea PreviousArea { get; internal set; }
+        public GridArea? PreviousArea { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next area.
         /// </summary>
-        public GridArea NextArea { get; internal set; }
+        public GridArea? NextArea { get; internal set; }
 
         /// <summary>
         /// Gets whether the area has any controls.
@@ -74,13 +74,13 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets the first control of the area. If the area doesn't contain
         /// any controls, this property will return <c>null</c>.
         /// </summary>
-        public GridControl FirstControl => Controls.FirstOrDefault();
+        public GridControl? FirstControl => Controls.FirstOrDefault();
 
         /// <summary>
         /// Gets the last control of the area. If the area doesn't contain
         /// any controls, this property will return <c>null</c>.
         /// </summary>
-        public GridControl LastControl => Controls.LastOrDefault();
+        public GridControl? LastControl => Controls.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one control within the area is valid.

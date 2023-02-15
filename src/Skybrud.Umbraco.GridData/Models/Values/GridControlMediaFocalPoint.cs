@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
 
@@ -15,25 +16,25 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// The horizontal (X-axis) coordinate of the focal point.
         /// </summary>
         [JsonProperty("left")]
-        public float Left { get; private set; }
+        public float Left { get; }
 
         /// <summary>
         /// The vertical (Y-axis) coordinate of the focal point.
         /// </summary>
         [JsonProperty("top")]
-        public float Top { get; private set; }
+        public float Top { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the the focal point.</param>
-        protected GridControlMediaFocalPoint(JObject obj) : base(obj) {
-            Left = obj.GetFloat("left");
-            Top = obj.GetFloat("top");
+        /// <param name="json">An instance of <see cref="JObject"/> representing the the focal point.</param>
+        protected GridControlMediaFocalPoint(JObject json) : base(json) {
+            Left = json.GetFloat("left");
+            Top = json.GetFloat("top");
         }
 
         #endregion
@@ -41,11 +42,12 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Static methods
 
         /// <summary>
-        /// Gets a focal point from the specified <paramref name="obj"/>.
+        /// Gets a focal point from the specified <paramref name="json"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
-        public static GridControlMediaFocalPoint Parse(JObject obj) {
-            return obj == null ? null : new GridControlMediaFocalPoint(obj);
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+        [return: NotNullIfNotNull("json")]
+        public static GridControlMediaFocalPoint? Parse(JObject? json) {
+            return json == null ? null : new GridControlMediaFocalPoint(json);
         }
 
         #endregion

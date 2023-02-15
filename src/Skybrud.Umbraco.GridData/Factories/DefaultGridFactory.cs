@@ -8,6 +8,7 @@ using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Values;
 using Umbraco.Cms.Core.Configuration.Grid;
 using Umbraco.Cms.Core.Models.PublishedContent;
+using static Lucene.Net.Queries.Function.ValueSources.MultiFunction;
 using IGridEditorConfig = Skybrud.Umbraco.GridData.Models.Config.IGridEditorConfig;
 
 // ReSharper disable InconsistentNaming
@@ -60,22 +61,22 @@ namespace Skybrud.Umbraco.GridData.Factories {
             ReplaceEditorObjectFromConfig(json);
 
             // Parse the Grid editor (undelrying type may be generic ... or not)
-            GridEditor editor = json.GetObject("editor", CreateGridEditor);
+            GridEditor editor = json.GetObject("editor", CreateGridEditor)!;
 
             // Initialize a new Grid control
-            GridControl control = new(json, area);
-
-            // Make sure to set the editor before we parse the control value
-            control.Editor = editor;
+            GridControl control = new(json, area) {
+                // Make sure to set the editor before we parse the control value
+                Editor = editor
+            };
 
             // Parse the control value
             control.Value = ParseGridControlValue(control);
 
             // Get the type of the editor config (it may not have a config)
-            Type configType = control.Editor?.Config?.GetType();
+            Type? configType = control.Editor.Config?.GetType();
 
             // Determine the value type
-            Type valueType = null;
+            Type? valueType = null;
             foreach (IGridConverter converter in _converters) {
                 if (converter.GetValueType(control, out valueType)) break;
             }
@@ -87,10 +88,10 @@ namespace Skybrud.Umbraco.GridData.Factories {
             // If we both have a value type and config type, we create a new generic type from both types
             if (configType == null) {
                 Type genericType = typeof(GridControl<>).MakeGenericType(valueType);
-                control = (GridControl) Activator.CreateInstance(genericType, control);
+                control = (GridControl) Activator.CreateInstance(genericType, control)!;
             } else {
                 Type genericType = typeof(GridControl<,>).MakeGenericType(valueType, configType);
-                control = (GridControl) Activator.CreateInstance(genericType, control, editor);
+                control = (GridControl) Activator.CreateInstance(genericType, control, editor)!;
             }
 
             // Return the control
@@ -101,7 +102,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
         /// <inheritdoc />
         public virtual GridEditor CreateGridEditor(JObject json) {
 
-            Type configType = null;
+            Type? configType = null;
 
             // Initialize a new Grid editor
             GridEditor editor = new(json);
@@ -116,25 +117,27 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
                 Type genericType = typeof(GridEditor<>).MakeGenericType(configType);
 
-                editor = (GridEditor) Activator.CreateInstance(genericType, editor);
+                editor = (GridEditor) Activator.CreateInstance(genericType, editor)!;
 
             }
 
             // Parse the grid editor configuration
-            if (editor != null) editor.Config = ParseGridEditorConfig(editor);
+            editor.Config = ParseGridEditorConfig(editor);
 
             // Return the editor
             return editor;
 
         }
 
-        protected virtual IGridControlValue ParseGridControlValue(GridControl control) {
+        protected virtual IGridControlValue? ParseGridControlValue(GridControl control) {
 
             // Parse the control value
-            JToken value = control.JObject.GetValue("value");
+            JToken? value = control.JObject.GetValue("value");
+            if (value is null) return null;
+
             foreach (IGridConverter converter in _converters) {
                 try {
-                    if (!converter.ConvertControlValue(control, value, out IGridControlValue converted)) continue;
+                    if (!converter.ConvertControlValue(control, value, out IGridControlValue? converted)) continue;
                     return converted;
                 } catch (Exception ex) {
                     _logger.LogError(ex, $"Converter of type {converter} failed for ConvertControlValue()");
@@ -145,13 +148,15 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
         }
 
-        protected virtual IGridEditorConfig ParseGridEditorConfig(GridEditor editor) {
+        protected virtual IGridEditorConfig? ParseGridEditorConfig(GridEditor editor) {
 
             // Parse the editor configuration
-            JToken config = editor.JObject.GetValue("config");
+            JToken? config = editor.JObject.GetValue("config");
+            if (config is null) return null;
+
             foreach (IGridConverter converter in _converters) {
                 try {
-                    if (!converter.ConvertEditorConfig(editor, config, out IGridEditorConfig converted)) continue;
+                    if (!converter.ConvertEditorConfig(editor, config, out IGridEditorConfig? converted)) continue;
                     return converted;
                 } catch (Exception ex) {
                     _logger.LogError(ex, $"Converter of type {converter} failed for ConvertEditorConfig()");
@@ -166,10 +171,11 @@ namespace Skybrud.Umbraco.GridData.Factories {
         protected virtual void ReplaceEditorObjectFromConfig(JObject json) {
 
             // Get the "editor" object from the JSON
-            JObject editor = json.GetObject("editor");
+            JObject? editor = json.GetObject("editor");
+            if (editor is null) return;
 
             // Get the alias of the editor
-            string alias = editor?.GetString("alias");
+            string? alias = editor.GetString("alias");
 
             // Skip if we dont have an alias
             if (string.IsNullOrWhiteSpace(alias)) return;

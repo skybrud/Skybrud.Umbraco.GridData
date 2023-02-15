@@ -25,7 +25,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <returns></returns>
         public static string GetFileVersion() {
             Assembly assembly = typeof(GridUtils).Assembly;
-            return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion;
+            return FileVersionInfo.GetVersionInfo(assembly.Location).FileVersion!;
         }
 
         #endregion
@@ -37,8 +37,8 @@ namespace Skybrud.Umbraco.GridData {
         /// </summary>
         /// <param name="name">The name of the partial.</param>
         /// <returns><c>true</c> if <paramref name="name"/> is valid; otherwise <c>false</c>.</returns>
-        public static bool IsValidPartialName(string name) {
-            return Regex.IsMatch(name ?? string.Empty, "^[a-zA-Z0-9-\\._ ]+$");
+        public static bool IsValidPartialName(string? name) {
+            return name is not null && Regex.IsMatch(name, "^[a-zA-Z0-9-\\._ ]+$");
         }
 
         #endregion

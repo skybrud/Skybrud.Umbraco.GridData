@@ -18,17 +18,17 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets a reference to the parent <see cref="GridSection"/>.
         /// </summary>
-        public GridSection Section { get; private set; }
+        public GridSection Section { get; }
 
         /// <summary>
         /// Gets the unique ID of the row.
         /// </summary>
-        public string Id { get; private set; }
+        public string Id { get; }
 
         /// <summary>
         /// Gets the label of the row. Use <see cref="HasLabel"/> to check whether a label has been specified.
         /// </summary>
-        public string Label { get; private set; }
+        public string? Label { get; }
 
         /// <summary>
         /// Gets whether a label has been specified for the definition of this row.
@@ -38,22 +38,22 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets the name of the row.
         /// </summary>
-        public string Name { get; private set; }
+        public string Name { get; }
 
         /// <summary>
         /// Gets an array of all areas in the row.
         /// </summary>
-        public IReadOnlyList<GridArea> Areas { get; private set; }
+        public IReadOnlyList<GridArea> Areas { get; }
 
         /// <summary>
         /// Gets a reference to the previous row.
         /// </summary>
-        public GridRow PreviousRow { get; internal set; }
+        public GridRow? PreviousRow { get; internal set; }
 
         /// <summary>
         /// Gets a reference to the next row.
         /// </summary>
-        public GridRow NextRow { get; internal set; }
+        public GridRow? NextRow { get; internal set; }
 
         /// <summary>
         /// Gets whether the row has any areas.
@@ -63,12 +63,12 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets the first area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
-        public GridArea FirstRow => Areas.FirstOrDefault();
+        public GridArea? FirstRow => Areas.FirstOrDefault();
 
         /// <summary>
         /// Gets the last area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
-        public GridArea LastRow => Areas.LastOrDefault();
+        public GridArea? LastRow => Areas.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one area or control within the row is valid.
@@ -90,9 +90,9 @@ namespace Skybrud.Umbraco.GridData.Models {
         public GridRow(JObject json, GridSection section, IGridFactory factory) : base(json) {
 
             Section = section;
-            Id = json.GetString("id");
+            Id = json.GetString("id")!;
             Label = json.GetString("label");
-            Name = json.GetString("name");
+            Name = json.GetString("name")!;
 
             Areas = json.GetArray("areas", x => factory.CreateGridArea(x, this)) ?? Array.Empty<GridArea>();
 

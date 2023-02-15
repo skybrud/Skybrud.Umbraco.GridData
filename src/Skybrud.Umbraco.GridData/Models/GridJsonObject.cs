@@ -22,9 +22,9 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #region Constructors
 
-        /// <param name="obj">The underlying instance of <see cref="JObject"/>.</param>
-        public GridJsonObject(JObject obj) {
-            JObject = obj;
+        /// <param name="json">The underlying instance of <see cref="JObject"/>.</param>
+        public GridJsonObject(JObject json) {
+            JObject = json;
         }
 
         #endregion

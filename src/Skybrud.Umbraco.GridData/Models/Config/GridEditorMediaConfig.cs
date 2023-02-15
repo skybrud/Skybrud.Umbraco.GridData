@@ -21,8 +21,8 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
 
         #region Constructors
 
-        public GridEditorMediaConfig(GridEditor editor, JObject obj) : base(editor, obj) {
-            Size = obj.GetObject("size", GridEditorMediaConfigSize.Parse);
+        public GridEditorMediaConfig(GridEditor editor, JObject json) : base(editor, json) {
+            Size = json.GetObject("size", GridEditorMediaConfigSize.Parse)!;
         }
 
         #endregion

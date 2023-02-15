@@ -29,11 +29,11 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="json"/>.
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        protected GridControlValueBase(GridControl control, JObject obj) : base(obj) {
+        /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
+        protected GridControlValueBase(GridControl control, JObject json) : base(json) {
             Control = control;
         }
 

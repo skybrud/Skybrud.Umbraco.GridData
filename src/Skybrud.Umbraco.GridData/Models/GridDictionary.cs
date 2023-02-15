@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 using Newtonsoft.Json;
@@ -47,7 +48,7 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #region Constructors
 
-        private GridDictionary(Dictionary<string, string> config, JObject obj) : base(obj) {
+        private GridDictionary(Dictionary<string, string> config, JObject json) : base(json) {
             _dictionary = config;
         }
 
@@ -71,7 +72,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// key is found; otherwise, the default value for the type of the value parameter. This parameter is passed
         /// uninitialized.</param>
         /// <returns><c>true</c> if the dictionary contains an element with the specified key; otherwise, <c>false</c>.</returns>
-        public bool TryGetValue(string key, out string value) {
+        public bool TryGetValue(string key, [NotNullWhen(true)] out string? value) {
             return _dictionary.TryGetValue(key, out value);
         }
 
@@ -92,24 +93,24 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="GridDictionary"/>.
+        /// Parses the specified <paramref name="json"/> into an instance of <see cref="GridDictionary"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="GridDictionary"/>.</returns>
-        public static GridDictionary Parse(JObject obj) {
+        public static GridDictionary Parse(JObject? json) {
 
             // Initialize an empty dictionary
             Dictionary<string, string> config = new();
 
             // Add all properties to the dictionary
-            if (obj != null) {
-                foreach (JProperty property in obj.Properties()) {
+            if (json != null) {
+                foreach (JProperty property in json.Properties()) {
                     config.Add(property.Name, string.Format(CultureInfo.InvariantCulture, "{0}", property.Value));
                 }
             }
 
             // Return the instance
-            return new GridDictionary(config, obj);
+            return new GridDictionary(config, json ?? new JObject());
 
         }
 

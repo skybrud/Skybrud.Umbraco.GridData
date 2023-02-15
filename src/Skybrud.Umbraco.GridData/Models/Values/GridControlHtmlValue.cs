@@ -46,7 +46,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Member methods
 
         public override void WriteSearchableText(GridContext context, TextWriter writer) {
-            if (Value != null) writer.WriteLine(Regex.Replace(Value, "<.*?>", " "));
+            writer.WriteLine(Regex.Replace(Value, "<.*?>", " "));
         }
 
         #endregion

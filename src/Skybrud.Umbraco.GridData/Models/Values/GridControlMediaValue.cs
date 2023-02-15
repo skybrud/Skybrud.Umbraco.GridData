@@ -16,7 +16,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets the focal point with information on how the iamge should be cropped.
         /// </summary>
         [JsonProperty("focalPoint")]
-        public GridControlMediaFocalPoint FocalPoint { get; protected set; }
+        public GridControlMediaFocalPoint? FocalPoint { get; protected set; }
 
         /// <summary>
         /// Gets the ID of the image.
@@ -28,13 +28,13 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets the URL of the media.
         /// </summary>
         [JsonProperty("image")]
-        public string Image { get; protected set; }
+        public string? Image { get; protected set; }
 
         /// <summary>
         /// Gets the alt text of the media.
         /// </summary>
         [JsonProperty("altText", NullValueHandling = NullValueHandling.Ignore)]
-        public string AlternativeText { get; protected set; }
+        public string? AlternativeText { get; protected set; }
 
         /// <summary>
         /// Gets whether the <see cref="AlternativeText"/> property has a value.
@@ -46,7 +46,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets the caption of the media.
         /// </summary>
         [JsonProperty("caption", NullValueHandling = NullValueHandling.Ignore)]
-        public string Caption { get; protected set; }
+        public string? Caption { get; protected set; }
 
         /// <summary>
         /// Gets whether the <see cref="Caption"/> property has a value.
@@ -62,23 +62,23 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         public override bool IsValid => Id > 0;
 
         [JsonIgnore]
-        public IPublishedContent PublishedImage { get; internal set; }
+        public IPublishedContent? PublishedImage { get; internal set; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="json"/>.
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        public GridControlMediaValue(GridControl control, JObject obj) : base(control, obj) {
-            FocalPoint = obj.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
-            Id = obj.GetInt32("id");
-            Image = obj.GetString("image");
-            AlternativeText = obj.GetString("altText");
-            Caption = obj.GetString("caption");
+        /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
+        public GridControlMediaValue(GridControl control, JObject json) : base(control, json) {
+            FocalPoint = json.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
+            Id = json.GetInt32("id");
+            Image = json.GetString("image");
+            AlternativeText = json.GetString("altText");
+            Caption = json.GetString("caption");
         }
 
         #endregion
