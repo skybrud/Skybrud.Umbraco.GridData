@@ -29,12 +29,35 @@ namespace Skybrud.Umbraco.GridData.Factories {
         /// <returns>An instance of <see cref="GridSection"/> representing the grid section.</returns>
         GridSection CreateGridSection(JObject json, GridDataModel grid);
 
+        /// <summary>
+        /// Creates a new <see cref="GridRow"/> based on the specified <paramref name="json"/> object.
+        /// </summary>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the row.</param>
+        /// <param name="section">A reference to the parent <see cref="GridSection"/>.</param>
+        /// <returns>An instance of <see cref="GridRow"/>.</returns>
         GridRow CreateGridRow(JObject json, GridSection section);
 
+        /// <summary>
+        /// Creates a new <see cref="GridArea"/> based on the specified <paramref name="json"/> object.
+        /// </summary>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the area.</param>
+        /// <param name="row">A reference to the parent <see cref="GridRow"/>.</param>
+        /// <returns>An instance of <see cref="GridArea"/>.</returns>
         GridArea CreateGridArea(JObject json, GridRow row);
 
+        /// <summary>
+        /// Creates a new <see cref="GridControl"/> based on the specified <paramref name="json"/> object.
+        /// </summary>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the control.</param>
+        /// <param name="area">A reference to the parent <see cref="GridArea"/>.</param>
+        /// <returns>An instance of <see cref="GridControl"/>.</returns>
         GridControl CreateGridControl(JObject json, GridArea area);
 
+        /// <summary>
+        /// Creates a new <see cref="GridEditor"/> based on the specified <paramref name="json"/> object.
+        /// </summary>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the editor.</param>
+        /// <returns>An instance of <see cref="GridEditor"/>.</returns>
         GridEditor CreateGridEditor(JObject json);
 
     }

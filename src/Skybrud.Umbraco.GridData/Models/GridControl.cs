@@ -68,8 +68,9 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #endregion
 
-        #region Constructors/// <summary>
+        #region Constructors
 
+        /// <summary>
         /// Initializes a new instance from the specified <paramref name="json"/> object and <paramref name="area"/>.
         /// </summary>
         /// <param name="json">The instance of <see cref="JObject"/> representing the control.</param>
@@ -100,12 +101,17 @@ namespace Skybrud.Umbraco.GridData.Models {
             return Value is T value ? value : default;
         }
 
+        /// <summary>
+        /// Writes a string representation of the control to <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <param name="writer">The writer.</param>
         public void WriteSearchableText(GridContext context, TextWriter writer) {
             Value?.WriteSearchableText(context, writer);
         }
 
         /// <summary>
-        /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+        /// Returns the value of the control as a searchable text - eg. to be used in Examine.
         /// </summary>
         /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>
@@ -120,6 +126,10 @@ namespace Skybrud.Umbraco.GridData.Models {
 
     }
 
+    /// <summary>
+    /// Class representing a grid control where the value is of type <typeparamref name="TValue"/>.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
     public class GridControl<TValue> : GridControl where TValue : IGridControlValue {
 
         /// <summary>
@@ -128,10 +138,19 @@ namespace Skybrud.Umbraco.GridData.Models {
         [JsonProperty("value")]
         public new TValue Value => (TValue) base.Value!;
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="control"/>.
+        /// </summary>
+        /// <param name="control">The control.</param>
         public GridControl(GridControl control) : base(control) { }
 
     }
 
+    /// <summary>
+    /// Class representing a grid control where the value is of type <typeparamref name="TValue"/> and an editor with a config of type <typeparamref name="TConfig"/>.
+    /// </summary>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <typeparam name="TConfig">The type of the editor config.</typeparam>
     public class GridControl<TValue, TConfig> : GridControl<TValue> where TValue : IGridControlValue where TConfig : IGridEditorConfig {
 
         /// <summary>
@@ -140,6 +159,11 @@ namespace Skybrud.Umbraco.GridData.Models {
         [JsonProperty("editor")]
         public new GridEditor<TConfig> Editor { get; }
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="editor"/>.
+        /// </summary>
+        /// <param name="control">The control.</param>
+        /// <param name="editor">The editor.</param>
         public GridControl(GridControl control, GridEditor<TConfig> editor) : base(control) {
             Editor = editor;
         }

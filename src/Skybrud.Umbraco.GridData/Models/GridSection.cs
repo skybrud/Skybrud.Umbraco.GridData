@@ -80,6 +80,11 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         #region Member methods
 
+        /// <summary>
+        /// Writes a string representation of the section to <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <param name="writer">The writer.</param>
         public void WriteSearchableText(GridContext context, TextWriter writer) {
             foreach (GridRow row in Rows) row.WriteSearchableText(context, writer);
         }

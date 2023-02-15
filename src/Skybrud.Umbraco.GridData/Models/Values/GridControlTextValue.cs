@@ -54,10 +54,20 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
 
         #region Member methods
 
+        /// <summary>
+        /// Writes a string representation of this value to <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <param name="writer">The writer.</param>
         public virtual void WriteSearchableText(GridContext context, TextWriter writer) {
             writer.WriteLine(Value);
         }
 
+        /// <summary>
+        /// Returns a string representation of this value.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <returns>A string representation of this value.</returns>
         public virtual string GetSearchableText(GridContext context) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);

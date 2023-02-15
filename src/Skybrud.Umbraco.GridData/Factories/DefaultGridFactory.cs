@@ -8,10 +8,9 @@ using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Values;
 using Umbraco.Cms.Core.Configuration.Grid;
 using Umbraco.Cms.Core.Models.PublishedContent;
-using static Lucene.Net.Queries.Function.ValueSources.MultiFunction;
 using IGridEditorConfig = Skybrud.Umbraco.GridData.Models.Config.IGridEditorConfig;
 
-// ReSharper disable InconsistentNaming
+#pragma warning disable CS1591
 
 namespace Skybrud.Umbraco.GridData.Factories {
 
@@ -166,7 +165,6 @@ namespace Skybrud.Umbraco.GridData.Factories {
             return null;
 
         }
-
 
         protected virtual void ReplaceEditorObjectFromConfig(JObject json) {
 

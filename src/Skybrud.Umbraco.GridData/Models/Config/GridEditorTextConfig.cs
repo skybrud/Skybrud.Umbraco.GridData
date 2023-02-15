@@ -37,7 +37,12 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
 
         #region Constructors
 
-        public GridEditorTextConfig(GridEditor editor, JObject json) : base(editor, json) {
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
+        /// </summary>
+        /// <param name="json">An instance of <see cref="JObject"/> representing the configuration of the editor.</param>
+        /// <param name="editor">An instance of <see cref="GridEditor"/> representing the parent editor.</param>
+        public GridEditorTextConfig(JObject json, GridEditor editor) : base(json, editor) {
             Style = json.GetString("style")!;
             Markup = json.GetString("markup")!;
         }

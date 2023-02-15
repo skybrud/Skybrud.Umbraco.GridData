@@ -140,6 +140,11 @@ namespace Skybrud.Umbraco.GridData.Models {
             ).ToArray();
         }
 
+        /// <summary>
+        /// Writes a string representation of the row to <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <param name="writer">The writer.</param>
         public override void WriteSearchableText(GridContext context, TextWriter writer) {
             foreach (GridArea area in Areas) area.WriteSearchableText(context, writer);
         }

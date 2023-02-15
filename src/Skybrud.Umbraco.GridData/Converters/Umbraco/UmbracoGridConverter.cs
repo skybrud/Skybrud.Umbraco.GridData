@@ -6,7 +6,7 @@ using Skybrud.Umbraco.GridData.Models.Config;
 using Skybrud.Umbraco.GridData.Models.Values;
 using Umbraco.Cms.Core.Web;
 
-// ReSharper disable InconsistentNaming
+#pragma warning disable CS1591
 
 namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
@@ -66,11 +66,11 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             value = null;
 
             if (IsEmbedEditor(control.Editor)) {
-                value = new GridControlEmbedValue(control, (JObject) token);
+                value = new GridControlEmbedValue((JObject) token, control);
             } else if (IsMacroEditor(control.Editor)) {
-                value = new GridControlMacroValue(control, (JObject) token);
+                value = new GridControlMacroValue((JObject) token, control);
             } else if (IsMediaEditor(control.Editor)) {
-                value = ParseGridControlMediaValue(control, (JObject) token);
+                value = ParseGridControlMediaValue((JObject) token, control);
             } else if (IsRichTextEditor(control.Editor)) {
                 value = new GridControlRichTextValue(control, token);
             } else if (IsTextStringEditor(control.Editor)) {
@@ -81,9 +81,9 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
         }
 
-        protected virtual IGridControlValue ParseGridControlMediaValue(GridControl control, JObject json) {
+        protected virtual IGridControlValue ParseGridControlMediaValue(JObject json, GridControl control) {
 
-            GridControlMediaValue value = new(control, json);
+            GridControlMediaValue value = new(json, control);
 
             if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context)) {
                 value.PublishedImage = context.Media?.GetById(value.Id);
@@ -104,32 +104,32 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             config = null;
 
             if (IsMediaEditor(editor)) {
-                config = new GridEditorMediaConfig(editor, (JObject) token);
+                config = new GridEditorMediaConfig((JObject) token, editor);
             } else if (IsTextStringEditor(editor)) {
-                config = new GridEditorTextConfig(editor, (JObject) token);
+                config = new GridEditorTextConfig((JObject) token, editor);
             }
 
             return config != null;
 
         }
 
-        protected bool IsEmbedEditor(GridEditor? editor) {
+        protected static bool IsEmbedEditor(GridEditor? editor) {
             return editor?.View == "embed";
         }
 
-        protected bool IsTextStringEditor(GridEditor? editor) {
+        protected static bool IsTextStringEditor(GridEditor? editor) {
             return editor?.View == "textstring";
         }
 
-        protected bool IsMediaEditor(GridEditor? editor) {
+        protected static bool IsMediaEditor(GridEditor? editor) {
             return editor?.View == "media";
         }
 
-        protected bool IsMacroEditor(GridEditor? editor) {
+        protected static bool IsMacroEditor(GridEditor? editor) {
             return editor?.View == "macro";
         }
 
-        protected bool IsRichTextEditor(GridEditor? editor) {
+        protected static bool IsRichTextEditor(GridEditor? editor) {
             return editor?.View == "rte";
         }
 

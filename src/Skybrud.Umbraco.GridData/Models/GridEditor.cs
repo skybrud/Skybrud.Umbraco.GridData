@@ -77,6 +77,10 @@ namespace Skybrud.Umbraco.GridData.Models {
 
         }
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="editor"/>.
+        /// </summary>
+        /// <param name="editor">The editor to be wrapped.</param>
         public GridEditor(GridEditor editor) : base(editor.JObject) {
             Name = editor.Name;
             Alias = editor.Alias;
@@ -101,10 +105,21 @@ namespace Skybrud.Umbraco.GridData.Models {
 
     }
 
+    /// <summary>
+    /// Class representing an editor where the config is of type <typeparamref name="TConfig"/>.
+    /// </summary>
+    /// <typeparam name="TConfig">The type of the editor config.</typeparam>
     public class GridEditor<TConfig> : GridEditor where TConfig : IGridEditorConfig {
 
+        /// <summary>
+        /// Gets the editor config.
+        /// </summary>
         public new TConfig Config => (TConfig) base.Config!;
 
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="editor"/>.
+        /// </summary>
+        /// <param name="editor">The editor to be wrapped.</param>
         public GridEditor(GridEditor editor) : base(editor) { }
 
     }

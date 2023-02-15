@@ -17,6 +17,11 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Constructors
 
+        /// <summary>
+        /// Initializes a new instance based on the specified dependencies.
+        /// </summary>
+        /// <param name="logger">A reference to the current logger.</param>
+        /// <param name="converterCollection">A reference to the current <see cref="GridConverterCollection"/>.</param>
         public GridContext(ILogger<GridContext> logger, GridConverterCollection converterCollection) {
             _logger = logger;
             _converterCollection = converterCollection;
@@ -26,6 +31,11 @@ namespace Skybrud.Umbraco.GridData {
 
         #region Member methods
 
+        /// <summary>
+        /// Writes a string representation of <paramref name="element"/> to <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <param name="writer">The writer.</param>
         public virtual void WriteSearchableText(IPublishedElement element, TextWriter writer) {
             foreach (IGridConverter converter in _converterCollection) {
                 try {
@@ -36,6 +46,11 @@ namespace Skybrud.Umbraco.GridData {
             }
         }
 
+        /// <summary>
+        /// Returns a string representation of the specified <paramref name="element"/>.
+        /// </summary>
+        /// <param name="element">The element.</param>
+        /// <returns>A string representation of <paramref name="element"/>.</returns>
         public virtual string GetSearchableText(IPublishedElement element) {
             StringBuilder sb = new();
             using TextWriter writer = new StringWriter(sb);

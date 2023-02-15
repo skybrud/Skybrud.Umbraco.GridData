@@ -22,11 +22,11 @@ namespace Skybrud.Umbraco.GridData.Models.Config {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="editor"/> and <paramref name="json"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="editor">An instance of <see cref="GridEditor"/> representing the parent editor.</param>
         /// <param name="json">An instance of <see cref="JObject"/> representing the configuration of the editor.</param>
-        protected GridEditorConfigBase(GridEditor editor, JObject json) : base(json) {
+        /// <param name="editor">An instance of <see cref="GridEditor"/> representing the parent editor.</param>
+        protected GridEditorConfigBase(JObject json, GridEditor editor) : base(json) {
             Editor = editor;
         }
 

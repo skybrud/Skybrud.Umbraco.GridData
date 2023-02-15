@@ -61,6 +61,9 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         [JsonIgnore]
         public override bool IsValid => Id > 0;
 
+        /// <summary>
+        /// Gets a reference to the underlying <see cref="IPublishedContent"/> representing the selected image.
+        /// </summary>
         [JsonIgnore]
         public IPublishedContent? PublishedImage { get; internal set; }
 
@@ -69,11 +72,11 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="json"/>.
+        /// Initializes a new instance based on the specified and <paramref name="json"/> object.
         /// </summary>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        public GridControlMediaValue(GridControl control, JObject json) : base(control, json) {
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        public GridControlMediaValue(JObject json, GridControl control) : base(json, control) {
             FocalPoint = json.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
             Id = json.GetInt32("id");
             Image = json.GetString("image");

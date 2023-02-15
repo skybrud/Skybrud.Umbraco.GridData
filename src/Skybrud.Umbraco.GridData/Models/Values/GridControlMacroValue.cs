@@ -38,11 +38,11 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="json"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
         /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        public GridControlMacroValue(GridControl control, JObject json) : base(control, json) {
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
+        public GridControlMacroValue(JObject json, GridControl control) : base(json, control) {
             Syntax = json.GetString("syntax")!;
             MacroAlias = json.GetString("macroAlias")!;
             Parameters = json.GetObject("macroParamsDictionary")?.ToObject<Dictionary<string, object>>() ?? new Dictionary<string, object>();

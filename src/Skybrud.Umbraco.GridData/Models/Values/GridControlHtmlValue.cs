@@ -45,6 +45,11 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
 
         #region Member methods
 
+        /// <summary>
+        /// Writes a string representation of this value to <paramref name="writer"/>.
+        /// </summary>
+        /// <param name="context">The current grid context.</param>
+        /// <param name="writer">The writer.</param>
         public override void WriteSearchableText(GridContext context, TextWriter writer) {
             writer.WriteLine(Regex.Replace(Value, "<.*?>", " "));
         }

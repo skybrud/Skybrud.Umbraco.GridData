@@ -42,8 +42,8 @@
   </ItemGroup>
 
   <!-- Generate XML documentation -->
-  <!--<PropertyGroup>
+  <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
-  </PropertyGroup>-->
+  </PropertyGroup>
 
 </Project>
