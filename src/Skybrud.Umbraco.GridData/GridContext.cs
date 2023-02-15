@@ -39,7 +39,7 @@ namespace Skybrud.Umbraco.GridData {
         public virtual void WriteSearchableText(IPublishedElement element, TextWriter writer) {
             foreach (IGridConverter converter in _converterCollection) {
                 try {
-                    if (converter.WriteSearchableText(this, element, writer)) return;
+                    if (converter.TryWriteSearchableText(this, element, writer)) return;
                 } catch (Exception ex) {
                     _logger.LogError(ex, $"Converter of type {converter} failed for WriteSearchableText()");
                 }

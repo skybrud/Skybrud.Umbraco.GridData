@@ -21,7 +21,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             _umbracoContextAccessor = umbracoContextAccessor;
         }
 
-        public override bool GetConfigType(GridEditor editor, [NotNullWhen(true)] out Type? type) {
+        public override bool TryGetConfigType(GridEditor editor, [NotNullWhen(true)] out Type? type) {
 
             type = null;
 
@@ -35,7 +35,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
 
         }
 
-        public override bool GetValueType(GridControl control, [NotNullWhen(true)] out Type? type) {
+        public override bool TryGetValueType(GridControl control, [NotNullWhen(true)] out Type? type) {
 
             type = null;
 
@@ -61,7 +61,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         /// <param name="control">The parent control.</param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the control value.</param>
         /// <param name="value">The converted value.</param>
-        public override bool ConvertControlValue(GridControl control, JToken token, [NotNullWhen(true)] out IGridControlValue? value) {
+        public override bool TryConvertControlValue(GridControl control, JToken token, [NotNullWhen(true)] out IGridControlValue? value) {
 
             value = null;
 
@@ -99,7 +99,7 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
         /// <param name="editor"></param>
         /// <param name="token">The instance of <see cref="JToken"/> representing the editor config.</param>
         /// <param name="config">The converted config.</param>
-        public override bool ConvertEditorConfig(GridEditor editor, JToken token, [NotNullWhen(true)] out IGridEditorConfig? config) {
+        public override bool TryConvertEditorConfig(GridEditor editor, JToken token, [NotNullWhen(true)] out IGridEditorConfig? config) {
 
             config = null;
 

@@ -77,7 +77,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
             // Determine the value type
             Type? valueType = null;
             foreach (IGridConverter converter in _converters) {
-                if (converter.GetValueType(control, out valueType)) break;
+                if (converter.TryGetValueType(control, out valueType)) break;
             }
 
             // If no converters specify a value type, we just return the control right away
@@ -108,7 +108,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
             foreach (var converter in _converters) {
 
-                if (converter.GetConfigType(editor, out configType)) break;
+                if (converter.TryGetConfigType(editor, out configType)) break;
 
             }
 
@@ -136,7 +136,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
             foreach (IGridConverter converter in _converters) {
                 try {
-                    if (!converter.ConvertControlValue(control, value, out IGridControlValue? converted)) continue;
+                    if (!converter.TryConvertControlValue(control, value, out IGridControlValue? converted)) continue;
                     return converted;
                 } catch (Exception ex) {
                     _logger.LogError(ex, $"Converter of type {converter} failed for ConvertControlValue()");
@@ -155,7 +155,7 @@ namespace Skybrud.Umbraco.GridData.Factories {
 
             foreach (IGridConverter converter in _converters) {
                 try {
-                    if (!converter.ConvertEditorConfig(editor, config, out IGridEditorConfig? converted)) continue;
+                    if (!converter.TryConvertEditorConfig(editor, config, out IGridEditorConfig? converted)) continue;
                     return converted;
                 } catch (Exception ex) {
                     _logger.LogError(ex, $"Converter of type {converter} failed for ConvertEditorConfig()");
