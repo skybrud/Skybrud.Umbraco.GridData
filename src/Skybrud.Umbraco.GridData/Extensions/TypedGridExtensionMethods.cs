@@ -29,23 +29,6 @@ namespace Skybrud.Umbraco.GridData.Extensions {
         /// Gets the model for the typed Grid.
         /// </summary>
         /// <param name="content">The parent content item.</param>
-        public static GridDataModel GetTypedGrid(this IPublishedContent content) {
-            return content.Value<GridDataModel>(DefaultPropertyAlias) ?? GridDataModel.GetEmptyModel();
-        }
-
-        /// <summary>
-        /// Gets the model for the typed Grid.
-        /// </summary>
-        /// <param name="content">The parent content item.</param>
-        /// <param name="propertyAlias">The alias of the property.</param>
-        public static GridDataModel GetTypedGrid(this IPublishedContent content, string propertyAlias) {
-            return content.Value<GridDataModel>(propertyAlias) ?? GridDataModel.GetEmptyModel();
-        }
-
-        /// <summary>
-        /// Gets the model for the typed Grid.
-        /// </summary>
-        /// <param name="content">The parent content item.</param>
         public static GridDataModel GetGridModel(this IPublishedContent content) {
             return content.Value<GridDataModel>(DefaultPropertyAlias) ?? GridDataModel.GetEmptyModel();
         }
