@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -46,6 +47,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets whether the grid model has a reference to it's <see cref="IPublishedElement"/> owner.
         /// </summary>
         [JsonIgnore]
+        [MemberNotNullWhen(true, "Owner")]
         public bool HasOwner => Owner != null;
 
         /// <summary>
@@ -56,6 +58,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets whether a property type has been specified for the model.
         /// </summary>
+        [MemberNotNullWhen(true, "PropertyType")]
         public bool HasPropertyType => PropertyType != null;
 
         #endregion
