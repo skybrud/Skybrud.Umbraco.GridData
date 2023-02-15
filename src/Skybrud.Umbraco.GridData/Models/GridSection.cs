@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Umbraco.GridData.Factories;
 
 namespace Skybrud.Umbraco.GridData.Models {

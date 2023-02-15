@@ -2,7 +2,7 @@
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
+using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Umbraco.GridData.Converters;
 using Skybrud.Umbraco.GridData.Models;
 using Skybrud.Umbraco.GridData.Models.Values;
