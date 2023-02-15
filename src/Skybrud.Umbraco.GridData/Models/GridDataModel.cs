@@ -95,7 +95,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets an array of all nested controls.
         /// </summary>
-        public GridControl[] GetAllControls() {
+        public IReadOnlyList<GridControl> GetAllControls() {
             return (
                 from section in Sections
                 from row in section.Rows
@@ -109,7 +109,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
-        public GridControl[] GetAllControls(string alias) {
+        public IReadOnlyList<GridControl> GetAllControls(string alias) {
             return GetAllControls(x => x.Editor.Alias == alias);
         }
 
@@ -117,7 +117,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>.
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
-        public GridControl[] GetAllControls(Func<GridControl, bool> predicate) {
+        public IReadOnlyList<GridControl> GetAllControls(Func<GridControl, bool> predicate) {
             return (
                 from section in Sections
                 from row in section.Rows
