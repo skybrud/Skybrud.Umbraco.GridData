@@ -2,7 +2,6 @@
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Models.Values {
 
@@ -50,7 +49,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// </summary>
         /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
         protected GridControlValueBase(GridControl control) {
-            Json = control.JObject.GetObject("value")!;
+            Json = control.JObject.GetValue("value")!;
             Control = control;
         }
 
