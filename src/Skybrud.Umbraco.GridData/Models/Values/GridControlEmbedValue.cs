@@ -23,10 +23,10 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         public string Value { get; protected set; }
 
         /// <summary>
-        /// Gets an instance of <see cref="HtmlString"/> representing the text value.
+        /// Gets an instance of <see cref="IHtmlContent"/> representing the text value.
         /// </summary>
         [JsonIgnore]
-        public HtmlString HtmlValue { get; protected set; }
+        public IHtmlContent HtmlValue { get; protected set; }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlEmbedValue"/>, this means
@@ -63,7 +63,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets the preview html of the embed.
         /// </summary>
         [JsonProperty("preview")]
-        public HtmlString Preview => HtmlValue;
+        public IHtmlContent Preview => HtmlValue;
 
         #endregion
 

@@ -15,10 +15,10 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Properties
 
         /// <summary>
-        /// Gets an instance of <see cref="HtmlString"/> representing the text value.
+        /// Gets an instance of <see cref="IHtmlContent"/> representing the text value.
         /// </summary>
         [JsonIgnore]
-        public HtmlString HtmlValue { get; }
+        public IHtmlContent HtmlValue { get; }
 
         /// <summary>
         /// Gets whether the value is valid. For an instance of <see cref="GridControlHtmlValue"/>, this means
