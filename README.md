@@ -1,29 +1,14 @@
-<table>
-  <thead>
-    <tr>
-      <td align="left">
-        :warning:
-      </td>
-      <td align="left" width="100%">
-          <strong>NOTICE</strong>
-      </td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td colspan="2">
-          This branch is for the <strong>Umbraco 10+</strong> version of this package. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><strong>v4/main</strong></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><strong>v3/main</strong></a> branch.
-      </td>
-    </tr>
-  </tbody>
-</table>
+# Skybrud Grid Data [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) [![NuGet](https://img.shields.io/nuget/vpre/Skybrud.Umbraco.GridData.svg)](https://www.nuget.org/packages/Skybrud.Umbraco.GridData) [![NuGet](https://img.shields.io/nuget/dt/Skybrud.Umbraco.GridData.svg)](https://www.nuget.org/packages/Skybrud.Umbraco.GridData) [![Our Umbraco](https://img.shields.io/badge/our-umbraco-%233544B1)](https://our.umbraco.com/packages/developer-tools/skybrud-griddata/) [![Our Umbraco](https://img.shields.io/badge/umbraco-marketplace-%233544B1)](https://marketplace.umbraco.com/package/skybrud.umbraco.griddata)
 
-Skybrud.Umbraco.GridData
-========================
+**Skybrud.Umbraco.GridData** is a package with a strongly typed model for the grid in Umbraco. The package makes it easy to work the grid in your MVC views, master pages or even in your custom logic - eg. to index the grid data in Examine for better searches.
 
-**Skybrud.Umbraco.GridData** is a package with a strongly typed model for the grid in Umbraco.
+Version 5 of this package specifically targets Umbraco 10 and above, but past major versions also support older versions of Umbraco. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><code><strong>v4/main</strong></code></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><code><strong>v3/main</strong></code></a> branch.
 
-The package makes it easy to use the model in your MVC views, master pages or even in your custom logic - eg. to index the grid data in Examine for better searches.
+
+
+
+
+<br /><br />
 
 ## Links
 
@@ -36,18 +21,19 @@ The package makes it easy to use the model in your MVC views, master pages or ev
 
 
 
+<br /><br />
 ## Installation
 
 The Umbraco 10+ version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
 
 ```
-dotnet add package Skybrud.Umbraco.GridData --version 5.0.0-alpha001
+dotnet add package Skybrud.Umbraco.GridData --version 5.0.0
 ```
 
 or the older NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Umbraco.GridData -Version 5.0.0-alpha001
+Install-Package Skybrud.Umbraco.GridData -Version 5.0.0
 ```
 
 **Umbraco 9**  
@@ -59,6 +45,8 @@ For the Umbraco 8 version of this package, see the [**v3/main**](https://github.
 
 
 
+
+<br /><br />
 
 ## Examples
 
@@ -84,6 +72,9 @@ The benefit of the extension method is that it will always return an instance of
 
 
 
+
+
+<br /><br />
 
 ## Indexing with Examine
 
@@ -112,6 +103,9 @@ If you need further control of the indexing, you can have a look at this example
 
 
 
+
+
+<br /><br />
 
 ## Rendering the grid
 
@@ -149,6 +143,9 @@ https://github.com/abjerner/UmbracoGridDataDemo/blob/master/dev/web/Views/Partia
 
 
 
+
+
+<br /><br />
 
 ## Extending the grid
 
