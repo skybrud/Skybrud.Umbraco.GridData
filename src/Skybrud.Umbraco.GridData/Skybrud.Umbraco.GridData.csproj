@@ -9,11 +9,11 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>5.0.0-alpha001</VersionPrefix>
+    <VersionPrefix>5.0.0</VersionPrefix>
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
     <Company>Limbo</Company>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
-    <Copyright>Copyright © 2022</Copyright>
+    <Copyright>Copyright © 2023</Copyright>
     <Title>Skybrud Grid Data</Title>
     <Description>Strongly typed models for the grid in Umbraco 10+.</Description>
   </PropertyGroup>
