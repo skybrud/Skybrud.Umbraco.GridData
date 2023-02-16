@@ -90,7 +90,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets a textual representation of the section - eg. to be used in Examine.
+        /// Returns a textual representation of the section - eg. to be used in Examine.
         /// </summary>
         /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="string"/> representing the value of the element.</returns>

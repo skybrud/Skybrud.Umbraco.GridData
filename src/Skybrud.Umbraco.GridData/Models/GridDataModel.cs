@@ -93,7 +93,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Member methods
 
         /// <summary>
-        /// Gets an array of all nested controls.
+        /// Returns a list of all nested controls.
         /// </summary>
         public IReadOnlyList<GridControl> GetAllControls() {
             return (
@@ -106,7 +106,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>.
+        /// Returns a list of all nested controls with the specified editor <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
         public IReadOnlyList<GridControl> GetAllControls(string alias) {
@@ -114,7 +114,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>.
+        /// Returns a list of all nested controls matching the specified <paramref name="predicate"/>.
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
         public IReadOnlyList<GridControl> GetAllControls(Func<GridControl, bool> predicate) {
@@ -138,7 +138,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets a textual representation of the grid model - eg. to be used in Examine.
+        /// Returns a textual representation of the grid model - eg. to be used in Examine.
         /// </summary>
         /// <param name="context">The current grid context.</param>
         /// <returns>An instance of <see cref="string"/> representing the value of the element.</returns>
@@ -154,14 +154,14 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Static methods
 
         /// <summary>
-        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
+        /// Returns an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
         /// </summary>
         public static GridDataModel GetEmptyModel() {
             return new GridDataModel(null, null, null, null);
         }
 
         /// <summary>
-        /// Gets an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
+        /// Returns an empty (and invalid) model. This method can be used to get a fallback value for when an actual Grid model isn't available.
         /// </summary>
         /// <param name="owner">An instance of <see cref="IPublishedElement"/> representing the owner holding the grid value.</param>
         /// <param name="propertyType">An instance of <see cref="IPublishedPropertyType"/> representing the property holding the grid value.</param>

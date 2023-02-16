@@ -109,7 +109,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Member methods
 
         /// <summary>
-        /// Gets an array of all nested controls.
+        /// Returns a list of all nested controls.
         /// </summary>
         public IReadOnlyList<GridControl> GetAllControls() {
             return (
@@ -120,7 +120,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls with the specified editor <paramref name="alias"/>.
+        /// Returns a list of all nested controls with the specified editor <paramref name="alias"/>.
         /// </summary>
         /// <param name="alias">The editor alias of controls to be returned.</param>
         public IReadOnlyList<GridControl> GetAllControls(string alias) {
@@ -128,7 +128,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         }
 
         /// <summary>
-        /// Gets an array of all nested controls matching the specified <paramref name="predicate"/>.
+        /// Returns a list of all nested controls matching the specified <paramref name="predicate"/>.
         /// </summary>
         /// <param name="predicate">The predicate (callback function) used for comparison.</param>
         public IReadOnlyList<GridControl> GetAllControls(Func<GridControl, bool> predicate) {

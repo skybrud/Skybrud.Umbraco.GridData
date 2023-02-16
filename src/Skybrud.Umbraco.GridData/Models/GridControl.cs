@@ -94,7 +94,7 @@ namespace Skybrud.Umbraco.GridData.Models {
         #region Member methods
 
         /// <summary>
-        /// Gets the value of the control casted to the type of <typeparamref name="T"/>.
+        /// Returns the value of the control casted to the type of <typeparamref name="T"/>.
         /// </summary>
         /// <typeparam name="T">The type of the value to be returned.</typeparam>
         public T? GetValue<T>() where T : IGridControlValue {
