@@ -63,12 +63,12 @@ namespace Skybrud.Umbraco.GridData.Models {
         /// <summary>
         /// Gets the first area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
-        public GridArea? FirstRow => Areas.FirstOrDefault();
+        public GridArea? FirstArea => Areas.FirstOrDefault();
 
         /// <summary>
         /// Gets the last area of the row. If the row doesn't contain any areas, this property will return <c>null</c>.
         /// </summary>
-        public GridArea? LastRow => Areas.LastOrDefault();
+        public GridArea? LastArea => Areas.LastOrDefault();
 
         /// <summary>
         /// Gets whether at least one area or control within the row is valid.
