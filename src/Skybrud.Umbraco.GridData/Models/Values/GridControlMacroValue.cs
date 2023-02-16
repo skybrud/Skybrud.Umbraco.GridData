@@ -8,7 +8,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
     /// <summary>
     /// Class representing the macro value of a control.
     /// </summary>
-    public class GridControlMacroValue : GridControlValueBase {
+    public class GridControlMacroValue : GridControlValueBase<JObject> {
 
         /// <summary>
         /// Gets the syntax of the macro.
@@ -38,14 +38,13 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="json"/> object.
+        /// Initializes a new instance based on the value of the specified grid <paramref name="control"/>.
         /// </summary>
-        /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        public GridControlMacroValue(JObject json, GridControl control) : base(json, control) {
-            Syntax = json.GetString("syntax")!;
-            MacroAlias = json.GetString("macroAlias")!;
-            Parameters = json.GetObject("macroParamsDictionary")?.ToObject<Dictionary<string, object>>() ?? new Dictionary<string, object>();
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        public GridControlMacroValue(GridControl control) : base(control) {
+            Syntax = Json.GetString("syntax")!;
+            MacroAlias = Json.GetString("macroAlias")!;
+            Parameters = Json.GetObject("macroParamsDictionary")?.ToObject<Dictionary<string, object>>() ?? new Dictionary<string, object>();
         }
 
         #endregion

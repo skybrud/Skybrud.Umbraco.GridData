@@ -2,15 +2,22 @@
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Json.Extensions;
 
 namespace Skybrud.Umbraco.GridData.Models.Values {
 
     /// <summary>
     /// Abstract class with a basic implementation of the <see cref="IGridControlValue"/> interface.
     /// </summary>
-    public abstract class GridControlValueBase : GridJsonObject, IGridControlValue {
+    public abstract class GridControlValueBase : IGridControlValue {
 
         #region Properties
+
+        /// <summary>
+        /// Gets a reference to the underlying instance of <see cref="JToken"/> the value was parsed from.
+        /// </summary>
+        [JsonIgnore]
+        public JToken Json { get; }
 
         /// <summary>
         /// Gets a reference to the parent <see cref="GridControl"/>.
@@ -31,9 +38,19 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        protected GridControlValueBase(JObject json, GridControl control) : base(json) {
+        /// <param name="json">An instance of <see cref="JToken"/> representing the value of the control.</param>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        protected GridControlValueBase(JToken json, GridControl control) {
+            Json = json;
+            Control = control;
+        }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="control"/> object.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        protected GridControlValueBase(GridControl control) {
+            Json = control.JObject.GetObject("value")!;
             Control = control;
         }
 
@@ -61,6 +78,32 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         }
 
         #endregion
+
+    }
+
+    /// <summary>
+    /// Abstract class with a basic implementation of the <see cref="IGridControlValue"/> interface.
+    /// </summary>
+    public abstract class GridControlValueBase<TJson> : GridControlValueBase where TJson : JToken {
+
+        /// <summary>
+        /// Gets a reference to the underlying instance of <see cref="JToken"/> the value was parsed from.
+        /// </summary>
+        [JsonIgnore]
+        public new TJson Json => (TJson) base.Json;
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
+        /// </summary>
+        /// <param name="json">An instance of <typeparamref name="TJson"/> representing the value of the control.</param>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        protected GridControlValueBase(TJson json, GridControl control) : base(json, control) { }
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="control"/> object.
+        /// </summary>
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        protected GridControlValueBase(GridControl control) : base(control) { }
 
     }
 

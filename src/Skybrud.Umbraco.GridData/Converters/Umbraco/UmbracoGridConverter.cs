@@ -66,24 +66,24 @@ namespace Skybrud.Umbraco.GridData.Converters.Umbraco {
             value = null;
 
             if (IsEmbedEditor(control.Editor)) {
-                value = new GridControlEmbedValue((JObject) token, control);
+                value = new GridControlEmbedValue(control);
             } else if (IsMacroEditor(control.Editor)) {
-                value = new GridControlMacroValue((JObject) token, control);
+                value = new GridControlMacroValue(control);
             } else if (IsMediaEditor(control.Editor)) {
-                value = ParseGridControlMediaValue((JObject) token, control);
+                value = ParseGridControlMediaValue(control);
             } else if (IsRichTextEditor(control.Editor)) {
-                value = new GridControlRichTextValue(control, token);
+                value = new GridControlRichTextValue(control);
             } else if (IsTextStringEditor(control.Editor)) {
-                value = new GridControlTextValue(control, token);
+                value = new GridControlTextValue(control);
             }
 
             return value != null;
 
         }
 
-        protected virtual IGridControlValue ParseGridControlMediaValue(JObject json, GridControl control) {
+        protected virtual IGridControlValue ParseGridControlMediaValue(GridControl control) {
 
-            GridControlMediaValue value = new(json, control);
+            GridControlMediaValue value = new(control);
 
             if (value.Id > 0 && _umbracoContextAccessor.TryGetUmbracoContext(out IUmbracoContext? context)) {
                 value.PublishedImage = context.Media?.GetById(value.Id);

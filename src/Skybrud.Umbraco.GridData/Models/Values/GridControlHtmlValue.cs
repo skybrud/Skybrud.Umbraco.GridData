@@ -2,7 +2,6 @@
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Html;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using Skybrud.Umbraco.GridData.Json.Converters;
 
 namespace Skybrud.Umbraco.GridData.Models.Values {
@@ -33,11 +32,10 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="control"/> and <paramref name="token"/>.
+        /// Initializes a new instance based on the value of the specified grid <paramref name="control"/>.
         /// </summary>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        /// <param name="token">An instance of <see cref="JToken"/> representing the value of the control.</param>
-        public GridControlHtmlValue(GridControl control, JToken token) : base(control, token) {
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        public GridControlHtmlValue(GridControl control) : base(control) {
             HtmlValue = new HtmlString(Value);
         }
 

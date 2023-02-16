@@ -8,7 +8,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
     /// <summary>
     /// Class representing the media value of a control.
     /// </summary>
-    public class GridControlMediaValue : GridControlValueBase {
+    public class GridControlMediaValue : GridControlValueBase<JObject> {
 
         #region Properties
 
@@ -72,16 +72,15 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified and <paramref name="json"/> object.
+        /// Initializes a new instance based on the value of the specified grid <paramref name="control"/>.
         /// </summary>
-        /// <param name="json">An instance of <see cref="JObject"/> representing the value of the control.</param>
-        /// <param name="control">An instance of <see cref="GridControl"/> representing the control.</param>
-        public GridControlMediaValue(JObject json, GridControl control) : base(json, control) {
-            FocalPoint = json.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
-            Id = json.GetInt32("id");
-            Image = json.GetString("image");
-            AlternativeText = json.GetString("altText");
-            Caption = json.GetString("caption");
+        /// <param name="control">An instance of <see cref="GridControl"/> representing the parent grid control.</param>
+        public GridControlMediaValue(GridControl control) : base(control) {
+            FocalPoint = Json.GetObject("focalPoint", GridControlMediaFocalPoint.Parse);
+            Id = Json.GetInt32("id");
+            Image = Json.GetString("image");
+            AlternativeText = Json.GetString("altText");
+            Caption = Json.GetString("caption");
         }
 
         #endregion
