@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Umbraco.Cms.Core.Models.PublishedContent;
@@ -40,6 +41,7 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// Gets whether the <see cref="AlternativeText"/> property has a value.
         /// </summary>
         [JsonIgnore]
+        [MemberNotNullWhen(true, nameof(AlternativeText))]
         public bool HasAlternativeText => !string.IsNullOrWhiteSpace(AlternativeText);
 
         /// <summary>
@@ -51,6 +53,8 @@ namespace Skybrud.Umbraco.GridData.Models.Values {
         /// <summary>
         /// Gets whether the <see cref="Caption"/> property has a value.
         /// </summary>
+        [JsonIgnore]
+        [MemberNotNullWhen(true, nameof(Caption))]
         public bool HasCaption => !string.IsNullOrWhiteSpace(Caption);
 
         /// <summary>
