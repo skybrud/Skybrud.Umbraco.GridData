@@ -27,13 +27,13 @@ Version 5 of this package specifically targets Umbraco 10 and above, but past ma
 The Umbraco 10+ version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
 
 ```
-dotnet add package Skybrud.Umbraco.GridData --version 5.0.0
+dotnet add package Skybrud.Umbraco.GridData --version 5.0.1
 ```
 
 or the older NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Umbraco.GridData -Version 5.0.0
+Install-Package Skybrud.Umbraco.GridData -Version 5.0.1
 ```
 
 **Umbraco 9**  
