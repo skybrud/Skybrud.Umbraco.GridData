@@ -13,7 +13,7 @@
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
     <Company>Limbo</Company>
     <Authors>Anders Bjerner, René Pjengaard</Authors>
-    <Copyright>Copyright © 2023</Copyright>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.ToString(`yyyy`))</Copyright>
     <Title>Skybrud Grid Data</Title>
     <Description>Strongly typed models for the grid in Umbraco 10+.</Description>
   </PropertyGroup>
