@@ -17,7 +17,7 @@ namespace Skybrud.Umbraco.GridData {
         /// <summary>
         /// Gets the friendly name of the package.
         /// </summary>
-        public const string Name = "Limbo Grid Data";
+        public const string Name = "Skybrud Grid Data";
 
         /// <summary>
         /// Gets the version of the package.
