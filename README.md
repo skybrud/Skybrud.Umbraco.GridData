@@ -46,6 +46,21 @@ For the Umbraco 8 version of this package, see the [**v3/main**](https://github.
 
 
 
+
+<br /><br />
+
+## Add-ons
+
+- [**Skybrud.Umbraco.GridData.Dtge**](https://github.com/skybrud/Skybrud.Umbraco.GridData.Dtge)  
+Adds support for working with [**Doc Type Grid Editor**](https://github.com/skttl/umbraco-doc-type-grid-editor).
+
+
+
+
+
+
+
+
 <br /><br />
 
 ## Examples
