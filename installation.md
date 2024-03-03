@@ -10,7 +10,7 @@
 
 {{installation?version=v4}}
 
-## Umbraco 98
+## Umbraco 8
 
 {{installation?version=v3}}
 
