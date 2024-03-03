@@ -14,4 +14,5 @@ The package makes it easy to use the model in your MVC views, master pages or ev
 
 ## Add-ons
 
+- [**Doc Type Grid Editor**](https://packages.limbo.works/skybrud.umbraco.griddata.dtge/)
 - [**LeBlender**](./leblender.md)
