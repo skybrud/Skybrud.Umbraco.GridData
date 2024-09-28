@@ -18,6 +18,14 @@
     <Description>Strongly typed models for the grid in Umbraco.</Description>
   </PropertyGroup>
 
+  <!-- Include additional metadata in the assembly -->
+  <ItemGroup>
+    <AssemblyMetadata Include="PackageProjectUrl" Value="https://packages.limbo.works/skybrud.umbraco.griddata/" />
+    <AssemblyMetadata Include="DocumentationUrl" Value="https://packages.limbo.works/skybrud.umbraco.griddata/docs/v13/" />
+    <AssemblyMetadata Include="NuGetUrl" Value="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" />
+    <AssemblyMetadata Include="UmbracoMarketplaceUrl" Value="https://marketplace.umbraco.com/package/skybrud.umbraco.griddata" />
+  </ItemGroup>
+
   <!-- Information for the NuGet package -->
   <PropertyGroup>
     <PackageId>Skybrud.Umbraco.GridData</PackageId>

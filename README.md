@@ -1,8 +1,13 @@
-# Skybrud Grid Data [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE.md) [![NuGet](https://img.shields.io/nuget/vpre/Skybrud.Umbraco.GridData.svg)](https://www.nuget.org/packages/Skybrud.Umbraco.GridData) [![NuGet](https://img.shields.io/nuget/dt/Skybrud.Umbraco.GridData.svg)](https://www.nuget.org/packages/Skybrud.Umbraco.GridData) [![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-%233544B1)](https://marketplace.umbraco.com/package/skybrud.umbraco.griddata)
+# Skybrud Grid Data
+
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/skybrud/Skybrud.Umbraco.GridData/blob/v13/main/LICENSE.md)
+[![NuGet](https://img.shields.io/nuget/vpre/Skybrud.Umbraco.GridData.svg)](https://www.nuget.org/packages/Skybrud.Umbraco.GridData)
+[![NuGet](https://img.shields.io/nuget/dt/Skybrud.Umbraco.GridData.svg)](https://www.nuget.org/packages/Skybrud.Umbraco.GridData)
+[![Umbraco Marketplace](https://img.shields.io/badge/umbraco-marketplace-%233544B1)](https://marketplace.umbraco.com/package/skybrud.umbraco.griddata)
 
 **Skybrud.Umbraco.GridData** is a package with a strongly typed model for the grid in Umbraco. The package makes it easy to work the grid in your MVC views, master pages or even in your custom logic - eg. to index the grid data in Examine for better searches.
 
-Version 5 of this package specifically targets Umbraco 10 and above, but past major versions also support older versions of Umbraco. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><code><strong>v4/main</strong></code></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><code><strong>v3/main</strong></code></a> branch.
+Version 13 of this package specifically targets Umbraco 3, but past major versions also support older versions of Umbraco. For the Umbraco 10-12 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v5/main"><code><strong>v4/main</strong></code></a> branch. For the Umbraco 9 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v4/main"><code><strong>v4/main</strong></code></a> branch. For the Umbraco 8 package, see <a href="https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v3/main"><code><strong>v3/main</strong></code></a> branch.
 
 
 
@@ -24,16 +29,20 @@ Version 5 of this package specifically targets Umbraco 10 and above, but past ma
 <br /><br />
 ## Installation
 
-The Umbraco 10+ version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
+The Umbraco 13 version of this package is only available via <a href="https://www.nuget.org/packages/Skybrud.Umbraco.GridData" target="_blank">NuGet</a>. To install the package, you can use either .NET CLI:
 
 ```
-dotnet add package Skybrud.Umbraco.GridData --version 5.0.3
+dotnet add package Skybrud.Umbraco.GridData --version 13.0.0
 ```
 
 or the older NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Umbraco.GridData -Version 5.0.3
+Install-Package Skybrud.Umbraco.GridData -Version 13.0.0
+```
+
+**Umbraco 10-12**  
+For the Umbraco 9 version of this package, see the [**v5/main**](https://github.com/skybrud/Skybrud.Umbraco.GridData/tree/v5/main) branch instead.
 ```
 
 **Umbraco 9**  
