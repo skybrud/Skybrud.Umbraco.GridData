@@ -25,13 +25,13 @@ public class GridDictionary : GridJsonObject, IEnumerable<GridDictionaryItem> {
     /// Gets the keys of the underlying dictionary.
     /// </summary>
     [JsonIgnore]
-    public string[] Keys => _dictionary.Keys.ToArray();
+    public string[] Keys => [.. _dictionary.Keys];
 
     /// <summary>
     /// Gets the keys of the underlying dictionary.
     /// </summary>
     [JsonIgnore]
-    public string[] Values => _dictionary.Keys.ToArray();
+    public string[] Values => [.. _dictionary.Keys];
 
     /// <summary>
     /// Gets the amount of items in the dictionary.

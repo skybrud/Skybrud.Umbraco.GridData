@@ -62,7 +62,7 @@ public abstract class GridElement : GridJsonObject {
     public abstract void WriteSearchableText(GridContext context, TextWriter writer);
 
     /// <summary>
-    /// Gets a textual representation of the element - eg. to be used in Examine.
+    /// Gets a textual representation of the element - e.g. to be used in Examine.
     /// </summary>
     /// <param name="context">The current grid context.</param>
     /// <returns>An instance of <see cref="string"/> representing the value of the element.</returns>

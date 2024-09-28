@@ -31,7 +31,7 @@ public class GridControlMediaFocalPoint : GridJsonObject {
     /// <summary>
     /// Initializes a new instance based on the specified <paramref name="json"/>.
     /// </summary>
-    /// <param name="json">An instance of <see cref="JObject"/> representing the the focal point.</param>
+    /// <param name="json">An instance of <see cref="JObject"/> representing the focal point.</param>
     protected GridControlMediaFocalPoint(JObject json) : base(json) {
         Left = json.GetFloat("left");
         Top = json.GetFloat("top");

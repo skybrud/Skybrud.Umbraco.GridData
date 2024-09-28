@@ -28,7 +28,7 @@ public interface IGridControlValue {
     void WriteSearchableText(GridContext context, TextWriter writer);
 
     /// <summary>
-    /// Gets the value of the control as a searchable text - eg. to be used in Examine.
+    /// Gets the value of the control as a searchable text - e.g. to be used in Examine.
     /// </summary>
     /// <param name="context">The current grid context.</param>
     /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>

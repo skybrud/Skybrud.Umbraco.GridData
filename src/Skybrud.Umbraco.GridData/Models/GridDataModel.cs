@@ -81,9 +81,9 @@ public class GridDataModel : GridJsonObject {
         Name = json.GetString("name")!;
 
         if (factory is null) {
-            Sections = Array.Empty<GridSection>();
+            Sections = [];
         } else {
-            Sections = json.GetArray("sections", x => factory.CreateGridSection(x, this)) ?? Array.Empty<GridSection>();
+            Sections = json.GetArray("sections", x => factory.CreateGridSection(x, this)) ?? [];
         }
 
     }
@@ -138,7 +138,7 @@ public class GridDataModel : GridJsonObject {
     }
 
     /// <summary>
-    /// Returns a textual representation of the grid model - eg. to be used in Examine.
+    /// Returns a textual representation of the grid model - e.g. to be used in Examine.
     /// </summary>
     /// <param name="context">The current grid context.</param>
     /// <returns>An instance of <see cref="string"/> representing the value of the element.</returns>

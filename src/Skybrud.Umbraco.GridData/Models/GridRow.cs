@@ -94,7 +94,7 @@ public class GridRow : GridElement {
         Label = json.GetString("label");
         Name = json.GetString("name")!;
 
-        Areas = json.GetArray("areas", x => factory.CreateGridArea(x, this)) ?? Array.Empty<GridArea>();
+        Areas = json.GetArray("areas", x => factory.CreateGridArea(x, this)) ?? [];
 
         // Update "PreviousArea" and "NextArea" properties
         for (int i = 1; i < Areas.Count; i++) {

@@ -105,7 +105,7 @@ public class GridArea : GridElement {
         Grid = json.GetInt32("grid");
         AllowAll = json.GetBoolean("allowAll");
         Allowed = json.GetStringArray("allowed");
-        Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? Array.Empty<GridControl>();
+        Controls = json.GetArray("controls", x => factory.CreateGridControl(x, this)) ?? [];
 
         // Update "PreviousControl" and "NextControl" properties
         for (int i = 1; i < Controls.Count; i++) {

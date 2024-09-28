@@ -94,7 +94,7 @@ public class GridEditor : GridJsonObject {
     #region Member methods
 
     /// <summary>
-    /// Returns the config of the editor casted to the type of <typeparamref name="T"/>.
+    /// Returns the config of the editor cast to the type of <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T">The type of the config to be returned.</typeparam>
     public T? GetConfig<T>() where T : IGridEditorConfig {

@@ -10,6 +10,7 @@ public class GridManifestFilter : IManifestFilter {
     public void Filter(List<PackageManifest> manifests) {
         manifests.Add(new PackageManifest {
             AllowPackageTelemetry = true,
+            PackageId = GridPackage.Alias,
             PackageName = GridPackage.Name,
             Version = GridPackage.InformationalVersion
         });

@@ -25,7 +25,7 @@ public abstract class GridControlValueBase : IGridControlValue {
     public GridControl Control { get; }
 
     /// <summary>
-    /// Gets whether the control is valid (eg. whether it has a value).
+    /// Gets whether the control is valid (e.g. whether it has a value).
     /// </summary>
     [JsonIgnore]
     public virtual bool IsValid => true;

@@ -98,7 +98,7 @@ public class GridControlEmbedValue : GridControlValueBase<JObject> {
     }
 
     /// <summary>
-    /// Gets a HTML representing the value of the control.
+    /// Gets an HTML representing the value of the control.
     /// </summary>
     /// <returns>An instance of <see cref="string"/>.</returns>
     public string ToHtmlString() {

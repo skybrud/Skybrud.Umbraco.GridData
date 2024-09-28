@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -66,7 +65,7 @@ public class GridSection : GridJsonObject {
         Model = grid;
         Grid = json.GetInt32("grid");
         Name = grid.Name;
-        Rows = json.GetArray("rows", x => factory.CreateGridRow(x, this)) ?? Array.Empty<GridRow>();
+        Rows = json.GetArray("rows", x => factory.CreateGridRow(x, this)) ?? [];
 
         // Update "PreviousRow" and "NextRow" properties
         for (int i = 1; i < Rows.Count; i++) {
@@ -90,7 +89,7 @@ public class GridSection : GridJsonObject {
     }
 
     /// <summary>
-    /// Returns a textual representation of the section - eg. to be used in Examine.
+    /// Returns a textual representation of the section - e.g. to be used in Examine.
     /// </summary>
     /// <param name="context">The current grid context.</param>
     /// <returns>An instance of <see cref="string"/> representing the value of the element.</returns>

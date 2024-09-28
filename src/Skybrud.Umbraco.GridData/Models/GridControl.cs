@@ -94,7 +94,7 @@ public class GridControl : GridJsonObject {
     #region Member methods
 
     /// <summary>
-    /// Returns the value of the control casted to the type of <typeparamref name="T"/>.
+    /// Returns the value of the control cast to the type of <typeparamref name="T"/>.
     /// </summary>
     /// <typeparam name="T">The type of the value to be returned.</typeparam>
     public T? GetValue<T>() where T : IGridControlValue {
@@ -111,7 +111,7 @@ public class GridControl : GridJsonObject {
     }
 
     /// <summary>
-    /// Returns the value of the control as a searchable text - eg. to be used in Examine.
+    /// Returns the value of the control as a searchable text - e.g. to be used in Examine.
     /// </summary>
     /// <param name="context">The current grid context.</param>
     /// <returns>An instance of <see cref="string"/> with the value as a searchable text.</returns>

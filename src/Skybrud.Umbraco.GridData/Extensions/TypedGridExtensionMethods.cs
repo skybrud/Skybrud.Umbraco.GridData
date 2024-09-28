@@ -22,7 +22,7 @@ public static class TypedGridExtensionMethods {
 
     /// <summary>
     /// Returns a <see cref="GridDataModel"/> instance representing the value of the property with the specified
-    /// <paramref name="propertyAlias"/>. If the property doesn't exist or it's value doesn't match a
+    /// <paramref name="propertyAlias"/>. If the property doesn't exist, or it's value doesn't match a
     /// <see cref="GridDataModel"/> instance, a <see cref="GridDataModel"/> instance representing an empty grid
     /// model is returned instead.
     /// </summary>
@@ -34,7 +34,7 @@ public static class TypedGridExtensionMethods {
 
     /// <summary>
     /// Returns a <see cref="GridDataModel"/> instance representing the value of the property with the specified
-    /// <paramref name="propertyAlias"/>. If the property doesn't exist or it's value doesn't match a
+    /// <paramref name="propertyAlias"/>. If the property doesn't exist, or it's value doesn't match a
     /// <see cref="GridDataModel"/> instance, <see langword="null"/> is returned instead.
     /// </summary>
     /// <param name="content">The parent content item.</param>
