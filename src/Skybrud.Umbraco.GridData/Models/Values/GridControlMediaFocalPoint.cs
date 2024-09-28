@@ -3,55 +3,53 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
-namespace Skybrud.Umbraco.GridData.Models.Values {
+namespace Skybrud.Umbraco.GridData.Models.Values;
+
+/// <summary>
+/// Class representing the focal point of a media.
+/// </summary>
+public class GridControlMediaFocalPoint : GridJsonObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing the focal point of a media.
+    /// The horizontal (X-axis) coordinate of the focal point.
     /// </summary>
-    public class GridControlMediaFocalPoint : GridJsonObject {
+    [JsonProperty("left")]
+    public float Left { get; }
 
-        #region Properties
+    /// <summary>
+    /// The vertical (Y-axis) coordinate of the focal point.
+    /// </summary>
+    [JsonProperty("top")]
+    public float Top { get; }
 
-        /// <summary>
-        /// The horizontal (X-axis) coordinate of the focal point.
-        /// </summary>
-        [JsonProperty("left")]
-        public float Left { get; }
+    #endregion
 
-        /// <summary>
-        /// The vertical (Y-axis) coordinate of the focal point.
-        /// </summary>
-        [JsonProperty("top")]
-        public float Top { get; }
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="json"/>.
-        /// </summary>
-        /// <param name="json">An instance of <see cref="JObject"/> representing the the focal point.</param>
-        protected GridControlMediaFocalPoint(JObject json) : base(json) {
-            Left = json.GetFloat("left");
-            Top = json.GetFloat("top");
-        }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Gets a focal point from the specified <paramref name="json"/>.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
-        [return: NotNullIfNotNull("json")]
-        public static GridControlMediaFocalPoint? Parse(JObject? json) {
-            return json == null ? null : new GridControlMediaFocalPoint(json);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="json"/>.
+    /// </summary>
+    /// <param name="json">An instance of <see cref="JObject"/> representing the the focal point.</param>
+    protected GridControlMediaFocalPoint(JObject json) : base(json) {
+        Left = json.GetFloat("left");
+        Top = json.GetFloat("top");
     }
+
+    #endregion
+
+    #region Static methods
+
+    /// <summary>
+    /// Gets a focal point from the specified <paramref name="json"/>.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
+    [return: NotNullIfNotNull("json")]
+    public static GridControlMediaFocalPoint? Parse(JObject? json) {
+        return json == null ? null : new GridControlMediaFocalPoint(json);
+    }
+
+    #endregion
 
 }

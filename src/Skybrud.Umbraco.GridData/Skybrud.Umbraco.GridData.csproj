@@ -3,7 +3,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
     <TargetFrameworks>net8.0</TargetFrameworks>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -15,7 +15,7 @@
     <Authors>Anders Bjerner, René Pjengaard</Authors>
     <Copyright>Copyright © $([System.DateTime]::UtcNow.ToString(`yyyy`))</Copyright>
     <Title>Skybrud Grid Data</Title>
-    <Description>Strongly typed models for the grid in Umbraco 10+.</Description>
+    <Description>Strongly typed models for the grid in Umbraco.</Description>
   </PropertyGroup>
 
   <!-- Information for the NuGet package -->
@@ -31,7 +31,7 @@
 
   <!-- Include NuGet dependencies -->
   <ItemGroup>
-    <PackageReference Include="Skybrud.Essentials" Version="1.1.50" />
+    <PackageReference Include="Skybrud.Essentials" Version="1.1.57" />
     <PackageReference Include="Umbraco.Cms.Core" Version="[13.0.0,13.999)" />
     <PackageReference Include="Umbraco.Cms.Web.BackOffice" Version="[13.0.0,13.999)" />
   </ItemGroup>

@@ -1,18 +1,16 @@
 ﻿using Newtonsoft.Json;
 
-namespace Skybrud.Umbraco.GridData.Models.Config {
+namespace Skybrud.Umbraco.GridData.Models.Config;
+
+/// <summary>
+/// Interface describing a grid editor config.
+/// </summary>
+public interface IGridEditorConfig {
 
     /// <summary>
-    /// Interface describing a grid editor config.
+    /// Gets a reference to the parent editor of the configuration.
     /// </summary>
-    public interface IGridEditorConfig {
-
-        /// <summary>
-        /// Gets a reference to the parent editor of the configuration.
-        /// </summary>
-        [JsonIgnore]
-        GridEditor Editor { get; }
-
-    }
+    [JsonIgnore]
+    GridEditor Editor { get; }
 
 }

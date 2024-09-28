@@ -3,125 +3,123 @@ using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Umbraco.GridData.Models.Config;
 
-namespace Skybrud.Umbraco.GridData.Models {
+namespace Skybrud.Umbraco.GridData.Models;
+
+/// <summary>
+/// Class representing an editor of a control in an Umbraco Grid.
+/// </summary>
+public class GridEditor : GridJsonObject {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing an editor of a control in an Umbraco Grid.
+    /// Gets the name of the editor.
     /// </summary>
-    public class GridEditor : GridJsonObject {
+    [JsonProperty("name")]
+    public string? Name { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets the alias of the editor.
+    /// </summary>
+    [JsonProperty("alias")]
+    public string Alias { get; }
 
-        /// <summary>
-        /// Gets the name of the editor.
-        /// </summary>
-        [JsonProperty("name")]
-        public string? Name { get; }
+    /// <summary>
+    /// Gets the view of the editor.
+    /// </summary>
+    [JsonProperty("view")]
+    public string? View { get; }
 
-        /// <summary>
-        /// Gets the alias of the editor.
-        /// </summary>
-        [JsonProperty("alias")]
-        public string Alias { get; }
+    /// <summary>
+    /// Gets renderer for the control/editor. If specified, the renderer refers to a partial
+    /// view that should be used for rendering the control.
+    /// </summary>
+    [JsonProperty("render")]
+    public string? Render { get; }
 
-        /// <summary>
-        /// Gets the view of the editor.
-        /// </summary>
-        [JsonProperty("view")]
-        public string? View { get; }
+    /// <summary>
+    /// Gets the icon of the editor.
+    /// </summary>
+    [JsonProperty("icon")]
+    public string? Icon { get; }
 
-        /// <summary>
-        /// Gets renderer for the control/editor. If specified, the renderer refers to a partial
-        /// view that should be used for rendering the control.
-        /// </summary>
-        [JsonProperty("render")]
-        public string? Render { get; }
+    /// <summary>
+    /// Gets the configuration object for the editor. This property will return <c>null</c> if the
+    /// corresponding property in the underlying JSON is also <c>null</c>.
+    /// </summary>
+    [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
+    public IGridEditorConfig? Config { get; internal set; }
 
-        /// <summary>
-        /// Gets the icon of the editor.
-        /// </summary>
-        [JsonProperty("icon")]
-        public string? Icon { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets the configuration object for the editor. This property will return <c>null</c> if the
-        /// corresponding property in the underlying JSON is also <c>null</c>.
-        /// </summary>
-        [JsonProperty("config", NullValueHandling = NullValueHandling.Ignore)]
-        public IGridEditorConfig? Config { get; internal set; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance with the specified <paramref name="alias"/>.
+    /// </summary>
+    /// <param name="alias">The alias of the editor.</param>
+    public GridEditor(string alias) : base(null ?? new JObject()) {
+        Alias = alias;
+    }
 
-        #region Constructors
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="json"/> object.
+    /// </summary>
+    /// <param name="json">The instance of <see cref="JObject"/> representing the control.</param>
+    public GridEditor(JObject json) : base(json) {
 
-        /// <summary>
-        /// Initializes a new instance with the specified <paramref name="alias"/>.
-        /// </summary>
-        /// <param name="alias">The alias of the editor.</param>
-        public GridEditor(string alias) : base(null ?? new JObject()) {
-            Alias = alias;
-        }
-
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="json"/> object.
-        /// </summary>
-        /// <param name="json">The instance of <see cref="JObject"/> representing the control.</param>
-        public GridEditor(JObject json) : base(json) {
-
-            // Parse basic properties
-            Name = json.GetString("name")!;
-            Alias = json.GetString("alias")!;
-            View = json.GetString("view")!;
-            Render = json.GetString("render");
-            Icon = json.GetString("icon")!;
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="editor"/>.
-        /// </summary>
-        /// <param name="editor">The editor to be wrapped.</param>
-        public GridEditor(GridEditor editor) : base(editor.JObject) {
-            Name = editor.Name;
-            Alias = editor.Alias;
-            View = editor.View;
-            Render = editor.Render;
-            Icon = editor.Icon;
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <summary>
-        /// Returns the config of the editor casted to the type of <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">The type of the config to be returned.</typeparam>
-        public T? GetConfig<T>() where T : IGridEditorConfig {
-            return Config is T value ? value : default;
-        }
-
-        #endregion
+        // Parse basic properties
+        Name = json.GetString("name")!;
+        Alias = json.GetString("alias")!;
+        View = json.GetString("view")!;
+        Render = json.GetString("render");
+        Icon = json.GetString("icon")!;
 
     }
 
     /// <summary>
-    /// Class representing an editor where the config is of type <typeparamref name="TConfig"/>.
+    /// Initializes a new instance based on the specified <paramref name="editor"/>.
     /// </summary>
-    /// <typeparam name="TConfig">The type of the editor config.</typeparam>
-    public class GridEditor<TConfig> : GridEditor where TConfig : IGridEditorConfig {
-
-        /// <summary>
-        /// Gets the editor config.
-        /// </summary>
-        public new TConfig Config => (TConfig) base.Config!;
-
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="editor"/>.
-        /// </summary>
-        /// <param name="editor">The editor to be wrapped.</param>
-        public GridEditor(GridEditor editor) : base(editor) { }
-
+    /// <param name="editor">The editor to be wrapped.</param>
+    public GridEditor(GridEditor editor) : base(editor.JObject) {
+        Name = editor.Name;
+        Alias = editor.Alias;
+        View = editor.View;
+        Render = editor.Render;
+        Icon = editor.Icon;
     }
+
+    #endregion
+
+    #region Member methods
+
+    /// <summary>
+    /// Returns the config of the editor casted to the type of <typeparamref name="T"/>.
+    /// </summary>
+    /// <typeparam name="T">The type of the config to be returned.</typeparam>
+    public T? GetConfig<T>() where T : IGridEditorConfig {
+        return Config is T value ? value : default;
+    }
+
+    #endregion
+
+}
+
+/// <summary>
+/// Class representing an editor where the config is of type <typeparamref name="TConfig"/>.
+/// </summary>
+/// <typeparam name="TConfig">The type of the editor config.</typeparam>
+public class GridEditor<TConfig> : GridEditor where TConfig : IGridEditorConfig {
+
+    /// <summary>
+    /// Gets the editor config.
+    /// </summary>
+    public new TConfig Config => (TConfig) base.Config!;
+
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="editor"/>.
+    /// </summary>
+    /// <param name="editor">The editor to be wrapped.</param>
+    public GridEditor(GridEditor editor) : base(editor) { }
 
 }
